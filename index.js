@@ -552,8 +552,8 @@ ${readMore}
         case 'swm':
         case 'stickerwm':
         case 'sticker':
-          var a = "affis junianto";
-          var b = "+6282334297175";
+          var a = "BOT DO LORRAN";
+          var b = "TESTE";
           if (isMedia && !mek.message.videoMessage || isQuotedImage ) {
           const encmedia = isQuotedImage   ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
            media = await client.downloadAndSaveMediaMessage(encmedia)
