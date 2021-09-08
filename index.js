@@ -537,9 +537,10 @@ ${readMore}
             reply('server error')
           }                         
           break;
-        case 'swm':
-        case 'stickerwm':
+        case 'figu':
+        case 'figurinha':
         case 'sticker':
+          case 'f':
           var a = "BOT DO LORRAN";
           var b = "TESTE";
           if (isMedia && !mek.message.videoMessage || isQuotedImage ) {
@@ -596,25 +597,27 @@ ${readMore}
             createExif(a, b);
             modStick(media, client, mek, from)
           } else {
-          reply(`Kirim gambar dengan caption ${prefix}swm atau tag gambar yang sudah dikirim`)
+          reply(`Pra criar figurinhas c tem que marcar uma imagem ou video de ate 10 segundos com ${prefix}sticker`)
           }
           break;
         case 'join':
-          if (args.length === 0 ) return reply(`please input params\n${prefix}join _link gc wa_`)
+          case 'entrar':
+          if (args.length === 0 ) return reply(`Pra eu entrar em um grupo c tem que usar um link valido\nExemplo: ${prefix}join _https://chat.whatsapp.com/acasxxzdsad2_`)
+          if (!isOwner)return reply("Voçê não é meu papai")
           var link = body.slice(6)
           res = link.replace("https://chat.whatsapp.com/", "");
           done = await client.acceptInvite(res)
-          reply(`berhasil bergabung di ${done.gid}`)
+          reply(`Pronto papai, entrei nesse grupo ai ${done.gid}`)
           break;
         case 'leave':
-          if (!isGroup) return reply("khusus gc")
-          if (!groupAdmins) return reply("khusus group admin")
+          if (!isGroup) return reply("wtf man, a gnt nem ta em um grupo como assim eu vou sair")
+          if (!groupAdmins) return reply("So respeito os adm kkkkkkkkk")
           client.groupLeave(from)
           .then((res) => {
-            client.sendMessage(sender, "perintah untuk keluar berhasil di eksekusi", text)
+            client.sendMessage(sender, "tchau", text)
           })
           break;
-        case 'setdescgc':
+        case 'setdesc':
           if (!isGroup)return reply("khusus gc")
           if (!isBotGroupAdmins) return reply("bot harus jadi admin")
           const newdesc = body.slice(11)
@@ -655,18 +658,18 @@ ${readMore}
           })
           break;
         case 'ytmp3':
-          if (args.length < 1) return reply('masukan link youtube yang mau di download')
+          if (args.length < 1) return reply('Pra eu baixar o audio c tem que usar um link valido do youtube')
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-          if (!link) return reply("link yang anda masukan invalid")
+          if (!link) return reply("Link invalido")
           try {
-            reply("wait....")
+            reply("Calmai macaco 🦧....")
             yta(args[0])
             .then((res) =>{
               const { dl_link, thumb, title, filesizeF, filesize } = res
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then((a) => {
-                if (Number(filesize) >= 30000) return sendMediaURL(thumb, `*Data Berhasil Didapatkan!*\n\n*Title* : ${title}\n*Ext* : MP3\n*Filesize* : ${filesizeF}\n*Link* : ${a.data}\n\n_Untuk durasi lebih dari batas disajikan dalam mektuk link_`)
-                const caption = `*YTMP3*\n\n*Title* : ${title}\n*Ext* : MP3\n*Size* : ${filesizeF}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
+                if (Number(filesize) >= 30000) return sendMediaURL(thumb, `*Achei carai*\n\n*Titulo* : ${title}\n*Formato de arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual nao suporta baixar e converter videos muito grandes, caso seja muito grande vou mandar o seu audio em formato de link_`)
+                const caption = `*YTMP3*\n\n*Titulo* : ${title}\n*Formato* : MP3\n*Tamanho* : ${filesizeF}\n\n_Ja vou baixar o seu audio, pode ser que demore um pouco, fica calmo ai carai_`
                 sendMediaURL(thumb, caption)
                 sendMediaURL(dl_link).catch(() => reply("file error"))
               })
@@ -676,9 +679,9 @@ ${readMore}
           }
           break;
         case 'ytmp4':
-          if (args.length < 1) return reply('masukan link youtube yang mau di download')
+          if (args.length < 1) return reply('Pra eu baixar o video c tem que usar um link valido do youtube')
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-          if (!link) return reply("link yang anda masukan invalid")
+          if (!link) return reply("link invalido")
           try {
             reply("wait....")
             ytv(args[0])
@@ -686,8 +689,8 @@ ${readMore}
               const { dl_link, thumb, title, filesizeF, filesize } = res
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then((a) => {
-                if (Number(filesize) >= 30000) return sendMediaURL(thumb, `*Data Berhasil Didapatkan!*\n\n*Title* : ${title}\n*Ext* : MP3\n*Filesize* : ${filesizeF}\n*Link* : ${a.data}\n\n_Untuk durasi lebih dari batas disajikan dalam mektuk link_`)
-                const caption = `*YTMP4*\n\n*Title* : ${title}\n*Ext* : MP3\n*Size* : ${filesizeF}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
+                if (Number(filesize) >= 30000) return sendMediaURL(thumb, `*Achei carai!*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual nao suporta baixar videos muito grandes, caso seja muito grande vou mandar o seu video em formato de link_`)
+                const caption = `*YTMP4*\n\n*Titulo* : ${title}\n*Formato* : MP3\n*Tamanho do arquivo* : ${filesizeF}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
                 sendMediaURL(thumb, caption)
                 sendMediaURL(dl_link).catch(() => reply("file error"))
               })
