@@ -101,10 +101,7 @@ module.exports = (client) => {
     } else if (mem.announce == "true"){
       client.sendMessage(metadata.id, `*[ Grupo Fechado ]* \n\n${mns}Modo serio grupo fechado pelo adm${mns}`, MessageType.text);
       console.log(`[ GROUP CLOSED ]\ngroup : ${metadata.subject}`);
-    } else if (!mem.desc == "") {
-      tag = mem.descOwner.split("@")[0] + "@s.whatsapp.net";
-      client.sendMessage(metadata.id, `*[ Group Description Change ]*\n\ndeskripsi group telah di ubah oleh owner ${mem.descOwner.split("@")[0]}\n\ndeskripsi baru: ${mem.desc}`, MessageType.text, {
-        contextInfo:{mentionedJid:[tag]}
+    }
       });
   client.on("group-participants-update", async(mem) => {
     try {
