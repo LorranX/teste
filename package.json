@@ -1,7 +1,7 @@
 {
-  "name": "affisbot",
-  "version": "8.0.0",
-  "description": "this bot new update",
+  "name": "Bot do Lorran",
+  "version": "1.0.5",
+  "description": "Primeira versão",
   "main": "start.js",
   "directories": {
     "lib": "lib"
@@ -32,16 +32,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/affisjunianto/botwasapv8.git"
+    "url": "git+ssh://git@github.com/LorranX/teste"
   },
   "keywords": [
-    "ampibi",
-    "bot"
+    "LORRAN",
+    "BOT"
   ],
-  "author": "affis",
+  "author": "Lorran",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/affisjunianto/botwasapv8/issues"
+    "url": "https://github.com/LorranX/teste/issues"
   },
-  "homepage": "https://github.com/affisjunianto/botwasapv8#readme"
+  "homepage": "https://github.com/LorranX/teste#readme"
 }
