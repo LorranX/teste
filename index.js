@@ -32,10 +32,10 @@ const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
 
 //data
-owner = ["6282334297175@s.whatsapp.net"];
+owner = ["553195703379@s.whatsapp.net"];
 mns = "```";
 battery = {
-  persen: "" || "tidak terdeteksi",
+  persen: "" || "O carai, não consegui detectar",
   charger: "" || false
 };
 blocked = [];
@@ -46,8 +46,8 @@ self = false;
 
 //for time
 function tanggal(){
-  myMonths = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-	myDays = ['Minggu','Senin','Selasa','Rabu','Kamis','Jum at','Sabtu'];
+  myMonths = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+	myDays = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sabado'];
 	var tgl = new Date();
 	var day = tgl.getDate();
 	bulan = tgl.getMonth();
@@ -64,31 +64,31 @@ const runtime = function (seconds) {
   var h = Math.floor((seconds % (3600 * 24)) / 3600);
   var m = Math.floor((seconds % 3600) / 60);
   var s = Math.floor(seconds % 60);
-  var dDisplay = d > 0 ? d + (d == 1 ? " hari, " : " Hari, ") : "";
-  var hDisplay = h > 0 ? h + (h == 1 ? " jam, " : " Jam, ") : "";
-  var mDisplay = m > 0 ? m + (m == 1 ? " menit, " : " Menit, ") : "";
-  var sDisplay = s > 0 ? s + (s == 1 ? " detik" : " Detik") : "";
+  var dDisplay = d > 0 ? d + (d == 1 ? " dia, " : " Dia, ") : "";
+  var hDisplay = h > 0 ? h + (h == 1 ? " hora, " : " Hora, ") : "";
+  var mDisplay = m > 0 ? m + (m == 1 ? " minuto, " : " Minuto, ") : "";
+  var sDisplay = s > 0 ? s + (s == 1 ? " segundo" : " segundo") : "";
   return dDisplay + hDisplay + mDisplay + sDisplay;
 };
 
-const time2 = moment().tz("Asia/Jakarta").format("HH:mm:ss");
+const time2 = moment().tz("America/Sao_Paulo").format("HH:mm:ss");
 if (time2 < "24:59:00") {
-  var ucapanWaktu = "Selamat malam";
+  var ucapanWaktu = "Vai dormir corno madrugada ja";
 }
 if (time2 < "19:00:00") {
-  var ucapanWaktu = "Selamat senja";
+  var ucapanWaktu = "Boa noite carai";
 }
 if (time2 < "18:00:00") {
-  var ucapanWaktu = "Selamat sore";
+  var ucapanWaktu = "Boa noite carai";
 }
 if (time2 < "15:00:00") {
-  var ucapanWaktu = "Selamat siang";
+  var ucapanWaktu = "Boa tarde meu mano";
 }
 if (time2 < "11:00:00") {
-  var ucapanWaktu = "Selamat pagi";
+  var ucapanWaktu = "coe viado bom dia";
 }
 if (time2 < "05:00:00") {
-  var ucapanWaktu = "Selamat malam";
+  var ucapanWaktu = "acordou cedo hoje bom dia";
 }
 
 
@@ -96,25 +96,16 @@ module.exports = (client) => {
   client.on("group-update", async(mem) => {
     metadata = await client.groupMetadata(mem.jid);
     if (mem.announce == "false") {
-      client.sendMessage(metadata.id, `*[ Group Opened ]* \n\n${mns}group telah di buka oleh admin${mns}\n${mns}sekarang semua member bisa mengirim pesan${mns}`, MessageType.text);
+      client.sendMessage(metadata.id, `*[ Grupo Aberto ]* \n\n${mns}Grupo abrido pelo corno do adm${mns}`, MessageType.text);
       console.log(`[ GROUP OPENED ]\ngroup : ${metadata.subject}`);
     } else if (mem.announce == "true"){
-      client.sendMessage(metadata.id, `*[ Group Closed ]* \n\n${mns}group telah di tutup oleh admin${mns}\n${mns}sekarang hanya admin yang bisa mengirim pesan${mns}`, MessageType.text);
+      client.sendMessage(metadata.id, `*[ Grupo Fechado ]* \n\n${mns}Modo serio grupo fechado pelo adm${mns}`, MessageType.text);
       console.log(`[ GROUP CLOSED ]\ngroup : ${metadata.subject}`);
     } else if (!mem.desc == "") {
       tag = mem.descOwner.split("@")[0] + "@s.whatsapp.net";
       client.sendMessage(metadata.id, `*[ Group Description Change ]*\n\ndeskripsi group telah di ubah oleh owner ${mem.descOwner.split("@")[0]}\n\ndeskripsi baru: ${mem.desc}`, MessageType.text, {
         contextInfo:{mentionedJid:[tag]}
       });
-      console.log(`[ DESCRIPTION CHANGE ]\ngroup : ${metadata.subject}`);
-    } else if (mem.restrict == "false") {
-      client.sendMessage(metadata.id, `*[ Group Setting Change ]*\n\nfitur edit group telah di buka\nsekarang semua member dapat mengedit info group`, MessageType.text);
-      console.log(`[ GROUP SETTING CHANGE ]\ngroup : ${metadata.subject}`);
-    } else if (mem.restrict == "true") {
-      client.sendMessage(metadata.id, `*[ Group Setting Change ]*\n\nfitur edit group telah di tutup\nsekarang hanya admin yang dapat mengedit info group`, MessageType.text);
-      console.log(`[ GROUP SETTING CHANGE ]\ngroup : ${metadata.subject}`);
-    }
-  });
   client.on("group-participants-update", async(mem) => {
     try {
       groupMetadata =await client.groupMetadata(mem.jid);
