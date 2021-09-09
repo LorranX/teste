@@ -686,8 +686,7 @@ ${readMore}
 					quoted: mek
 					}
 					client.sendMessage(from, options, text)
-					await limitAdd(sender)
-					break
+					break;
           case 'setname':
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
@@ -831,7 +830,19 @@ ${readMore}
             reply("error server")
           }
           break;
-          break 
+          case 'probabilidade':
+              rate = body.slice(1)
+              const ra =['99','7','1000','-10','31','0','4','9','17','28','34','48','59','62','100','29','94','75','41','39']
+              const te = ra[Math.floor(Math.random() * ra.length)]
+              client.sendMessage(from, 'Comando : *'+rate+'*\n\nResultado : '+ te+'%', text, { quoted: mek })
+              break
+                    case '%gay':
+            if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Porra, burrão, c tem que marcar alguem pra eu dizer a %')
+              rate = body.slice(1)
+              const gay =['99','7','1000','-10','31','0','4','9','17','28','34','48','59','62','100','29','94','75','41','39']
+              const jabs = gay[Math.floor(Math.random() * gay.length)]
+              client.sendMessage(from, '*Porcentagem de quão gay esse cara é*\n\nResultado : '+ jabs+'%', text, { quoted: mek })
+              break
 				case 'slowmo':
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await client.downloadAndSaveMediaMessage(encmedia)
