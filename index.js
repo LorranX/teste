@@ -409,7 +409,7 @@ ${readMore}
         sendButtonMsg(menu, `runtime: ${runtime(process.uptime())}`,[{
           buttonId: `${prefix}owner`,
           buttonText: {
-            displayText: ""
+            displayText: "owner"
           },
           type: 1
           },{
@@ -503,7 +503,7 @@ ${readMore}
           client.sendMessage(from, {display: "Dono do Bot", vcard: vacrd}, contact, {quoted: mek})
           break;
         case 'github':
-          client.sendMessage(from, "*❏ Meu github*\n\nhttps://github.com/LorranX", text)
+          client.sendMessage(from, "*❏ My github for download this script*\n\nhttp://github.com/affisjunianto", text)
           break;
         case 'play':
           case 'p':
