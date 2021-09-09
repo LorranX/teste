@@ -746,26 +746,6 @@ ${readMore}
 					client.blockUser (`${body.slice(10)}@c.us`, "remove")
 					client.sendMessage(from, `Pronto papai, desbloquiei esse corno`, text)
 				break;
-				case 'gtts':
-				case 'tovoice':
-				if (args.length < 1) return client.sendMessage(from, 'Cade o codigo de linguagem macaco', text, {quoted: mek})
-					const gtts = require('./lib/gtts')(args[0])
-					if (args.length < 2) return client.sendMessage(from, 'Cade o texto macaco', text, {quoted: mek})
-					dtt = body.slice(8)
-					ranm = getRandom('.mp3')
-					rano = getRandom('.ogg')
-					dtt.length > 600
-					? reply('Grande pá carai essa porra')
-					: gtts.save(ranm, dtt, function() {
-						exec(`ffmpeg -i ${ranm} -ar 48000 -vn -c:a libopus ${rano}`, (err) => {
-							fs.unlinkSync(ranm)
-							buffer = fs.readFileSync(rano)
-							if (err) return reply('Deu errado carai')
-							client.sendMessage(from, buffer, audio, {quoted: mek, ptt:true})
-							fs.unlinkSync(rano)
-						})
-					})
-				break;
         case 'tomp3':
 				client.updatePresence(from, Presence.composing)
 				if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
