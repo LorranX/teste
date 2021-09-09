@@ -14,7 +14,7 @@ nocache("./index.js", (module) => console.log(`${module} already updated`));
 async function starts(client = new WAConnection()){
   client.logger.level = 'warn';
   client.version = [2, 2123, 8];
-  client.browserDescription = [ 'lorran totoso', 'ubunto', '3.0' ];
+  client.browserDescription = [ 'LORRAN-BOT', 'ubunto', '3.0' ];
   console.log(banner.string);
   client.on('qr', qr => {
      console.log(
