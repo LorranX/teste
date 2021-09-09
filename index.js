@@ -69,22 +69,23 @@ const runtime = function (seconds) {
   var h = Math.floor((seconds % (3600 * 24)) / 3600);
   var m = Math.floor((seconds % 3600) / 60);
   var s = Math.floor(seconds % 60);
-  var dDisplay = d > 0 ? d + (d == 1 ? " dia, " : " Dia, ") : "";
-  var hDisplay = h > 0 ? h + (h == 1 ? " hora, " : " Hora, ") : "";
-  var mDisplay = m > 0 ? m + (m == 1 ? " minuto, " : " Minuto, ") : "";
-  var sDisplay = s > 0 ? s + (s == 1 ? " segundo" : " segundo") : "";
+  var dDisplay = d > 0 ? d + (d == 1 ? " dia(s), " : " Dia(s), ") : "";
+  var hDisplay = h > 0 ? h + (h == 1 ? " hora(s), " : " Hora(s), ") : "";
+  var mDisplay = m > 0 ? m + (m == 1 ? " minuto(s), " : " Minuto(s), ") : "";
+  var sDisplay = s > 0 ? s + (s == 1 ? " segundo(s)" : " segundo(s)") : "";
   return dDisplay + hDisplay + mDisplay + sDisplay;
 };
 
+
 const time2 = moment().tz("America/Sao_Paulo").format("HH:mm:ss");
 if (time2 < "24:59:00") {
-  var ucapanWaktu = "Vai dormir corno madrugada ja";
+  var ucapanWaktu = "Boa noite";
 }
 if (time2 < "19:00:00") {
-  var ucapanWaktu = "Boa noite carai";
+  var ucapanWaktu = "Boa noite";
 }
 if (time2 < "18:00:00") {
-  var ucapanWaktu = "Boa noite carai";
+  var ucapanWaktu = "Boa noite";
 }
 if (time2 < "15:00:00") {
   var ucapanWaktu = "Boa tarde meu mano";
@@ -345,7 +346,7 @@ module.exports = (client) => {
 //list command
       if (listbut == 'menu' || command == `${prefix}start`) {
         var menu = `
-${ucapanWaktu} kak ${pushname}
+${ucapanWaktu} ${pushname}
 
 *❏ About Bot*
 ├ *name* : ${client.user.name}
@@ -468,7 +469,7 @@ ${readMore}
         case 'menu':
           var menulist = client.prepareMessageFromContent(from, {
             "listMessage" :{
-              "title": `${ucapanWaktu} kak ${pushname}\n\nini adalah bot ${client.user.name}\nbot ini bisa di buat menggunakan termux. untuk script nya bisa di download di github owner\ndan untuk fitur fitur nya bisa kalian add sendiri:)\n\nThanks for suports\nortu\nfadhil\nangga\nhanz\nadiwajshing\ntermos bot maker\nmhankbarbar`,
+              "title": `${ucapanWaktu} ${pushname}\n\nini adalah bot ${client.user.name}\nbot ini bisa di buat menggunakan termux. untuk script nya bisa di download di github owner\ndan untuk fitur fitur nya bisa kalian add sendiri:)\n\nThanks for suports\nortu\nfadhil\nangga\nhanz\nadiwajshing\ntermos bot maker\nmhankbarbar`,
               "description": `bot ini berjalan selama \n${runtime(process.uptime())}`,
               "buttonText": "click here👈",
               "listType": "SINGLE_SELECT",
