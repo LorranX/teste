@@ -760,6 +760,23 @@ ${readMore}
 					fs.unlinkSync(ran)
 				})
 				break;
+				case 'togif': // by lindow
+                    if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
+                        const encmediaaa = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
+                        const mediaaa = await client.downloadAndSaveMediaMessage(encmediaaa)
+                        reply("calmai")
+                        addFilter(from)
+                        a = await webp2gifFile(mediaaa)
+                        mp4 = await getBuffer(a.result)
+                        tiringa.sendMessage(from, mp4, MessageType.video, {
+                            mimetype: 'video/gif',
+                            filename: `stick.gif`,
+                            quoted: mek,
+                            caption: '✅'
+                        })
+                        fs.unlinkSync(mediaaa)
+                    }
+                    break;
         case 'ytsearch':
           if (args.length < 1) return reply("masukan judul video")
           var search = args.join('')
