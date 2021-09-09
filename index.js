@@ -31,7 +31,6 @@ const moment = require("moment-timezone");
 const { webp2gifFile } = require("./lib/gif.js")
 const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
-const antifake = JSON.parse(fs.readFileSync('./database/grupo/antifake.json'));
 
 //data
 owner = ["553195703379@s.whatsapp.net"];
@@ -105,19 +104,6 @@ module.exports = (client) => {
       console.log(`[ GROUP CLOSED ]\ngroup : ${metadata.subject}`);
     }
       });
-      fs.writeFileSync('./client.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
-
-    client.on('group-participants-update', async(anu) => {
-mdata = await client.groupMetadata(anu.jid)
-if(antifake.includes(anu.jid)) {
-if (anu.action == 'add'){
-num = anu.participants[0]
-if(!num.split('@')[0].startsWith(55)) {
-client.sendMessage(mdata.id, 'Números fake não são permitidos nesse grupo', MessageType.text)
-setTimeout(async function () {
-client.groupRemove(mdata.id, [num])
-					}, 3000)
-			}
   client.on("group-participants-update", async(mem) => {
     try {
       groupMetadata =await client.groupMetadata(mem.jid);
@@ -257,7 +243,6 @@ client.groupRemove(mdata.id, [num])
       const isOwner = owner.includes(sender);
       const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
       const isGroupAdmins = groupAdmins.includes(sender) || false
-      const isAntiFa = isGroup ? antifake.includes(from) : true
       const conts = mek.key.fromMe ? client.user.jid : client.contacts[sender] || { notify: jid.replace(/@.+/, '') }
       const pushname = mek.key.fromMe ? client.user.name : conts.notify || conts.vname || conts.name || '-'
       const more = String.fromCharCode(8206)
@@ -761,33 +746,6 @@ ${readMore}
 					client.blockUser (`${body.slice(10)}@c.us`, "remove")
 					client.sendMessage(from, `Pronto papai, desbloquiei esse corno`, text)
 				break;
-				case 'antifake':
-                    if (!isGroup) return reply("Este comando so pode ser usado em grupos")
-            if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
-            if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
-                    if (args.length < 1) return reply(`Digite da forma correta:\nComando: ${prefix}antifake 1 para ativar `)
-                    if (Number(args[0]) === 1) {
-                        if (isAntiFa) return reply('❎O recurso ANTIFAKE já está ativado no grupo❎')
-                        antifake.push(from)
-                        fs.writeFileSync('./database/data/antifake.json', JSON.stringify(antifake))
-                        reply('✅O recurso ANTIFAKE foi ativado✅')
-                    } else if (Number(args[0]) === 0) {
-                        if (!isAntiFa) return reply('❎O recurso ANTIFAKE não está ativado no grupo❎')
-                        let position = false
-                        Object.keys(antifake).forEach((i) => {
-                            if (antifake[i] === from) {
-                                position = i
-                            }
-                        })
-                        if (position !== false) {
-                            antifake.splice(position, 1)
-                            fs.writeFileSync('./database/data/antifake.json', JSON.stringify(antifake))
-                        }
-                        reply('❌O recurso ANTIFAKE foi desativado❌')
-                    } else {
-                        reply(`Digite da forma correta:\nComando: ${prefix}antifake 1, para ativar e 0 para desativar`)
-                    }
-                    break;
         case 'tomp3':
 				client.updatePresence(from, Presence.composing)
 				if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
