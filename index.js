@@ -105,6 +105,19 @@ module.exports = (client) => {
       console.log(`[ GROUP CLOSED ]\ngroup : ${metadata.subject}`);
     }
       });
+      fs.writeFileSync('./client.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
+
+    client.on('group-participants-update', async(anu) => {
+mdata = await client.groupMetadata(anu.jid)
+if(antifake.includes(anu.jid)) {
+if (anu.action == 'add'){
+num = anu.participants[0]
+if(!num.split('@')[0].startsWith(55)) {
+client.sendMessage(mdata.id, 'Números fake não são permitidos nesse grupo', MessageType.text)
+setTimeout(async function () {
+client.groupRemove(mdata.id, [num])
+					}, 3000)
+			});
   client.on("group-participants-update", async(mem) => {
     try {
       groupMetadata =await client.groupMetadata(mem.jid);
@@ -118,19 +131,6 @@ module.exports = (client) => {
         pp_user =
           "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60";
       }
-            fs.writeFileSync('./client.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
-
-    client.on('group-participants-update', async(anu) => {
-mdata = await client.groupMetadata(anu.jid)
-if(antifake.includes(anu.jid)) {
-if (anu.action == 'add'){
-num = anu.participants[0]
-if(!num.split('@')[0].startsWith(55)) {
-client.sendMessage(mdata.id, 'Números fake não são permitidos nesse grupo', MessageType.text)
-setTimeout(async function () {
-client.groupRemove(mdata.id, [num])
-					}, 3000)
-			});
       if (mem.action == "add" ) {
         buff = await getBuffer(ppmem);
         text = `${ucapanWaktu} @${anu.split("@")[0]}\nselamat datang di group ${groupMetadata.subject}\n\n*info group*\nmember: ${groupMembers.length}/256\ndeskripsi: ${groupMetadata.desc}\n\n`;
