@@ -130,9 +130,6 @@ client.sendMessage(mdata.id, 'Números fake não são permitidos nesse grupo', M
 setTimeout(async function () {
 client.groupRemove(mdata.id, [num])
 					}, 3000)
-				}
-	} catch (e) {
-      console.log("Error : %s", color(e, "red"));
 			}
 		});
       if (mem.action == "add" ) {
