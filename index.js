@@ -349,12 +349,12 @@ module.exports = (client) => {
 ╔═══════════════════
 ║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
 ╠═══════════════════
-║│*↭ Sobre o Bot*
+║│ *↭ Sobre o Bot*
 ║ *Bateria* : ${battery.persen}
 ║ *charger* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
 ║ *Marca do celular* : ${client.user.phone.device_manufacturer}
 ║ *Nome do servidor* : ${client.browserDescription[0]}
-║*Servidor* : ${client.browserDescription[1]}
+║ *Servidor* : ${client.browserDescription[1]}
 ║ *Versão* : ${client.browserDescription[2]}
 ║ *Modelo do celular* : ${client.user.phone.device_model}
 └ *Versão do Whatsapp* : ${client.user.phone.wa_version}
@@ -365,8 +365,6 @@ ${HORARIOS} ${pushname}
 
 ║│↭_*   [ *${prefix}hour* ] 
 ║│↭_*   [ *${prefix}listonline* ] 
-║│↭ _*  [ *${prefix}dono* ] 
-║│↭_*   [ *${prefix}info* ] 
 ║│↭_*   [ *${prefix}gp* ] 
 ║│↭_*   [ *${prefix}probabilidade* ]
 ║│↭_*   [ *${prefix}%gay* ] 
@@ -401,22 +399,13 @@ ${HORARIOS} ${pushname}
             },
             type: 1
         }])
-      } else if (listbut == "donasi") {
-        const donate = `
-*❏ Donate Pages*
-├ *pulsa* : +62 823-3429-7175
-├ *dana* : +62 895-7100-73737
-└ *kuota* : +62 877-6182-2449 (XL)
-`
-        client.sendMessage(from, fs.readFileSync("./lib/image/donasi.jpeg"), image, {quoted: mek, caption:donate})
-      } else if (listbut == "sosial media") {
+      } else if (listbut == "ChangeLog") {
         const medsos = `
-*❏ Sosial Media*
-├ *github* : http://github.com/affisjunianto
-├ *Fb* : affis junianto tri saputro
-├ *Ig* : @affis_saputro123
-├ *Wa* : +62 823-3429-7175
-└ *Yt* : comming soon
+  *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
+Ultima atualização: 09/09/2021 as 21:20
+Alteraçoes:Criado menu, editadas opções
+Versão atual:1.0.5
+% de conclusão:30%
 `
         client.sendMessage(from, fs.readFileSync("./lib/image/medsos.jpeg"), image, {quoted: mek, caption: medsos})
       }
@@ -453,21 +442,17 @@ ${HORARIOS} ${pushname}
             "listMessage" :{
               "title": `${HORARIOS} ${pushname}\n\nEu sou o BOT DO LORRAN\nainda não estou pronto, mas asssim que estiver meu papai vai disponibilizar esse script no github\n\n\nEsse script foi desenvolvido com a ajuda direta e indireta de algumas pessoas\nSPECIAL THANKS TO:\nAffis Junianto\nManik\nmhankbarbar`,
               "description": `Estou funcionando a \n${runtime(process.uptime())}`,
-              "buttonText": "click here👈",
+              "buttonText": "Opções",
               "listType": "SINGLE_SELECT",
               "sections": [{
                 "title": `${tanggal()}`,
                 "rows": [{
-                    "title": "menu",
+                    "title": "Menu",
                     "rowId": "0",
                     "description": ""
                   },{
-                    "title": "sosial media",
+                    "title": "ChangeLog",
                     "rowId": "1",
-                    "description": ""
-                  },{
-                    "title": "donasi",
-                    "rowId": "2",
                     "description": ""
                   }]
               }]
@@ -485,7 +470,7 @@ ${HORARIOS} ${pushname}
           client.sendMessage(from, {display: "Dono do Bot", vcard: vacrd}, contact, {quoted: mek})
           break;
         case 'github':
-          client.sendMessage(from, "*❏ My github for download this script*\n\nhttp://github.com/affisjunianto", text)
+          client.sendMessage(from, "*ᨁ Meu github *\n\nhttp://github.com/LorranX", text)
           break;
         case 'play':
           case 'p':
@@ -522,7 +507,7 @@ ${HORARIOS} ${pushname}
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then(async (a) => {
                 if (Number(filesize) >= 100000) return sendMediaURL(thumb, `*PLAY VIDEO*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual não suporta baixar videos muito grandes, caso seja muito grande vou mandar o seu audio em formato de link_`)
-                const captions = `*PLAY VIDEO*\n\n*Title* : ${title}\n*Ext* : MP4\n*Size* : ${filesizeF}\n*Link* : ${a.data}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
+                const captions = `*PLAY VIDEO*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP4\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
                 sendMediaURL(thumb, captions)
                 await URL(dl_link).catch(() => reply('error'))
               })                
