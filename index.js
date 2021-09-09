@@ -607,11 +607,11 @@ ${readMore}
           var link = body.slice(6)
           res = link.replace("https://chat.whatsapp.com/", "");
           done = await client.acceptInvite(res)
-          reply(`Pronto papai, entrei nesse grupo ai ${done.gid}`)
+          reply(`Pronto papai, entrei nesse grupo ai`)
           break;
         case 'leave':
-          if (!isGroup) return reply("wtf man, a gnt nem ta em um grupo como assim eu vou sair")
-          if (!groupAdmins) return reply("So respeito os adm kkkkkkkkk")
+          if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+					if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
           client.groupLeave(from)
           .then((res) => {
             client.sendMessage(sender, "tchau", text)
@@ -629,6 +629,84 @@ ${readMore}
             reply(e)
           }
           break;
+          case 'promote':
+					if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+					if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+					if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
+					if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Ta de adm mas é burro pa caralho, c tem que marcar alguem pra eu promover')
+					mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+					if (mentioned.length > 1) {
+						teks = ''
+						for (let _ of mentioned) {
+							teks += `Membro comum promovido a adm do grupo, tô de olho filho da puta 🧐 :\n`
+							teks += `@_.split('@')[0]`
+						}
+						mentions(teks, mentioned, true)
+						client.groupMakeAdmin(from, mentioned)
+					} else {
+						mentions(`Membro comum @${mentioned[0].split('@')[0]} promovido a adm do grupo tô de olho seu filho da puta 🧐`, mentioned, true)
+						client.groupMakeAdmin(from, mentioned)
+					}
+					break;
+          case 'setname':
+            if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+            if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+            if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
+                client.groupUpdateSubject(from, `${body.slice(9)}`)
+                client.sendMessage(from, 'Pronto macaco, alterei o nome do grupo', text, {quoted: mek})
+					break
+			     	case 'kick':
+              if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+              if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+              if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
+					if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Ta de adm mas é burro pa caralho, c tem que marcar alguem pra eu expulsar')
+					mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+					if (mentioned.length > 1) {
+						teks = ''
+						for (let _ of mentioned) {
+							teks += `𝘽 𝘼 𝙉 𝙄 𝘿 𝙊 :\n`
+							teks += `@_.split('@')[0]`
+						}
+						mentions(teks, mentioned, true)
+						client.groupRemove(from, mentioned)
+					} else {
+						mentions(`𝘽 𝘼 𝙉 𝙄 𝘿 𝙊 @${mentioned[0].split('@')[0]}`, mentioned, true)
+						client.groupRemove(from, mentioned)
+					}
+					break;
+          case 'delete':
+			    	case 'del':
+              if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+              if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+						client.deleteMessage(from, { id: mek.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
+						break;
+            case 'block':
+					client.updatePresence(from, Presence.composing) 
+					if (!isOwner) return reply("Voçê não é meu papai😡")
+					client.blockUser (`${body.slice(8)}@c.us`, "add")
+					client.sendMessage(from, `Pronto papai bloquiei esse filho da puta wa.me${body.slice(8)}@c.us`, text)
+				break;
+				case 'unblock':
+					client.updatePresence(from, Presence.composing) 
+					if (!isOwner) return reply("Voçê não é meu papai😡")
+					client.blockUser (`${body.slice(10)}@c.us`, "remove")
+					client.sendMessage(from, `Pronto papai, desbloquiei esse corno wa.me/${body.slice(10)}`, text)
+				break;
+        case 'tomp3':
+				client.updatePresence(from, Presence.composing)
+				if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
+				reply("Calmai macaco 🦧")
+				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
+				media = await client.downloadAndSaveMediaMessage(encmedia)
+				ran = getRandom('.mp4')
+				exec(`ffmpeg -i ${media} ${ran}`, (err) => {
+					fs.unlinkSync(media)
+					if (err) return reply('Deu errado carai :(')
+					buffer = fs.readFileSync(ran)
+					client.sendMessage(from, buffer, audio, { mimetype: 'audio/mp4', quoted: mek })
+					fs.unlinkSync(ran)
+				})
+				break;
         case 'ytsearch':
           if (args.length < 1) return reply("masukan judul video")
           var search = args.join('')
@@ -662,14 +740,14 @@ ${readMore}
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
           if (!link) return reply("Link invalido")
           try {
-            reply("Calmai macaco 🦧....")
+            reply("Calmai macaco 🦧")
             yta(args[0])
             .then((res) =>{
               const { dl_link, thumb, title, filesizeF, filesize } = res
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then((a) => {
                 if (Number(filesize) >= 30000) return sendMediaURL(thumb, `*Achei carai*\n\n*Titulo* : ${title}\n*Formato de arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual nao suporta baixar e converter videos muito grandes, caso seja muito grande vou mandar o seu audio em formato de link_`)
-                const caption = `*YTMP3*\n\n*Titulo* : ${title}\n*Formato* : MP3\n*Tamanho* : ${filesizeF}\n\n_Ja vou baixar o seu audio, pode ser que demore um pouco, fica calmo ai carai_`
+                const caption = `*Achei carai*\n\n*Titulo* : ${title}\n*Formato* : MP3\n*Tamanho* : ${filesizeF}\n\n_Ja vou baixar o seu audio, pode ser que demore um pouco, fica calmo ai carai_`
                 sendMediaURL(thumb, caption)
                 sendMediaURL(dl_link).catch(() => reply("file error"))
               })
@@ -683,14 +761,14 @@ ${readMore}
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
           if (!link) return reply("link invalido")
           try {
-            reply("wait....")
+            reply("Calmai macaco 🦧")
             ytv(args[0])
             .then((res) =>{
               const { dl_link, thumb, title, filesizeF, filesize } = res
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then((a) => {
                 if (Number(filesize) >= 30000) return sendMediaURL(thumb, `*Achei carai!*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual nao suporta baixar videos muito grandes, caso seja muito grande vou mandar o seu video em formato de link_`)
-                const caption = `*YTMP4*\n\n*Titulo* : ${title}\n*Formato* : MP3\n*Tamanho do arquivo* : ${filesizeF}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
+                const caption = `*Achei carai*\n\n*Titulo* : ${title}\n*Formato* : MP3\n*Tamanho do arquivo* : ${filesizeF}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
                 sendMediaURL(thumb, caption)
                 sendMediaURL(dl_link).catch(() => reply("file error"))
               })
@@ -806,7 +884,7 @@ ${readMore}
           reply(teks)
           break;
         case 'eval':
-          if (sender != "6282334297175@s.whatsapp.net") return reply("khusus owner")
+          if (sender != "@s.whatsapp.net") return reply("khusus owner")
           try {
             client.sendMessage(from, JSON.stringify(eval(body.slice(6)),null,'\t'), text, {quoted: mek})
           } catch (e) {
