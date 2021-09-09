@@ -1323,4 +1323,5 @@ giliran = @${tty.player1.split('@')[0]}`
       console.log("Error : %s", color(e, "red"));
     }
   });
+  });
 };
