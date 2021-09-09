@@ -798,7 +798,7 @@ ${readMore}
                     break;
                     case 'toimg':
 				if (!isQuotedSticker) return reply('Pra usar esse comando c tem que marcar uma figurinha')
-					reply("Calmai macaco 🦧)
+					reply("Calmai macaco 🦧")
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
 					ran = getRandom('.png')
