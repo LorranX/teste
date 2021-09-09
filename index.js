@@ -117,7 +117,7 @@ client.sendMessage(mdata.id, 'Números fake não são permitidos nesse grupo', M
 setTimeout(async function () {
 client.groupRemove(mdata.id, [num])
 					}, 3000)
-			});
+			}
   client.on("group-participants-update", async(mem) => {
     try {
       groupMetadata =await client.groupMetadata(mem.jid);
