@@ -670,6 +670,24 @@ ${readMore}
 						client.groupDemoteAdmin(from, mentioned)
 					}
 					break;
+          case 'hidetag':
+            if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+            if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+					var value = body.slice(9)
+					var group = await client.groupMetadata(from)
+					var member = group['participants']
+					var mem = []
+					member.map( async adm => {
+					mem.push(adm.id.replace('c.us', 's.whatsapp.net'))
+					})
+					var options = {
+					text: value,
+					contextInfo: { mentionedJid: mem },
+					quoted: mek
+					}
+					client.sendMessage(from, options, text)
+					await limitAdd(sender)
+					break
           case 'setname':
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
@@ -696,6 +714,20 @@ ${readMore}
 						client.groupRemove(from, mentioned)
 					}
 					break;
+          case 'add':
+            if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+            if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+            if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
+					if (args.length < 1) return reply('C tem que botsr um numero ai pra eu adicionar')
+					if (args[0].startsWith('9')) return reply('Cade o código de pais seu anima')
+					try {
+						num = `${args[0].replace(/ /g, '')}@s.whatsapp.net`
+						client.groupAdd(from, [num])
+					} catch (e) {
+						console.log('Error :', e)
+						reply('Deu errado carai, muito provavelmente o cara privou quem pode ó adicionar em grupos')
+					}
+				break;
           case 'delete':
 			    	case 'del':
               if (!isGroup) return reply("Este comando so pode ser usado em grupos")
