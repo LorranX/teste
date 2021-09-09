@@ -346,65 +346,47 @@ module.exports = (client) => {
 //list command
       if (listbut == 'menu' || command == `${prefix}start`) {
         var menu = `
+╔═══════════════════
+║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
+╠═══════════════════
+║│*↭ Sobre o Bot*
+║ *Bateria* : ${battery.persen}
+║ *charger* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
+║ *Marca do celular* : ${client.user.phone.device_manufacturer}
+║ *Nome do servidor* : ${client.browserDescription[0]}
+║*Servidor* : ${client.browserDescription[1]}
+║ *Versão* : ${client.browserDescription[2]}
+║ *Modelo do celular* : ${client.user.phone.device_model}
+└ *Versão do Whatsapp* : ${client.user.phone.wa_version}
+
 ${HORARIOS} ${pushname}
 
-*❏ About Bot*
-├ *name* : ${client.user.name}
-├ *battery* : ${battery.persen}
-├ *charger* : ${battery.charger == true ? "sedang di cas" : "sedang tidak di cas"}
-├ *self* : ${self ? "mode self" : "mode public"}
-├ *phone* : ${client.user.phone.device_manufacturer}
-├ *Server Name* : ${client.browserDescription[0]}
-├ *Server* : ${client.browserDescription[1]}
-├ *version* : ${client.browserDescription[2]}
-├ *model* : ${client.user.phone.device_model}
-└ *version Wa* : ${client.user.phone.wa_version}
+║╭──❉ * ⛤𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨⛤ * ❉──
 
-*❏ About user*
-├ *name* : ${pushname}
-├ *owner* : ${isOwner ? "Owner":"bukan Owner"}
-└ *nomer* : ${sender.split("@")[0]}
-${readMore}
-*❏ Sticker*
-└ *${prefix}sticker* _<reply image,video,sticker>_
+║│↭_*   [ *${prefix}hour* ] 
+║│↭_*   [ *${prefix}listonline* ] 
+║│↭ _*  [ *${prefix}dono* ] 
+║│↭_*   [ *${prefix}info* ] 
+║│↭_*   [ *${prefix}gp* ] 
+║│↭_*   [ *${prefix}probabilidade* ]
+║│↭_*   [ *${prefix}%gay* ] 
+║│↭ _*  [ *${prefix}ocr* ] 
+║│↭_*   [ *${prefix}ytmp4* ]
+║│↭_*   [ *${prefix}ytmp3* ]
+║│↭_*   [ *${prefix}play* ] 
+║│↭_*   [ *${prefix}pvideo* ] 
+║│↭ _*  [ *${prefix}sticker* ] 
+║│↭_*   [ *${prefix}listadms* ] 
+║│↭_*   [ *${prefix}toimg* ] 
+║│↭_*   [ *${prefix}togif* ] 
+║│↭_*   [ *${prefix}tomp3* ] 
+║│ 
 
-*❏ experiment features*
-├ *${prefix}jadibot*
-├ *${prefix}stopjadibot*
-└ *${prefix}listjadibot*
+║│
 
-*❏ Edukasi*
-├ *${prefix}lirik* _<judul lagu>_
-└ *${prefix}brainly* _<soal>_
-
-*❏ Game*
-├ *${prefix}slot*
-├ *${prefix}suit* _<batu|gunting|kertas>_
-├ *${prefix}ttt* _<tag orang>_
-└ *${prefix}delttt*
-
-*❏ Download Yt*
-├ *${prefix}play* _<judul lagu>_
-├ *${prefix}ytsearch* _<judul search>_
-├ *${prefix}ytmp3* _<link video>_
-├ *${prefix}ytmp4* _<link video>_
-└ *${prefix}video* _<judul video>_
-
-*❏ Download Medsos*
-├ *${prefix}igstalk* _<@username>_
-├ *${prefix}ig* _<link post>_
-├ *${prefix}fb* _<link post>_
-├ *${prefix}igstory* _<@usernam>_
-├ *${prefix}twitter* _<link twit>_
-├ *${prefix}tiktok* _<link post>_
-
-*❏ Group*
-├ *${prefix}join* _<link group>_
-├ *${prefix}linkgc*
-└ *${prefix}leave*
-
-*❏ Owner*
-└ *${prefix}mode*
+║ | ↭_*  *[Meu criador]*
+║https://wa.me/+553195703379
+╰───────────
 `;
         sendButtonMsg(menu, `runtime: ${runtime(process.uptime())}`,[{
           buttonId: `${prefix}owner`,
