@@ -131,8 +131,10 @@ setTimeout(async function () {
 client.groupRemove(mdata.id, [num])
 					}, 3000)
 				}
+	} catch (e) {
+      console.log("Error : %s", color(e, "red"));
 			}
-		}
+		});
       if (mem.action == "add" ) {
         buff = await getBuffer(ppmem);
         text = `${ucapanWaktu} @${anu.split("@")[0]}\nselamat datang di group ${groupMetadata.subject}\n\n*info group*\nmember: ${groupMembers.length}/256\ndeskripsi: ${groupMetadata.desc}\n\n`;
