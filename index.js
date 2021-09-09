@@ -746,6 +746,26 @@ ${readMore}
 					client.blockUser (`${body.slice(10)}@c.us`, "remove")
 					client.sendMessage(from, `Pronto papai, desbloquiei esse corno`, text)
 				break;
+				case 'gtts':
+				case 'tovoice':
+				if (args.length < 1) return client.sendMessage(from, 'Cade o codigo de linguagem macaco', text, {quoted: mek})
+					const gtts = require('./lib/gtts')(args[0])
+					if (args.length < 2) return client.sendMessage(from, 'Cade o texto macaco', text, {quoted: mek})
+					dtt = body.slice(8)
+					ranm = getRandom('.mp3')
+					rano = getRandom('.ogg')
+					dtt.length > 600
+					? reply('Grande pá carai essa porra')
+					: gtts.save(ranm, dtt, function() {
+						exec(`ffmpeg -i ${ranm} -ar 48000 -vn -c:a libopus ${rano}`, (err) => {
+							fs.unlinkSync(ranm)
+							buffer = fs.readFileSync(rano)
+							if (err) return reply('Deu errado carai')
+							client.sendMessage(from, buffer, audio, {quoted: mek, ptt:true})
+							fs.unlinkSync(rano)
+						})
+					})
+				break;
         case 'tomp3':
 				client.updatePresence(from, Presence.composing)
 				if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
@@ -761,22 +781,36 @@ ${readMore}
 					fs.unlinkSync(ran)
 				})
 				break;
-				case 'togif': // by lindow
+				case 'togif':
                     if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
                         const encmediaaa = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         const mediaaa = await client.downloadAndSaveMediaMessage(encmediaaa)
-                        reply("calmai")
+                        reply("calmai macaco 🦧")
                         a = await webp2gifFile(mediaaa)
                         mp4 = await getBuffer(a.result)
                         client.sendMessage(from, mp4, MessageType.video, {
                             mimetype: 'video/gif',
                             filename: `stick.gif`,
                             quoted: mek,
-                            caption: '✅'
                         })
                         fs.unlinkSync(mediaaa)
                     }
                     break;
+                    case 'toimg':
+				if (!isQuotedSticker) return reply('Pra usar esse comando c tem que marcar uma figurinha')
+					reply("Calmai macaco 🦧)
+					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+					media = await client.downloadAndSaveMediaMessage(encmedia)
+					ran = getRandom('.png')
+					exec(`ffmpeg -i ${media} ${ran}`, (err) => {
+						fs.unlinkSync(media)
+						if (err) return reply(ind.stikga())
+						buffer = fs.readFileSync(ran)
+						client.sendMessage(from, buffer, image, {quoted: mek})
+						fs.unlinkSync(ran)
+					})
+					await limitAdd(sender)
+				break 
         case 'ytsearch':
           if (args.length < 1) return reply("masukan judul video")
           var search = args.join('')
