@@ -409,7 +409,7 @@ ${readMore}
         sendButtonMsg(menu, `runtime: ${runtime(process.uptime())}`,[{
           buttonId: `${prefix}owner`,
           buttonText: {
-            displayText: "owner"
+            displayText: ""
           },
           type: 1
           },{
@@ -469,8 +469,8 @@ ${readMore}
         case 'menu':
           var menulist = client.prepareMessageFromContent(from, {
             "listMessage" :{
-              "title": `${HORARIOS} ${pushname}\n\nini adalah bot ${client.user.name}\nbot ini bisa di buat menggunakan termux. untuk script nya bisa di download di github owner\ndan untuk fitur fitur nya bisa kalian add sendiri:)\n\nThanks for suports\nortu\nfadhil\nangga\nhanz\nadiwajshing\ntermos bot maker\nmhankbarbar`,
-              "description": `bot ini berjalan selama \n${runtime(process.uptime())}`,
+              "title": `${HORARIOS} ${pushname}\n\nEu sou o BOT DO LORRAN\nainda não estou pronto, mas asssim que estiver meu papai vai disponibilizar esse script no github\n\n\nEsse script foi desenvolvido com a ajuda direta e indireta de algumas pessoas\nSPECIAL THANKS TO:\nAffis Junianto\nManik\nmhankbarbar`,
+              "description": `Estou funcionando a \n${runtime(process.uptime())}`,
               "buttonText": "click here👈",
               "listType": "SINGLE_SELECT",
               "sections": [{
@@ -503,7 +503,7 @@ ${readMore}
           client.sendMessage(from, {display: "Dono do Bot", vcard: vacrd}, contact, {quoted: mek})
           break;
         case 'github':
-          client.sendMessage(from, "*❏ My github for download this script*\n\nhttp://github.com/affisjunianto", text)
+          client.sendMessage(from, "*❏ Meu github*\n\nhttps://github.com/LorranX", text)
           break;
         case 'play':
           case 'p':
