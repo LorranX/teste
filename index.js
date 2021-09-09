@@ -249,6 +249,9 @@ module.exports = (client) => {
       if (self) {
         if (!isOwner || !botNumber) return
       }
+      const mentions = (teks, memberr, id) => {
+				(id == null || id == undefined || id == false) ? client.sendMessage(from, teks.trim(), extendedText, {contextInfo: {"mentionedJid": memberr}}) : client.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": memberr}})
+			}
       idttt = [];
       players1 = [];
       players2 = [];
