@@ -31,6 +31,7 @@ const moment = require("moment-timezone");
 const { webp2gifFile } = require("./lib/gif.js")
 const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
+const antifake = JSON.parse(fs.readFileSync('./database/data/antifake.json'));
 
 //data
 owner = ["553195703379@s.whatsapp.net"];
@@ -243,6 +244,7 @@ module.exports = (client) => {
       const isOwner = owner.includes(sender);
       const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
       const isGroupAdmins = groupAdmins.includes(sender) || false
+      const isAntiFa = isGroup ? antifake.includes(from) : true
       const conts = mek.key.fromMe ? client.user.jid : client.contacts[sender] || { notify: jid.replace(/@.+/, '') }
       const pushname = mek.key.fromMe ? client.user.name : conts.notify || conts.vname || conts.name || '-'
       const more = String.fromCharCode(8206)
@@ -321,6 +323,21 @@ module.exports = (client) => {
           fs.unlinkSync(filename)
         });
       }
+      fs.writeFileSync('./client.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
+
+    client.on('group-participants-update', async(anu) => {
+mdata = await tiringa.groupMetadata(anu.jid)
+if(antifake.includes(anu.jid)) {
+if (anu.action == 'add'){
+num = anu.participants[0]
+if(!num.split('@')[0].startsWith(55)) {
+tiringa.sendMessage(mdata.id, 'Números fake não são permitidos nesse grupo', MessageType.text)
+setTimeout(async function () {
+tiringa.groupRemove(mdata.id, [num])
+					}, 2000)
+				}
+			}
+		}
       
       const isMedia = type === "imageMessage" || type === "videoMessage";
       const isQuotedImage =
@@ -728,6 +745,32 @@ ${readMore}
 						reply('Deu errado carai, muito provavelmente o cara privou quem pode ó adicionar em grupos')
 					}
 				break;
+        case 'antifake':
+          if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+          if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+                    if (args.length < 1) return reply(`Digite da forma correta:\nComando: ${prefix}antifake 1 para ativar `)
+                    if (Number(args[0]) === 1) {
+                        if (isAntiFa) return reply('❎O recurso ANTIFAKE já está ativado no grupo❎')
+                        antifake.push(from)
+                        fs.writeFileSync('./database/grupo/antifake.json', JSON.stringify(antifake))
+                        reply('✅O recurso ANTIFAKE foi ativado✅')
+                    } else if (Number(args[0]) === 0) {
+                        if (!isAntiFa) return reply('❎O recurso ANTIFAKE não está ativado no grupo❎')
+                        let position = false
+                        Object.keys(antifake).forEach((i) => {
+                            if (antifake[i] === from) {
+                                position = i
+                            }
+                        })
+                        if (position !== false) {
+                            antifake.splice(position, 1)
+                            fs.writeFileSync('./database/grupo/antifake.json', JSON.stringify(antifake))
+                        }
+                        reply('❌O recurso ANTIFAKE foi desativado❌')
+                    } else {
+                        reply(`Digite da forma correta:\nComando: ${prefix}antifake 1, para ativar e 0 para desativar`)
+                    }
+                    break;
           case 'delete':
 			    	case 'del':
               if (!isGroup) return reply("Este comando so pode ser usado em grupos")
