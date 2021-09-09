@@ -28,6 +28,7 @@ const yts = require( 'yt-search');
 const request = require('request');
 const axios = require("axios");
 const moment = require("moment-timezone");
+const { webp2gifFile } = require("./lib/gif.js")
 const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
 
@@ -765,10 +766,9 @@ ${readMore}
                         const encmediaaa = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         const mediaaa = await client.downloadAndSaveMediaMessage(encmediaaa)
                         reply("calmai")
-                        addFilter(from)
                         a = await webp2gifFile(mediaaa)
                         mp4 = await getBuffer(a.result)
-                        tiringa.sendMessage(from, mp4, MessageType.video, {
+                        client.sendMessage(from, mp4, MessageType.video, {
                             mimetype: 'video/gif',
                             filename: `stick.gif`,
                             quoted: mek,
