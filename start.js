@@ -21,18 +21,18 @@ async function starts(client = new WAConnection()){
        color("[","white"),
        color("∆","red"),
        color("]","white"),
-       color("Escaneie o qr code para usar o bot","purple")
+       color("Escaneie o qr code acima para usar o bot","purple")
        );
   });
   
   fs.existsSync('./session.json') && client.loadAuthInfo('./session.json');
   client.on('connecting', () => {
-  	console.log("[ BOT ]", color("Ta conectando carai....","cyan"));
+  	console.log("[ BOT ]", color("To tentando conectar","cyan"));
   });
   
   client.on('open', (key) => {
   	console.log("[ BOT ]",color("Conectado","green"));
-  	client.sendMessage(client.user.jid, "Conectado com sucesso porra", MessageType.text);
+  	client.sendMessage(client.user.jid, "TESTE/Conectado com sucesso", MessageType.text);
   });
   
   await client.connect({timeoutMs: 30*1000});
