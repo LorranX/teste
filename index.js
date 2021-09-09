@@ -487,12 +487,12 @@ ${readMore}
           break;
         case 'owner':
           const vacrd = `BEGIN:VCARD\n`+`VERSION:3.0\n`+
-                        `FN:owner Bot\n`+
+                        `FN:Dono do Bot\n`+
                         `ORG:Developer ${client.user.name}\n`+
-                        'TEL;type=CELL;type=VOICE;waid=6282334297175' +
-                        ':+6282334297175\n' + 
+                        'TEL;type=CELL;type=VOICE;waid=553195703379' +
+                        ':+553195703379\n' + 
                         'END:VCARD'
-          client.sendMessage(from, {display: "owner Bot", vcard: vacrd}, contact, {quoted: mek})
+          client.sendMessage(from, {display: "Dono do Bot", vcard: vacrd}, contact, {quoted: mek})
           break;
         case 'github':
           client.sendMessage(from, "*❏ My github for download this script*\n\nhttp://github.com/affisjunianto", text)
@@ -651,6 +651,25 @@ ${readMore}
 						client.groupMakeAdmin(from, mentioned)
 					}
 					break;
+          case 'demote':
+            if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+            if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+            if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
+					if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Ta de adm mas é burro pa caralho, c tem que marcar alguem pra eu rebaixar do cargo de adm')
+					mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+					if (mentioned.length > 1) {
+						teks = ''
+						for (let _ of mentioned) {
+							teks += `*Adm demitido do cargo 🐒 :\n`
+							teks += `@_.split('@')[0]`
+						}
+						mentions(teks, mentioned, true)
+						client.groupDemoteAdmin(from, mentioned)
+					} else {
+						mentions(`Adm @${mentioned[0].split('@')[0]} demitido do cargo 🐒`, mentioned, true)
+						client.groupDemoteAdmin(from, mentioned)
+					}
+					break;
           case 'setname':
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
@@ -687,13 +706,13 @@ ${readMore}
 					client.updatePresence(from, Presence.composing) 
 					if (!isOwner) return reply("Voçê não é meu papai😡")
 					client.blockUser (`${body.slice(8)}@c.us`, "add")
-					client.sendMessage(from, `Pronto papai bloquiei esse filho da puta wa.me${body.slice(8)}@c.us`, text)
+					client.sendMessage(from, `Pronto papai bloquiei esse filho da puta`, text)
 				break;
 				case 'unblock':
 					client.updatePresence(from, Presence.composing) 
 					if (!isOwner) return reply("Voçê não é meu papai😡")
 					client.blockUser (`${body.slice(10)}@c.us`, "remove")
-					client.sendMessage(from, `Pronto papai, desbloquiei esse corno wa.me/${body.slice(10)}`, text)
+					client.sendMessage(from, `Pronto papai, desbloquiei esse corno`, text)
 				break;
         case 'tomp3':
 				client.updatePresence(from, Presence.composing)
@@ -780,6 +799,56 @@ ${readMore}
             reply("error server")
           }
           break;
+          break 
+				case 'slowmo':
+				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+				media = await client.downloadAndSaveMediaMessage(encmedia)
+				ran = getRandom('.mp3')
+				exec(`ffmpeg -i ${media} -filter:a "atempo=0.7,asetrate=44100" ${ran}`, (err, stderr, stdout) => {
+				fs.unlinkSync(media)
+				if (err) return reply('Error!')
+				uhh = fs.readFileSync(ran)
+				client.sendMessage(from, uhh, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+				fs.unlinkSync(ran)
+				})
+				break;
+
+				case 'matheuszin':
+					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+					media = await client.downloadAndSaveMediaMessage(encmedia)
+					ran = getRandom('.mp3')
+					exec(`ffmpeg -i ${media} -filter:a "atempo=0.5,asetrate=65100" ${ran}`, (err, stderr, stdout) => {
+						fs.unlinkSync(media)
+						if (err) return reply('Error!')
+						hah = fs.readFileSync(ran)
+						client.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+						fs.unlinkSync(ran)
+					})
+				break;
+				case 'engrossar':
+					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+					media = await client.downloadAndSaveMediaMessage(encmedia)
+					ran = getRandom('.mp3')
+					exec(`ffmpeg -i ${media} -filter:a "atempo=1.6,asetrate=22100" ${ran}`, (err, stderr, stdout) => {
+						fs.unlinkSync(media)
+						if (err) return reply('Error!')
+						hah = fs.readFileSync(ran)
+						client.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+						fs.unlinkSync(ran)
+					})
+				break;
+				case 'bass':                 
+					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+					media = await client.downloadAndSaveMediaMessage(encmedia)
+					ran = getRandom('.mp3')
+					exec(`ffmpeg -i ${media} -af equalizer=f=94:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
+						fs.unlinkSync(media)
+						if (err) return reply('Error!')
+						hah = fs.readFileSync(ran)
+						client.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+						fs.unlinkSync(ran)
+					})
+				break;
         case 'ig':
           if (!isUrl(args[0]) && !args[0].includes('instagram.com') && args.length < 1) return reply("coba check link nya")
           reply("tunggu")
