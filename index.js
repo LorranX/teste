@@ -79,22 +79,22 @@ const runtime = function (seconds) {
 
 const time2 = moment().tz("America/Sao_Paulo").format("HH:mm:ss");
 if (time2 < "24:59:00") {
-  var ucapanWaktu = "Boa noite";
+  var HORARIOS = "Boa noite";
 }
 if (time2 < "19:00:00") {
-  var ucapanWaktu = "Boa noite";
+  var HORARIOS = "Boa noite";
 }
 if (time2 < "18:00:00") {
-  var ucapanWaktu = "Boa noite";
+  var HORARIOS = "Boa noite";
 }
 if (time2 < "15:00:00") {
-  var ucapanWaktu = "Boa tarde meu mano";
+  var HORARIOS = "Boa tarde meu mano";
 }
 if (time2 < "11:00:00") {
-  var ucapanWaktu = "coe viado bom dia";
+  var HORARIOS = "coe viado bom dia";
 }
 if (time2 < "05:00:00") {
-  var ucapanWaktu = "acordou cedo hoje bom dia";
+  var HORARIOS = "acordou cedo hoje bom dia";
 }
 
 
@@ -108,7 +108,7 @@ module.exports = (client) => {
       client.sendMessage(metadata.id, `*[ Grupo Fechado ]* \n\n${mns}Modo serio grupo fechado pelo adm${mns}`, MessageType.text);
       console.log(`[ GROUP CLOSED ]\ngroup : ${metadata.subject}`);
     }
-      });
+  /*      });
   client.on("group-participants-update", async(mem) => {
     try {
       groupMetadata =await client.groupMetadata(mem.jid);
@@ -124,20 +124,20 @@ module.exports = (client) => {
       }
       if (mem.action == "add" ) {
         buff = await getBuffer(ppmem);
-        text = `${ucapanWaktu} @${anu.split("@")[0]}\nselamat datang di group ${groupMetadata.subject}\n\n*info group*\nmember: ${groupMembers.length}/256\ndeskripsi: ${groupMetadata.desc}\n\n`;
+        text = `${HORARIOS} @${anu.split("@")[0]}\nselamat datang di group ${groupMetadata.subject}\n\n*info group*\nmember: ${groupMembers.length}/256\ndeskripsi: ${groupMetadata.desc}\n\n`;
         client.sendMessage(groupMetadata.id, buff, MessageType.image, { caption: text, contextInfo: { mentionedJid: [anu.split("@")[0] + "@s.whatsapp.net"]}});
       } else if (mem.action == "remove" ) {
         buff = await getBuffer(ppmem);
         text = `sampai jumpa @${anu.split("@")[0]}\nsemoga tenang di alam sana ya kak:)`;
         client.sendMessage(groupMetadata.id, buff, MessageType.image, { caption: text, contextInfo: { mentionedJid: [anu.split("@")[0] + "@s.whatsapp.net"]}});
       } else if (mem.action == "promote") {
-        client.sendMessage(groupMetadata.id, `@${anu.split("@")[0]} telah di promote`, MessageType.text, { contextInfo: {mentionedJid: [anu.split("@")[0]+ "@s.whatsapp.net"]}});
+        client.sendMessage(groupMetadata.id, `M@${anu.split("@")[0]} telah di promote`, MessageType.text, { contextInfo: {mentionedJid: [anu.split("@")[0]+ "@s.whatsapp.net"]}});
       } else if (mem.action == "demote") {
-        client.sendMessage(groupMetadata.id, `@${anu.split("@")[0]} telah di demote`, MessageType.text, { contextInfo: {mentionedJid: [anu.split("@")[0]+ "@s.whatsapp.net"]}});
+        client.sendMessage(groupMetadata.id, `Adm @${anu.split("@")[0]} rebaixado a membro comum`, MessageType.text, { contextInfo: {mentionedJid: [anu.split("@")[0]+ "@s.whatsapp.net"]}});
       }
     } catch (e) {
       console.log("Error : %s", color(e, "red"));
-    }
+    } */
   });
   client.on("CB:Blocklist", (json) => {
     if (blocked.length > 2) return;
@@ -346,7 +346,7 @@ module.exports = (client) => {
 //list command
       if (listbut == 'menu' || command == `${prefix}start`) {
         var menu = `
-${ucapanWaktu} ${pushname}
+${HORARIOS} ${pushname}
 
 *❏ About Bot*
 ├ *name* : ${client.user.name}
@@ -441,7 +441,7 @@ ${readMore}
 //case
       switch (command) {
         case 'mode':
-          sendButtonMsg(`${ucapanWaktu} ${isOwner == true ? "owner\nsilahkan pilih mode di bawah ini" : "kak\nanda bukan owner\njadi percumah kalo kamu pencet"}`,`${tanggal()}`,[{
+          sendButtonMsg(`${HORARIOS} ${isOwner == true ? "owner\nsilahkan pilih mode di bawah ini" : "kak\nanda bukan owner\njadi percumah kalo kamu pencet"}`,`${tanggal()}`,[{
             buttonId:`${prefix}self on`,
             buttonText: {
               displayText: `on`
@@ -469,7 +469,7 @@ ${readMore}
         case 'menu':
           var menulist = client.prepareMessageFromContent(from, {
             "listMessage" :{
-              "title": `${ucapanWaktu} ${pushname}\n\nini adalah bot ${client.user.name}\nbot ini bisa di buat menggunakan termux. untuk script nya bisa di download di github owner\ndan untuk fitur fitur nya bisa kalian add sendiri:)\n\nThanks for suports\nortu\nfadhil\nangga\nhanz\nadiwajshing\ntermos bot maker\nmhankbarbar`,
+              "title": `${HORARIOS} ${pushname}\n\nini adalah bot ${client.user.name}\nbot ini bisa di buat menggunakan termux. untuk script nya bisa di download di github owner\ndan untuk fitur fitur nya bisa kalian add sendiri:)\n\nThanks for suports\nortu\nfadhil\nangga\nhanz\nadiwajshing\ntermos bot maker\nmhankbarbar`,
               "description": `bot ini berjalan selama \n${runtime(process.uptime())}`,
               "buttonText": "click here👈",
               "listType": "SINGLE_SELECT",
