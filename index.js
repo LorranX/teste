@@ -505,7 +505,8 @@ ${readMore}
           client.sendMessage(from, "*❏ My github for download this script*\n\nhttp://github.com/affisjunianto", text)
           break;
         case 'play':
-          if (args.length === 0) return reply(`parameter salah\nsilahkan ketik *${prefix}play* _lagu yang ingin di cari_`)
+          case 'p':
+          if (args.length === 0) return reply(`Pra eu baixar a musica c tem que mandar um nome valido\nExemplo: *${prefix}play sertanejo*`)
           var srch = args.join('')
           find = await yts(srch)
           res = find.all
@@ -516,8 +517,8 @@ ${readMore}
               const { dl_link, thumb, title, filesizeF, filesize } = res
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then(async (a) => {
-                if (Number(filesize) >= 100000) return sendMediaURL(thumb, `*PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Filesize* : ${filesizeF}\n*Link* : ${a.data}\n\n_Untuk durasi lebih dari batas disajikan dalam bentuk link_`)
-                sendMediaURL(thumb, `*PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Size* : ${filesizeF}\n*Link* : ${a.data}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`)
+                if (Number(filesize) >= 100000) return sendMediaURL(thumb, `*PLAY MUSIC*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual nao suporta baixar e converter musicas muito grandes, caso seja muito grande vou mandar o seu audio em formato de link_`)
+                sendMediaURL(thumb, `*PLAY MUSIC*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Ja vou baixar o sua musica, pode ser que demore um pouco, fica calmo ai carai_`)
                 await sendMediaURL(dl_link).catch(() => reply('error'))
               })
             })
@@ -525,8 +526,8 @@ ${readMore}
             reply(`server error`)
           }
           break;
-        case 'video':
-          if (args.length === 0) return reply(`Kirim perintah *${prefix}video* _Judul lagu yang akan dicari_`)
+        case 'pvideo':
+          if (args.length === 0) return reply(`Pra eu baixar esse video c tem que mandar um nome valido\nExemplo: *${prefix}pvideo macaco*`)
           var srch = args.join('')
           find = await yts(srch);
           res = find.all 
@@ -537,8 +538,8 @@ ${readMore}
               const { dl_link, thumb, title, filesizeF, filesize } = res
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then(async (a) => {
-                if (Number(filesize) >= 100000) return sendMediaURL(thumb, `*PLAY VIDEO*\n\n*Title* : ${title}\n*Ext* : MP3\n*Filesize* : ${filesizeF}\n*Link* : ${a.data}\n\n_Untuk durasi lebih dari batas disajikan dalam mektuk link_`)
-                const captions = `*PLAY VIDEO*\n\n*Title* : ${title}\n*Ext* : MP4\n*Size* : ${filesizeF}\n*Link* : ${a.data}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
+                if (Number(filesize) >= 100000) return sendMediaURL(thumb, `*PLAY VIDEO*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual não suporta baixar videos muito grandes, caso seja muito grande vou mandar o seu audio em formato de link_`)
+                const captions = `*PLAY VIDEO*\n\n*Title* : ${title}\n*Ext* : MP4\n*Size* : ${filesizeF}\n*Link* : ${a.data}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
                 sendMediaURL(thumb, captions)
                 await URL(dl_link).catch(() => reply('error'))
               })                
