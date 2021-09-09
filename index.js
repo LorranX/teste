@@ -326,18 +326,20 @@ module.exports = (client) => {
       fs.writeFileSync('./client.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
 
     client.on('group-participants-update', async(anu) => {
-mdata = await tiringa.groupMetadata(anu.jid)
+mdata = await client.groupMetadata(anu.jid)
 if(antifake.includes(anu.jid)) {
 if (anu.action == 'add'){
 num = anu.participants[0]
 if(!num.split('@')[0].startsWith(55)) {
-tiringa.sendMessage(mdata.id, 'Números fake não são permitidos nesse grupo', MessageType.text)
-setTimeout(async function () {
-tiringa.groupRemove(mdata.id, [num])
-					}, 2000)
-				}
-			}
-		}
+client.sendMessage(mdata.id, 'Números fake não são permitidos nesse grupo', MessageType.text)
+setTimeout( () => {
+  client.groupRemove(from, [kic]).catch((e)=>{reply(`*ERR:* ${e}`)})
+}, 1000)
+  setTimeout( () => {
+  client.updatePresence(from, Presence.composing)
+  reply("este sera seu último segundo aqui")
+}, 0)
+}
       
       const isMedia = type === "imageMessage" || type === "videoMessage";
       const isQuotedImage =
