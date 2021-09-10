@@ -386,19 +386,6 @@ ${HORARIOS} ${pushname}
 ║https://wa.me/+553195703379
 ╰───────────
 `;
-        sendButtonMsg(menu, `runtime: ${runtime(process.uptime())}`,[{
-          buttonId: `${prefix}owner`,
-          buttonText: {
-            displayText: "owner"
-          },
-          type: 1
-          },{
-            buttonId: `${prefix}github`,
-            buttonText: {
-              displayText: "script bot"
-            },
-            type: 1
-        }])
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
@@ -407,7 +394,7 @@ Alteraçoes:Criado menu, editadas opções
 Versão atual:1.0.5
 % de conclusão:30%
 `
-        client.sendMessage(from, fs.readFileSync("./lib/image/medsos.jpeg"), image, {quoted: mek, caption: medsos})
+        client.sendMessage(from, fs.readFileSync("./lib/image/changelog.jpg"), image, {quoted: mek, caption: medsos})
       }
 //case
       switch (command) {
