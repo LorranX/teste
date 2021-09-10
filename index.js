@@ -352,7 +352,7 @@ module.exports = (client) => {
 ╰───────────
 `;
 sendButtonMsg(Menu, `By LorranX ©`,[{
-  buttonId: `${prefix}Owner`,
+  buttonId: `${prefix}owner`,
   buttonText: {
     displayText: "Dono"
   },
@@ -404,7 +404,7 @@ Versão atual: 1.0.5
           }, {})
           client.relayWAMessage(menulist, {waitForAck: false})
           break;
-        case 'Owner':
+        case 'owner':
           const vacrd = `BEGIN:VCARD\n`+`VERSION:3.0\n`+
                         `FN:Dono do Bot\n`+
                         `ORG:Desenvolvedor do BOT DO LORRAN\n`+
