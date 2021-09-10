@@ -344,8 +344,8 @@ module.exports = (client) => {
       if (isCmd && isGroup) console.log("[",color("command","lime"),"]",time2,color(command,"lime"),"from",color(sender.split("@")[0],"cyan"),"in",color(groupName,"yellow"))
       if (listbut) console.log("[",color("command","lime"),"]",time2,color(listbut,"lime"),"from",color(sender.split("@")[0],"cyan"))
 //list command
-      if (listbut == 'menu' || command == `${prefix}start`) {
-        var menu = `
+      if (listbut == 'Menu' || command == `${prefix}start`) {
+        var Menu = `
 ╔═══════════════════
 ║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
 ╠═══════════════════
@@ -386,7 +386,7 @@ ${HORARIOS} ${pushname}
 ║https://wa.me/+553195703379
 ╰───────────
 `;
-sendButtonMsg(menu, `runtime: ${runtime(process.uptime())}`,[{
+sendButtonMsg(Menu, `runtime: ${runtime(process.uptime())}`,[{
   buttonId: `${prefix}owner`,
   buttonText: {
     displayText: "owner"
@@ -399,6 +399,13 @@ sendButtonMsg(menu, `runtime: ${runtime(process.uptime())}`,[{
     },
     type: 1
 }])
+} else if (listbut == "donasi") {
+const donate = `
+*❏ Donate Pages*
+├ *pulsa* : +62 823-3429-7175
+├ *dana* : +62 895-7100-73737
+└ *kuota* : +62 877-6182-2449 (XL)
+`
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
