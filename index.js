@@ -362,12 +362,9 @@ ${HORARIOS} ${pushname}
 
 ║╭──❉ * ⛤𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨⛤ * ❉──
 
-║│↭_*   [ *${prefix}hour* ] 
 ║│↭_*   [ *${prefix}listonline* ] 
-║│↭_*   [ *${prefix}gp* ] 
 ║│↭_*   [ *${prefix}probabilidade* ]
 ║│↭_*   [ *${prefix}%gay* ] 
-║│↭ _*  [ *${prefix}ocr* ] 
 ║│↭_*   [ *${prefix}ytmp4* ]
 ║│↭_*   [ *${prefix}ytmp3* ]
 ║│↭_*   [ *${prefix}play* ] 
@@ -385,7 +382,7 @@ ${HORARIOS} ${pushname}
 ║https://wa.me/+553195703379
 ╰───────────
 `;
-sendButtonMsg(Menu, `by LorranX ©`,[{
+sendButtonMsg(Menu, `By LorranX ©`,[{
   buttonId: `${prefix}macaco`,
   buttonText: {
     displayText: "macaco"
@@ -426,13 +423,13 @@ Versão atual:1.0.5
           }])
           break;
         case 'self':
-          if (!isOwner) return reply("anda bukan owner yak:)")
+          if (!isOwner) return reply("Voçê não é meu papai")
           if (args[0] === "on") {
             self = true;
-            reply("bot sekarang telah menjadi self mode")
+            reply("Self-bot mod foi ativado")
           } else if (args[0] === "off") {
             self = false;
-            reply("bot sekarang telah menjadi public mode")
+            reply("Self-bot mod foi desativado")
           }
           break;
           case 'macaco':
