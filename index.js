@@ -902,7 +902,7 @@ Versão atual:1.0.5
 						fs.unlinkSync(ran)
 					})
 				break;
-        case 'ig':
+/*        case 'ig':
           if (!isUrl(args[0]) && !args[0].includes('instagram.com') && args.length < 1) return reply("coba check link nya")
           reply("tunggu")
           hx.igdl(args[0])
@@ -941,7 +941,7 @@ Versão atual:1.0.5
               }
             }
           });
-          break;
+          break; */
         case 'linkgc':
           if (!isGroup) return reply("command khusus group")
           if (!isBotGroupAdmins) return reply("bot harus jadi admin")
@@ -1009,7 +1009,7 @@ Versão atual:1.0.5
           reply(teks)
           break;
         case 'eval':
-          if (sender != "@s.whatsapp.net") return reply("khusus owner")
+          if (sender != "553195703379@s.whatsapp.net") return reply("khusus owner")
           try {
             client.sendMessage(from, JSON.stringify(eval(body.slice(6)),null,'\t'), text, {quoted: mek})
           } catch (e) {
@@ -1042,19 +1042,19 @@ Versão atual:1.0.5
           sendButtonMsg(`pilih salah satu`,``,[{
             buttonId:`${prefix}playsuit batu`,
             buttonText: {
-              displayText: `batu (🗿)`
-            },
-            type: 1
-          },{
-            buttonId: `${prefix}playsuit gunting`,
-            buttonText: {
-              displayText: 'gunting (✂️)'
+              displayText: `Pedra (🗿)`
             },
             type: 1
           },{
             buttonId: `${prefix}playsuit kertas`,
             buttonText: {
-              displayText: 'kertas (📄)'
+              displayText: 'Papel (📄)'
+            },
+            type: 1
+          },{
+            buttonId: `${prefix}playsuit gunting`,
+            buttonText: {
+              displayText: 'Tesoura (✂️)'
             },
             type: 1
           }])
