@@ -340,7 +340,6 @@ module.exports = (client) => {
 ║│↭_*   [ *${prefix}play* ] 
 ║│↭_*   [ *${prefix}pvideo* ] 
 ║│↭ _*  [ *${prefix}sticker* ] 
-║│↭_*   [ *${prefix}listadms* ] 
 ║│↭_*   [ *${prefix}toimg* ] 
 ║│↭_*   [ *${prefix}togif* ] 
 ║│↭_*   [ *${prefix}tomp3* ] 
@@ -361,47 +360,22 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
   },{
     buttonId: `${prefix}github`,
     buttonText: {
-      displayText: "script bot"
+      displayText: "script do bot"
     },
     type: 1
 }])
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-Ultima atualização: 10/09/2021 as 15:40
-Alteraçoes:Correções menu, editadas opções, self bot mode adicionado
-Versão atual:1.0.5
-% de conclusão:30%
+Ultima atualização: 10/09/2021 as 20:04
+Ultimas alteraçoes: Script organizado
+Versão atual: 1.0.5
+% de conclusão: 30%
 `
         client.sendMessage(from, fs.readFileSync("./lib/image/changelog.jpg"), image, {quoted: mek, caption: medsos})
       }
 //case
       switch (command) {
-        case 'mode':
-          sendButtonMsg(`${HORARIOS} ${isOwner == true ? "owner\nsilahkan pilih mode di bawah ini" : "kak\nanda bukan owner\njadi percumah kalo kamu pencet"}`,`${tanggal()}`,[{
-            buttonId:`${prefix}self on`,
-            buttonText: {
-              displayText: `on`
-            },
-            type: 1
-          },{
-            buttonId: `${prefix}self off`,
-            buttonText: {
-              displayText: 'off'
-            },
-            type: 1
-          }])
-          break;
-        case 'self':
-          if (!isOwner) return reply("Você não é meu papai")
-          if (args[0] === "on") {
-            self = true;
-            reply("Self-bot mod foi ativado")
-          } else if (args[0] === "off") {
-            self = false;
-            reply("Self-bot mod foi desativado")
-          }
-          break;
           case 'macaco':
 					hisil = fs.readFileSync('./lib/image/changelog.jpg')
 					client.sendMessage(from, hisil, image)
@@ -441,51 +415,7 @@ Versão atual:1.0.5
           client.sendMessage(from, {display: "Dono do Bot", vcard: vacrd}, contact, {quoted: mek})
           break;
         case 'github':
-          client.sendMessage(from, "*ᨁ Meu github *\n\nhttp://github.com/LorranX", text)
-          break;
-        case 'play':
-          case 'p':
-          if (args.length === 0) return reply(`Pra eu baixar a musica c tem que mandar um nome valido\nExemplo: *${prefix}play sertanejo*`)
-          var srch = args.join('')
-          find = await yts(srch)
-          res = find.all
-          var reslink = res[0].url;
-          try {
-            yta(reslink)
-            .then((res) => {
-              const { dl_link, thumb, title, filesizeF, filesize } = res
-              axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
-              .then(async (a) => {
-                if (Number(filesize) >= 100000) return sendMediaURL(thumb, `*PLAY MUSIC*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual nao suporta baixar e converter musicas muito grandes, caso seja muito grande vou mandar o seu audio em formato de link_`)
-                sendMediaURL(thumb, `*PLAY MUSIC*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Ja vou baixar o sua musica, pode ser que demore um pouco, fica calmo ai carai_`)
-                await sendMediaURL(dl_link).catch(() => reply('error'))
-              })
-            })
-          } catch (e) {
-            reply(`server error`)
-          }
-          break;
-        case 'pvideo':
-          if (args.length === 0) return reply(`Pra eu baixar esse video c tem que mandar um nome valido\nExemplo: *${prefix}pvideo macaco*`)
-          var srch = args.join('')
-          find = await yts(srch);
-          res = find.all 
-          var reslink = res[0].url
-          try {
-            ytv(reslink)
-            .then((res) => {
-              const { dl_link, thumb, title, filesizeF, filesize } = res
-              axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
-              .then(async (a) => {
-                if (Number(filesize) >= 100000) return sendMediaURL(thumb, `*PLAY VIDEO*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual não suporta baixar videos muito grandes, caso seja muito grande vou mandar o seu audio em formato de link_`)
-                const captions = `*PLAY VIDEO*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP4\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
-                sendMediaURL(thumb, captions)
-                await URL(dl_link).catch(() => reply('error'))
-              })                
-            })
-          } catch (e) {
-            reply('server error')
-          }                         
+          client.sendMessage(from, "*ᨁ Meu github* \n\nhttp://github.com/LorranX", text)
           break;
         case 'figu':
         case 'figurinha':
@@ -501,7 +431,7 @@ Versão atual:1.0.5
           ffmpeg(media)
           .on('error', (e) => {
           console.log(e)
-          client.sendMessage(from, 'Terjadi kesalahan', 'conversation', { quoted: mek })
+          client.sendMessage(from, 'Deu errado carai', 'conversation', { quoted: mek })
           fs.unlinkSync(media)
           })
           .on('end', () => {
@@ -525,7 +455,7 @@ Versão atual:1.0.5
           ffmpeg(media)
           .on('error', (e) => {
           console.log(e)
-          client.sendMessage(from, 'Terjadi kesalahan', 'conversation', { quoted: mek })
+          client.sendMessage(from, 'Deu errado carai', 'conversation', { quoted: mek })
           fs.unlinkSync(media)
           })
           .on('end', () => {
@@ -550,36 +480,29 @@ Versão atual:1.0.5
           reply(`Pra criar figurinhas c tem que marcar uma imagem ou video de ate 10 segundos com ${prefix}sticker`)
           }
           break;
-        case 'join':
-          case 'entrar':
-          if (args.length === 0 ) return reply(`Pra eu entrar em um grupo c tem que usar um link valido\nExemplo: ${prefix}join _https://chat.whatsapp.com/acasxxzdsad2_`)
-          if (!isOwner)return reply("Voçê não é meu papai")
-          var link = body.slice(6)
-          res = link.replace("https://chat.whatsapp.com/", "");
-          done = await client.acceptInvite(res)
-          reply(`Pronto papai, entrei nesse grupo ai`)
-          break;
+         //FUNÇÕES DE GRUPO
         case 'leave':
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
-					if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
           client.groupLeave(from)
           .then((res) => {
             client.sendMessage(sender, "tchau", text)
           })
           break;
         case 'setdesc':
-          if (!isGroup)return reply("khusus gc")
+          if (!isGroup)return reply("Este comando so pode ser usado em grupos")
           if (!isBotGroupAdmins) return reply("bot harus jadi admin")
           const newdesc = body.slice(11)
           const olddesc = groupDesc
           try {
           client.groupUpdateDescription(from, newdesc)
-          reply(`berhasil mengganti description group\ndari: ${olddesc}\n\nmenjadi: ${newdesc}`)
+          reply(`Pronto, alterei a descricao do grupo\nde: ${olddesc}\n\npara: ${newdesc}`)
           } catch (e) {
             reply(e)
           }
           break;
           case 'promote':
+            case 'promover':
 					if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
 					if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
@@ -599,6 +522,7 @@ Versão atual:1.0.5
 					}
 					break;
           case 'demote':
+            case 'rebaixar':
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
             if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
@@ -674,12 +598,45 @@ Versão atual:1.0.5
 						reply('Deu errado carai, muito provavelmente o cara privou quem pode ó adicionar em grupos')
 					}
 				break;
+        case 'linkgp':
+          if (!isGroup) return reply("command khusus group")
+          if (!isBotGroupAdmins) return reply("bot harus jadi admin")
+          try {
+            const linkgece = await client.groupInviteCode(from)
+            reply(`link group ${groupName}\nlink: http://whatsapp.com/${linkgece}`)
+          } catch (e) {
+            reply("link group invalid or expired")
+          }
+          break;
           case 'delete':
 			    	case 'del':
-              if (!isGroup) return reply("Este comando so pode ser usado em grupos")
               if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
 						client.deleteMessage(from, { id: mek.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
 						break;
+            case 'ttt':
+              case 'tictactoe':
+                if (!isGroup) return reply("mainkan di group")
+                if (args.length < 1) return reply ("tag orang yang mau kamu aja main")
+                if (isTTT) return reply("permainan sedang berlangsung di group ini")
+                if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Tag salah satu orang untuk di ajak bermain')
+                ment = mek.message.extendedTextMessage.contextInfo.mentionedJid;
+                player1 = sender
+                player2 = ment[0]
+                number = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣"]
+                id = from
+                turn = player2
+                roomttt.push({player1,player2,id,number,turn})
+                client.sendMessage(from, `@${player1.split("@")[0]} Telah Memulai Game\n\n*@${player2.split("@")[0]}* anda di tantang untuk bermain game tic tac toe oleh *@${player1.split("@")[0]}*\nketik Y/N untuk menerima/menolak tantangan\n\nketik ${prefix}delttt untuk membatalkan permainan di group ini`, text, {contextInfo: {mentionedJid: player2}})
+                break;
+              case 'delttt':
+                if (!isGroup) return reply("command ini hanya untuk group")
+                if (!isTTT) return reply("tidak ada permainan yang sedang berlangsung")
+                rooms = roomttt.filter(titid => titid.id.includes())
+                roomttt = rooms;
+                reply("sukses")
+                break;
+                //END FUNÇÕES GRUPO
+                //FUNÇÕES DONO
             case 'block':
 					client.updatePresence(from, Presence.composing) 
 					if (!isOwner) return reply("Voçê não é meu papai😡")
@@ -692,6 +649,42 @@ Versão atual:1.0.5
 					client.blockUser (`${body.slice(10)}@c.us`, "remove")
 					client.sendMessage(from, `Pronto papai, desbloquiei esse corno`, text)
 				break;
+        case 'join':
+          case 'entrar':
+          if (args.length === 0 ) return reply(`Pra eu entrar em um grupo c tem que usar um link valido\nExemplo: ${prefix}join _https://chat.whatsapp.com/acasxxzdsad2_`)
+          if (!isOwner)return reply("Voçê não é meu papai")
+          var link = body.slice(6)
+          res = link.replace("https://chat.whatsapp.com/", "");
+          done = await client.acceptInvite(res)
+          reply(`Pronto papai, entrei nesse grupo ai`)
+          break;
+                  case 'self':
+          if (!isOwner) return reply("Você não é meu papai")
+          if (args[0] === "on") {
+            self = true;
+            reply("Self-bot mod foi ativado")
+          } else if (args[0] === "off") {
+            self = false;
+            reply("Self-bot mod foi desativado")
+          }
+          break;
+          case 'mode':
+            sendButtonMsg(`${HORARIOS} ${isOwner == true ? "\nsilahkan pilih mode di bawah ini" : "kak\nanda bukan owner\njadi percumah kalo kamu pencet"}`,`${tanggal()}`,[{
+              buttonId:`${prefix}self on`,
+              buttonText: {
+                displayText: `on`
+              },
+              type: 1
+            },{
+              buttonId: `${prefix}self off`,
+              buttonText: {
+                displayText: 'off'
+              },
+              type: 1
+            }])
+            break;
+            //END FUNÇÕES DONO
+            //CONVERSORES
         case 'tomp3':
 				client.updatePresence(from, Presence.composing)
 				if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
@@ -736,7 +729,53 @@ Versão atual:1.0.5
 						fs.unlinkSync(ran)
 					})
 					await limitAdd(sender)
-				break 
+				break;
+        //END CONVERSORES
+        //DOWNLOADERS
+        case 'play':
+          case 'p':
+          if (args.length === 0) return reply(`Pra eu baixar a musica c tem que mandar um nome valido\nExemplo: *${prefix}play sertanejo*`)
+          var srch = args.join('')
+          find = await yts(srch)
+          res = find.all
+          var reslink = res[0].url;
+          try {
+            yta(reslink)
+            .then((res) => {
+              const { dl_link, thumb, title, filesizeF, filesize } = res
+              axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+              .then(async (a) => {
+                if (Number(filesize) >= 100000) return sendMediaURL(thumb, `*PLAY MUSIC*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual nao suporta baixar e converter musicas muito grandes, caso seja muito grande vou mandar o seu audio em formato de link_`)
+                sendMediaURL(thumb, `*PLAY MUSIC*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Ja vou baixar o sua musica, pode ser que demore um pouco, fica calmo ai carai_`)
+                await sendMediaURL(dl_link).catch(() => reply('error'))
+              })
+            })
+          } catch (e) {
+            reply(`server error`)
+          }
+          break;
+        case 'pvideo':
+          if (args.length === 0) return reply(`Pra eu baixar esse video c tem que mandar um nome valido\nExemplo: *${prefix}pvideo macaco*`)
+          var srch = args.join('')
+          find = await yts(srch);
+          res = find.all 
+          var reslink = res[0].url
+          try {
+            ytv(reslink)
+            .then((res) => {
+              const { dl_link, thumb, title, filesizeF, filesize } = res
+              axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+              .then(async (a) => {
+                if (Number(filesize) >= 100000) return sendMediaURL(thumb, `*PLAY VIDEO*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual não suporta baixar videos muito grandes, caso seja muito grande vou mandar o seu audio em formato de link_`)
+                const captions = `*PLAY VIDEO*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP4\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
+                sendMediaURL(thumb, captions)
+                await URL(dl_link).catch(() => reply('error'))
+              })                
+            })
+          } catch (e) {
+            reply('server error')
+          }                         
+          break;
         case 'ytmp3':
           if (args.length < 1) return reply('Pra eu baixar o audio c tem que usar um link valido do youtube')
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
@@ -779,19 +818,26 @@ Versão atual:1.0.5
             reply("error server")
           }
           break;
+          case 'twitter':
+            if (!isUrl(args[0]) && !args[0].includes('twitter.com') && !q) return reply("link Twitter?")
+            var res = await hx.twitter(args[0])
+            sendMediaURL(res.HD, "DONE✓")
+            break;
+            //END DOWNLOADERS
           case 'probabilidade':
               rate = body.slice(1)
               const ra =['99','7','1000','-10','31','0','4','9','17','28','34','48','59','62','100','29','94','75','41','39']
               const te = ra[Math.floor(Math.random() * ra.length)]
               client.sendMessage(from, 'Comando : *'+rate+'*\n\nResultado : '+ te+'%', text, { quoted: mek })
-              break
+              break;
                     case '%gay':
             if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Porra, burrão, c tem que marcar alguem pra eu dizer a %')
               rate = body.slice(1)
               const gay =['99','7','1000','-10','31','0','4','9','17','28','34','48','59','62','100','29','94','75','41','39']
               const jabs = gay[Math.floor(Math.random() * gay.length)]
               client.sendMessage(from, '*Porcentagem de quão gay esse cara é*\n\nResultado : '+ jabs+'%', text, { quoted: mek })
-              break
+              break;
+              //MODIFICAR AUDIO
 				case 'slowmo':
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -805,7 +851,7 @@ Versão atual:1.0.5
 				})
 				break;
 
-				case 'matheuszin':
+				case 'esquilo':
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
 					ran = getRandom('.mp3')
@@ -841,21 +887,7 @@ Versão atual:1.0.5
 						fs.unlinkSync(ran)
 					})
 				break;
-        case 'linkgc':
-          if (!isGroup) return reply("command khusus group")
-          if (!isBotGroupAdmins) return reply("bot harus jadi admin")
-          try {
-            const linkgece = await client.groupInviteCode(from)
-            reply(`link group ${groupName}\nlink: http://whatsapp.com/${linkgece}`)
-          } catch (e) {
-            reply("link group invalid or expired")
-          }
-          break;
-        case 'twitter':
-          if (!isUrl(args[0]) && !args[0].includes('twitter.com') && !q) return reply("link Twitter?")
-          var res = await hx.twitter(args[0])
-          sendMediaURL(res.HD, "DONE✓")
-          break;
+        //END MODIFICAR AUDIO
         case 'lirik':
           if(!q) return reply('lagu apa?')
           let song = await hx.lirik(q);
@@ -875,36 +907,6 @@ Versão atual:1.0.5
           teks += `*Nomor* : ${i.jid.split('@')[0]}*Nama* : ${i.name}\n*Device* : ${i.phone.device_manufacturer}\n*Model* : ${i.phone.device_model}\n\n`
           }
           reply(teks)
-          break;
-        case 'eval':
-          if (sender != "553195703379@s.whatsapp.net") return reply("khusus owner")
-          try {
-            client.sendMessage(from, JSON.stringify(eval(body.slice(6)),null,'\t'), text, {quoted: mek})
-          } catch (e) {
-            reply(String(e))
-          }
-          break;
-        case 'ttt':
-        case 'tictactoe':
-          if (!isGroup) return reply("mainkan di group")
-          if (args.length < 1) return reply ("tag orang yang mau kamu aja main")
-          if (isTTT) return reply("permainan sedang berlangsung di group ini")
-          if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Tag salah satu orang untuk di ajak bermain')
-          ment = mek.message.extendedTextMessage.contextInfo.mentionedJid;
-          player1 = sender
-          player2 = ment[0]
-          number = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣"]
-          id = from
-          turn = player2
-          roomttt.push({player1,player2,id,number,turn})
-          client.sendMessage(from, `@${player1.split("@")[0]} Telah Memulai Game\n\n*@${player2.split("@")[0]}* anda di tantang untuk bermain game tic tac toe oleh *@${player1.split("@")[0]}*\nketik Y/N untuk menerima/menolak tantangan\n\nketik ${prefix}delttt untuk membatalkan permainan di group ini`, text, {contextInfo: {mentionedJid: player2}})
-          break;
-        case 'delttt':
-          if (!isGroup) return reply("command ini hanya untuk group")
-          if (!isTTT) return reply("tidak ada permainan yang sedang berlangsung")
-          rooms = roomttt.filter(titid => titid.id.includes())
-          roomttt = rooms;
-          reply("sukses")
           break;
         case 'suit':
           sendButtonMsg(`pilih salah satu`,``,[{
@@ -994,6 +996,7 @@ Versão atual:1.0.5
           break;
 
           //GARBAGE
+
            /*       case 'tiktok':
           if (!isUrl(args[0]) && !args[0].includes('tiktok.com') && !q) return reply("Link invalido")
           sek = reply("Calmai macaco")
@@ -1012,6 +1015,14 @@ Versão atual:1.0.5
             })
           })
           .catch( e => console.log(e))
+          break; */
+           /*       case 'eval':
+          if (sender != "553195703379@s.whatsapp.net") return reply("khusus owner")
+          try {
+            client.sendMessage(from, JSON.stringify(eval(body.slice(6)),null,'\t'), text, {quoted: mek})
+          } catch (e) {
+            reply(String(e))
+          }
           break; */
  /*       case 'brainly':
           if (args.length < 1) return reply('Pertanyaan apa')
@@ -1123,6 +1134,7 @@ Versão atual:1.0.5
     } catch (e) {
       console.log("Error : %s", color(e, "red"));
     } */
+    //END GARBAGE
 
         
         default:
