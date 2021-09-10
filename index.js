@@ -397,9 +397,9 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
 }])
       } else if (listbut == "ChangeLog") {
         const medsos = `
-  * ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮 *
+  *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
 Ultima atualização: 10/09/2021 as 15:40
-Alteraçoes:Correções menu, editadas opções
+Alteraçoes:Correções menu, editadas opções, self bot mode adicionado
 Versão atual:1.0.5
 % de conclusão:30%
 `
@@ -666,14 +666,14 @@ Versão atual:1.0.5
 					break;
           case 'setname':
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
-            if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+            if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
             if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
                 client.groupUpdateSubject(from, `${body.slice(9)}`)
                 client.sendMessage(from, 'Pronto macaco, alterei o nome do grupo', text, {quoted: mek})
 					break
 			     	case 'kick':
               if (!isGroup) return reply("Este comando so pode ser usado em grupos")
-              if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+              if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
               if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
 					if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Ta de adm mas é burro pa caralho, c tem que marcar alguem pra eu expulsar')
 					mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
@@ -767,7 +767,7 @@ Versão atual:1.0.5
 					})
 					await limitAdd(sender)
 				break 
-        case 'ytsearch':
+  /*       case 'ytsearch':
           if (args.length < 1) return reply("masukan judul video")
           var search = args.join('')
           try {
@@ -794,7 +794,7 @@ Versão atual:1.0.5
             desc = `*ID* : ${user.profile_id}\n*Username* : ${args.join('')}\n*Full Name* : ${user.full_name}\n*Bio* : ${user.biography}\n*Followers* : ${user.followers}\n*Following* : ${user.following}\n*Private* : ${user.is_private}\n*Verified* : ${user.is_verified}\n\n*Link* : https://instagram.com/${args.join('')}`
             sendMediaURL(thum, desc)
           })
-          break;
+          break; */
         case 'ytmp3':
           if (args.length < 1) return reply('Pra eu baixar o audio c tem que usar um link valido do youtube')
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
