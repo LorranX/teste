@@ -387,9 +387,9 @@ ${HORARIOS} ${pushname}
 ╰───────────
 `;
 sendButtonMsg(Menu, `runtime: ${runtime(process.uptime())}`,[{
-  buttonId: `${prefix}owner`,
+  buttonId: `${prefix}macaco`,
   buttonText: {
-    displayText: "owner"
+    displayText: "macaco"
   },
   type: 1
   },{
@@ -399,16 +399,9 @@ sendButtonMsg(Menu, `runtime: ${runtime(process.uptime())}`,[{
     },
     type: 1
 }])
-} else if (listbut == "donasi") {
-const donate = `
-*❏ Donate Pages*
-├ *pulsa* : +62 823-3429-7175
-├ *dana* : +62 895-7100-73737
-└ *kuota* : +62 877-6182-2449 (XL)
-`
       } else if (listbut == "ChangeLog") {
         const medsos = `
-  *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
+  * ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮 *
 Ultima atualização: 09/09/2021 as 21:20
 Alteraçoes:Criado menu, editadas opções
 Versão atual:1.0.5
