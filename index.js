@@ -386,6 +386,19 @@ ${HORARIOS} ${pushname}
 ║https://wa.me/+553195703379
 ╰───────────
 `;
+        sendButtonMsg(menu, `runtime: ${runtime(process.uptime())}`,[{
+          buttonId: `${prefix}macaco`,
+          buttonText: {
+            displayText: "macaco"
+          },
+          type: 1
+          },{
+            buttonId: `${prefix}github`,
+            buttonText: {
+              displayText: "script bot"
+            },
+            type: 1
+        }])
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
@@ -422,6 +435,10 @@ Versão atual:1.0.5
             self = false;
             reply("bot sekarang telah menjadi public mode")
           }
+          break;
+          case 'macaco':
+					hisil = fs.readFileSync('./lib/image/changelog.jpg')
+					client.sendMessage(from, hisil, image)
           break;
         case 'help':
         case 'menu':
