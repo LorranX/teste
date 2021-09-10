@@ -107,36 +107,6 @@ module.exports = (client) => {
       client.sendMessage(metadata.id, `*[ Grupo Fechado ]* \n\n${mns}Modo serio grupo fechado pelo adm${mns}`, MessageType.text);
       console.log(`[ GROUP CLOSED ]\ngroup : ${metadata.subject}`);
     }
-  /*      });
-  client.on("group-participants-update", async(mem) => {
-    try {
-      groupMetadata =await client.groupMetadata(mem.jid);
-      groupMembers = groupMetadata.participants;
-      groupAdmins = getGroupAdmins(groupMembers);
-      anu = mem.participants[0];
-      ppmem = await client.getProfilePicture(anu);
-      try {
-        pp_user = await client.getProfilePicture(anu);
-      } catch (e) {
-        pp_user =
-          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60";
-      }
-      if (mem.action == "add" ) {
-        buff = await getBuffer(ppmem);
-        text = `${HORARIOS} @${anu.split("@")[0]}\nselamat datang di group ${groupMetadata.subject}\n\n*info group*\nmember: ${groupMembers.length}/256\ndeskripsi: ${groupMetadata.desc}\n\n`;
-        client.sendMessage(groupMetadata.id, buff, MessageType.image, { caption: text, contextInfo: { mentionedJid: [anu.split("@")[0] + "@s.whatsapp.net"]}});
-      } else if (mem.action == "remove" ) {
-        buff = await getBuffer(ppmem);
-        text = `sampai jumpa @${anu.split("@")[0]}\nsemoga tenang di alam sana ya kak:)`;
-        client.sendMessage(groupMetadata.id, buff, MessageType.image, { caption: text, contextInfo: { mentionedJid: [anu.split("@")[0] + "@s.whatsapp.net"]}});
-      } else if (mem.action == "promote") {
-        client.sendMessage(groupMetadata.id, `M@${anu.split("@")[0]} telah di promote`, MessageType.text, { contextInfo: {mentionedJid: [anu.split("@")[0]+ "@s.whatsapp.net"]}});
-      } else if (mem.action == "demote") {
-        client.sendMessage(groupMetadata.id, `Adm @${anu.split("@")[0]} rebaixado a membro comum`, MessageType.text, { contextInfo: {mentionedJid: [anu.split("@")[0]+ "@s.whatsapp.net"]}});
-      }
-    } catch (e) {
-      console.log("Error : %s", color(e, "red"));
-    } */
   });
   client.on("CB:Blocklist", (json) => {
     if (blocked.length > 2) return;
@@ -767,34 +737,6 @@ Versão atual:1.0.5
 					})
 					await limitAdd(sender)
 				break 
-  /*       case 'ytsearch':
-          if (args.length < 1) return reply("masukan judul video")
-          var search = args.join('')
-          try {
-            var find = await yts(search)
-          } catch {
-            return await reply("error")
-          }
-          result = find.all
-          var tbuff = await getBuffer(result[0].image)
-          var ytres = `*[ YT Result ]*\n*————————————————————*\n\n`
-          find.all.map((video) => {
-            ytres += '❏ Title: ' + video.title + '\n'
-            ytres += '❏ Link: ' + video.url + '\n'
-            ytres += '❏ Durasi: ' + video.timestamp + '\n'
-            ytres += `❏ Upload: ` + video.ago +`\n*————————————————————*\n\n`
-          })
-          await fakethumb(tbuff, ytres)
-          break;
-        case 'igstalk':
-          if (args.length < 1) return reply("masukan username")
-          ig.fetchUser(args[0])
-          .then(user => {
-            thum = `${user.profile_pic_url_hd}`
-            desc = `*ID* : ${user.profile_id}\n*Username* : ${args.join('')}\n*Full Name* : ${user.full_name}\n*Bio* : ${user.biography}\n*Followers* : ${user.followers}\n*Following* : ${user.following}\n*Private* : ${user.is_private}\n*Verified* : ${user.is_verified}\n\n*Link* : https://instagram.com/${args.join('')}`
-            sendMediaURL(thum, desc)
-          })
-          break; */
         case 'ytmp3':
           if (args.length < 1) return reply('Pra eu baixar o audio c tem que usar um link valido do youtube')
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
@@ -899,46 +841,6 @@ Versão atual:1.0.5
 						fs.unlinkSync(ran)
 					})
 				break;
-/*        case 'ig':
-          if (!isUrl(args[0]) && !args[0].includes('instagram.com') && args.length < 1) return reply("coba check link nya")
-          reply("tunggu")
-          hx.igdl(args[0])
-          .then(async (res) => {
-            for (let i of res.medias) {
-              if (i.url.includes("mp4")){
-                let link = await getBuffer(i.url)
-                client.sendMessage(from,link,video,{quoted: mek,caption: `Type : ${i.type}`})
-              } else {
-                let link = await getBuffer(i.url)
-                client.sendMessage(from,link,image,{quoted: mek,caption: `Type : ${i.type}`})
-              }
-            }
-          })
-          break;
-        case 'fb':
-          if (!isUrl(args[0]) && !args[0].includes('facebook.com') && args.length < 1) return reply("coba check link nya")
-          reply("tunggu")
-          hx.fbdown(args[0])
-          .then(res => {
-            link = `${res.HD}`
-            sendMediaURL(link, `*Link video_normal* : ${re.Normal_video}`)
-          })
-          break;
-        case 'igstory':
-          if(!q) return reply('Usernamenya?')
-          hx.igstory(q)
-          .then(async result => {
-            for(let i of result.medias){
-              if(i.url.includes('mp4')){
-                let link = await getBuffer(i.url)
-                client.sendMessage(from,link,video,{quoted: mek,caption: `Type : ${i.type}`})
-              } else {
-                let link = await getBuffer(i.url)
-                client.sendMessage(from,link,image,{quoted: mek,caption: `Type : ${i.type}`})                  
-              }
-            }
-          });
-          break; */
         case 'linkgc':
           if (!isGroup) return reply("command khusus group")
           if (!isBotGroupAdmins) return reply("bot harus jadi admin")
@@ -954,37 +856,6 @@ Versão atual:1.0.5
           var res = await hx.twitter(args[0])
           sendMediaURL(res.HD, "DONE✓")
           break;
- /*       case 'tiktok':
-          if (!isUrl(args[0]) && !args[0].includes('tiktok.com') && !q) return reply("Link invalido")
-          sek = reply("Calmai macaco")
-          hx.ttdownloader(args[0])
-          .then(res => {
-            const {
-              nowm
-            } = res;
-            axios.get(`https://tinyurl.com/api-create.php?url=${nowm}`)
-            .then(async (a) => {
-              me = `link: ${a.data}`
-              salsa.sendMessage(from,{url:`${nowm}`},video,{mimetype:'video/mp4',quoted:mek,caption:me})
-              setTimeout(() => {
-                client.deleteMessage(from, sek.key)
-              }, 10000);
-            })
-          })
-          .catch( e => console.log(e))
-          break; */
- /*       case 'brainly':
-          if (args.length < 1) return reply('Pertanyaan apa')
-          soal = args.join(' ')
-          brainly(`${soal}`)
-          .then(res => {
-            let teks = `<==========================>\n`
-            for (let i of res.data) {
-              teks += `*[ Brainly ]*\nsoal:${i.pertanyaan}\n\njawaban:${i.jawaban[0].text}\n<==========================>\n`
-            }
-            client.sendMessage(from, teks, text,{quoted:mek,detectLinks: false})
-          })
-          break; */
         case 'lirik':
           if(!q) return reply('lagu apa?')
           let song = await hx.lirik(q);
@@ -1121,6 +992,138 @@ Versão atual:1.0.5
             return(`maaf masukan query yang benar\ncontoh: ${prefix}${command} halo|5`)
           }
           break;
+
+          //GARBAGE
+           /*       case 'tiktok':
+          if (!isUrl(args[0]) && !args[0].includes('tiktok.com') && !q) return reply("Link invalido")
+          sek = reply("Calmai macaco")
+          hx.ttdownloader(args[0])
+          .then(res => {
+            const {
+              nowm
+            } = res;
+            axios.get(`https://tinyurl.com/api-create.php?url=${nowm}`)
+            .then(async (a) => {
+              me = `link: ${a.data}`
+              salsa.sendMessage(from,{url:`${nowm}`},video,{mimetype:'video/mp4',quoted:mek,caption:me})
+              setTimeout(() => {
+                client.deleteMessage(from, sek.key)
+              }, 10000);
+            })
+          })
+          .catch( e => console.log(e))
+          break; */
+ /*       case 'brainly':
+          if (args.length < 1) return reply('Pertanyaan apa')
+          soal = args.join(' ')
+          brainly(`${soal}`)
+          .then(res => {
+            let teks = `<==========================>\n`
+            for (let i of res.data) {
+              teks += `*[ Brainly ]*\nsoal:${i.pertanyaan}\n\njawaban:${i.jawaban[0].text}\n<==========================>\n`
+            }
+            client.sendMessage(from, teks, text,{quoted:mek,detectLinks: false})
+          })
+          break; */
+          /*        case 'ig':
+          if (!isUrl(args[0]) && !args[0].includes('instagram.com') && args.length < 1) return reply("coba check link nya")
+          reply("tunggu")
+          hx.igdl(args[0])
+          .then(async (res) => {
+            for (let i of res.medias) {
+              if (i.url.includes("mp4")){
+                let link = await getBuffer(i.url)
+                client.sendMessage(from,link,video,{quoted: mek,caption: `Type : ${i.type}`})
+              } else {
+                let link = await getBuffer(i.url)
+                client.sendMessage(from,link,image,{quoted: mek,caption: `Type : ${i.type}`})
+              }
+            }
+          })
+          break;
+        case 'fb':
+          if (!isUrl(args[0]) && !args[0].includes('facebook.com') && args.length < 1) return reply("coba check link nya")
+          reply("tunggu")
+          hx.fbdown(args[0])
+          .then(res => {
+            link = `${res.HD}`
+            sendMediaURL(link, `*Link video_normal* : ${re.Normal_video}`)
+          })
+          break;
+        case 'igstory':
+          if(!q) return reply('Usernamenya?')
+          hx.igstory(q)
+          .then(async result => {
+            for(let i of result.medias){
+              if(i.url.includes('mp4')){
+                let link = await getBuffer(i.url)
+                client.sendMessage(from,link,video,{quoted: mek,caption: `Type : ${i.type}`})
+              } else {
+                let link = await getBuffer(i.url)
+                client.sendMessage(from,link,image,{quoted: mek,caption: `Type : ${i.type}`})                  
+              }
+            }
+          });
+          break; */
+            /*       case 'ytsearch':
+          if (args.length < 1) return reply("masukan judul video")
+          var search = args.join('')
+          try {
+            var find = await yts(search)
+          } catch {
+            return await reply("error")
+          }
+          result = find.all
+          var tbuff = await getBuffer(result[0].image)
+          var ytres = `*[ YT Result ]*\n*————————————————————*\n\n`
+          find.all.map((video) => {
+            ytres += '❏ Title: ' + video.title + '\n'
+            ytres += '❏ Link: ' + video.url + '\n'
+            ytres += '❏ Durasi: ' + video.timestamp + '\n'
+            ytres += `❏ Upload: ` + video.ago +`\n*————————————————————*\n\n`
+          })
+          await fakethumb(tbuff, ytres)
+          break;
+        case 'igstalk':
+          if (args.length < 1) return reply("masukan username")
+          ig.fetchUser(args[0])
+          .then(user => {
+            thum = `${user.profile_pic_url_hd}`
+            desc = `*ID* : ${user.profile_id}\n*Username* : ${args.join('')}\n*Full Name* : ${user.full_name}\n*Bio* : ${user.biography}\n*Followers* : ${user.followers}\n*Following* : ${user.following}\n*Private* : ${user.is_private}\n*Verified* : ${user.is_verified}\n\n*Link* : https://instagram.com/${args.join('')}`
+            sendMediaURL(thum, desc)
+          })
+          break; */
+            /*      });
+  client.on("group-participants-update", async(mem) => {
+    try {
+      groupMetadata =await client.groupMetadata(mem.jid);
+      groupMembers = groupMetadata.participants;
+      groupAdmins = getGroupAdmins(groupMembers);
+      anu = mem.participants[0];
+      ppmem = await client.getProfilePicture(anu);
+      try {
+        pp_user = await client.getProfilePicture(anu);
+      } catch (e) {
+        pp_user =
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60";
+      }
+      if (mem.action == "add" ) {
+        buff = await getBuffer(ppmem);
+        text = `${HORARIOS} @${anu.split("@")[0]}\nselamat datang di group ${groupMetadata.subject}\n\n*info group*\nmember: ${groupMembers.length}/256\ndeskripsi: ${groupMetadata.desc}\n\n`;
+        client.sendMessage(groupMetadata.id, buff, MessageType.image, { caption: text, contextInfo: { mentionedJid: [anu.split("@")[0] + "@s.whatsapp.net"]}});
+      } else if (mem.action == "remove" ) {
+        buff = await getBuffer(ppmem);
+        text = `sampai jumpa @${anu.split("@")[0]}\nsemoga tenang di alam sana ya kak:)`;
+        client.sendMessage(groupMetadata.id, buff, MessageType.image, { caption: text, contextInfo: { mentionedJid: [anu.split("@")[0] + "@s.whatsapp.net"]}});
+      } else if (mem.action == "promote") {
+        client.sendMessage(groupMetadata.id, `M@${anu.split("@")[0]} telah di promote`, MessageType.text, { contextInfo: {mentionedJid: [anu.split("@")[0]+ "@s.whatsapp.net"]}});
+      } else if (mem.action == "demote") {
+        client.sendMessage(groupMetadata.id, `Adm @${anu.split("@")[0]} rebaixado a membro comum`, MessageType.text, { contextInfo: {mentionedJid: [anu.split("@")[0]+ "@s.whatsapp.net"]}});
+      }
+    } catch (e) {
+      console.log("Error : %s", color(e, "red"));
+    } */
+
         
         default:
           if (isTTT && isPlayer2) {
