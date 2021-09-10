@@ -386,19 +386,19 @@ ${HORARIOS} ${pushname}
 ║https://wa.me/+553195703379
 ╰───────────
 `;
-        sendButtonMsg(menu, `runtime: ${runtime(process.uptime())}`,[{
-          buttonId: `${prefix}macaco`,
-          buttonText: {
-            displayText: "macaco"
-          },
-          type: 1
-          },{
-            buttonId: `${prefix}github`,
-            buttonText: {
-              displayText: "script bot"
-            },
-            type: 1
-        }])
+sendButtonMsg(menu, `runtime: ${runtime(process.uptime())}`,[{
+  buttonId: `${prefix}owner`,
+  buttonText: {
+    displayText: "owner"
+  },
+  type: 1
+  },{
+    buttonId: `${prefix}github`,
+    buttonText: {
+      displayText: "script bot"
+    },
+    type: 1
+}])
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
