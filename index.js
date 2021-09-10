@@ -21,7 +21,6 @@ const { spawn, exec, execSync } = require("child_process");
 const speed = require('performance-now');
 const ig = require('insta-fetcher');
 const hx = require("hxz-api");
-const brainly = require('brainly-scraper');
 const fs = require("fs");
 const ffmpeg = require('fluent-ffmpeg');
 const yts = require( 'yt-search');
@@ -386,7 +385,7 @@ ${HORARIOS} ${pushname}
 ║https://wa.me/+553195703379
 ╰───────────
 `;
-sendButtonMsg(Menu, `runtime: ${runtime(process.uptime())}`,[{
+sendButtonMsg(Menu, `by LorranX ©`,[{
   buttonId: `${prefix}macaco`,
   buttonText: {
     displayText: "macaco"
@@ -957,9 +956,9 @@ Versão atual:1.0.5
           var res = await hx.twitter(args[0])
           sendMediaURL(res.HD, "DONE✓")
           break;
-        case 'tiktok':
-          if (!isUrl(args[0]) && !args[0].includes('tiktok.com') && !q) return reply("link tiktok nya tuan")
-          sek = await reply("wait ya bund")
+ /*       case 'tiktok':
+          if (!isUrl(args[0]) && !args[0].includes('tiktok.com') && !q) return reply("Link invalido")
+          sek = reply("Calmai macaco")
           hx.ttdownloader(args[0])
           .then(res => {
             const {
@@ -975,8 +974,8 @@ Versão atual:1.0.5
             })
           })
           .catch( e => console.log(e))
-          break;
-        case 'brainly':
+          break; */
+ /*       case 'brainly':
           if (args.length < 1) return reply('Pertanyaan apa')
           soal = args.join(' ')
           brainly(`${soal}`)
@@ -987,7 +986,7 @@ Versão atual:1.0.5
             }
             client.sendMessage(from, teks, text,{quoted:mek,detectLinks: false})
           })
-          break;
+          break; */
         case 'lirik':
           if(!q) return reply('lagu apa?')
           let song = await hx.lirik(q);
