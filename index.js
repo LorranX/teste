@@ -84,10 +84,10 @@ if (time2 < "19:00:00") {
   var HORARIOS = "Boa noite";
 }
 if (time2 < "18:00:00") {
-  var HORARIOS = "Boa noite";
+  var HORARIOS = "Boa tarde ";
 }
 if (time2 < "15:00:00") {
-  var HORARIOS = "Boa tarde meu mano";
+  var HORARIOS = "Boa tarde";
 }
 if (time2 < "11:00:00") {
   var HORARIOS = "coe viado bom dia";
@@ -174,7 +174,7 @@ module.exports = (client) => {
     let nomer;
     calling = JSON.parse(JSON.stringify(num));
     nomer = calling[1].from;
-    client.sendMessage(nomer, `Sorry ${client.user.name} can't receive calls, \ncall = block`, MessageType.text)
+    client.sendMessage(nomer, `Sorry ${client.user.name} Sai , \ncall = block`, MessageType.text)
     .then(() => {
       return client.blockUser(nomer, 'add')
     })
@@ -358,7 +358,7 @@ module.exports = (client) => {
 ║ *Modelo do celular* : ${client.user.phone.device_model}
 └ *Versão do Whatsapp* : ${client.user.phone.wa_version}
 
-${HORARIOS} ${pushname}
+*↭  ${HORARIOS} ${pushname}*
 
 ║╭──❉ * ⛤𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨⛤ * ❉──
 
@@ -383,9 +383,9 @@ ${HORARIOS} ${pushname}
 ╰───────────
 `;
 sendButtonMsg(Menu, `By LorranX ©`,[{
-  buttonId: `${prefix}macaco`,
+  buttonId: `${prefix}Dono`,
   buttonText: {
-    displayText: "macaco"
+    displayText: "Dono"
   },
   type: 1
   },{
@@ -398,8 +398,8 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   * ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮 *
-Ultima atualização: 09/09/2021 as 21:20
-Alteraçoes:Criado menu, editadas opções
+Ultima atualização: 10/09/2021 as 15:40
+Alteraçoes:Correções menu, editadas opções
 Versão atual:1.0.5
 % de conclusão:30%
 `
@@ -423,7 +423,7 @@ Versão atual:1.0.5
           }])
           break;
         case 'self':
-          if (!isOwner) return reply("Voçê não é meu papai")
+          if (!isOwner) return reply("Você não é meu papai")
           if (args[0] === "on") {
             self = true;
             reply("Self-bot mod foi ativado")
@@ -460,10 +460,11 @@ Versão atual:1.0.5
           }, {})
           client.relayWAMessage(menulist, {waitForAck: false})
           break;
-        case 'owner':
+        case 'Owner':
+          case 'Dono':
           const vacrd = `BEGIN:VCARD\n`+`VERSION:3.0\n`+
                         `FN:Dono do Bot\n`+
-                        `ORG:Developer ${client.user.name}\n`+
+                        `ORG:Desenvolvedor do BOT DO LORRAN\n`+
                         'TEL;type=CELL;type=VOICE;waid=553195703379' +
                         ':+553195703379\n' + 
                         'END:VCARD'
