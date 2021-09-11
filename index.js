@@ -326,7 +326,7 @@ module.exports = (client) => {
 ╠═══════════════════
 ║│ *↭ Sobre o Bot*
 ║ *Bateria* : ${battery.persen}
-║ *charger* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
+║ *Info carregador* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
 ║ *Marca do celular* : ${client.user.phone.device_manufacturer}
 ║ *Nome do servidor* : ${client.browserDescription[0]}
 ║ *Servidor* : ${client.browserDescription[1]}
@@ -341,6 +341,7 @@ module.exports = (client) => {
 ║│↭_*   [ *${prefix}listonline* ] 
 ║│↭_*   [ *${prefix}probabilidade* ]
 ║│↭_*   [ *${prefix}%gay* ] 
+║│↭_*   [ *${prefix}twitter* ]
 ║│↭_*   [ *${prefix}ytmp4* ]
 ║│↭_*   [ *${prefix}ytmp3* ]
 ║│↭_*   [ *${prefix}play* ] 
@@ -350,6 +351,10 @@ module.exports = (client) => {
 ║│↭_*   [ *${prefix}togif* ] 
 ║│↭_*   [ *${prefix}tomp3* ] 
 ║│↭_*   [ *${prefix}menuadmin* ] 
+║│↭_*   [ *${prefix}slowmo* ] 
+║│↭_*   [ *${prefix}esquilo* ] 
+║│↭_*   [ *${prefix}engrossar* ] 
+║│↭_*   [ *${prefix}bass* ] 
 ║│ 
 
 ║│
@@ -374,10 +379,10 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-Ultima atualização: 10/09/2021 as 20:04
-Ultimas alteraçoes: Script organizado
+Ultima atualização: 11/09/2021 as 00:50
+Ultimas alteraçoes: adicionado menu admin e menu audio
 Versão atual: 1.0.5
-% de conclusão: 30%
+% de conclusão: 35%
 `
         client.sendMessage(from, fs.readFileSync("./lib/image/changelog.jpg"), image, {quoted: mek, caption: medsos})
       }
@@ -689,8 +694,8 @@ Versão atual: 1.0.5
             reply("Self-bot mod foi desativado")
           }
           break;
-          case 'mode':
-            sendButtonMsg(`${HORARIOS} ${isOwner == true ? "Ola papai\nescolha em qual modo eu devo operar" : "kak\nanda bukan owner\njadi percumah kalo kamu pencet"}`,`${DATACOMPLETA()}`,[{
+          case 'selfmode':
+            sendButtonMsg(`${HORARIOS} ${isOwner == true ? "Ola papai\nescolha em qual modo eu devo operar" : "Você não é meu papai 😡"}`,`${DATACOMPLETA()}`,[{
               buttonId:`${prefix}self on`,
               buttonText: {
                 displayText: `on`
@@ -871,7 +876,6 @@ Versão atual: 1.0.5
 				fs.unlinkSync(ran)
 				})
 				break;
-
 				case 'esquilo':
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
