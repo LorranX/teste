@@ -506,6 +506,25 @@ Versão atual: 1.0.5
           reply(`Pra criar figurinhas c tem que marcar uma imagem ou video de ate 10 segundos com ${prefix}sticker`)
           }
           break;
+          case 'attp':
+                if (args.length < 1) return reply(`C tem que mandar um texto pra eu criar figurinha`)
+                dulim = body.slice(5)
+				apiglow = await getBuffer(`https://api.xteam.xyz/attp?file&text=${dulim}`)
+				LorranX.sendMessage(from, apiglow, sticker, {quoted: mek})
+				break;
+        case 'dado':
+			ranp = getRandom('.png')
+			rano = getRandom('.webp')
+		        random = `${Math.floor(Math.random() * 6)}`
+                    hasil = 'https://www.random.org/dice/' + random + '.png'
+			exec(`wget ${hasil} -O ${ranp} && ffmpeg -i ${ranp} -vcodec libwebp -filter:v fps=fps=15 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${rano}`, (e) => {
+			fs.unlinkSync(ranp)
+			if (e) return reply(ind.wait())
+			buffer = fs.readFileSync(rano)
+			LorranX.sendMessage(from, buffer, sticker)
+			fs.unlinkSync(rano)
+			})
+			break;
          //FUNÇÕES DE GRUPO
         case 'leave':
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
