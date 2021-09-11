@@ -380,7 +380,7 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
 Ultima atualização: 11/09/2021 as 00:50
-Ultimas alteraçoes: adicionado menu admin e menu audio
+Ultimas alteraçoes: adicionado menu admin
 Versão atual: 1.0.5
 % de conclusão: 35%
 `
