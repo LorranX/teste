@@ -103,30 +103,30 @@ if (time2 < "05:00:00") {
 }
 
 
-module.exports = (client) => {
-  client.on("group-update", async(mem) => {
-    metadata = await client.groupMetadata(mem.jid);
+module.exports = (LorranX) => {
+  LorranX.on("group-update", async(mem) => {
+    metadata = await LorranX.groupMetadata(mem.jid);
     if (mem.announce == "false") {
-      client.sendMessage(metadata.id, `*[ Grupo Aberto ]* \n\n${mns}Grupo abrido pelo corno do adm${mns}`, MessageType.text);
+      LorranX.sendMessage(metadata.id, `*[ Grupo Aberto ]* \n\n${mns}Grupo abrido pelo corno do adm${mns}`, MessageType.text);
       console.log(`[ GROUP OPENED ]\ngroup : ${metadata.subject}`);
     } else if (mem.announce == "true"){
-      client.sendMessage(metadata.id, `*[ Grupo Fechado ]* \n\n${mns}Modo serio grupo fechado pelo adm${mns}`, MessageType.text);
+      LorranX.sendMessage(metadata.id, `*[ Grupo Fechado ]* \n\n${mns}Modo serio grupo fechado pelo adm${mns}`, MessageType.text);
       console.log(`[ GROUP CLOSED ]\ngroup : ${metadata.subject}`);
     }
   });
-  client.on("CB:Blocklist", (json) => {
+  LorranX.on("CB:Blocklist", (json) => {
     if (blocked.length > 2) return;
     for (let i of json[1].blocklist){
       blocked.push(i.replace("c.us","s.whatsapp.net"));
     }
   });
-  client.on("CB:action,,battery", (json) => {
+  LorranX.on("CB:action,,battery", (json) => {
     const batteryLevelStr = json[2][0][1].value;
     const batteryLevel = parseInt(batteryLevelStr);
     battery.persen = `${batteryLevel}%`;
     battery.charger = json[2][0][1].live;
   });
-  client.on("message-delete",async(mek) => {
+  LorranX.on("message-delete",async(mek) => {
     if (mek.key.remoteJid == "status@broadcast") return;
     if (!mek.key.fromMe && mek.key.fromMe) return;
     if (antideleted === false) return;
@@ -144,18 +144,18 @@ module.exports = (client) => {
       year: 'numeric'
     });
     const type = Object.keys(mek.message)[0];
-    client.sendMessage(mek.key.remoteJid, `*[ ANTI DELETE ]*\n\n*nama* : @${mek.participant.split("@")[0]}\n*jam* : ${moment.localweek.localday}\n*Type* : ${type}`, MessageType.text, {quoted:mek.message, contextInfo: { "mentionedJid": [mek.participant]}})
+    LorranX.sendMessage(mek.key.remoteJid, `*[ ANTI DELETE ]*\n\n*nama* : @${mek.participant.split("@")[0]}\n*jam* : ${moment.localweek.localday}\n*Type* : ${type}`, MessageType.text, {quoted:mek.message, contextInfo: { "mentionedJid": [mek.participant]}})
   });
-  client.on("CB:Call", (num) => {
+  LorranX.on("CB:Call", (num) => {
     let nomer;
     calling = JSON.parse(JSON.stringify(num));
     nomer = calling[1].from;
-    client.sendMessage(nomer, `Sorry ${client.user.name} Sai , \ncall = block`, MessageType.text)
+    LorranX.sendMessage(nomer, `Sorry ${LorranX.user.name} Sai , \ncall = block`, MessageType.text)
     .then(() => {
-      return client.blockUser(nomer, 'add')
+      return LorranX.blockUser(nomer, 'add')
     })
   });
-  client.on("chat-update", async(mek) => {
+  LorranX.on("chat-update", async(mek) => {
     try {
       if (!mek.hasNewMessage) return;
       mek = mek.messages.all()[0];
@@ -205,15 +205,15 @@ module.exports = (client) => {
       const args = body.trim().split(/ +/).slice(1)
       const isCmd = body.startsWith(prefix)
       const q = args.join(' ')
-      const botNumber = client.user.jid
+      const botNumber = LorranX.user.jid
       const isGroup = from.endsWith("@g.us")
       const sender = mek.key.fromMe
-        ? client.user.jid
+        ? LorranX.user.jid
         : isGroup
         ? mek.participant
         : mek.key.remoteJid
-      const totalchat = client.chats.all()
-      const groupMetadata = isGroup ? await client.groupMetadata(from) : ''
+      const totalchat = LorranX.chats.all()
+      const groupMetadata = isGroup ? await LorranX.groupMetadata(from) : ''
       const groupName = isGroup ? groupMetadata.subject : ''
       const groupId = isGroup ? groupMetadata.jid : ''
       const groupMembers = isGroup ? groupMetadata.participants : ''
@@ -223,15 +223,15 @@ module.exports = (client) => {
       const isOwner = owner.includes(sender);
       const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
       const isGroupAdmins = groupAdmins.includes(sender) || false
-      const conts = mek.key.fromMe ? client.user.jid : client.contacts[sender] || { notify: jid.replace(/@.+/, '') }
-      const pushname = mek.key.fromMe ? client.user.name : conts.notify || conts.vname || conts.name || '-'
+      const conts = mek.key.fromMe ? LorranX.user.jid : LorranX.contacts[sender] || { notify: jid.replace(/@.+/, '') }
+      const pushname = mek.key.fromMe ? LorranX.user.name : conts.notify || conts.vname || conts.name || '-'
       const more = String.fromCharCode(8206)
       const readMore = more.repeat(4001)
       if (self) {
         if (!isOwner || !botNumber) return
       }
       const mentions = (teks, memberr, id) => {
-				(id == null || id == undefined || id == false) ? client.sendMessage(from, teks.trim(), extendedText, {contextInfo: {"mentionedJid": memberr}}) : client.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": memberr}})
+				(id == null || id == undefined || id == false) ? LorranX.sendMessage(from, teks.trim(), extendedText, {contextInfo: {"mentionedJid": memberr}}) : LorranX.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": memberr}})
 			}
       idttt = [];
       players1 = [];
@@ -251,10 +251,10 @@ module.exports = (client) => {
       }
 
       const reply = (teks) => {
-        client.sendMessage(from, teks, text, {quoted:mek})
+        LorranX.sendMessage(from, teks, text, {quoted:mek})
       }
       const fakethumb = (teks, yes) => {
-            client.sendMessage(from, teks, image, {thumbnail:fs.readFileSync('./lib/image/fake.jpeg'),quoted:mek,caption:yes})
+            LorranX.sendMessage(from, teks, image, {thumbnail:fs.readFileSync('./lib/image/fake.jpeg'),quoted:mek,caption:yes})
         }
         
       const sendButtonMsg = (text, footer, but = [], options = {}) => {
@@ -264,7 +264,7 @@ module.exports = (client) => {
           buttons: but,
           headerType: 1
         };
-        client.sendMessage(
+        LorranX.sendMessage(
           from,
           buttonMessagek,
           buttonsMessage,
@@ -296,7 +296,7 @@ module.exports = (client) => {
           if(mime.split("/")[0] === "audio"){
             mime = Mimetype.mp4Audio
           }
-          client.sendMessage(from, media, type, { quoted: mek, mimetype: mime, caption: text,contextInfo: {"mentionedJid": mids}})
+          LorranX.sendMessage(from, media, type, { quoted: mek, mimetype: mime, caption: text,contextInfo: {"mentionedJid": mids}})
                     
           fs.unlinkSync(filename)
         });
@@ -327,12 +327,12 @@ module.exports = (client) => {
 ║│ *↭ Sobre o Bot*
 ║ *Bateria* : ${battery.persen}
 ║ *Info carregador* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
-║ *Marca do celular* : ${client.user.phone.device_manufacturer}
-║ *Nome do servidor* : ${client.browserDescription[0]}
-║ *Servidor* : ${client.browserDescription[1]}
-║ *Versão* : ${client.browserDescription[2]}
-║ *Modelo do celular* : ${client.user.phone.device_model}
-└ *Versão do Whatsapp* : ${client.user.phone.wa_version}
+║ *Marca do celular* : ${LorranX.user.phone.device_manufacturer}
+║ *Nome do servidor* : ${LorranX.browserDescription[0]}
+║ *Servidor* : ${LorranX.browserDescription[1]}
+║ *Versão* : ${LorranX.browserDescription[2]}
+║ *Modelo do celular* : ${LorranX.user.phone.device_model}
+└ *Versão do Whatsapp* : ${LorranX.user.phone.wa_version}
 
 *↭  ${HORARIOS} ${pushname}*
 
@@ -384,7 +384,7 @@ Ultimas alteraçoes: adicionado menu admin
 Versão atual: 1.0.5
 % de conclusão: 35%
 `
-        client.sendMessage(from, fs.readFileSync("./lib/image/changelog.jpg"), image, {quoted: mek, caption: medsos})
+        LorranX.sendMessage(from, fs.readFileSync("./lib/image/changelog.jpg"), image, {quoted: mek, caption: medsos})
       }
 //case
       switch (command) {
@@ -405,11 +405,11 @@ Versão atual: 1.0.5
             break;
           case 'macaco':
 					hisil = fs.readFileSync('./lib/image/changelog.jpg')
-					client.sendMessage(from, hisil, image)
+					LorranX.sendMessage(from, hisil, image)
           break;
         case 'help':
         case 'menu':
-          var menulist = client.prepareMessageFromContent(from, {
+          var menulist = LorranX.prepareMessageFromContent(from, {
             "listMessage" :{
               "title": `${HORARIOS} ${pushname}\n\nEu sou o BOT DO LORRAN\nainda não estou pronto, mas asssim que estiver meu papai vai disponibilizar esse script no github\n\n\nEsse script foi desenvolvido com a ajuda direta e indireta de algumas pessoas\nSPECIAL THANKS TO:\nAffis Junianto\nManik\nmhankbarbar`,
               "description": `Estou funcionando a \n${runtime(process.uptime())}`,
@@ -429,7 +429,7 @@ Versão atual: 1.0.5
               }]
             }
           }, {})
-          client.relayWAMessage(menulist, {waitForAck: false})
+          LorranX.relayWAMessage(menulist, {waitForAck: false})
           break;
         case 'owner':
           const vacrd = `BEGIN:VCARD\n`+`VERSION:3.0\n`+
@@ -438,10 +438,10 @@ Versão atual: 1.0.5
                         'TEL;type=CELL;type=VOICE;waid=553195703379' +
                         ':+553195703379\n' + 
                         'END:VCARD'
-          client.sendMessage(from, {display: "Dono do Bot", vcard: vacrd}, contact, {quoted: mek})
+          LorranX.sendMessage(from, {display: "Dono do Bot", vcard: vacrd}, contact, {quoted: mek})
           break;
         case 'github':
-          client.sendMessage(from, "Infelizmente ainda nao estou pronto, assim que possivel meu dono dispobilizara este script", text)
+          LorranX.sendMessage(from, "Infelizmente ainda nao estou pronto, assim que possivel meu dono dispobilizara este script", text)
           break;
         case 'figu':
         case 'figurinha':
@@ -451,20 +451,20 @@ Versão atual: 1.0.5
           var b = "TESTE";
           if (isMedia && !mek.message.videoMessage || isQuotedImage ) {
           const encmedia = isQuotedImage   ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-           media = await client.downloadAndSaveMediaMessage(encmedia)
+           media = await LorranX.downloadAndSaveMediaMessage(encmedia)
           await createExif(a,b)
           out = getRandom('.webp')
           ffmpeg(media)
           .on('error', (e) => {
           console.log(e)
-          client.sendMessage(from, 'Deu errado carai', 'conversation', { quoted: mek })
+          LorranX.sendMessage(from, 'Deu errado carai', 'conversation', { quoted: mek })
           fs.unlinkSync(media)
           })
           .on('end', () => {
           _out = getRandom('.webp')
           spawn('webpmux', ['-set','exif','./stick/data.exif', out, '-o', _out])
           .on('exit', () => {
-          client.sendMessage(from, fs.readFileSync(_out),'stickerMessage', { quoted: mek })
+          LorranX.sendMessage(from, fs.readFileSync(_out),'stickerMessage', { quoted: mek })
           fs.unlinkSync(out)
           fs.unlinkSync(_out)
           fs.unlinkSync(media)
@@ -475,20 +475,20 @@ Versão atual: 1.0.5
           .save(out) 
           } else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
           const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-          const media = await client.downloadAndSaveMediaMessage(encmedia)
+          const media = await LorranX.downloadAndSaveMediaMessage(encmedia)
           await createExif(a,b)
           out = getRandom('.webp')
           ffmpeg(media)
           .on('error', (e) => {
           console.log(e)
-          client.sendMessage(from, 'Deu errado carai', 'conversation', { quoted: mek })
+          LorranX.sendMessage(from, 'Deu errado carai', 'conversation', { quoted: mek })
           fs.unlinkSync(media)
           })
           .on('end', () => {
           _out = getRandom('.webp')
           spawn('webpmux', ['-set','exif','./stick/data.exif', out, '-o', _out])
           .on('exit', () => {
-          client.sendMessage(from, fs.readFileSync(_out),'stickerMessage', { quoted: mek })
+          LorranX.sendMessage(from, fs.readFileSync(_out),'stickerMessage', { quoted: mek })
           fs.unlinkSync(out)
           fs.unlinkSync(_out)
           fs.unlinkSync(media)
@@ -499,9 +499,9 @@ Versão atual: 1.0.5
           .save(out)       
           } else if (isQuotedSticker){
             const encmedia = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-            media = await client.downloadAndSaveMediaMessage(encmedia)
+            media = await LorranX.downloadAndSaveMediaMessage(encmedia)
             createExif(a, b);
-            modStick(media, client, mek, from)
+            modStick(media, LorranX, mek, from)
           } else {
           reply(`Pra criar figurinhas c tem que marcar uma imagem ou video de ate 10 segundos com ${prefix}sticker`)
           }
@@ -510,9 +510,9 @@ Versão atual: 1.0.5
         case 'leave':
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
-          client.groupLeave(from)
+          LorranX.groupLeave(from)
           .then((res) => {
-            client.sendMessage(sender, "tchau", text)
+            LorranX.sendMessage(sender, "tchau", text)
           })
           break;
         case 'setdesc':
@@ -521,7 +521,7 @@ Versão atual: 1.0.5
           const newdesc = body.slice(11)
           const olddesc = groupDesc
           try {
-          client.groupUpdateDescription(from, newdesc)
+          LorranX.groupUpdateDescription(from, newdesc)
           reply(`Pronto, alterei a descricao do grupo\nde: ${olddesc}\n\npara: ${newdesc}`)
           } catch (e) {
             reply(e)
@@ -541,10 +541,10 @@ Versão atual: 1.0.5
 							teks += `@_.split('@')[0]`
 						}
 						mentions(teks, mentioned, true)
-						client.groupMakeAdmin(from, mentioned)
+						LorranX.groupMakeAdmin(from, mentioned)
 					} else {
 						mentions(`Membro comum @${mentioned[0].split('@')[0]} promovido a adm do grupo tô de olho seu filho da puta 🧐`, mentioned, true)
-						client.groupMakeAdmin(from, mentioned)
+						LorranX.groupMakeAdmin(from, mentioned)
 					}
 					break;
           case 'demote':
@@ -561,17 +561,17 @@ Versão atual: 1.0.5
 							teks += `@_.split('@')[0]`
 						}
 						mentions(teks, mentioned, true)
-						client.groupDemoteAdmin(from, mentioned)
+						LorranX.groupDemoteAdmin(from, mentioned)
 					} else {
 						mentions(`Adm @${mentioned[0].split('@')[0]} demitido do cargo 🐒`, mentioned, true)
-						client.groupDemoteAdmin(from, mentioned)
+						LorranX.groupDemoteAdmin(from, mentioned)
 					}
 					break;
           case 'hidetag':
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
 					var value = body.slice(9)
-					var group = await client.groupMetadata(from)
+					var group = await LorranX.groupMetadata(from)
 					var member = group['participants']
 					var mem = []
 					member.map( async adm => {
@@ -582,14 +582,60 @@ Versão atual: 1.0.5
 					contextInfo: { mentionedJid: mem },
 					quoted: mek
 					}
-					client.sendMessage(from, options, text)
+					LorranX.sendMessage(from, options, text)
 					break;
+          case 'tagstick':
+                    if(!isOwner) return reply("Command only for owner bot")
+                    if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
+                        const encmedia = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
+                        filePath = await LorranX.downloadAndSaveMediaMessage(encmedia, filename = getRandom())
+                        var value = args.join(" ")
+                        var group = await LorranX.groupMetadata(from)
+                        var member = group['participants']
+                        var mem = []
+                        member.map(async adm => {
+                            mem.push(adm.id.replace('c.us', 's.whatsapp.net'))
+                        })
+                        var options = {
+                            contextInfo: { mentionedJid: mem },
+                            quoted: LorranX
+                        }
+                        ini_buffer = fs.readFileSync(filePath)
+                        LorranX.sendMessage(from, ini_buffer, sticker, options)
+                        fs.unlinkSync(filePath)
+                    } else {
+                        reply(`c tem que marcar uma figurinha`)
+                    }
+                    break;
+                    case 'tagimg':
+                    if(!isOwner) return reply("Command only for owner bot")
+                    if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
+                        const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
+                        filePath = await LorranX.downloadAndSaveMediaMessage(encmedia, filename = getRandom())
+                        var value = args.join(" ")
+                        var group = await LorranX.groupMetadata(from)
+                        var member = group['participants']
+                        var mem = []
+                        member.map(async adm => {
+                            mem.push(adm.id.replace('c.us', 's.whatsapp.net'))
+                        })
+                        var options = {
+                            contextInfo: { mentionedJid: mem },
+                            quoted: Arya
+                        }
+                        ini_buffer = fs.readFileSync(filePath)
+                        LorranX.sendMessage(from, ini_buffer, image, options)
+                        fs.unlinkSync(filePath)
+                    } else {
+                        reply(`Tag image yang sudah dikirim`)
+                    }
+                    break
           case 'setname':
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
             if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
-                client.groupUpdateSubject(from, `${body.slice(9)}`)
-                client.sendMessage(from, 'Pronto macaco, alterei o nome do grupo', text, {quoted: mek})
+                LorranX.groupUpdateSubject(from, `${body.slice(9)}`)
+                LorranX.sendMessage(from, 'Pronto macaco, alterei o nome do grupo', text, {quoted: mek})
 					break
 			     	case 'kick':
               if (!isGroup) return reply("Este comando so pode ser usado em grupos")
@@ -604,10 +650,10 @@ Versão atual: 1.0.5
 							teks += `@_.split('@')[0]`
 						}
 						mentions(teks, mentioned, true)
-						client.groupRemove(from, mentioned)
+						LorranX.groupRemove(from, mentioned)
 					} else {
 						mentions(`𝘽 𝘼 𝙉 𝙄 𝘿 𝙊 @${mentioned[0].split('@')[0]}`, mentioned, true)
-						client.groupRemove(from, mentioned)
+						LorranX.groupRemove(from, mentioned)
 					}
 					break;
           case 'add':
@@ -618,7 +664,7 @@ Versão atual: 1.0.5
 					if (args[0].startsWith('9')) return reply('Cade o código de pais seu anima')
 					try {
 						num = `${args[0].replace(/ /g, '')}@s.whatsapp.net`
-						client.groupAdd(from, [num])
+						LorranX.groupAdd(from, [num])
 					} catch (e) {
 						console.log('Error :', e)
 						reply('Deu errado carai, muito provavelmente o cara privou quem pode ó adicionar em grupos')
@@ -628,7 +674,7 @@ Versão atual: 1.0.5
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
           if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
           try {
-            const linkgece = await client.groupInviteCode(from)
+            const linkgece = await LorranX.groupInviteCode(from)
             reply(`Link do grupo ${groupName}\n http://whatsapp.com/${linkgece}`)
           } catch (e) {
             reply("link invalido")
@@ -637,7 +683,7 @@ Versão atual: 1.0.5
           case 'delete':
 			    	case 'del':
               if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
-						client.deleteMessage(from, { id: mek.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
+						LorranX.deleteMessage(from, { id: mek.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
 						break;
             case 'ttt':
               case 'tictactoe':
@@ -652,7 +698,7 @@ Versão atual: 1.0.5
                 id = from
                 turn = player2
                 roomttt.push({player1,player2,id,number,turn})
-                client.sendMessage(from, `@${player1.split("@")[0]} Telah Memulai Game\n\n*@${player2.split("@")[0]}* anda di tantang untuk bermain game tic tac toe oleh *@${player1.split("@")[0]}*\nketik Y/N untuk menerima/menolak tantangan\n\nketik ${prefix}delttt untuk membatalkan permainan di group ini`, text, {contextInfo: {mentionedJid: player2}})
+                LorranX.sendMessage(from, `@${player1.split("@")[0]} Telah Memulai Game\n\n*@${player2.split("@")[0]}* anda di tantang untuk bermain game tic tac toe oleh *@${player1.split("@")[0]}*\nketik Y/N untuk menerima/menolak tantangan\n\nketik ${prefix}delttt untuk membatalkan permainan di group ini`, text, {contextInfo: {mentionedJid: player2}})
                 break;
               case 'delttt':
                 if (!isGroup) return reply("command ini hanya untuk group")
@@ -664,16 +710,16 @@ Versão atual: 1.0.5
                 //END FUNÇÕES GRUPO
                 //FUNÇÕES DONO
             case 'block':
-					client.updatePresence(from, Presence.composing) 
+					LorranX.updatePresence(from, Presence.composing) 
 					if (!isOwner) return reply("Voçê não é meu papai😡")
-					client.blockUser (`${body.slice(8)}@c.us`, "add")
-					client.sendMessage(from, `Pronto papai bloquiei esse filho da puta`, text)
+					LorranX.blockUser (`${body.slice(8)}@c.us`, "add")
+					LorranX.sendMessage(from, `Pronto papai bloquiei esse filho da puta`, text)
 				break;
 				case 'unblock':
-					client.updatePresence(from, Presence.composing) 
+					LorranX.updatePresence(from, Presence.composing) 
 					if (!isOwner) return reply("Voçê não é meu papai😡")
-					client.blockUser (`${body.slice(10)}@c.us`, "remove")
-					client.sendMessage(from, `Pronto papai, desbloquiei esse corno`, text)
+					LorranX.blockUser (`${body.slice(10)}@c.us`, "remove")
+					LorranX.sendMessage(from, `Pronto papai, desbloquiei esse corno`, text)
 				break;
         case 'join':
           case 'entrar':
@@ -681,7 +727,7 @@ Versão atual: 1.0.5
           if (!isOwner)return reply("Voçê não é meu papai")
           var link = body.slice(6)
           res = link.replace("https://chat.whatsapp.com/", "");
-          done = await client.acceptInvite(res)
+          done = await LorranX.acceptInvite(res)
           reply(`Pronto papai, entrei nesse grupo ai`)
           break;
                   case 'self':
@@ -712,28 +758,28 @@ Versão atual: 1.0.5
             //END FUNÇÕES DONO
             //CONVERSORES
         case 'tomp3':
-				client.updatePresence(from, Presence.composing)
+				LorranX.updatePresence(from, Presence.composing)
 				if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
 				reply("Calmai macaco 🦧")
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-				media = await client.downloadAndSaveMediaMessage(encmedia)
+				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp4')
 				exec(`ffmpeg -i ${media} ${ran}`, (err) => {
 					fs.unlinkSync(media)
 					if (err) return reply('Deu errado carai :(')
 					buffer = fs.readFileSync(ran)
-					client.sendMessage(from, buffer, audio, { mimetype: 'audio/mp4', quoted: mek })
+					LorranX.sendMessage(from, buffer, audio, { mimetype: 'audio/mp4', quoted: mek })
 					fs.unlinkSync(ran)
 				})
 				break;
 				case 'togif':
                     if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
                         const encmediaaa = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        const mediaaa = await client.downloadAndSaveMediaMessage(encmediaaa)
+                        const mediaaa = await LorranX.downloadAndSaveMediaMessage(encmediaaa)
                         reply("calmai macaco 🦧")
                         a = await webp2gifFile(mediaaa)
                         mp4 = await getBuffer(a.result)
-                        client.sendMessage(from, mp4, MessageType.video, {
+                        LorranX.sendMessage(from, mp4, MessageType.video, {
                             mimetype: 'video/gif',
                             filename: `stick.gif`,
                             quoted: mek,
@@ -745,13 +791,13 @@ Versão atual: 1.0.5
 				if (!isQuotedSticker) return reply('Pra usar esse comando c tem que marcar uma figurinha')
 					reply("Calmai macaco 🦧")
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-					media = await client.downloadAndSaveMediaMessage(encmedia)
+					media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 					ran = getRandom('.png')
 					exec(`ffmpeg -i ${media} ${ran}`, (err) => {
 						fs.unlinkSync(media)
 						if (err) return reply(ind.stikga())
 						buffer = fs.readFileSync(ran)
-						client.sendMessage(from, buffer, image, {quoted: mek})
+						LorranX.sendMessage(from, buffer, image, {quoted: mek})
 						fs.unlinkSync(ran)
 					})
 					await limitAdd(sender)
@@ -854,61 +900,61 @@ Versão atual: 1.0.5
               rate = body.slice(1)
               const ra =['99','7','1000','-10','31','0','4','9','17','28','34','48','59','62','100','29','94','75','41','39']
               const te = ra[Math.floor(Math.random() * ra.length)]
-              client.sendMessage(from, 'Comando : *'+rate+'*\n\nResultado : '+ te+'%', text, { quoted: mek })
+              LorranX.sendMessage(from, 'Comando : *'+rate+'*\n\nResultado : '+ te+'%', text, { quoted: mek })
               break;
                     case '%gay':
             if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Porra, burrão, c tem que marcar alguem pra eu dizer a %')
               rate = body.slice(1)
               const gay =['99','7','1000','-10','31','0','4','9','17','28','34','48','59','62','100','29','94','75','41','39']
               const jabs = gay[Math.floor(Math.random() * gay.length)]
-              client.sendMessage(from, '*Porcentagem de quão gay esse cara é*\n\nResultado : '+ jabs+'%', text, { quoted: mek })
+              LorranX.sendMessage(from, '*Porcentagem de quão gay esse cara é*\n\nResultado : '+ jabs+'%', text, { quoted: mek })
               break;
               //MODIFICAR AUDIO
 				case 'slowmo':
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-				media = await client.downloadAndSaveMediaMessage(encmedia)
+				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp3')
 				exec(`ffmpeg -i ${media} -filter:a "atempo=0.7,asetrate=44100" ${ran}`, (err, stderr, stdout) => {
 				fs.unlinkSync(media)
 				if (err) return reply('Error!')
 				uhh = fs.readFileSync(ran)
-				client.sendMessage(from, uhh, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+				LorranX.sendMessage(from, uhh, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 				fs.unlinkSync(ran)
 				})
 				break;
 				case 'esquilo':
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-					media = await client.downloadAndSaveMediaMessage(encmedia)
+					media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 					ran = getRandom('.mp3')
 					exec(`ffmpeg -i ${media} -filter:a "atempo=0.5,asetrate=65100" ${ran}`, (err, stderr, stdout) => {
 						fs.unlinkSync(media)
 						if (err) return reply('Error!')
 						hah = fs.readFileSync(ran)
-						client.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+						LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 						fs.unlinkSync(ran)
 					})
 				break;
 				case 'engrossar':
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-					media = await client.downloadAndSaveMediaMessage(encmedia)
+					media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 					ran = getRandom('.mp3')
 					exec(`ffmpeg -i ${media} -filter:a "atempo=1.6,asetrate=22100" ${ran}`, (err, stderr, stdout) => {
 						fs.unlinkSync(media)
 						if (err) return reply('Error!')
 						hah = fs.readFileSync(ran)
-						client.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+						LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 						fs.unlinkSync(ran)
 					})
 				break;
 				case 'bass':                 
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-					media = await client.downloadAndSaveMediaMessage(encmedia)
+					media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 					ran = getRandom('.mp3')
 					exec(`ffmpeg -i ${media} -af equalizer=f=94:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
 						fs.unlinkSync(media)
 						if (err) return reply('Error!')
 						hah = fs.readFileSync(ran)
-						client.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+						LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 						fs.unlinkSync(ran)
 					})
 				break;
@@ -920,7 +966,7 @@ Versão atual: 1.0.5
           break;
         case 'jadibot':
           if (mek.key.fromMe) return reply("tidak bisa menjadi bot dalam bot")
-          jadibot(reply, client, from)
+          jadibot(reply, LorranX, from)
           break;
         case 'stopjadibot':
           if (mek.key.fromMe) return reply("```khusus Owner```")
@@ -1004,12 +1050,12 @@ Versão atual: 1.0.5
               jum = q.split("|")[1]
               if (jum > 10) return reply("jumblah terlalu banyak\nminimal: 10")
               to = parseInt(jum) + 1
-              res = await client.searchMessages(q.split(0), from, to,1)
+              res = await LorranX.searchMessages(q.split(0), from, to,1)
               if (res.messages.length < 2) return reply("pesan tidak di temukan")
               if (res.messages.length < parseInt(to)) reply(`hanya di temukan ${res.messages.length - 1} pesan`)
               for (let i = 1; i < res.messages.length; i++) {
                 if (res.messages[i].message) {
-                  client.sendMessage(from, "nih pesan nya!!", text, {quoted: res.messages[i]})
+                  LorranX.sendMessage(from, "nih pesan nya!!", text, {quoted: res.messages[i]})
                 }
               }
             } catch (e) {
@@ -1020,19 +1066,19 @@ Versão atual: 1.0.5
           }
           break;
 				case 'dulio':
-					client.sendMessage(from, `
+					LorranX.sendMessage(from, `
     ╔═══════════════════
     ║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
     ╠═══════════════════
     ║│ *↭ Sobre o Bot*
     ║ *Bateria* : ${battery.persen}
     ║ *charger* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
-    ║ *Marca do celular* : ${client.user.phone.device_manufacturer}
-    ║ *Nome do servidor* : ${client.browserDescription[0]}
-    ║ *Servidor* : ${client.browserDescription[1]}
-    ║ *Versão* : ${client.browserDescription[2]}
-    ║ *Modelo do celular* : ${client.user.phone.device_model}
-    └ *Versão do Whatsapp* : ${client.user.phone.wa_version}
+    ║ *Marca do celular* : ${LorranX.user.phone.device_manufacturer}
+    ║ *Nome do servidor* : ${LorranX.browserDescription[0]}
+    ║ *Servidor* : ${LorranX.browserDescription[1]}
+    ║ *Versão* : ${LorranX.browserDescription[2]}
+    ║ *Modelo do celular* : ${LorranX.user.phone.device_model}
+    └ *Versão do Whatsapp* : ${LorranX.user.phone.wa_version}
     
     *↭  ${HORARIOS} ${pushname}*
     
@@ -1070,7 +1116,7 @@ Versão atual: 1.0.5
               me = `link: ${a.data}`
               salsa.sendMessage(from,{url:`${nowm}`},video,{mimetype:'video/mp4',quoted:mek,caption:me})
               setTimeout(() => {
-                client.deleteMessage(from, sek.key)
+                LorranX.deleteMessage(from, sek.key)
               }, 10000);
             })
           })
@@ -1079,7 +1125,7 @@ Versão atual: 1.0.5
            /*       case 'eval':
           if (sender != "553195703379@s.whatsapp.net") return reply("khusus owner")
           try {
-            client.sendMessage(from, JSON.stringify(eval(body.slice(6)),null,'\t'), text, {quoted: mek})
+            LorranX.sendMessage(from, JSON.stringify(eval(body.slice(6)),null,'\t'), text, {quoted: mek})
           } catch (e) {
             reply(String(e))
           }
@@ -1093,7 +1139,7 @@ Versão atual: 1.0.5
             for (let i of res.data) {
               teks += `*[ Brainly ]*\nsoal:${i.pertanyaan}\n\njawaban:${i.jawaban[0].text}\n<==========================>\n`
             }
-            client.sendMessage(from, teks, text,{quoted:mek,detectLinks: false})
+            LorranX.sendMessage(from, teks, text,{quoted:mek,detectLinks: false})
           })
           break; */
           /*        case 'ig':
@@ -1104,10 +1150,10 @@ Versão atual: 1.0.5
             for (let i of res.medias) {
               if (i.url.includes("mp4")){
                 let link = await getBuffer(i.url)
-                client.sendMessage(from,link,video,{quoted: mek,caption: `Type : ${i.type}`})
+                LorranX.sendMessage(from,link,video,{quoted: mek,caption: `Type : ${i.type}`})
               } else {
                 let link = await getBuffer(i.url)
-                client.sendMessage(from,link,image,{quoted: mek,caption: `Type : ${i.type}`})
+                LorranX.sendMessage(from,link,image,{quoted: mek,caption: `Type : ${i.type}`})
               }
             }
           })
@@ -1128,10 +1174,10 @@ Versão atual: 1.0.5
             for(let i of result.medias){
               if(i.url.includes('mp4')){
                 let link = await getBuffer(i.url)
-                client.sendMessage(from,link,video,{quoted: mek,caption: `Type : ${i.type}`})
+                LorranX.sendMessage(from,link,video,{quoted: mek,caption: `Type : ${i.type}`})
               } else {
                 let link = await getBuffer(i.url)
-                client.sendMessage(from,link,image,{quoted: mek,caption: `Type : ${i.type}`})                  
+                LorranX.sendMessage(from,link,image,{quoted: mek,caption: `Type : ${i.type}`})                  
               }
             }
           });
@@ -1165,15 +1211,15 @@ Versão atual: 1.0.5
           })
           break; */
             /*      });
-  client.on("group-participants-update", async(mem) => {
+  LorranX.on("group-participants-update", async(mem) => {
     try {
-      groupMetadata =await client.groupMetadata(mem.jid);
+      groupMetadata =await LorranX.groupMetadata(mem.jid);
       groupMembers = groupMetadata.participants;
       groupAdmins = getGroupAdmins(groupMembers);
       anu = mem.participants[0];
-      ppmem = await client.getProfilePicture(anu);
+      ppmem = await LorranX.getProfilePicture(anu);
       try {
-        pp_user = await client.getProfilePicture(anu);
+        pp_user = await LorranX.getProfilePicture(anu);
       } catch (e) {
         pp_user =
           "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60";
@@ -1181,15 +1227,15 @@ Versão atual: 1.0.5
       if (mem.action == "add" ) {
         buff = await getBuffer(ppmem);
         text = `${HORARIOS} @${anu.split("@")[0]}\nselamat datang di group ${groupMetadata.subject}\n\n*info group*\nmember: ${groupMembers.length}/256\ndeskripsi: ${groupMetadata.desc}\n\n`;
-        client.sendMessage(groupMetadata.id, buff, MessageType.image, { caption: text, contextInfo: { mentionedJid: [anu.split("@")[0] + "@s.whatsapp.net"]}});
+        LorranX.sendMessage(groupMetadata.id, buff, MessageType.image, { caption: text, contextInfo: { mentionedJid: [anu.split("@")[0] + "@s.whatsapp.net"]}});
       } else if (mem.action == "remove" ) {
         buff = await getBuffer(ppmem);
         text = `sampai jumpa @${anu.split("@")[0]}\nsemoga tenang di alam sana ya kak:)`;
-        client.sendMessage(groupMetadata.id, buff, MessageType.image, { caption: text, contextInfo: { mentionedJid: [anu.split("@")[0] + "@s.whatsapp.net"]}});
+        LorranX.sendMessage(groupMetadata.id, buff, MessageType.image, { caption: text, contextInfo: { mentionedJid: [anu.split("@")[0] + "@s.whatsapp.net"]}});
       } else if (mem.action == "promote") {
-        client.sendMessage(groupMetadata.id, `M@${anu.split("@")[0]} telah di promote`, MessageType.text, { contextInfo: {mentionedJid: [anu.split("@")[0]+ "@s.whatsapp.net"]}});
+        LorranX.sendMessage(groupMetadata.id, `M@${anu.split("@")[0]} telah di promote`, MessageType.text, { contextInfo: {mentionedJid: [anu.split("@")[0]+ "@s.whatsapp.net"]}});
       } else if (mem.action == "demote") {
-        client.sendMessage(groupMetadata.id, `Adm @${anu.split("@")[0]} rebaixado a membro comum`, MessageType.text, { contextInfo: {mentionedJid: [anu.split("@")[0]+ "@s.whatsapp.net"]}});
+        LorranX.sendMessage(groupMetadata.id, `Adm @${anu.split("@")[0]} rebaixado a membro comum`, MessageType.text, { contextInfo: {mentionedJid: [anu.split("@")[0]+ "@s.whatsapp.net"]}});
       }
     } catch (e) {
       console.log("Error : %s", color(e, "red"));
@@ -1213,14 +1259,14 @@ ${number[4]}${number[5]}${number[6]}
 ${number[7]}${number[8]}${number[9]}
 
 giliran = @${tty.player1.split('@')[0]}`
-              client.sendMessage(from, teksboard, text, {quoted: mek, contextInfo:{mentionedJid: [tty.player1,tty.player2]}})
+              LorranX.sendMessage(from, teksboard, text, {quoted: mek, contextInfo:{mentionedJid: [tty.player1,tty.player2]}})
             }
             if (budy.startsWith('N')) {
               tto = roomttt.filter(gang => gang.id.includes(from))
               tty = tto[0]
               rooms = roomttt.filter(tokek => !tokek.id.includes(from))
               roomttt = rooms;
-              client.sendMessage(from, `Yahh @${tty.player2.split('@')[0]} Menolak:(`,text,{quoted:mek,contextInfo:{mentionedJid:[tty.player2]}})
+              LorranX.sendMessage(from, `Yahh @${tty.player2.split('@')[0]} Menolak:(`,text,{quoted:mek,contextInfo:{mentionedJid:[tty.player2]}})
             }
           }
           if (isTTT && isPlayer1) {
@@ -1245,7 +1291,7 @@ giliran = @${tty.player1.split('@')[0]}`
             winningspeech = () => {
               ucapan1 = `*[ Hasil pertandingan Tic Tac Toe ]*\n\nyeyyy permainan di menangkan oleh *@${tty.player1.split('@')[0]}*\n`
               ucapan2 = `*[ Papan Hasil akhir ]*\n\n${ttt}`
-              client.sendMessage(from, ucapan1, text, {quoted:mek, contextInfo:{mentionedJid: [tty.player2]}}) 
+              LorranX.sendMessage(from, ucapan1, text, {quoted:mek, contextInfo:{mentionedJid: [tty.player2]}}) 
               rooms = roomttt.filter(hhg => !hhg.id.includes(from))
               return roomttt = rooms 
             }
@@ -1273,7 +1319,7 @@ giliran = @${tty.player1.split('@')[0]}`
               return roomttt= naa
             }
             ucapan = `*[ TIC TAC TOE GAME ]*\n\nPlayer1 @${tty.player1.split('@')[0]}=❌\nPlayer2 @${tty.player2.split('@')[0]}=⭕\n\n${ttt}\n\ngiliran = @${tty.player2.split('@')[0]}`
-            client.sendMessage(from, ucapan, text, {quoted: mek, contextInfo:{mentionedJid: [tty.player1,tty.player2]}})
+            LorranX.sendMessage(from, ucapan, text, {quoted: mek, contextInfo:{mentionedJid: [tty.player1,tty.player2]}})
           }
           if (isTTT && isPlayer2) {
             noober = parseInt(budy)
@@ -1297,7 +1343,7 @@ giliran = @${tty.player1.split('@')[0]}`
             winningspeech = () => {
               ucapan1 = `*[ Hasil pertandingan Tic Tac Toe ]*\n\nyeyyy permainan di menangkan oleh *@${tty.player2.split('@')[0]}*\n`
               ucapan2 = `*[ Papan Hasil akhir ]*\n\n${ttt}`
-              client.sendMessage(from, ucapan1, text, {quoted:mek, contextInfo:{mentionedJid: [tty.player1]}}) 
+              LorranX.sendMessage(from, ucapan1, text, {quoted:mek, contextInfo:{mentionedJid: [tty.player1]}}) 
               rooms = roomttt.filter(hhg => !hhg.id.includes(from))
               return roomttt = rooms 
             }
@@ -1325,7 +1371,7 @@ giliran = @${tty.player1.split('@')[0]}`
               return roomttt= naa
             }
             ucapan = `*[ TIC TAC TOE GAME ]*\n\nPlayer1 @${tty.player1.split('@')[0]}=❌\nPlayer2 @${tty.player2.split('@')[0]}=⭕\n\n${ttt}\n\ngiliran = @${tty.player1.split('@')[0]}`
-            client.sendMessage(from, ucapan, text, {quoted: mek, contextInfo:{mentionedJid: [tty.player1,tty.player2]}})
+            LorranX.sendMessage(from, ucapan, text, {quoted: mek, contextInfo:{mentionedJid: [tty.player1,tty.player2]}})
           }
       }
     } catch (e) {
