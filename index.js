@@ -33,7 +33,7 @@ const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
 
 //data
-owner = ["553195703379@s.whatsapp.net"];
+owner = ["553195703379@s.whatsapp.net,553192941210@s.whatsapp.net"];
 mns = "```";
 battery = {
   persen: "" || "O carai, não consegui detectar",
@@ -598,7 +598,7 @@ Versão atual: 1.0.5
                         })
                         var options = {
                             contextInfo: { mentionedJid: mem },
-                            quoted: LorranX
+                            quoted: mek
                         }
                         ini_buffer = fs.readFileSync(filePath)
                         LorranX.sendMessage(from, ini_buffer, sticker, options)
@@ -621,7 +621,7 @@ Versão atual: 1.0.5
                         })
                         var options = {
                             contextInfo: { mentionedJid: mem },
-                            quoted: Arya
+                            quoted: mek
                         }
                         ini_buffer = fs.readFileSync(filePath)
                         LorranX.sendMessage(from, ini_buffer, image, options)
