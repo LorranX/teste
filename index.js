@@ -1015,8 +1015,8 @@ Versão atual: 1.0.5
           }
           break;
 				case 'dulio':
-					client.sendMessage(from, menuadmin(prefix), text)
-					break
+					client.sendMessage(from, teks, text,{ caption: menuadmin(prefix) })
+					break;
 
           //GARBAGE
 
