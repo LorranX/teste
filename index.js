@@ -441,7 +441,7 @@ Versão atual: 1.0.5
           client.sendMessage(from, {display: "Dono do Bot", vcard: vacrd}, contact, {quoted: mek})
           break;
         case 'github':
-          client.sendMessage(from, "*ᨁ Meu github* \n\nhttp://github.com/LorranX", text)
+          client.sendMessage(from, "Infelizmente ainda nao estou pronto, assim que possivel meu dono dispobilizara este script", text)
           break;
         case 'figu':
         case 'figurinha':
