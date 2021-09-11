@@ -33,7 +33,7 @@ const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
 
 //data
-owner = ["553195703379@s.whatsapp.net,553192941210@s.whatsapp.net"];
+owner = ["553195703379@s.whatsapp.net","553192941210@s.whatsapp.net"];
 mns = "```";
 battery = {
   persen: "" || "O carai, não consegui detectar",
