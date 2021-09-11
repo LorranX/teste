@@ -349,6 +349,7 @@ module.exports = (client) => {
 ║│↭_*   [ *${prefix}toimg* ] 
 ║│↭_*   [ *${prefix}togif* ] 
 ║│↭_*   [ *${prefix}tomp3* ] 
+║│↭_*   [ *${prefix}menuadmin* ] 
 ║│ 
 
 ║│
