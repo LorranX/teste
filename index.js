@@ -695,7 +695,7 @@ Versão atual: 1.0.5
           }
           break;
           case 'selfmode':
-            sendButtonMsg(`${HORARIOS} ${isOwner == true ? "Ola papai\nescolha em qual modo eu devo operar" : "Você não é meu papai 😡"}`,`${DATACOMPLETA()}`,[{
+            sendButtonMsg(`${isOwner == true ? "Ola papai\nescolha em qual modo eu devo operar" : "Você não é meu papai 😡"}`,`${DATACOMPLETA()}`,[{
               buttonId:`${prefix}self on`,
               buttonText: {
                 displayText: `on`
