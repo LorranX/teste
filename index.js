@@ -99,7 +99,7 @@ if (time2 < "11:00:00") {
   var HORARIOS = "coe viado bom dia";
 }
 if (time2 < "05:00:00") {
-  var HORARIOS = "acordou cedo hoje bom dia";
+  var HORARIOS = "Boa madrugada";
 }
 
 
