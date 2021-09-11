@@ -17,6 +17,7 @@ const {
 	Browsers
 } = require("@adiwajshing/baileys");
 const { getBuffer, color, getGroupAdmins, createExif, getRandom, modStick, fetchJson } = require("./lib/function.js");
+const { menuadmin } = require('./assets/menus/admin')
 const { spawn, exec, execSync } = require("child_process");
 const speed = require('performance-now');
 const ig = require('insta-fetcher');
@@ -49,7 +50,7 @@ self = false;
 //end load files
 
 //for time
-function tanggal(){
+function DATACOMPLETA(){
   myMonths = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 	myDays = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sabado'];
 	var tgl = new Date();
@@ -60,6 +61,11 @@ function tanggal(){
 	var yy = tgl.getYear();
 	var year = (yy < 1000) ? yy + 1900 : yy;
 	return `${thisDay}, ${day} - ${myMonths[bulan]} - ${year}`;
+}
+function RODAPE(){
+  MyTrademark = ["By LorranX ©"];
+  ThisTrademark = MyTrademark;
+  return `${ThisTrademark}`;
 }
 
 const runtime = function (seconds) {
@@ -376,6 +382,21 @@ Versão atual: 1.0.5
       }
 //case
       switch (command) {
+        case 'menuadmin':
+            sendButtonMsg(`${HORARIOS} ${pushname}"\nTambem posso te ajudar com o gerenciamento de grupo\nainda não tenho muitas funções mas meu dono me atualiza diariamente"`,`${RODAPE()}`,[{
+              buttonId:`${prefix}dulio`,
+              buttonText: {
+                displayText: `Menu admin`
+              },
+              type: 1
+            },{
+              buttonId: `${prefix}owner`,
+              buttonText: {
+                displayText: 'Dono'
+              },
+              type: 1
+            }])
+            break;
           case 'macaco':
 					hisil = fs.readFileSync('./lib/image/changelog.jpg')
 					client.sendMessage(from, hisil, image)
@@ -389,7 +410,7 @@ Versão atual: 1.0.5
               "buttonText": "Opções",
               "listType": "SINGLE_SELECT",
               "sections": [{
-                "title": `${tanggal()}`,
+                "title": `${DATACOMPLETA()}`,
                 "rows": [{
                     "title": "Menu",
                     "rowId": "0",
@@ -598,13 +619,13 @@ Versão atual: 1.0.5
 					}
 				break;
         case 'linkgp':
-          if (!isGroup) return reply("command khusus group")
-          if (!isBotGroupAdmins) return reply("bot harus jadi admin")
+          if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+          if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
           try {
             const linkgece = await client.groupInviteCode(from)
-            reply(`link group ${groupName}\nlink: http://whatsapp.com/${linkgece}`)
+            reply(`Link do grupo ${groupName}\n http://whatsapp.com/${linkgece}`)
           } catch (e) {
-            reply("link group invalid or expired")
+            reply("link invalido")
           }
           break;
           case 'delete':
@@ -668,7 +689,7 @@ Versão atual: 1.0.5
           }
           break;
           case 'mode':
-            sendButtonMsg(`${HORARIOS} ${isOwner == true ? "\nsilahkan pilih mode di bawah ini" : "kak\nanda bukan owner\njadi percumah kalo kamu pencet"}`,`${tanggal()}`,[{
+            sendButtonMsg(`${HORARIOS} ${isOwner == true ? "Ola papai\nescolha em qual modo eu devo operar" : "kak\nanda bukan owner\njadi percumah kalo kamu pencet"}`,`${DATACOMPLETA()}`,[{
               buttonId:`${prefix}self on`,
               buttonText: {
                 displayText: `on`
@@ -993,6 +1014,9 @@ Versão atual: 1.0.5
             return(`maaf masukan query yang benar\ncontoh: ${prefix}${command} halo|5`)
           }
           break;
+				case 'dulio':
+					client.sendMessage(from, menuadmin(prefix), text)
+					break
 
           //GARBAGE
 
