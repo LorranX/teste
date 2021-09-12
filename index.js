@@ -229,27 +229,6 @@ module.exports = (LorranX) => {
       const more = String.fromCharCode(8206)
       const readMore = more.repeat(4001)
 
-      //ANTI-SPAM BY ITALU
-     if (isCmd && isFiltered(from) && !isGroup) {
-      console.log(color('SPAM', 'red'), color(moment.tz('America/Sao_Paulo').format('HH:mm:ss'), 'yellow'), color(`${command}`), 'DE:', color(pushname))
-      const ff = {
-                text:  `Sem flood @${sender.split('@')[0]}...\n\nAguarde 3 segundos antes de usar outro comando✅`,
-                  contextInfo: {
-                      mentionedJid: [sender]
-                  }
-               }
-      return reply(ff)}
-      
-      if (isCmd && isFiltered(from) && isGroup) {
-      console.log(color('SPAM', 'red'), color(moment.tz('America/Sao_Paulo').format('HH:mm:ss'), 'yellow'), color(`${command}`), 'DE:', color(pushname))
-      const ff1 = {
-                text:  `Sem flood @${sender.split('@')[0]}...\n\nAguarde 3 segundos antes de usar outro comando✅`,
-                  contextInfo: {
-                      mentionedJid: [sender]
-                  }
-               }
-      return reply(ff1)}
-
       if (self) {
         if (!isOwner || !botNumber) return
       }
@@ -341,7 +320,30 @@ module.exports = (LorranX) => {
       if (isCmd && !isGroup) console.log("[",color("command","lime"),"]",time2,color(command,"lime"),"from",color(sender.split("@")[0],"cyan"))
       if (isCmd && isGroup) console.log("[",color("command","lime"),"]",time2,color(command,"lime"),"from",color(sender.split("@")[0],"cyan"),"in",color(groupName,"yellow"))
       if (listbut) console.log("[",color("command","lime"),"]",time2,color(listbut,"lime"),"from",color(sender.split("@")[0],"cyan"))
-//list command
+
+
+      //ANTI-SPAM BY ITALU
+      if (isCmd && isFiltered(from) && !isGroup) {
+        console.log(color('SPAM', 'red'), color(moment.tz('America/Sao_Paulo').format('HH:mm:ss'), 'yellow'), color(`${command}`), 'DE:', color(pushname))
+        const ff = {
+                  text:  `Sem flood @${sender.split('@')[0]}...\n\nAguarde 3 segundos antes de usar outro comando✅`,
+                    contextInfo: {
+                        mentionedJid: [sender]
+                    }
+                 }
+        return reply(ff)}
+        
+        if (isCmd && isFiltered(from) && isGroup) {
+        console.log(color('SPAM', 'red'), color(moment.tz('America/Sao_Paulo').format('HH:mm:ss'), 'yellow'), color(`${command}`), 'DE:', color(pushname))
+        const ff1 = {
+                  text:  `Sem flood @${sender.split('@')[0]}...\n\nAguarde 3 segundos antes de usar outro comando✅`,
+                    contextInfo: {
+                        mentionedJid: [sender]
+                    }
+                 }
+        return reply(ff1)}  
+
+      //list command
       if (listbut == 'Menu' || command == `${prefix}start`) {
         var Menu = `
 ╔═══════════════════
