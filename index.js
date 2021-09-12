@@ -29,6 +29,7 @@ const request = require('request');
 const axios = require("axios");
 const moment = require("moment-timezone");
 const { webp2gifFile } = require("./lib/gif.js")
+const { isFiltered, addFilter } = require('./lib/antispam')
 const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
 
@@ -227,6 +228,28 @@ module.exports = (LorranX) => {
       const pushname = mek.key.fromMe ? LorranX.user.name : conts.notify || conts.vname || conts.name || '-'
       const more = String.fromCharCode(8206)
       const readMore = more.repeat(4001)
+
+      //ANTI-SPAM BY ITALU
+     if (isCmd && isFiltered(from) && !isGroup) {
+      console.log(color('SPAM', 'red'), color(moment.tz('America/Sao_Paulo').format('HH:mm:ss'), 'yellow'), color(`${command}`), 'DE:', color(pushname))
+      const ff = {
+                text:  `Sem flood @${sender.split('@')[0]}...\n\nAguarde 3 segundos antes de usar outro comando✅`,
+                  contextInfo: {
+                      mentionedJid: [sender]
+                  }
+               }
+      return reply(ff)}
+      
+      if (isCmd && isFiltered(from) && isGroup) {
+      console.log(color('SPAM', 'red'), color(moment.tz('America/Sao_Paulo').format('HH:mm:ss'), 'yellow'), color(`${command}`), 'DE:', color(pushname))
+      const ff1 = {
+                text:  `Sem flood @${sender.split('@')[0]}...\n\nAguarde 3 segundos antes de usar outro comando✅`,
+                  contextInfo: {
+                      mentionedJid: [sender]
+                  }
+               }
+      return reply(ff1)}
+
       if (self) {
         if (!isOwner || !botNumber) return
       }
@@ -430,6 +453,7 @@ Versão atual: 1.0.5
             }
           }, {})
           LorranX.relayWAMessage(menulist, {waitForAck: false})
+          addFilter(from)
           break;
         case 'owner':
           const vacrd = `BEGIN:VCARD\n`+`VERSION:3.0\n`+
@@ -439,6 +463,7 @@ Versão atual: 1.0.5
                         ':+553195703379\n' + 
                         'END:VCARD'
           LorranX.sendMessage(from, {display: "Dono do Bot", vcard: vacrd}, contact, {quoted: mek})
+          addFilter(from)
           break;
         case 'github':
           LorranX.sendMessage(from, "Infelizmente ainda nao estou pronto, assim que possivel meu dono dispobilizara este script", text)
@@ -505,26 +530,15 @@ Versão atual: 1.0.5
           } else {
           reply(`Pra criar figurinhas c tem que marcar uma imagem ou video de ate 10 segundos com ${prefix}sticker`)
           }
+          addFilter(from)
           break;
           case 'attp':
                 if (args.length < 1) return reply(`C tem que mandar um texto pra eu criar figurinha`)
                 dulim = body.slice(5)
 				apiglow = await getBuffer(`https://api.xteam.xyz/attp?file&text=${dulim}`)
 				LorranX.sendMessage(from, apiglow, sticker, {quoted: mek})
+        addFilter(from)
 				break;
-        case 'dado':
-			ranp = getRandom('.png')
-			rano = getRandom('.webp')
-		        random = `${Math.floor(Math.random() * 6)}`
-                    hasil = 'https://www.random.org/dice/' + random + '.png'
-			exec(`wget ${hasil} -O ${ranp} && ffmpeg -i ${ranp} -vcodec libwebp -filter:v fps=fps=15 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${rano}`, (e) => {
-			fs.unlinkSync(ranp)
-			if (e) return reply(ind.wait())
-			buffer = fs.readFileSync(rano)
-			LorranX.sendMessage(from, buffer, sticker)
-			fs.unlinkSync(rano)
-			})
-			break;
          //FUNÇÕES DE GRUPO
         case 'leave':
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
@@ -602,9 +616,12 @@ Versão atual: 1.0.5
 					quoted: mek
 					}
 					LorranX.sendMessage(from, options, text)
+          addFilter(from)
 					break;
           case 'tagstick':
-                    if(!isOwner) return reply("Command only for owner bot")
+            case 'tagfig': 
+            if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+            if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
                     if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
                         const encmedia = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         filePath = await LorranX.downloadAndSaveMediaMessage(encmedia, filename = getRandom())
@@ -623,11 +640,13 @@ Versão atual: 1.0.5
                         LorranX.sendMessage(from, ini_buffer, sticker, options)
                         fs.unlinkSync(filePath)
                     } else {
-                        reply(`c tem que marcar uma figurinha`)
+                        reply(`C tem que marcar uma figurinha`)
                     }
+                    addFilter(from)
                     break;
                     case 'tagimg':
-                    if(!isOwner) return reply("Command only for owner bot")
+                      if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+                      if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         filePath = await LorranX.downloadAndSaveMediaMessage(encmedia, filename = getRandom())
@@ -646,16 +665,17 @@ Versão atual: 1.0.5
                         LorranX.sendMessage(from, ini_buffer, image, options)
                         fs.unlinkSync(filePath)
                     } else {
-                        reply(`Tag image yang sudah dikirim`)
+                        reply(`C tem que marcar uma imagem`)
                     }
-                    break
+                    addFilter(from)
+                    break;
           case 'setname':
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
             if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
                 LorranX.groupUpdateSubject(from, `${body.slice(9)}`)
                 LorranX.sendMessage(from, 'Pronto macaco, alterei o nome do grupo', text, {quoted: mek})
-					break
+					break;
 			     	case 'kick':
               if (!isGroup) return reply("Este comando so pode ser usado em grupos")
               if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
@@ -674,6 +694,7 @@ Versão atual: 1.0.5
 						mentions(`𝘽 𝘼 𝙉 𝙄 𝘿 𝙊 @${mentioned[0].split('@')[0]}`, mentioned, true)
 						LorranX.groupRemove(from, mentioned)
 					}
+          addFilter(from)
 					break;
           case 'add':
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
@@ -688,6 +709,7 @@ Versão atual: 1.0.5
 						console.log('Error :', e)
 						reply('Deu errado carai, muito provavelmente o cara privou quem pode ó adicionar em grupos')
 					}
+          addFilter(from)
 				break;
         case 'linkgp':
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
@@ -703,6 +725,7 @@ Versão atual: 1.0.5
 			    	case 'del':
               if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
 						LorranX.deleteMessage(from, { id: mek.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
+            addFilter(from)
 						break;
             case 'ttt':
               case 'tictactoe':
@@ -790,6 +813,7 @@ Versão atual: 1.0.5
 					LorranX.sendMessage(from, buffer, audio, { mimetype: 'audio/mp4', quoted: mek })
 					fs.unlinkSync(ran)
 				})
+        addFilter(from)
 				break;
 				case 'togif':
                     if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
@@ -805,6 +829,7 @@ Versão atual: 1.0.5
                         })
                         fs.unlinkSync(mediaaa)
                     }
+                    addFilter(from)
                     break;
                     case 'toimg':
 				if (!isQuotedSticker) return reply('Pra usar esse comando c tem que marcar uma figurinha')
@@ -819,7 +844,7 @@ Versão atual: 1.0.5
 						LorranX.sendMessage(from, buffer, image, {quoted: mek})
 						fs.unlinkSync(ran)
 					})
-					await limitAdd(sender)
+          addFilter(from)
 				break;
         //END CONVERSORES
         //DOWNLOADERS
@@ -844,6 +869,7 @@ Versão atual: 1.0.5
           } catch (e) {
             reply(`server error`)
           }
+          addFilter(from)
           break;
         case 'pvideo':
           if (args.length === 0) return reply(`Pra eu baixar esse video c tem que mandar um nome valido\nExemplo: *${prefix}pvideo macaco*`)
@@ -865,7 +891,8 @@ Versão atual: 1.0.5
             })
           } catch (e) {
             reply('server error')
-          }                         
+          }       
+          addFilter(from)                  
           break;
         case 'ytmp3':
           if (args.length < 1) return reply('Pra eu baixar o audio c tem que usar um link valido do youtube')
@@ -887,6 +914,7 @@ Versão atual: 1.0.5
           } catch (e) {
             reply("error server")
           }
+          addFilter(from)
           break;
         case 'ytmp4':
           if (args.length < 1) return reply('Pra eu baixar o video c tem que usar um link valido do youtube')
@@ -908,11 +936,13 @@ Versão atual: 1.0.5
           } catch (e) {
             reply("error server")
           }
+          addFilter(from)
           break;
           case 'twitter':
             if (!isUrl(args[0]) && !args[0].includes('twitter.com') && !q) return reply("link Twitter?")
             var res = await hx.twitter(args[0])
             sendMediaURL(res.HD, "DONE✓")
+            addFilter(from)
             break;
             //END DOWNLOADERS
           case 'probabilidade':
@@ -940,6 +970,7 @@ Versão atual: 1.0.5
 				LorranX.sendMessage(from, uhh, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 				fs.unlinkSync(ran)
 				})
+        addFilter(from)
 				break;
 				case 'esquilo':
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -952,6 +983,7 @@ Versão atual: 1.0.5
 						LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 						fs.unlinkSync(ran)
 					})
+          addFilter(from)
 				break;
 				case 'engrossar':
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -964,6 +996,7 @@ Versão atual: 1.0.5
 						LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 						fs.unlinkSync(ran)
 					})
+          addFilter(from)
 				break;
 				case 'bass':                 
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -976,6 +1009,7 @@ Versão atual: 1.0.5
 						LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 						fs.unlinkSync(ran)
 					})
+          addFilter(from)
 				break;
         //END MODIFICAR AUDIO
         case 'lirik':
