@@ -974,13 +974,13 @@ Versão atual: 1.0.5
         case 'rapido':  
 if (!isQuotedAudio) return enviar('Marque um áudio')
 encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-bmedia = await Lolizita.downloadAndSaveMediaMessage(encmedia)
+bmedia = await LorranX.downloadAndSaveMediaMessage(encmedia)
 ran = getRandom('.mp3')
 exec(`ffmpeg -i ${bmedia} -filter:a atempo=1.06,asetrate=44100*1.25 ${ran}`, (err, stderr, stdout) => {
 fs.unlinkSync(bmedia)
 if (err) return enviar('Error!')
 hah = fs.readFileSync(ran)
-Lolizita.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 fs.unlinkSync(ran)
 })
 break; 
