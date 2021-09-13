@@ -374,7 +374,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
       if (isCmd && isGroup) console.log("[",color("command","lime"),"]",time2,color(command,"lime"),"from",color(sender.split("@")[0],"cyan"),"in",color(groupName,"yellow"))
       if (listbut) console.log("[",color("command","lime"),"]",time2,color(listbut,"lime"),"from",color(sender.split("@")[0],"cyan"))
       
-      //ANTI-SPAM BY ITALU
+      //ANTI-SPAM
       if (isCmd && isFiltered(from) && !isGroup) {
         console.log(color('SPAM', 'red'), color(moment.tz('America/Sao_Paulo').format('HH:mm:ss'), 'yellow'), color(`${command}`), 'DE:', color(pushname))
         const ff = {
@@ -394,7 +394,10 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
                     }
                  }
         return reply(ff1)}  
-
+      //COMANDOS SEM PREFIX
+        if (messagesC.includes("Lorran")){
+					LorranX.sendMessage(from, "Oi carai", text)
+				}
 
       //list command
       if (listbut == 'Menu' || command == `${prefix}start`) {
