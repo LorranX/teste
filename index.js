@@ -1039,7 +1039,7 @@ break;
 				})
         addFilter(from)
 				break;
-        case 'rapido':  
+        case 'acelerar':  
 if (!isQuotedAudio) return enviar('Marque um áudio')
 encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 media = await LorranX.downloadAndSaveMediaMessage(encmedia)
@@ -1116,12 +1116,31 @@ case "reverse":
           fs.unlinkSync(media);
           if (err) return reply(`Error!`);
           hah = fs.readFileSync(ran);
-          LorranX.sendMessage(from, hah, audio, {mimetype: "audio/mp4", quoted: mek,});
+          LorranX.sendMessage(from, hah, audio, {mimetype: "audio/mp4", ptt:true, quoted: mek,});
           fs.unlinkSync(ran);
         });
         addFilter(from)
         break;
         //END MODIFICAR AUDIO
+        //MODIFICAR VIDEO
+        case "reversev":
+        if (!isQuotedVideo) return fakegroup("Reply videonya!");
+        encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
+          .message.extendedTextMessage.contextInfo;
+        media = await LorranX.downloadAndSaveMediaMessage(encmedia);
+        ran = getRandom(".mp4");
+        exec(`ffmpeg -i ${media} -vf reverse -af areverse ${ran}`, (err) => {
+          fs.unlinkSync(media);
+          if (err) return fakegroup(`Err: ${err}`);
+          buffer453 = fs.readFileSync(ran);
+          LorranX.sendMessage(from, buffer453, video, {
+            mimetype: "video/mp4",
+            quoted: mek,
+          });
+          fs.unlinkSync(ran);
+        });
+        addFilter(from)
+        break;
         case 'dado':
           case 'dadin':
 const dadinhos = ["⚀","⚁","⚂","⚃","⚄","⚅"]
