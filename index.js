@@ -859,7 +859,7 @@ Versão atual: 1.0.5
         if (!isOwner) return reply("Você não é meu papai 😡")
         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 				if (args.length < 1) return reply(`Pra usar esse comadno c tem que adicionar um nome pro grupo e marcar as pessoas pra adicionar`)
-				argz = arg.split('|')
+				argz = args.split('|')
 				if (mek.message.extendedTextMessage != undefined){
                     mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
                     for (let i = 0; i < mentioned.length; i++){
@@ -1170,7 +1170,7 @@ case "reverse":
           fs.unlinkSync(media);
           if (err) return reply(`Error!`);
           hah = fs.readFileSync(ran);
-          LorranX.sendMessage(from, hah, video, {mimetype: "video/mp4", quoted: mek,});
+          LorranX.sendMessage(from, hah, video, {mimetype: "audio/mp4", quoted: mek,});
           fs.unlinkSync(ran);
         });
         addFilter(from)
