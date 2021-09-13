@@ -48,6 +48,7 @@ self = false;
 
 //load files
 
+
 //end load files
 
 //for time
@@ -320,28 +321,28 @@ module.exports = (LorranX) => {
       if (isCmd && !isGroup) console.log("[",color("command","lime"),"]",time2,color(command,"lime"),"from",color(sender.split("@")[0],"cyan"))
       if (isCmd && isGroup) console.log("[",color("command","lime"),"]",time2,color(command,"lime"),"from",color(sender.split("@")[0],"cyan"),"in",color(groupName,"yellow"))
       if (listbut) console.log("[",color("command","lime"),"]",time2,color(listbut,"lime"),"from",color(sender.split("@")[0],"cyan"))
-
-
+      
       //ANTI-SPAM BY ITALU
       if (isCmd && isFiltered(from) && !isGroup) {
         console.log(color('SPAM', 'red'), color(moment.tz('America/Sao_Paulo').format('HH:mm:ss'), 'yellow'), color(`${command}`), 'DE:', color(pushname))
         const ff = {
-                  text:  `Sem flood @${sender.split('@')[0]}...\n\nAguarde 3 segundos antes de usar outro comando✅`,
+                  text:  `Sem flood @${sender.split('@')[0]}\n\nAguarde 3 segundos antes de usar outro comando`,
                     contextInfo: {
                         mentionedJid: [sender]
                     }
                  }
         return reply(ff)}
-        
+               
         if (isCmd && isFiltered(from) && isGroup) {
         console.log(color('SPAM', 'red'), color(moment.tz('America/Sao_Paulo').format('HH:mm:ss'), 'yellow'), color(`${command}`), 'DE:', color(pushname))
         const ff1 = {
-                  text:  `Sem flood @${sender.split('@')[0]}...\n\nAguarde 3 segundos antes de usar outro comando✅`,
+                  text:  `Sem flood @${sender.split('@')[0]}\n\nAguarde 3 segundos antes de usar outro comando`,
                     contextInfo: {
                         mentionedJid: [sender]
                     }
                  }
         return reply(ff1)}  
+
 
       //list command
       if (listbut == 'Menu' || command == `${prefix}start`) {
@@ -404,8 +405,8 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-Ultima atualização: 11/09/2021 as 00:50
-Ultimas alteraçoes: adicionado menu admin
+Ultima atualização: 12/09/2021 as 09:40
+Ultimas alteraçoes: Adicionado anti-spam
 Versão atual: 1.0.5
 % de conclusão: 35%
 `
@@ -428,10 +429,6 @@ Versão atual: 1.0.5
               type: 1
             }])
             break;
-          case 'macaco':
-					hisil = fs.readFileSync('./lib/image/changelog.jpg')
-					LorranX.sendMessage(from, hisil, image)
-          break;
         case 'help':
         case 'menu':
           var menulist = LorranX.prepareMessageFromContent(from, {
@@ -1014,6 +1011,12 @@ Versão atual: 1.0.5
           addFilter(from)
 				break;
         //END MODIFICAR AUDIO
+        case 'dado': //Jogos
+const dadinhos = ["⚀","⚁","⚂","⚃","⚄","⚅"]
+dadoaleatorio = dadinhos[Math.floor(Math.random() * dadinhos.length)]
+dadin = fs.readFileSync('./database/dadin/'+dadoaleatorio+'.webp')
+LorranX.sendMessage(from, dadin, sticker, {quoted: mek})
+break;
         case 'lirik':
           if(!q) return reply('lagu apa?')
           let song = await hx.lirik(q);
