@@ -203,6 +203,7 @@ module.exports = (LorranX) => {
           : "";
       const budy = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : ''
       listbut = (type == 'listResponseMessage') ? mek.message.listResponseMessage.title : ''
+      const messagesC = pes.slice(0).trim().split(/ +/).shift().toLowerCase()
       const command = body.slice(1).trim().split(/ +/).shift().toLowerCase()
       const args = body.trim().split(/ +/).slice(1)
       const isCmd = body.startsWith(prefix)
