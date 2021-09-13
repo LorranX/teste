@@ -397,8 +397,8 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
                  }
         return reply(ff1)}  
       //COMANDOS SEM PREFIX
-        if (messagesC.includes("Lorran")){
-					LorranX.sendMessage(from, "Oi carai", text)
+        if (messagesC.includes("Lorran" , "lorran")){
+					reply(`Oi carai`)
 				}
 
       //list command
