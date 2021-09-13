@@ -259,9 +259,9 @@ module.exports = (LorranX) => {
       const fakethumb = (teks, yes) => {
             LorranX.sendMessage(from, teks, image, {thumbnail:fs.readFileSync('./lib/image/fake.jpeg'),quoted:mek,caption:yes})
         }
-        
+        //BOTÃO NORMAL
       const sendButtonMsg = (text, footer, but = [], options = {}) => {
-        const buttonMessagek = {
+        const buttonMessage = {
           contentText: text,
           footerText: footer,
           buttons: but,
@@ -269,11 +269,63 @@ module.exports = (LorranX) => {
         };
         LorranX.sendMessage(
           from,
-          buttonMessagek,
+          buttonMessage,
           buttonsMessage,
           options
         )
       }
+      ///BOTÃO DE IMAGEM
+const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => {
+  kma = gam1
+  mhan = await LorranX.prepareMessage(from, kma, image)
+  const buttonMessages = {
+  imageMessage: mhan.message.imageMessage,
+  contentText: text1,
+  footerText: desc1,
+  buttons: but,
+  headerType: 4
+  };
+  LorranX.sendMessage(
+    from,
+    buttonMessages,
+    MessageType.buttonsMessage,
+    options
+    )
+  }
+  ///BOTÃO DE VIDEO
+  const sendButVideo = async(from, text1, desc1, vid1, but = [], options = {}) => {
+  kma = vid1
+  mhan = await LorranX.prepareMessage(from, kma, video)
+  const buttonMessages = {
+  videoMessage: mhan.message.videoMessage,
+  contentText: text1,
+  footerText: desc1,
+  buttons: but,
+  headerType: 5
+  }
+  LorranX.sendMessage(from,
+    buttonMessages,
+    MessageType.buttonsMessage,
+    options
+    )
+  }
+  ///BOTÃO DE LOC
+  const sendButLocation = async (from, text1, desc1, gam1, but = [], options = {}) => {
+  kma = gam1
+  mhan = await LorranX.prepareMessage(from, kma, location)
+  const buttonMessages = {
+  locationMessage: mhan.message.locationMessage,
+  contentText: text1,
+  footerText: desc1,
+  buttons: but,
+  headerType: 6
+  }
+  LorranX.sendMessage(from,
+    buttonMessages,
+    MessageType.buttonsMessage,
+    options
+    )
+  }
       
       const sendMediaURL = async(url, text="", mids=[]) =>{
         if(mids.length > 0){
@@ -621,7 +673,7 @@ Versão atual: 1.0.5
 					LorranX.sendMessage(from, options, text)
           addFilter(from)
 					break;
-          case 'tagstick':
+          case 'tagsticker':
             case 'tagfig': 
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
@@ -756,13 +808,13 @@ Versão atual: 1.0.5
                 //FUNÇÕES DONO
             case 'block':
 					LorranX.updatePresence(from, Presence.composing) 
-					if (!isOwner) return reply("Voçê não é meu papai😡")
+					if (!isOwner) return reply("Você não é meu papai 😡")
 					LorranX.blockUser (`${body.slice(8)}@c.us`, "add")
 					LorranX.sendMessage(from, `Pronto papai bloquiei esse filho da puta`, text)
 				break;
 				case 'unblock':
 					LorranX.updatePresence(from, Presence.composing) 
-					if (!isOwner) return reply("Voçê não é meu papai😡")
+					if (!isOwner) return reply("Você não é meu papai 😡")
 					LorranX.blockUser (`${body.slice(10)}@c.us`, "remove")
 					LorranX.sendMessage(from, `Pronto papai, desbloquiei esse corno`, text)
 				break;
@@ -776,7 +828,7 @@ Versão atual: 1.0.5
           reply(`Pronto papai, entrei nesse grupo ai`)
           break;
                   case 'self':
-          if (!isOwner) return reply("Você não é meu papai")
+          if (!isOwner) return reply("Você não é meu papai 😡")
           if (args[0] === "on") {
             self = true;
             reply("Self-bot mod foi ativado")
@@ -800,8 +852,8 @@ Versão atual: 1.0.5
               type: 1
             }])
             break;
-            case 'restart':
-if (!isOwner) return reply('Voce não e meu papai')
+            case 'desligar':
+if (!isOwner) return reply('Você não e meu papai')
 reply('Bot desligado')
 setTimeout(() => {
 LorranX.close()
@@ -858,6 +910,40 @@ break;
 				break;
         //END CONVERSORES
         //DOWNLOADERS
+        case "tiktok":
+        if (!isUrl(args[0]) && !args[0].includes("tiktok.com"))
+          return reply(`Calmai macaco`);
+        var bv = await fetchJson(
+          `https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${args[0]}&apikey=beta`
+        );
+        var b = bv.result.author_metadata;
+        var tamnel = await getBuffer(
+          bv.result.media_resources.image.contentUrl
+        );
+        var a = bv.result.media_metadata;
+        sendButImage(
+          from,
+          `⚜️ *Nickname*: ${b.username}\n❤️ *Like*: ${a.stats.diggCount}\n💬 *Komentar*: ${a.stats.commentCount}\n🔁 *Share*: ${a.stats.shareCount}\n🎞️ *Views*: ${a.stats.playCount}`,
+          `Silahkan pilih salah satu format yg mau didownload`,
+          tamnel,
+          [
+            {
+              buttonId: `${prefix}escolhertiktok ${args[0]}|video`,
+              buttonText: {
+                displayText: `VIDEO`,
+              },
+              type: 1,
+            },
+            {
+              buttonId: `${prefix}escolhertiktok ${args[0]}|audio`,
+              buttonText: {
+                displayText: `AUDIO`,
+              },
+              type: 1,
+            },
+          ]
+        );
+        break;
         case 'play':
           case 'p':
           if (args.length === 0) return reply(`Pra eu baixar a musica c tem que mandar um nome valido\nExemplo: *${prefix}play sertanejo*`)
@@ -1036,7 +1122,7 @@ break;
           addFilter(from)
 				break;
 case 'estourar':       
-if (!isQuotedAudio) return enviar('Marque um áudio')
+if (!isQuotedAudio) return reply('Marque um áudio')
 encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 ran = getRandom('.mp3')
@@ -1049,6 +1135,21 @@ fs.unlinkSync(ran)
 })
 addFilter(from)
 break;
+case "reverse":
+        if (!isQuotedVideo) return fakegroup("Reply videonya!");
+        encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
+          .message.extendedTextMessage.contextInfo;
+        media = await LorranX.downloadAndSaveMediaMessage(encmedia);
+        ran = getRandom(".mp4");
+        exec(`ffmpeg -i ${media} -vf reverse -af areverse ${ran}`, (err) => {
+          fs.unlinkSync(media);
+          if (err) return fakegroup(`Err: ${err}`);
+          hah = fs.readFileSync(ran);
+          itsmevall.sendMessage(from, hah, audio, {mimetype: "audio/mp4", quoted: mek,});
+          fs.unlinkSync(ran);
+        });
+        addFilter(from)
+        break;
         //END MODIFICAR AUDIO
         case 'dado':
           case 'dadin':
@@ -1058,6 +1159,13 @@ dadin = fs.readFileSync('./database/dadin/'+dadoaleatorio+'.webp')
 LorranX.sendMessage(from, dadin, sticker, {quoted: mek})
 addFilter(from)
 break;
+case 'calculadora':
+  case 'calcular':
+				 var mtk = body.slice(12)
+				 teks = `${mtk} = ${Math_js.evaluate(mtk)}`
+				 reply(teks)
+         addFilter(from)
+				 break;
         case 'lirik':
           if(!q) return reply('lagu apa?')
           let song = await hx.lirik(q);
@@ -1164,6 +1272,21 @@ break;
             return(`maaf masukan query yang benar\ncontoh: ${prefix}${command} halo|5`)
           }
           break;
+          //PARA BOTÕES
+          case "escolhertiktok":
+            var gh = args.join("");
+            var link = gh.split("|")[0];
+            var tipe = gh.split("|")[1];
+            var bv = await fetchJson(
+              `https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${link}&apikey=beta`
+            );
+            if (tipe == "audio") {
+              sendMediaURL(from, bv.result.media_resources.music.playUrl, "");
+            }
+            if (tipe == "video") {
+              sendMediaURL(from, bv.result.media_resources.video.videoUrl, "");
+            }
+            break;
 				case 'dulio':
 					LorranX.sendMessage(from, `
     ╔═══════════════════
@@ -1189,6 +1312,9 @@ break;
     ║│↭_*   [ *${prefix}promote* ] 
     ║│↭_*   [ *${prefix}demote* ]
     ║│↭_*   [ *${prefix}hidetag* ]
+    ║│↭_*   [ *${prefix}tagimg* ]
+    ║│↭_*   [ *${prefix}tagimg* ]
+    ║│↭_*   [ *${prefix}tagsticker* ]
     ║│↭_*   [ *${prefix}kick* ] 
     ║│↭_*   [ *${prefix}add* ] 
     ║│↭ _*  [ *${prefix}linkgp* ] 
