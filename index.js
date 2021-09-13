@@ -419,7 +419,7 @@ Versão atual: 1.0.5
 //case
       switch (command) {
         case 'menuadmin':
-            sendButtonMsg(`${HORARIOS} ${pushname}\nTambem posso te ajudar com o gerenciamento de grupo\nainda não tenho muitas funções mas meu dono me atualiza diariamente`,`${RODAPE()}`,[{
+            sendButtonMsg(`${HORARIOS} ${pushname}\nTambem posso te ajudar com o gerenciamento de grupos\nainda não tenho muitas funções mas meu dono me atualiza diariamente`,`${RODAPE()}`,[{
               buttonId:`${prefix}dulio`,
               buttonText: {
                 displayText: `Menu admin`
@@ -800,6 +800,13 @@ Versão atual: 1.0.5
               type: 1
             }])
             break;
+            case 'restart':
+if (!isOwner) return reply('Voce não e meu papai')
+reply('Bot desligado')
+setTimeout(() => {
+LorranX.close()
+}, 3000)
+break;
             //END FUNÇÕES DONO
             //CONVERSORES
         case 'tomp3':
