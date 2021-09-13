@@ -600,6 +600,36 @@ Versão atual: 1.0.5
         addFilter(from)
 				break;
          //FUNÇÕES DE GRUPO
+         case 'resetlink':
+         case 'resetarlik':
+         case 'revokelink':
+          if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
+					if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
+          json = ['action', 'inviteReset', from]
+         LorranX.query({json, expect200: true})
+          reply('Link do grupo resetado')
+         break;
+         case 'demoteall':
+          if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
+					if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
+                      members_id = []
+          for (let mem of groupMembers) {
+             members_id.push(mem.jid)
+            }
+                      LorranX.groupDemoteAdmin(from, members_id)
+                      break;
+                      case 'promoteall':
+                        if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+                        if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
+                        if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
+                members_id = []
+		for (let mem of groupMembers) {
+	   	members_id.push(mem.jid)
+	  	}
+                LorranX.groupMakeAdmin(from, members_id)
+                break;
         case 'leave':
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
@@ -609,8 +639,9 @@ Versão atual: 1.0.5
           })
           break;
         case 'setdesc':
-          if (!isGroup)return reply("Este comando so pode ser usado em grupos")
-          if (!isBotGroupAdmins) return reply("bot harus jadi admin")
+          if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+					if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+					if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
           const newdesc = body.slice(11)
           const olddesc = groupDesc
           try {
@@ -823,6 +854,22 @@ Versão atual: 1.0.5
 					LorranX.blockUser (`${body.slice(10)}@c.us`, "remove")
 					LorranX.sendMessage(from, `Pronto papai, desbloquiei esse corno`, text)
 				break;
+        case 'creategroup':
+			case 'creategrup':
+        if (!isOwner) return reply("Você não é meu papai 😡")
+        if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+				if (args.length < 1) return reply(`Pra usar esse comadno c tem que adicionar um nome pro grupo e marcar as pessoas pra adicionar`)
+				argz = arg.split('|')
+				if (mek.message.extendedTextMessage != undefined){
+                    mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+                    for (let i = 0; i < mentioned.length; i++){
+						anu = []
+						anu.push(mentioned[i])
+                    }
+					LorranX.groupCreate(argz[0], anu)
+					reply(`Pronto, criei o grupo ${argz[0]}`)
+                }
+				break
         case 'join':
           case 'entrar':
           if (args.length === 0 ) return reply(`Pra eu entrar em um grupo c tem que usar um link valido\nExemplo: ${prefix}join _https://chat.whatsapp.com/acasxxzdsad2_`)
@@ -862,6 +909,13 @@ if (!isOwner) return reply('Você não e meu papai')
 reply('Bot desligado')
 setTimeout(() => {
 LorranX.close()
+}, 3000)
+break;
+case 'ligar':
+if (!isOwner) return reply('Você não e meu papai')
+reply('Bot desligado')
+setTimeout(() => {
+LorranX.open()
 }, 3000)
 break;
             //END FUNÇÕES DONO
