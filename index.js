@@ -373,14 +373,18 @@ module.exports = (LorranX) => {
 ║│↭_*   [ *${prefix}play* ] 
 ║│↭_*   [ *${prefix}pvideo* ] 
 ║│↭ _*  [ *${prefix}sticker* ] 
+║│↭_*   [ *${prefix}attp* ] 
+║│↭_*   [ *${prefix}dado* ] 
 ║│↭_*   [ *${prefix}toimg* ] 
 ║│↭_*   [ *${prefix}togif* ] 
 ║│↭_*   [ *${prefix}tomp3* ] 
 ║│↭_*   [ *${prefix}menuadmin* ] 
 ║│↭_*   [ *${prefix}slowmo* ] 
+║│↭_*   [ *${prefix}rapido* ] 
 ║│↭_*   [ *${prefix}esquilo* ] 
 ║│↭_*   [ *${prefix}engrossar* ] 
 ║│↭_*   [ *${prefix}bass* ] 
+║│↭_*   [ *${prefix}estourar* ] 
 ║│ 
 
 ║│
@@ -405,8 +409,8 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-Ultima atualização: 12/09/2021 as 09:40
-Ultimas alteraçoes: Adicionado anti-spam
+Ultima atualização: 12/09/2021 as 23:20
+Ultimas alteraçoes: Adicionada função dado e novos modificadores de audio
 Versão atual: 1.0.5
 % de conclusão: 35%
 `
@@ -983,6 +987,7 @@ hah = fs.readFileSync(ran)
 LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 fs.unlinkSync(ran)
 })
+addFilter(from)
 break; 
 				case 'esquilo':
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -1035,13 +1040,16 @@ hah = fs.readFileSync(ran)
 LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 fs.unlinkSync(ran)
 })
+addFilter(from)
 break;
         //END MODIFICAR AUDIO
-        case 'dado': //Jogos
+        case 'dado':
+          case 'dadin':
 const dadinhos = ["⚀","⚁","⚂","⚃","⚄","⚅"]
 dadoaleatorio = dadinhos[Math.floor(Math.random() * dadinhos.length)]
 dadin = fs.readFileSync('./database/dadin/'+dadoaleatorio+'.webp')
 LorranX.sendMessage(from, dadin, sticker, {quoted: mek})
+addFilter(from)
 break;
         case 'lirik':
           if(!q) return reply('lagu apa?')
