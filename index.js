@@ -1141,34 +1141,50 @@ case "reverse":
         });
         addFilter(from)
         break;
-        case 'slowmov':
-          if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
-          encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-          media = await LorranX.downloadAndSaveMediaMessage(encmedia)
-          ran = getRandom('.mp4')
-          exec(`ffmpeg -i ${media} -filter:a "atempo=0.7,asetrate=44100" ${ran}`, (err, stderr, stdout) => {
-          fs.unlinkSync(media)
-          if (err) return reply('Error!')
-          uhh = fs.readFileSync(ran)
-          LorranX.sendMessage(from, uhh, video, {mimetype: 'video/mp4', quoted: mek})
-          fs.unlinkSync(ran)
-          })
+        case "acelerarv":
+        if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
+        reply("Calmai macaco 🦧");
+        encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
+          .message.extendedTextMessage.contextInfo;
+        media = await LorranX.downloadAndSaveMediaMessage(encmedia);
+        ran = getRandom(".mp4");
+        exec(
+          `ffmpeg -i ${media} -filter_complex "[0:v]setpts=0.5*PTS[v];[0:a]atempo=2[a]" -map "[v]" -map "[a]" ${ran}`,
+          (err) => {
+            fs.unlinkSync(media);
+            if (err) return reply(`Error!`);
+            buffer453 = fs.readFileSync(ran);
+            LorranX.sendMessage(from, buffer453, video, {
+              mimetype: "video/mp4",
+              quoted: mek,
+            });
+            fs.unlinkSync(ran);
+          }
+        );
+        addFilter(from)
+        break;
+        case "slowv":
+          if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
+          reply("Calmai macaco 🦧");
+          encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
+            .message.extendedTextMessage.contextInfo;
+          media = await LorranX.downloadAndSaveMediaMessage(encmedia);
+          ran = getRandom(".mp4");
+          exec(
+            `ffmpeg -i ${media} -filter_complex "[0:v]setpts=2*PTS[v];[0:a]atempo=0.5[a]" -map "[v]" -map "[a]" ${ran}`,
+            (err) => {
+              fs.unlinkSync(media);
+              if (err) return reply(`Error!`);
+              buffer453 = fs.readFileSync(ran);
+              LorranX.sendMessage(from, buffer453, video, {
+                mimetype: "video/mp4",
+                quoted: mek,
+              });
+              fs.unlinkSync(ran);
+            }
+          );
           addFilter(from)
           break;
-          case 'acelerarv':  
-if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
-encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-media = await LorranX.downloadAndSaveMediaMessage(encmedia)
-ran = getRandom('.mp4')
-exec(`ffmpeg -i ${media} -filter:a atempo=1.06,asetrate=44100*1.25 ${ran}`, (err, stderr, stdout) => {
-fs.unlinkSync(media)
-if (err) return reply('Error!')
-hah = fs.readFileSync(ran)
-LorranX.sendMessage(from, hah, audio, {mimetype: 'video/mp4', ptt:true, quoted: mek})
-fs.unlinkSync(ran)
-})
-addFilter(from)
-break; 
 //END MODIFICADORES VIDEO
         case 'dado':
           case 'dadin':
