@@ -1102,7 +1102,7 @@ fs.unlinkSync(ran)
 addFilter(from)
 break;
 case "reverse":
-        if (!isQuotedVideo) return reply("Reply videonya!");
+        if (!isQuotedAudio) return reply("Reply videonya!");
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
           .message.extendedTextMessage.contextInfo;
         media = await LorranX.downloadAndSaveMediaMessage(encmedia);
