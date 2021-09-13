@@ -910,40 +910,6 @@ break;
 				break;
         //END CONVERSORES
         //DOWNLOADERS
-        case "tiktok":
-        if (!isUrl(args[0]) && !args[0].includes("tiktok.com"))
-          return reply(`Calmai macaco`);
-        var bv = await fetchJson(
-          `https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${args[0]}&apikey=beta`
-        );
-        var b = bv.result.author_metadata;
-        var tamnel = await getBuffer(
-          bv.result.media_resources.image.contentUrl
-        );
-        var a = bv.result.media_metadata;
-        sendButImage(
-          from,
-          `⚜️ *Nickname*: ${b.username}\n❤️ *Like*: ${a.stats.diggCount}\n💬 *Komentar*: ${a.stats.commentCount}\n🔁 *Share*: ${a.stats.shareCount}\n🎞️ *Views*: ${a.stats.playCount}`,
-          `Silahkan pilih salah satu format yg mau didownload`,
-          tamnel,
-          [
-            {
-              buttonId: `${prefix}escolhertiktok ${args[0]}|video`,
-              buttonText: {
-                displayText: `VIDEO`,
-              },
-              type: 1,
-            },
-            {
-              buttonId: `${prefix}escolhertiktok ${args[0]}|audio`,
-              buttonText: {
-                displayText: `AUDIO`,
-              },
-              type: 1,
-            },
-          ]
-        );
-        break;
         case 'play':
           case 'p':
           if (args.length === 0) return reply(`Pra eu baixar a musica c tem que mandar um nome valido\nExemplo: *${prefix}play sertanejo*`)
@@ -1136,16 +1102,16 @@ fs.unlinkSync(ran)
 addFilter(from)
 break;
 case "reverse":
-        if (!isQuotedVideo) return fakegroup("Reply videonya!");
+        if (!isQuotedVideo) return reply("Reply videonya!");
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
           .message.extendedTextMessage.contextInfo;
         media = await LorranX.downloadAndSaveMediaMessage(encmedia);
-        ran = getRandom(".mp4");
+        ran = getRandom(".mp3");
         exec(`ffmpeg -i ${media} -vf reverse -af areverse ${ran}`, (err) => {
           fs.unlinkSync(media);
-          if (err) return fakegroup(`Err: ${err}`);
+          if (err) return reply(`Error!`);
           hah = fs.readFileSync(ran);
-          itsmevall.sendMessage(from, hah, audio, {mimetype: "audio/mp4", quoted: mek,});
+          LorranX.sendMessage(from, hah, audio, {mimetype: "audio/mp4", quoted: mek,});
           fs.unlinkSync(ran);
         });
         addFilter(from)
@@ -1159,13 +1125,6 @@ dadin = fs.readFileSync('./database/dadin/'+dadoaleatorio+'.webp')
 LorranX.sendMessage(from, dadin, sticker, {quoted: mek})
 addFilter(from)
 break;
-case 'calculadora':
-  case 'calcular':
-				 var mtk = body.slice(12)
-				 teks = `${mtk} = ${Math_js.evaluate(mtk)}`
-				 reply(teks)
-         addFilter(from)
-				 break;
         case 'lirik':
           if(!q) return reply('lagu apa?')
           let song = await hx.lirik(q);
@@ -1273,20 +1232,6 @@ case 'calculadora':
           }
           break;
           //PARA BOTÕES
-          case "escolhertiktok":
-            var gh = args.join("");
-            var link = gh.split("|")[0];
-            var tipe = gh.split("|")[1];
-            var bv = await fetchJson(
-              `https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${link}&apikey=beta`
-            );
-            if (tipe == "audio") {
-              sendMediaURL(from, bv.result.media_resources.music.playUrl, "");
-            }
-            if (tipe == "video") {
-              sendMediaURL(from, bv.result.media_resources.video.videoUrl, "");
-            }
-            break;
 				case 'dulio':
 					LorranX.sendMessage(from, `
     ╔═══════════════════
