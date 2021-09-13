@@ -905,15 +905,15 @@ Versão atual: 1.0.5
             }])
             break;
             case 'desligar':
-if (!isOwner) return reply('Você não e meu papai')
+if (!isOwner) return reply('Você não e meu papai 😡')
 reply('Bot desligado')
 setTimeout(() => {
 LorranX.close()
 }, 3000)
 break;
 case 'ligar':
-if (!isOwner) return reply('Você não e meu papai')
-reply('Bot desligado')
+if (!isOwner) return reply('Você não e meu papai 😡')
+reply('Bot ligado')
 setTimeout(() => {
 LorranX.open()
 }, 3000)
