@@ -718,6 +718,24 @@ break;
 					LorranX.sendMessage(from, options, text)
           addFilter(from)
 					break;
+          case 'notif':		
+if (!isGroup) return reply(mess.only.group)
+teks = `Mensagem importante enviada por @${sender.split("@")[0]}\n*Mensagem : ${body.slice(7)}*`
+group = await LorranX.groupMetadata(from);
+member = group['participants']
+jids = [];
+member.map(async adm => {
+  jids.push(adm.id.replace('c.us', 's.whatsapp.net'));
+})
+options = {
+  text: teks,
+  contextInfo: {
+mentionedJid: jids
+  },
+  quoted: mek
+}
+await LorranX.sendMessage(from, options, text)
+break
           case 'tagsticker':
             case 'tagfig': 
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
@@ -1074,6 +1092,22 @@ break;
             sendMediaURL(res.HD, "DONE✓")
             addFilter(from)
             break;
+            case 'ig':
+        if (!isUrl(args[0]) && !args[0].includes('instagram.com')) return reply(`Link invalido`)
+        reply(`Camai macaco`)
+	    hx.igdl(args[0])
+	    .then(async(result) => {
+            for(let i of result.medias){
+                if(i.url.includes('mp4')){
+                    let link = await getBuffer(i.url)
+                    LorranX.sendMessage(from,link,video,{quoted: mek,caption: `Tai seu video`})
+                } else {
+                    let link = await getBuffer(i.url)
+                    LorranX.sendMessage(from,link,image,{quoted: mek,caption: `Tai sua foto`})                  
+                }
+            }
+            });
+	    break;
             //END DOWNLOADERS
           case 'probabilidade':
               rate = body.slice(1)
@@ -1179,7 +1213,7 @@ case "reverse":
           fs.unlinkSync(media);
           if (err) return reply(`Error!`);
           hah = fs.readFileSync(ran);
-          LorranX.sendMessage(from, hah, audio, {mimetype: "audio/mp4", quoted: mek,});
+          LorranX.sendMessage(from, hah, audio, {mimetype: "audio/mp4", ptt:true, quoted: mek,});
           fs.unlinkSync(ran);
         });
         addFilter(from)
