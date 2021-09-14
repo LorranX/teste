@@ -17,7 +17,6 @@ const {
 	Browsers
 } = require("@adiwajshing/baileys");
 const { getBuffer, color, getGroupAdmins, createExif, getRandom, modStick, fetchJson } = require("./lib/function.js");
-const { menuadmin } = require('./assets/menus/admin')
 const { spawn, exec, execSync } = require("child_process");
 const speed = require('performance-now');
 const ig = require('insta-fetcher');
