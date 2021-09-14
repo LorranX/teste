@@ -1365,7 +1365,9 @@ break;
           }
           break;
           case 'homematizap':
-            if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+            case 'homematizap':
+if (!isGroup) reply(`oi`)
+if (isGroup) reply(`『❗』${command} enviado no seu pv`)
 hai = (`https://hardianto-chan.herokuapp.com/api/anime/random?nsfw=bJ&apikey=hardianto`)
 kon = await getBuffer(hai)
 LorranX.sendMessage(sender, kon, image, {caption: `${command}, certo?`, quoted: mek, thumbnail:null})
