@@ -401,7 +401,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
 					reply(`Oi carai`)
 				}
 
-      //list command
+      //COMANDOS DE LISTA
       if (listbut == 'Menu' || command == `${prefix}start`) {
         var Menu = `
 ╔═══════════════════
@@ -425,6 +425,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
 ║│↭_*   [ *${prefix}probabilidade* ]
 ║│↭_*   [ *${prefix}%gay* ] 
 ║│↭_*   [ *${prefix}twitter* ]
+║│↭_*   [ *${prefix}ig* ]
 ║│↭_*   [ *${prefix}ytmp4* ]
 ║│↭_*   [ *${prefix}ytmp3* ]
 ║│↭_*   [ *${prefix}play* ] 
@@ -473,6 +474,57 @@ Versão atual: 1.0.5
 `
         LorranX.sendMessage(from, fs.readFileSync("./lib/image/changelog.jpg"), image, {quoted: mek, caption: medsos})
       }
+      if (listbut == 'Menu Admin' || command == `${prefix}start`) {
+        var MenuAdmin = `
+        ╔═══════════════════
+        ║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
+        ╠═══════════════════
+        ║│ *↭ Sobre o Bot*
+        ║ *Bateria* : ${battery.persen}
+        ║ *charger* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
+        ║ *Marca do celular* : ${LorranX.user.phone.device_manufacturer}
+        ║ *Nome do servidor* : ${LorranX.browserDescription[0]}
+        ║ *Servidor* : ${LorranX.browserDescription[1]}
+        ║ *Versão* : ${LorranX.browserDescription[2]}
+        ║ *Modelo do celular* : ${LorranX.user.phone.device_model}
+        └ *Versão do Whatsapp* : ${LorranX.user.phone.wa_version}
+        
+        *↭  ${HORARIOS} ${pushname}*
+        
+        ║╭──❉ * ⛤𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨 𝙖𝙙𝙢𝙞𝙣⛤ * ❉──
+        
+        ║│↭_*   [ *${prefix}leave* ] 
+        ║│↭_*   [ *${prefix}setdesc* ]
+        ║│↭_*   [ *${prefix}setname* ] 
+        ║│↭_*   [ *${prefix}promote* ] 
+        ║│↭_*   [ *${prefix}demote* ]
+        ║│↭_*   [ *${prefix}hidetag* ]
+        ║│↭_*   [ *${prefix}tagimg* ]
+        ║│↭_*   [ *${prefix}tagimg* ]
+        ║│↭_*   [ *${prefix}tagsticker* ]
+        ║│↭_*   [ *${prefix}kick* ] 
+        ║│↭_*   [ *${prefix}add* ] 
+        ║│↭ _*  [ *${prefix}linkgp* ] 
+        
+        ║│
+        
+        ║| ↭_*  *[Meu criador]*
+        ║      wa.me/+553195703379
+        ╰───────────`;
+sendButtonMsg(MenuAdmin, `By LorranX ©`,[{
+  buttonId: `${prefix}owner`,
+  buttonText: {
+    displayText: "Dono"
+  },
+  type: 1
+  },{
+    buttonId: `${prefix}github`,
+    buttonText: {
+      displayText: "script do bot"
+    },
+    type: 1
+}])
+      }
     //SEM PREFIX
     switch(is) {
       case 'bot':
@@ -484,21 +536,6 @@ break;
     }
     //CASE
       switch (command) {
-        case 'menuadmin':
-            sendButtonMsg(`${HORARIOS} ${pushname}\nTambem posso te ajudar com o gerenciamento de grupos\nainda não tenho muitas funções mas meu dono me atualiza diariamente`,`${RODAPE()}`,[{
-              buttonId:`${prefix}dulio`,
-              buttonText: {
-                displayText: `Menu admin`
-              },
-              type: 1
-            },{
-              buttonId: `${prefix}owner`,
-              buttonText: {
-                displayText: 'Dono'
-              },
-              type: 1
-            }])
-            break;
         case 'help':
         case 'menu':
           var menulist = LorranX.prepareMessageFromContent(from, {
@@ -524,6 +561,30 @@ break;
           LorranX.relayWAMessage(menulist, {waitForAck: false})
           addFilter(from)
           break;
+            case 'menuadmin':
+              var menuadmin = LorranX.prepareMessageFromContent(from, {
+                "listMessage" :{
+                  "title": `${HORARIOS} ${pushname}\n\nTambem posso te ajudar com o gerenciamento de grupos\nainda não tenho muitas funções mas meu dono me atualiza diariamente`,
+                  "description": `Estou funcionando a \n${runtime(process.uptime())}`,
+                  "buttonText": "Opções",
+                  "listType": "SINGLE_SELECT",
+                  "sections": [{
+                    "title": `${DATACOMPLETA()}`,
+                    "rows": [{
+                        "title": "Menu Admin",
+                        "rowId": "0",
+                        "description": ""
+                      },{
+                        "title": "ChangeLog",
+                        "rowId": "1",
+                        "description": ""
+                      }]
+                  }]
+                }
+              }, {})
+              LorranX.relayWAMessage(menuadmin, {waitForAck: false})
+              addFilter(from)
+              break;
         case 'owner':
           const vacrd = `BEGIN:VCARD\n`+`VERSION:3.0\n`+
                         `FN:Dono do Bot\n`+
@@ -1087,9 +1148,9 @@ break;
           addFilter(from)
           break;
           case 'twitter':
-            if (!isUrl(args[0]) && !args[0].includes('twitter.com') && !q) return reply("link Twitter?")
+            if (!isUrl(args[0]) && !args[0].includes('twitter.com') && !q) return reply("Link invalido")
             var res = await hx.twitter(args[0])
-            sendMediaURL(res.HD, "DONE✓")
+            sendMediaURL(res.HD, "Tai seu video")
             addFilter(from)
             break;
             case 'ig':
