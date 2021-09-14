@@ -1174,12 +1174,12 @@ case "reverse":
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
           .message.extendedTextMessage.contextInfo;
         media = await LorranX.downloadAndSaveMediaMessage(encmedia);
-        ran = getRandom(".mp4");
+        ran = getRandom(".mp3");
         exec(`ffmpeg -i ${media} -vf reverse -af areverse ${ran}`, (err) => {
           fs.unlinkSync(media);
           if (err) return reply(`Error!`);
           hah = fs.readFileSync(ran);
-          LorranX.sendMessage(from, hah, video, {mimetype: "audio/mp4", quoted: mek,});
+          LorranX.sendMessage(from, hah, audio, {mimetype: "audio/mp4", quoted: mek,});
           fs.unlinkSync(ran);
         });
         addFilter(from)
@@ -1363,14 +1363,6 @@ break;
             return(`maaf masukan query yang benar\ncontoh: ${prefix}${command} halo|5`)
           }
           break;
-          case 'homematizap':
-            case 'homematizap':
-if (!isGroup) reply(`oi`)
-if (isGroup) reply(`『❗』${command} enviado no seu pv`)
-hai = (`https://hardianto-chan.herokuapp.com/api/anime/random?nsfw=bJ&apikey=hardianto`)
-kon = await getBuffer(hai)
-LorranX.sendMessage(sender, kon, image, {caption: `${command}, certo?`, quoted: mek, thumbnail:null})
-break;
           //PARA BOTÕES
 				case 'dulio':
 					LorranX.sendMessage(from, `
