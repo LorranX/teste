@@ -32,7 +32,7 @@ const { isFiltered, addFilter } = require('./lib/antispam')
 const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
 
-//data
+        //INFO
 owner = ["553195703379@s.whatsapp.net","553192941210@s.whatsapp.net"];
 mns = "```";
 battery = {
@@ -45,12 +45,12 @@ defttt = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣",
 antideleted = true;
 self = false;
 
-//load files
+        //LOAD FILES
 
 
-//end load files
+        //END LOAD FILES
 
-//for time
+        //DATA...HORA
 function DATACOMPLETA(){
   myMonths = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 	myDays = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sabado'];
@@ -276,7 +276,7 @@ module.exports = (LorranX) => {
           options
         )
       }
-      ///BOTÃO DE IMAGEM
+        ///BOTÃO DE IMAGEM
 const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => {
   kma = gam1
   mhan = await LorranX.prepareMessage(from, kma, image)
@@ -294,7 +294,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
     options
     )
   }
-  ///BOTÃO DE VIDEO
+        ///BOTÃO DE VIDEO
   const sendButVideo = async(from, text1, desc1, vid1, but = [], options = {}) => {
   kma = vid1
   mhan = await LorranX.prepareMessage(from, kma, video)
@@ -311,7 +311,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
     options
     )
   }
-  ///BOTÃO DE LOC
+        ///BOTÃO DE LOC
   const sendButLocation = async (from, text1, desc1, gam1, but = [], options = {}) => {
   kma = gam1
   mhan = await LorranX.prepareMessage(from, kma, location)
@@ -376,7 +376,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
       if (isCmd && isGroup) console.log("[",color("command","lime"),"]",time2,color(command,"lime"),"from",color(sender.split("@")[0],"cyan"),"in",color(groupName,"yellow"))
       if (listbut) console.log("[",color("command","lime"),"]",time2,color(listbut,"lime"),"from",color(sender.split("@")[0],"cyan"))
       
-      //ANTI-SPAM
+        //ANTI-SPAM
       if (isCmd && isFiltered(from) && !isGroup) {
         console.log(color('SPAM', 'red'), color(moment.tz('America/Sao_Paulo').format('HH:mm:ss'), 'yellow'), color(`${command}`), 'DE:', color(pushname))
         const ff = {
@@ -396,12 +396,8 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
                     }
                  }
         return reply(ff1)}  
-      //COMANDOS SEM PREFIX
-        if (messagesC.includes("Lorran" , "lorran")){
-					reply(`Oi carai`)
-				}
 
-      //COMANDOS DE LISTA
+        //COMANDOS DE LISTA
       if (listbut == 'Menu' || command == `${prefix}start`) {
         var Menu = `
 ╔═══════════════════
@@ -467,8 +463,8 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-Ultima atualização: 12/09/2021 as 23:20
-Ultimas alteraçoes: Adicionada função dado e novos modificadores de audio
+Ultima atualização: 14/09/2021 as 20:21
+Ultimas alteraçoes: Script mais organizado, adicionados modificadores de video, adicionadas novas funções owner
 Versão atual: 1.0.5
 % de conclusão: 35%
 `
@@ -525,7 +521,7 @@ sendButtonMsg(MenuAdmin, `By LorranX ©`,[{
     type: 1
 }])
       }
-    //SEM PREFIX
+        //SEM PREFIX
     switch(is) {
       case 'bot':
 buf = fs.readFileSync(`./database/mp3/oi.mp3`)
@@ -534,7 +530,7 @@ mimetype: 'audio/mp4', quoted: mek, ptt: true
 })
 break;
     }
-    //CASE
+        //CASE
       switch (command) {
         case 'help':
         case 'menu':
@@ -669,7 +665,7 @@ break;
 				LorranX.sendMessage(from, apiglow, sticker, {quoted: mek})
         addFilter(from)
 				break;
-         //FUNÇÕES DE GRUPO
+        //FUNÇÕES DE GRUPO
          case 'resetlink':
          case 'resetarlik':
          case 'revokelink':
@@ -928,8 +924,8 @@ break
                 roomttt = rooms;
                 reply("sukses")
                 break;
-                //END FUNÇÕES GRUPO
-                //FUNÇÕES DONO
+        //END FUNÇÕES GRUPO
+        //FUNÇÕES DONO
             case 'block':
 					LorranX.updatePresence(from, Presence.composing) 
 					if (!isOwner) return reply("Você não é meu papai 😡")
@@ -1006,8 +1002,8 @@ setTimeout(() => {
 LorranX.open()
 }, 3000)
 break;
-            //END FUNÇÕES DONO
-            //CONVERSORES
+        //END FUNÇÕES DONO
+        //CONVERSORES
         case 'tomp3':
 				LorranX.updatePresence(from, Presence.composing)
 				if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
@@ -1169,7 +1165,7 @@ break;
             }
             });
 	    break;
-            //END DOWNLOADERS
+        //END DOWNLOADERS
           case 'probabilidade':
               rate = body.slice(1)
               const ra =['99','7','1000','-10','31','0','4','9','17','28','34','48','59','62','100','29','94','75','41','39']
@@ -1183,8 +1179,17 @@ break;
               const jabs = gay[Math.floor(Math.random() * gay.length)]
               LorranX.sendMessage(from, '*Porcentagem de quão gay esse cara é*\n\nResultado : '+ jabs+'%', text, { quoted: mek })
               break;
-              //MODIFICAR AUDIO
+              case 'dado':
+          case 'dadin':
+              const dadinhos = ["⚀","⚁","⚂","⚃","⚄","⚅"]
+              dadoaleatorio = dadinhos[Math.floor(Math.random() * dadinhos.length)]
+              dadin = fs.readFileSync('./database/dadin/'+dadoaleatorio+'.webp')
+              LorranX.sendMessage(from, dadin, sticker, {quoted: mek})
+              addFilter(from)
+              break;
+        //MODIFICAR AUDIO
 				case 'slowmo':
+          reply("Calmai macaco 🦧");
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp3')
@@ -1198,6 +1203,7 @@ break;
         addFilter(from)
 				break;
         case 'acelerar':  
+        reply("Calmai macaco 🦧");
 if (!isQuotedAudio) return enviar('Marque um áudio')
 encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 media = await LorranX.downloadAndSaveMediaMessage(encmedia)
@@ -1212,6 +1218,7 @@ fs.unlinkSync(ran)
 addFilter(from)
 break; 
 				case 'esquilo':
+          reply("Calmai macaco 🦧");
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 					ran = getRandom('.mp3')
@@ -1225,6 +1232,7 @@ break;
           addFilter(from)
 				break;
 				case 'engrossar':
+          reply("Calmai macaco 🦧");
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 					ran = getRandom('.mp3')
@@ -1237,7 +1245,8 @@ break;
 					})
           addFilter(from)
 				break;
-				case 'bass':                 
+				case 'bass':   
+        reply("Calmai macaco 🦧");              
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 					ran = getRandom('.mp3')
@@ -1252,6 +1261,7 @@ break;
 				break;
 case 'estourar':       
 if (!isQuotedAudio) return reply('Marque um áudio')
+reply("Calmai macaco 🦧");
 encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 ran = getRandom('.mp3')
@@ -1266,6 +1276,7 @@ addFilter(from)
 break;
 case "reverse":
         if (!isQuotedAudio) return reply("Pra usar esse comando c tem que marcar um audio");
+        reply("Calmai macaco 🦧");
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
           .message.extendedTextMessage.contextInfo;
         media = await LorranX.downloadAndSaveMediaMessage(encmedia);
@@ -1283,6 +1294,7 @@ case "reverse":
         //MODIFICAR VIDEO
         case "reversev":
         if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
+        reply("Calmai macaco 🦧");
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
           .message.extendedTextMessage.contextInfo;
         media = await LorranX.downloadAndSaveMediaMessage(encmedia);
@@ -1343,15 +1355,7 @@ case "reverse":
           );
           addFilter(from)
           break;
-//END MODIFICADORES VIDEO
-        case 'dado':
-          case 'dadin':
-const dadinhos = ["⚀","⚁","⚂","⚃","⚄","⚅"]
-dadoaleatorio = dadinhos[Math.floor(Math.random() * dadinhos.length)]
-dadin = fs.readFileSync('./database/dadin/'+dadoaleatorio+'.webp')
-LorranX.sendMessage(from, dadin, sticker, {quoted: mek})
-addFilter(from)
-break;
+        //END MODIFICADORES VIDEO
         case 'lirik':
           if(!q) return reply('lagu apa?')
           let song = await hx.lirik(q);
@@ -1458,47 +1462,9 @@ break;
             return(`maaf masukan query yang benar\ncontoh: ${prefix}${command} halo|5`)
           }
           break;
-          //PARA BOTÕES
-				case 'dulio':
-					LorranX.sendMessage(from, `
-    ╔═══════════════════
-    ║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
-    ╠═══════════════════
-    ║│ *↭ Sobre o Bot*
-    ║ *Bateria* : ${battery.persen}
-    ║ *charger* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
-    ║ *Marca do celular* : ${LorranX.user.phone.device_manufacturer}
-    ║ *Nome do servidor* : ${LorranX.browserDescription[0]}
-    ║ *Servidor* : ${LorranX.browserDescription[1]}
-    ║ *Versão* : ${LorranX.browserDescription[2]}
-    ║ *Modelo do celular* : ${LorranX.user.phone.device_model}
-    └ *Versão do Whatsapp* : ${LorranX.user.phone.wa_version}
-    
-    *↭  ${HORARIOS} ${pushname}*
-    
-    ║╭──❉ * ⛤𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨 𝙖𝙙𝙢𝙞𝙣⛤ * ❉──
-    
-    ║│↭_*   [ *${prefix}leave* ] 
-    ║│↭_*   [ *${prefix}setdesc* ]
-    ║│↭_*   [ *${prefix}setname* ] 
-    ║│↭_*   [ *${prefix}promote* ] 
-    ║│↭_*   [ *${prefix}demote* ]
-    ║│↭_*   [ *${prefix}hidetag* ]
-    ║│↭_*   [ *${prefix}tagimg* ]
-    ║│↭_*   [ *${prefix}tagimg* ]
-    ║│↭_*   [ *${prefix}tagsticker* ]
-    ║│↭_*   [ *${prefix}kick* ] 
-    ║│↭_*   [ *${prefix}add* ] 
-    ║│↭ _*  [ *${prefix}linkgp* ] 
-    
-    ║│
-    
-    ║| ↭_*  *[Meu criador]*
-    ║      wa.me/+553195703379
-    ╰───────────`, text)
-					break;
+        //PARA BOTÕES
 
-          //GARBAGE
+        //GARBAGE
 
            /*       case 'tiktok':
           if (!isUrl(args[0]) && !args[0].includes('tiktok.com') && !q) return reply("Link invalido")
@@ -1637,7 +1603,7 @@ break;
     } catch (e) {
       console.log("Error : %s", color(e, "red"));
     } */
-    //END GARBAGE
+        //END GARBAGE
 
         
         default:
