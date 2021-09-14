@@ -206,6 +206,7 @@ module.exports = (LorranX) => {
       var pes = (type === 'conversation' && mek.message.conversation) ? mek.message.conversation : (type == 'imageMessage') && mek.message.imageMessage.caption ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption ? mek.message.videoMessage.caption : (type == 'extendedTextMessage') && mek.message.extendedTextMessage.text ? mek.message.extendedTextMessage.text : ''
       const messagesC = pes.slice(0).trim().split(/ +/).shift().toLowerCase()
       const command = body.slice(1).trim().split(/ +/).shift().toLowerCase()
+      const is = budy.slice(0).trim().split(/ +/).shift().toLowerCase()
       const args = body.trim().split(/ +/).slice(1)
       const isCmd = body.startsWith(prefix)
       const q = args.join(' ')
@@ -473,7 +474,16 @@ Versão atual: 1.0.5
 `
         LorranX.sendMessage(from, fs.readFileSync("./lib/image/changelog.jpg"), image, {quoted: mek, caption: medsos})
       }
-//case
+    //SEM PREFIX
+    switch(is) {
+      case 'bot':
+buf = fs.readFileSync(`./database/mp3/oi.mp3`)
+LorranX.sendMessage(from, buf, audio, {
+mimetype: 'audio/mp4', quoted: mek, ptt: true
+})
+break;
+    }
+    //CASE
       switch (command) {
         case 'menuadmin':
             sendButtonMsg(`${HORARIOS} ${pushname}\nTambem posso te ajudar com o gerenciamento de grupos\nainda não tenho muitas funções mas meu dono me atualiza diariamente`,`${RODAPE()}`,[{
@@ -859,7 +869,7 @@ Versão atual: 1.0.5
         if (!isOwner) return reply("Você não é meu papai 😡")
         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 				if (args.length < 1) return reply(`Pra usar esse comadno c tem que adicionar um nome pro grupo e marcar as pessoas pra adicionar`)
-				argz = args.split('|')
+				argz = arg.split('|')
 				if (mek.message.extendedTextMessage != undefined){
                     mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
                     for (let i = 0; i < mentioned.length; i++){
@@ -1354,6 +1364,12 @@ break;
             return(`maaf masukan query yang benar\ncontoh: ${prefix}${command} halo|5`)
           }
           break;
+          case 'homematizap':
+            if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+hai = (`https://hardianto-chan.herokuapp.com/api/anime/random?nsfw=bJ&apikey=hardianto`)
+kon = await getBuffer(hai)
+LorranX.sendMessage(sender, kon, image, {caption: `${command}, certo?`, quoted: mek, thumbnail:null})
+break;
           //PARA BOTÕES
 				case 'dulio':
 					LorranX.sendMessage(from, `
