@@ -781,7 +781,7 @@ break;
 					break;
           case 'notif':		
 if (!isGroup) return reply(mess.only.group)
-teks = `Mensagem importante enviada por @${sender.split("@")[0]}\n*Mensagem : ${body.slice(7)}*`
+mensagem = `Mensagem importante enviada por @${sender.split("@")[0]}\n*Mensagem : ${body.slice(7)}*`
 group = await LorranX.groupMetadata(from);
 member = group['participants']
 jids = [];
@@ -789,9 +789,9 @@ member.map(async adm => {
   jids.push(adm.id.replace('c.us', 's.whatsapp.net'));
 })
 options = {
-  text: teks,
+  text: mensagem,
   contextInfo: {
-mentionedJid: jids
+mentionedJid: mem
   },
   quoted: mek
 }
