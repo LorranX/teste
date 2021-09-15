@@ -398,39 +398,127 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
         return reply(ff1)}  
 
         //COMANDOS DE LISTA
+        if (listbut == 'Modificadores de Audio' || command == `${prefix}start`) {
+          var Menuaudio = `
+╔═══════════════════
+║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
+╠═══════════════════
+║│ *↭ Sobre o Bot*
+║ *Bateria* : ${battery.persen}
+║ *charger* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
+║ *Marca do celular* : ${LorranX.user.phone.device_manufacturer}
+║ *Nome do servidor* : ${LorranX.browserDescription[0]}
+║ *Servidor* : ${LorranX.browserDescription[1]}
+║ *Versão* : ${LorranX.browserDescription[2]}
+║ *Modelo do celular* : ${LorranX.user.phone.device_model}
+└ *Versão do Whatsapp* : ${LorranX.user.phone.wa_version}
+
+*↭  ${HORARIOS} ${pushname}*
+
+║╭──❉ * ⛤𝙈𝙤𝙙𝙞𝙛𝙞𝙘𝙖𝙙𝙤𝙧𝙚𝙨 𝙙𝙚 𝙖𝙪𝙙𝙞𝙤⛤ * ❉──
+
+║│↭_*   [ *${prefix}slowmo* ] 
+║│↭_*   [ *${prefix}acelerar* ]
+║│↭_*   [ *${prefix}esquilo* ] 
+║│↭_*   [ *${prefix}engrossar* ] 
+║│↭_*   [ *${prefix}bass* ]
+║│↭_*   [ *${prefix}estourar* ]
+║│↭_*   [ *${prefix}reverse* ]
+
+║│
+
+║| ↭_*  *[Meu criador]*
+║https://wa.me/+553195703379
+╰───────────`;
+  sendButtonMsg(Menuaudio, `By LorranX ©`,[{
+    buttonId: `${prefix}owner`,
+    buttonText: {
+      displayText: "Dono"
+    },
+    type: 1
+    },{
+      buttonId: `${prefix}github`,
+      buttonText: {
+        displayText: "script do bot"
+      },
+      type: 1
+  }])
+}
+if (listbut == 'Modificadores de Video' || command == `${prefix}start`) {
+  var Menuvideo = `
+╔═══════════════════
+║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
+╠═══════════════════
+║│ *↭ Sobre o Bot*
+║ *Bateria* : ${battery.persen}
+║ *charger* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
+║ *Marca do celular* : ${LorranX.user.phone.device_manufacturer}
+║ *Nome do servidor* : ${LorranX.browserDescription[0]}
+║ *Servidor* : ${LorranX.browserDescription[1]}
+║ *Versão* : ${LorranX.browserDescription[2]}
+║ *Modelo do celular* : ${LorranX.user.phone.device_model}
+└ *Versão do Whatsapp* : ${LorranX.user.phone.wa_version}
+
+*↭  ${HORARIOS} ${pushname}*
+
+║╭──❉ * ⛤𝙈𝙤𝙙𝙞𝙛𝙞𝙘𝙖𝙙𝙤𝙧𝙚𝙨 𝙙𝙚 𝙫𝙞𝙙𝙚𝙤⛤ * ❉──
+
+║│↭_*   [ *${prefix}slowv* ] 
+║│↭_*   [ *${prefix}acelerarv* ]
+║│↭_*   [ *${prefix}reversev* ]
+
+║│
+
+║| ↭_*  *[Meu criador]*
+║https://wa.me/+553195703379
+╰───────────`;
+sendButtonMsg(Menuvideo, `By LorranX ©`,[{
+buttonId: `${prefix}owner`,
+buttonText: {
+displayText: "Dono"
+},
+type: 1
+},{
+buttonId: `${prefix}github`,
+buttonText: {
+displayText: "script do bot"
+},
+type: 1
+}])
+}
         if (listbut == 'Owner Menu' || command == `${prefix}start`) {
           var Menueu = `
-          ╔═══════════════════
-          ║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
-          ╠═══════════════════
-          ║│ *↭ Sobre o Bot*
-          ║ *Bateria* : ${battery.persen}
-          ║ *charger* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
-          ║ *Marca do celular* : ${LorranX.user.phone.device_manufacturer}
-          ║ *Nome do servidor* : ${LorranX.browserDescription[0]}
-          ║ *Servidor* : ${LorranX.browserDescription[1]}
-          ║ *Versão* : ${LorranX.browserDescription[2]}
-          ║ *Modelo do celular* : ${LorranX.user.phone.device_model}
-          └ *Versão do Whatsapp* : ${LorranX.user.phone.wa_version}
-          
-          *↭  ${HORARIOS} ${pushname}*
-          
-          ║╭──❉ * ⛤𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨 𝙙𝙤 𝙥𝙖𝙥𝙖𝙞⛤ * ❉──
-          
-          ║│↭_*   [ *${prefix}block* ] 
-          ║│↭_*   [ *${prefix}unblock* ]
-          ║│↭_*   [ *${prefix}creatgroup* ] 
-          ║│↭_*   [ *${prefix}join* ] 
-          ║│↭_*   [ *${prefix}selfmode* ]
-          ║│↭_*   [ *${prefix}desligar* ]
-          ║│↭_*   [ *${prefix}kickall* ]
-          ║│↭_*   [ *${prefix}clearall* ]
-          
-          ║│
-          
-          ║| ↭_*  *[Meu criador]*
-          ║https://wa.me/+553195703379
-          ╰───────────`;
+╔═══════════════════
+║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
+╠═══════════════════
+║│ *↭ Sobre o Bot*
+║ *Bateria* : ${battery.persen}
+║ *charger* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
+║ *Marca do celular* : ${LorranX.user.phone.device_manufacturer}
+║ *Nome do servidor* : ${LorranX.browserDescription[0]}
+║ *Servidor* : ${LorranX.browserDescription[1]}
+║ *Versão* : ${LorranX.browserDescription[2]}
+║ *Modelo do celular* : ${LorranX.user.phone.device_model}
+└ *Versão do Whatsapp* : ${LorranX.user.phone.wa_version}
+
+*↭  ${HORARIOS} ${pushname}*
+
+║╭──❉ * ⛤𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨 𝙙𝙤 𝙥𝙖𝙥𝙖𝙞⛤ * ❉──
+
+║│↭_*   [ *${prefix}block* ] 
+║│↭_*   [ *${prefix}unblock* ]
+║│↭_*   [ *${prefix}creatgroup* ] 
+║│↭_*   [ *${prefix}join* ] 
+║│↭_*   [ *${prefix}selfmode* ]
+║│↭_*   [ *${prefix}desligar* ]
+║│↭_*   [ *${prefix}kickall* ]
+║│↭_*   [ *${prefix}clearall* ]
+
+║│
+
+║| ↭_*  *[Meu criador]*
+║https://wa.me/+553195703379
+╰───────────`;
   sendButtonMsg(Menueu, `By LorranX ©`,[{
     buttonId: `${prefix}owner`,
     buttonText: {
@@ -481,12 +569,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
 ║│↭_*   [ *${prefix}tomp3* ] 
 ║│↭_*   [ *${prefix}adminmenu* ] 
 ║│↭_*   [ *${prefix}ownermenu* ]
-║│↭_*   [ *${prefix}slowmo* ] 
-║│↭_*   [ *${prefix}rapido* ] 
-║│↭_*   [ *${prefix}esquilo* ] 
-║│↭_*   [ *${prefix}engrossar* ] 
-║│↭_*   [ *${prefix}bass* ] 
-║│↭_*   [ *${prefix}estourar* ] 
+║│↭_*   [ *${prefix}modmenu* ]
 ║│ 
 
 ║│
@@ -520,42 +603,42 @@ Versão atual: 1.0.5
       }
       if (listbut == 'Admin Menu' || command == `${prefix}start`) {
         var MenuAdmin = `
-        ╔═══════════════════
-        ║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
-        ╠═══════════════════
-        ║│ *↭ Sobre o Bot*
-        ║ *Bateria* : ${battery.persen}
-        ║ *charger* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
-        ║ *Marca do celular* : ${LorranX.user.phone.device_manufacturer}
-        ║ *Nome do servidor* : ${LorranX.browserDescription[0]}
-        ║ *Servidor* : ${LorranX.browserDescription[1]}
-        ║ *Versão* : ${LorranX.browserDescription[2]}
-        ║ *Modelo do celular* : ${LorranX.user.phone.device_model}
-        └ *Versão do Whatsapp* : ${LorranX.user.phone.wa_version}
+╔═══════════════════
+║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
+╠═══════════════════
+║│ *↭ Sobre o Bot*
+║ *Bateria* : ${battery.persen}
+║ *charger* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
+║ *Marca do celular* : ${LorranX.user.phone.device_manufacturer}
+║ *Nome do servidor* : ${LorranX.browserDescription[0]}
+║ *Servidor* : ${LorranX.browserDescription[1]}
+║ *Versão* : ${LorranX.browserDescription[2]}
+║ *Modelo do celular* : ${LorranX.user.phone.device_model}
+└ *Versão do Whatsapp* : ${LorranX.user.phone.wa_version}
         
-        *↭  ${HORARIOS} ${pushname}*
+*↭  ${HORARIOS} ${pushname}*
         
-        ║╭──❉ * ⛤𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨 𝙖𝙙𝙢𝙞𝙣⛤ * ❉──
+║╭──❉ * ⛤𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨 𝙖𝙙𝙢𝙞𝙣⛤ * ❉──
         
-        ║│↭_*   [ *${prefix}leave* ] 
-        ║│↭_*   [ *${prefix}setdesc* ]
-        ║│↭_*   [ *${prefix}setname* ] 
-        ║│↭_*   [ *${prefix}promote* ] 
-        ║│↭_*   [ *${prefix}demote* ]
-        ║│↭_*   [ *${prefix}hidetag* ]
-        ║│↭_*   [ *${prefix}notif* ]
-        ║│↭_*   [ *${prefix}tagimg* ]
-        ║│↭_*   [ *${prefix}tagimg* ]
-        ║│↭_*   [ *${prefix}tagsticker* ]
-        ║│↭_*   [ *${prefix}kick* ] 
-        ║│↭_*   [ *${prefix}add* ] 
-        ║│↭ _*  [ *${prefix}linkgp* ] 
+║│↭_*   [ *${prefix}leave* ] 
+║│↭_*   [ *${prefix}setdesc* ]
+║│↭_*   [ *${prefix}setname* ] 
+║│↭_*   [ *${prefix}promote* ] 
+║│↭_*   [ *${prefix}demote* ]
+║│↭_*   [ *${prefix}hidetag* ]
+║│↭_*   [ *${prefix}notif* ]
+║│↭_*   [ *${prefix}tagimg* ]
+║│↭_*   [ *${prefix}tagimg* ]
+║│↭_*   [ *${prefix}tagsticker* ]
+║│↭_*   [ *${prefix}kick* ] 
+║│↭_*   [ *${prefix}add* ] 
+║│↭ _*  [ *${prefix}linkgp* ] 
         
-        ║│
+║│
         
-        ║| ↭_*  *[Meu criador]*
-        ║https://wa.me/+553195703379
-        ╰───────────`;
+║| ↭_*  *[Meu criador]*
+║https://wa.me/+553195703379
+╰───────────`;
 sendButtonMsg(MenuAdmin, `By LorranX ©`,[{
   buttonId: `${prefix}owner`,
   buttonText: {
@@ -652,6 +735,34 @@ break;
                 }
               }, {})
               LorranX.relayWAMessage(meumenu, {waitForAck: false})
+              addFilter(from)
+              break;
+              case 'modmenu':
+              var modficadoresmenu = LorranX.prepareMessageFromContent(from, {
+                "listMessage" :{
+                  "title": `${HORARIOS} ${pushname}\n\nEsse é o menu de modificadores, aqui você pode modificar seus videos e audios,`,
+                  "description": `Estou funcionando a \n${runtime(process.uptime())}`,
+                  "buttonText": "Opções",
+                  "listType": "SINGLE_SELECT",
+                  "sections": [{
+                    "title": `${DATACOMPLETA()}`,
+                    "rows": [{
+                        "title": "Modificadores de Audio ",
+                        "rowId": "0",
+                        "description": ""
+                      },{
+                        "title": "Modificadores de Video",
+                        "rowId": "1",
+                        "description": ""
+                      },{
+                        "title": "ChangeLog",
+                        "rowId": "1",
+                        "description": ""
+                      }]
+                  }]
+                }
+              }, {})
+              LorranX.relayWAMessage(modficadoresmenu, {waitForAck: false})
               addFilter(from)
               break;
         case 'owner':
