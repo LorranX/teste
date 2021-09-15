@@ -592,6 +592,28 @@ break;
           LorranX.sendMessage(from, {display: "Dono do Bot", vcard: vacrd}, contact, {quoted: mek})
           addFilter(from)
           break;
+          case 'tts':
+                addFilter(from)
+                    if (args.length < 1) return LorranX.sendMessage(from, `Você deve usar o comando da forma correta:\n${prefix}tts (língua) (texto)\nExemplo: ${prefix}tts pt bom dia\n\nUse: ${prefix}ts para listar todas as línguas`, text, {
+                        quoted: mek
+                    })
+                    const gtts = require('./lib/gtts')(args[0])
+                    if (args.length < 2) return LorranX.sendMessage(from, 'Cadê o texto?', text, {
+                        quoted: mek
+                    })
+                    dtt = body.slice(8)
+                    ranm = getRandom('.mp3')
+                    dtt.length > 800 ?
+                        reply('Grande pa carai saporra') :
+                        gtts.save(ranm, dtt, function() {
+                            LorranX.sendMessage(from, fs.readFileSync(ranm), audio, {
+                                quoted: mek,
+                                mimetype: 'audio/mp4',
+                                ptt: true
+                            })
+                            fs.unlinkSync(media)
+                        })
+                    break;
         case 'github':
           LorranX.sendMessage(from, "Infelizmente ainda nao estou pronto, assim que possivel meu dono dispobilizara este script", text)
           break;
