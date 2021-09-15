@@ -464,7 +464,7 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
 Ultima atualização: 14/09/2021 as 20:21
-Ultimas alteraçoes: Script mais organizado, adicionados modificadores de video, adicionadas novas funções owner
+Ultimas alteraçoes: Script mais organizado, adicionado notif como alternativa ao hide tag
 Versão atual: 1.0.5
 % de conclusão: 35%
 `
@@ -495,6 +495,7 @@ Versão atual: 1.0.5
         ║│↭_*   [ *${prefix}promote* ] 
         ║│↭_*   [ *${prefix}demote* ]
         ║│↭_*   [ *${prefix}hidetag* ]
+        ║│↭_*   [ *${prefix}notif* ]
         ║│↭_*   [ *${prefix}tagimg* ]
         ║│↭_*   [ *${prefix}tagimg* ]
         ║│↭_*   [ *${prefix}tagsticker* ]
@@ -890,8 +891,8 @@ break
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
           if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
           try {
-            const linkgece = await LorranX.groupInviteCode(from)
-            reply(`Link do grupo ${groupName}\n http://whatsapp.com/${linkgece}`)
+            const linkdogrupo = await LorranX.groupInviteCode(from)
+            reply(`Link do grupo ${groupName}\nhttp://chat.whatsapp.com/${linkdogrupo}`)
           } catch (e) {
             reply("link invalido")
           }
@@ -1188,7 +1189,7 @@ break;
               addFilter(from)
               break;
         //MODIFICAR AUDIO
-				case 'slowmo':
+				  case 'slowmo':
           reply("Calmai macaco 🦧");
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
@@ -1201,267 +1202,267 @@ break;
 				fs.unlinkSync(ran)
 				})
         addFilter(from)
-				break;
-        case 'acelerar':  
+				  break;
+          case 'acelerar':  
         reply("Calmai macaco 🦧");
-if (!isQuotedAudio) return enviar('Marque um áudio')
-encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-media = await LorranX.downloadAndSaveMediaMessage(encmedia)
-ran = getRandom('.mp3')
-exec(`ffmpeg -i ${media} -filter:a atempo=1.06,asetrate=44100*1.25 ${ran}`, (err, stderr, stdout) => {
-fs.unlinkSync(media)
-if (err) return enviar('Error!')
-hah = fs.readFileSync(ran)
-LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
-fs.unlinkSync(ran)
-})
-addFilter(from)
-break; 
-				case 'esquilo':
-          reply("Calmai macaco 🦧");
-					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-					media = await LorranX.downloadAndSaveMediaMessage(encmedia)
-					ran = getRandom('.mp3')
-					exec(`ffmpeg -i ${media} -filter:a "atempo=0.5,asetrate=65100" ${ran}`, (err, stderr, stdout) => {
-						fs.unlinkSync(media)
-						if (err) return reply('Error!')
-						hah = fs.readFileSync(ran)
-						LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
-						fs.unlinkSync(ran)
-					})
-          addFilter(from)
-				break;
-				case 'engrossar':
-          reply("Calmai macaco 🦧");
-					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-					media = await LorranX.downloadAndSaveMediaMessage(encmedia)
-					ran = getRandom('.mp3')
-					exec(`ffmpeg -i ${media} -filter:a "atempo=1.6,asetrate=22100" ${ran}`, (err, stderr, stdout) => {
-						fs.unlinkSync(media)
-						if (err) return reply('Error!')
-						hah = fs.readFileSync(ran)
-						LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
-						fs.unlinkSync(ran)
-					})
-          addFilter(from)
-				break;
-				case 'bass':   
+        if (!isQuotedAudio) return enviar('Marque um áudio')
+        encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+        media = await LorranX.downloadAndSaveMediaMessage(encmedia)
+        ran = getRandom('.mp3')
+        exec(`ffmpeg -i ${media} -filter:a atempo=1.06,asetrate=44100*1.25 ${ran}`, (err, stderr, stdout) => {
+        fs.unlinkSync(media)
+        if (err) return enviar('Error!')
+        hah = fs.readFileSync(ran)
+        LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+        fs.unlinkSync(ran)
+        })
+        addFilter(from)
+          break; 
+				  case 'esquilo':
+        reply("Calmai macaco 🦧");
+				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
+				ran = getRandom('.mp3')
+				exec(`ffmpeg -i ${media} -filter:a "atempo=0.5,asetrate=65100" ${ran}`, (err, stderr, stdout) => {
+				fs.unlinkSync(media)
+				if (err) return reply('Error!')
+				hah = fs.readFileSync(ran)
+				LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+				fs.unlinkSync(ran)
+				})
+        addFilter(from)
+				  break;
+				  case 'engrossar':
+        reply("Calmai macaco 🦧");
+				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
+				ran = getRandom('.mp3')
+				exec(`ffmpeg -i ${media} -filter:a "atempo=1.6,asetrate=22100" ${ran}`, (err, stderr, stdout) => {
+				fs.unlinkSync(media)
+				if (err) return reply('Error!')
+				hah = fs.readFileSync(ran)
+				LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+				fs.unlinkSync(ran)
+				})
+        addFilter(from)
+				  break;
+				  case 'bass':   
         reply("Calmai macaco 🦧");              
-					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-					media = await LorranX.downloadAndSaveMediaMessage(encmedia)
-					ran = getRandom('.mp3')
-					exec(`ffmpeg -i ${media} -af equalizer=f=94:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
-						fs.unlinkSync(media)
-						if (err) return reply('Error!')
-						hah = fs.readFileSync(ran)
-						LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
-						fs.unlinkSync(ran)
-					})
-          addFilter(from)
-				break;
-case 'estourar':       
-if (!isQuotedAudio) return reply('Marque um áudio')
-reply("Calmai macaco 🦧");
-encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-media = await LorranX.downloadAndSaveMediaMessage(encmedia)
-ran = getRandom('.mp3')
-exec(`ffmpeg -i ${media} -af equalizer=f=90:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
-fs.unlinkSync(media)
-if (err) return enviar('Error!')
-hah = fs.readFileSync(ran)
-LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
-fs.unlinkSync(ran)
-})
-addFilter(from)
-break;
-case "reverse":
+				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
+				ran = getRandom('.mp3')
+				exec(`ffmpeg -i ${media} -af equalizer=f=94:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
+				fs.unlinkSync(media)
+				if (err) return reply('Error!')
+				hah = fs.readFileSync(ran)
+				LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+				fs.unlinkSync(ran)
+				})
+        addFilter(from)
+				  break;
+          case 'estourar':       
+        if (!isQuotedAudio) return reply('Marque um áudio')
+        reply("Calmai macaco 🦧");
+        encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+        media = await LorranX.downloadAndSaveMediaMessage(encmedia)
+        ran = getRandom('.mp3')
+        exec(`ffmpeg -i ${media} -af equalizer=f=90:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
+        fs.unlinkSync(media)
+        if (err) return enviar('Error!')
+        hah = fs.readFileSync(ran)
+        LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+        fs.unlinkSync(ran)
+        })
+        addFilter(from)
+          break;
+          case "reverse":
         if (!isQuotedAudio) return reply("Pra usar esse comando c tem que marcar um audio");
         reply("Calmai macaco 🦧");
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
-          .message.extendedTextMessage.contextInfo;
+        .message.extendedTextMessage.contextInfo;
         media = await LorranX.downloadAndSaveMediaMessage(encmedia);
         ran = getRandom(".mp3");
         exec(`ffmpeg -i ${media} -vf reverse -af areverse ${ran}`, (err) => {
-          fs.unlinkSync(media);
-          if (err) return reply(`Error!`);
-          hah = fs.readFileSync(ran);
-          LorranX.sendMessage(from, hah, audio, {mimetype: "audio/mp4", ptt:true, quoted: mek,});
-          fs.unlinkSync(ran);
+        fs.unlinkSync(media);
+        if (err) return reply(`Error!`);
+        hah = fs.readFileSync(ran);
+        LorranX.sendMessage(from, hah, audio, {mimetype: "audio/mp4", ptt:true, quoted: mek,});
+        fs.unlinkSync(ran);
         });
         addFilter(from)
-        break;
+          break;
         //END MODIFICAR AUDIO
         //MODIFICAR VIDEO
-        case "reversev":
+          case "reversev":
         if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
         reply("Calmai macaco 🦧");
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
-          .message.extendedTextMessage.contextInfo;
+        .message.extendedTextMessage.contextInfo;
         media = await LorranX.downloadAndSaveMediaMessage(encmedia);
         ran = getRandom(".mp4");
         exec(`ffmpeg -i ${media} -vf reverse -af areverse ${ran}`, (err) => {
+        fs.unlinkSync(media);
+        if (err) return reply(`Error!`);
+        buffer453 = fs.readFileSync(ran);
+        LorranX.sendMessage(from, buffer453, video, {
+        mimetype: "video/mp4",
+        quoted: mek,
+        });
+        fs.unlinkSync(ran);
+        });
+        addFilter(from)
+          break;
+          case "acelerarv":
+        if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
+        reply("Calmai macaco 🦧");
+        encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
+        .message.extendedTextMessage.contextInfo;
+        media = await LorranX.downloadAndSaveMediaMessage(encmedia);
+        ran = getRandom(".mp4");
+        exec(
+        `ffmpeg -i ${media} -filter_complex "[0:v]setpts=0.5*PTS[v];[0:a]atempo=2[a]" -map "[v]" -map "[a]" ${ran}`,
+        (err) => {
+        fs.unlinkSync(media);
+        if (err) return reply(`Error!`);
+        buffer453 = fs.readFileSync(ran);
+        LorranX.sendMessage(from, buffer453, video, {
+        mimetype: "video/mp4",
+        quoted: mek,
+        });
+        fs.unlinkSync(ran);
+        }
+        );
+        addFilter(from)
+            break;
+            case "slowv":
+          if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
+          reply("Calmai macaco 🦧");
+          encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
+          .message.extendedTextMessage.contextInfo;
+          media = await LorranX.downloadAndSaveMediaMessage(encmedia);
+          ran = getRandom(".mp4");
+          exec(
+          `ffmpeg -i ${media} -filter_complex "[0:v]setpts=2*PTS[v];[0:a]atempo=0.5[a]" -map "[v]" -map "[a]" ${ran}`,
+          (err) => {
           fs.unlinkSync(media);
           if (err) return reply(`Error!`);
           buffer453 = fs.readFileSync(ran);
           LorranX.sendMessage(from, buffer453, video, {
-            mimetype: "video/mp4",
-            quoted: mek,
+          mimetype: "video/mp4",
+          quoted: mek,
           });
           fs.unlinkSync(ran);
-        });
-        addFilter(from)
-        break;
-        case "acelerarv":
-        if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
-        reply("Calmai macaco 🦧");
-        encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
-          .message.extendedTextMessage.contextInfo;
-        media = await LorranX.downloadAndSaveMediaMessage(encmedia);
-        ran = getRandom(".mp4");
-        exec(
-          `ffmpeg -i ${media} -filter_complex "[0:v]setpts=0.5*PTS[v];[0:a]atempo=2[a]" -map "[v]" -map "[a]" ${ran}`,
-          (err) => {
-            fs.unlinkSync(media);
-            if (err) return reply(`Error!`);
-            buffer453 = fs.readFileSync(ran);
-            LorranX.sendMessage(from, buffer453, video, {
-              mimetype: "video/mp4",
-              quoted: mek,
-            });
-            fs.unlinkSync(ran);
           }
-        );
-        addFilter(from)
-        break;
-        case "slowv":
-          if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
-          reply("Calmai macaco 🦧");
-          encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
-            .message.extendedTextMessage.contextInfo;
-          media = await LorranX.downloadAndSaveMediaMessage(encmedia);
-          ran = getRandom(".mp4");
-          exec(
-            `ffmpeg -i ${media} -filter_complex "[0:v]setpts=2*PTS[v];[0:a]atempo=0.5[a]" -map "[v]" -map "[a]" ${ran}`,
-            (err) => {
-              fs.unlinkSync(media);
-              if (err) return reply(`Error!`);
-              buffer453 = fs.readFileSync(ran);
-              LorranX.sendMessage(from, buffer453, video, {
-                mimetype: "video/mp4",
-                quoted: mek,
-              });
-              fs.unlinkSync(ran);
-            }
           );
           addFilter(from)
-          break;
+            break;
         //END MODIFICADORES VIDEO
-        case 'lirik':
+            case 'lirik':
           if(!q) return reply('lagu apa?')
           let song = await hx.lirik(q);
           sendMediaURL(song.thumb, song.lirik)
-          break;
-        case 'jadibot':
+            break;
+            case 'jadibot':
           if (mek.key.fromMe) return reply("tidak bisa menjadi bot dalam bot")
           jadibot(reply, LorranX, from)
-          break;
-        case 'stopjadibot':
+            break;
+            case 'stopjadibot':
           if (mek.key.fromMe) return reply("```khusus Owner```")
           stopjadibot(reply)
-          break;
-        case 'listjadibot':
+            break;
+            case 'listjadibot':
           let teks = "*[ LIST BOT ]*"
           for(let i of listjadibot) {
           teks += `*Nomor* : ${i.jid.split('@')[0]}*Nama* : ${i.name}\n*Device* : ${i.phone.device_manufacturer}\n*Model* : ${i.phone.device_model}\n\n`
           }
           reply(teks)
-          break;
-        case 'suit':
+            break;
+            case 'suit':
           sendButtonMsg(`pilih salah satu`,``,[{
-            buttonId:`${prefix}playsuit batu`,
-            buttonText: {
-              displayText: `Pedra (🗿)`
-            },
-            type: 1
+          buttonId:`${prefix}playsuit batu`,
+          buttonText: {
+          displayText: `Pedra (🗿)`
+          },
+          type: 1
           },{
-            buttonId: `${prefix}playsuit kertas`,
-            buttonText: {
-              displayText: 'Papel (📄)'
-            },
-            type: 1
+          buttonId: `${prefix}playsuit kertas`,
+          buttonText: {
+          displayText: 'Papel (📄)'
+          },
+          type: 1
           },{
-            buttonId: `${prefix}playsuit gunting`,
-            buttonText: {
-              displayText: 'Tesoura (✂️)'
-            },
-            type: 1
+          buttonId: `${prefix}playsuit gunting`,
+          buttonText: {
+          displayText: 'Tesoura (✂️)'
+          },
+          type: 1
           }])
-          break;
-        case 'playsuit':
+            break;
+            case 'playsuit':
           if (args.length < 1) return reply("pilih batu/gunting/kertas")
           if (args[0] === "gunting") {
-            gunting = [
-              "Kamu *Gunting*\nAku *Kertas*\nKamu Menang 😔",
-              "Kamu *Gunting*\nAku *Batu*\nKamu Kalah 🙂",
-              "Kamu *Gunting*\nAku *Gunting*\nKita Seri 😏"
-              ]
-            gun = gunting[Math.floor(Math.random() * gunting.length)]
-            reply(gun)
+          gunting = [
+          "Kamu *Gunting*\nAku *Kertas*\nKamu Menang 😔",
+          "Kamu *Gunting*\nAku *Batu*\nKamu Kalah 🙂",
+          "Kamu *Gunting*\nAku *Gunting*\nKita Seri 😏"
+          ]
+          gun = gunting[Math.floor(Math.random() * gunting.length)]
+          reply(gun)
           } else if (args[0] === 'kertas') {
-            ker = [
-              "Kamu *Kertas*\nAku *Batu*\nKamu Menang 😔",
-              "Kamu *Kertas*\nAku *Gunting*\nKamu Kalah 🙂",
-              "Kamu *Kertas*\nAku *Kertas*\nKita Seri 😏"
-              ]
-            kertas = ker[Math.floor(Math.random() * ker.length)]
-          	reply(kertas)
+          ker = [
+          "Kamu *Kertas*\nAku *Batu*\nKamu Menang 😔",
+          "Kamu *Kertas*\nAku *Gunting*\nKamu Kalah 🙂",
+          "Kamu *Kertas*\nAku *Kertas*\nKita Seri 😏"
+          ]
+          kertas = ker[Math.floor(Math.random() * ker.length)]
+          reply(kertas)
           } else if (args[0] === 'batu') {
-            bat = [
-              "Kamu *Batu*\nAku *Gunting*\nKamu Menang ??",
-              "Kamu *Batu*\nAku *Kertas*\nKamu Kalah 🙂",
-              "Kamu *Batu*\nAku *Batu*\nKita Seri 😏"
-              ]
-            batu = bat[Math.floor(Math.random() * bat.length)]
-            reply(batu)
+          bat = [
+          "Kamu *Batu*\nAku *Gunting*\nKamu Menang ??",
+          "Kamu *Batu*\nAku *Kertas*\nKamu Kalah 🙂",
+          "Kamu *Batu*\nAku *Batu*\nKita Seri 😏"
+          ]
+          batu = bat[Math.floor(Math.random() * bat.length)]
+          reply(batu)
           } else {
-            reply('Pilih gunting/batu/kertas')
+          reply('Pilih gunting/batu/kertas')
           }
-          break; 
-        case 'slot':
+            break; 
+            case 'slot':
           isiSlot = ["🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🫐","🍈","🍒","🍑","🥭","🍍"];
           slotBoard = ["","","","","","","","",""];
           for (let i = 0; i < slotBoard.length; i++) {
-            itemSlot = isiSlot[Math.floor(Math.random() * isiSlot.length)];
-            slotBoard[i] = itemSlot
+          itemSlot = isiSlot[Math.floor(Math.random() * isiSlot.length)];
+          slotBoard[i] = itemSlot
           }
           if (slotBoard[1] == slotBoard[4] && slotBoard[4] == slotBoard[7] && slotBoard[7] == slotBoard[1]) {
-            reply(`*[ MENANG ]*\n\n ${slotBoard[0]} : ${slotBoard[3]} : ${slotBoard[6]}\n ${slotBoard[1]} : ${slotBoard[4]} : ${slotBoard[7]} <===\n ${slotBoard[2]} : ${slotBoard[5]} : ${slotBoard[8]} \n\n*[ SLOT ]*\nketerangan: jika anda mendapatkan 3 baris buah yang sama maka anda menang\ncontoh: 🍒 : 🍒 : 🍒 <===`)
+          reply(`*[ MENANG ]*\n\n ${slotBoard[0]} : ${slotBoard[3]} : ${slotBoard[6]}\n ${slotBoard[1]} : ${slotBoard[4]} : ${slotBoard[7]} <===\n ${slotBoard[2]} : ${slotBoard[5]} : ${slotBoard[8]} \n\n*[ SLOT ]*\nketerangan: jika anda mendapatkan 3 baris buah yang sama maka anda menang\ncontoh: 🍒 : 🍒 : 🍒 <===`)
           } else {
           reply(`*[ KALAH ]*\n\n ${slotBoard[0]} : ${slotBoard[3]} : ${slotBoard[6]}\n ${slotBoard[1]} : ${slotBoard[4]} : ${slotBoard[7]} <===\n ${slotBoard[2]} : ${slotBoard[5]} : ${slotBoard[8]} \n\n*[ SLOT ]*\nketerangan: jika anda mendapatkan 3 baris buah yang sama maka anda menang\ncontoh: 🍒 : 🍒 : 🍒 <===`)
           }
-          break;
-        case 'caripesan':
+            break;
+            case 'caripesan':
           if (args.length <1) return reply(`query salah\ncontoh ${prefix}caripesan Hi|5`)
           if (q.includes("|")) {
-            try {
-              jum = q.split("|")[1]
-              if (jum > 10) return reply("jumblah terlalu banyak\nminimal: 10")
-              to = parseInt(jum) + 1
-              res = await LorranX.searchMessages(q.split(0), from, to,1)
-              if (res.messages.length < 2) return reply("pesan tidak di temukan")
-              if (res.messages.length < parseInt(to)) reply(`hanya di temukan ${res.messages.length - 1} pesan`)
-              for (let i = 1; i < res.messages.length; i++) {
-                if (res.messages[i].message) {
-                  LorranX.sendMessage(from, "nih pesan nya!!", text, {quoted: res.messages[i]})
-                }
-              }
-            } catch (e) {
-              reply("maaf error:)\ncoba lagi")
-            }
-          } else {
-            return(`maaf masukan query yang benar\ncontoh: ${prefix}${command} halo|5`)
+          try {
+          jum = q.split("|")[1]
+          if (jum > 10) return reply("jumblah terlalu banyak\nminimal: 10")
+          to = parseInt(jum) + 1
+          res = await LorranX.searchMessages(q.split(0), from, to,1)
+          if (res.messages.length < 2) return reply("pesan tidak di temukan")
+          if (res.messages.length < parseInt(to)) reply(`hanya di temukan ${res.messages.length - 1} pesan`)
+          for (let i = 1; i < res.messages.length; i++) {
+          if (res.messages[i].message) {
+          LorranX.sendMessage(from, "nih pesan nya!!", text, {quoted: res.messages[i]})
           }
-          break;
+          }
+          } catch (e) {
+          reply("maaf error:)\ncoba lagi")
+          }
+          } else {
+          return(`maaf masukan query yang benar\ncontoh: ${prefix}${command} halo|5`)
+          }
+            break;
         //PARA BOTÕES
 
         //GARBAGE
