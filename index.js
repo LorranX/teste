@@ -398,7 +398,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
         return reply(ff1)}  
 
         //COMANDOS DE LISTA
-      if (listbut == 'Owner Menu' || command == `${prefix}start`) {
+        if (listbut == 'Owner Menu' || command == `${prefix}start`) {
           var Menueu = `
           ╔═══════════════════
           ║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
@@ -444,8 +444,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
       },
       type: 1
   }])
-        }
-
+}
       if (listbut == 'Menu' || command == `${prefix}start`) {
         var Menu = `
 ╔═══════════════════
@@ -631,7 +630,7 @@ break;
               LorranX.relayWAMessage(menuadmin, {waitForAck: false})
               addFilter(from)
               break;
-              case 'owneradmin':
+              case 'ownermenu':
               var meumenu = LorranX.prepareMessageFromContent(from, {
                 "listMessage" :{
                   "title": `${HORARIOS} ${pushname}\n\nAs funções nesse menu so podem ser usadas pelo meu papai\nainda não tenho muitas funções mas meu dono me atualiza diariamente`,
