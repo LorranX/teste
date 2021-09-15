@@ -592,7 +592,7 @@ break;
           LorranX.sendMessage(from, {display: "Dono do Bot", vcard: vacrd}, contact, {quoted: mek})
           addFilter(from)
           break;
-          case 'tts':
+          case 'gtts':
                 addFilter(from)
                     if (args.length < 1) return LorranX.sendMessage(from, `Você deve usar o comando da forma correta:\n${prefix}tts (língua) (texto)\nExemplo: ${prefix}tts pt bom dia\n\nUse: ${prefix}ts para listar todas as línguas`, text, {
                         quoted: mek
