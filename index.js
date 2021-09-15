@@ -652,7 +652,7 @@ break;
                   }]
                 }
               }, {})
-              LorranX.relayWAMessage(meeumenu, {waitForAck: false})
+              LorranX.relayWAMessage(meumenu, {waitForAck: false})
               addFilter(from)
               break;
         case 'owner':
