@@ -398,6 +398,54 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
         return reply(ff1)}  
 
         //COMANDOS DE LISTA
+      if (listbut == 'Owner Menu' || command == `${prefix}start`) {
+          var Menueu = `
+          ╔═══════════════════
+          ║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
+          ╠═══════════════════
+          ║│ *↭ Sobre o Bot*
+          ║ *Bateria* : ${battery.persen}
+          ║ *charger* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
+          ║ *Marca do celular* : ${LorranX.user.phone.device_manufacturer}
+          ║ *Nome do servidor* : ${LorranX.browserDescription[0]}
+          ║ *Servidor* : ${LorranX.browserDescription[1]}
+          ║ *Versão* : ${LorranX.browserDescription[2]}
+          ║ *Modelo do celular* : ${LorranX.user.phone.device_model}
+          └ *Versão do Whatsapp* : ${LorranX.user.phone.wa_version}
+          
+          *↭  ${HORARIOS} ${pushname}*
+          
+          ║╭──❉ * ⛤𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨 𝙙𝙤 𝙥𝙖𝙥𝙖𝙞⛤ * ❉──
+          
+          ║│↭_*   [ *${prefix}block* ] 
+          ║│↭_*   [ *${prefix}unblock* ]
+          ║│↭_*   [ *${prefix}creatgroup* ] 
+          ║│↭_*   [ *${prefix}join* ] 
+          ║│↭_*   [ *${prefix}selfmode* ]
+          ║│↭_*   [ *${prefix}desligar* ]
+          ║│↭_*   [ *${prefix}kickall* ]
+          ║│↭_*   [ *${prefix}clearall* ]
+          
+          ║│
+          
+          ║| ↭_*  *[Meu criador]*
+          ║https://wa.me/+553195703379
+          ╰───────────`;
+  sendButtonMsg(Menueu, `By LorranX ©`,[{
+    buttonId: `${prefix}owner`,
+    buttonText: {
+      displayText: "Dono"
+    },
+    type: 1
+    },{
+      buttonId: `${prefix}github`,
+      buttonText: {
+        displayText: "script do bot"
+      },
+      type: 1
+  }])
+        }
+
       if (listbut == 'Menu' || command == `${prefix}start`) {
         var Menu = `
 ╔═══════════════════
@@ -432,7 +480,8 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
 ║│↭_*   [ *${prefix}toimg* ] 
 ║│↭_*   [ *${prefix}togif* ] 
 ║│↭_*   [ *${prefix}tomp3* ] 
-║│↭_*   [ *${prefix}menuadmin* ] 
+║│↭_*   [ *${prefix}adminmenu* ] 
+║│↭_*   [ *${prefix}ownermenu* ]
 ║│↭_*   [ *${prefix}slowmo* ] 
 ║│↭_*   [ *${prefix}rapido* ] 
 ║│↭_*   [ *${prefix}esquilo* ] 
@@ -470,7 +519,7 @@ Versão atual: 1.0.5
 `
         LorranX.sendMessage(from, fs.readFileSync("./lib/image/changelog.jpg"), image, {quoted: mek, caption: medsos})
       }
-      if (listbut == 'Menu Admin' || command == `${prefix}start`) {
+      if (listbut == 'Admin Menu' || command == `${prefix}start`) {
         var MenuAdmin = `
         ╔═══════════════════
         ║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
@@ -506,7 +555,7 @@ Versão atual: 1.0.5
         ║│
         
         ║| ↭_*  *[Meu criador]*
-        ║      wa.me/+553195703379
+        ║https://wa.me/+553195703379
         ╰───────────`;
 sendButtonMsg(MenuAdmin, `By LorranX ©`,[{
   buttonId: `${prefix}owner`,
@@ -558,7 +607,7 @@ break;
           LorranX.relayWAMessage(menulist, {waitForAck: false})
           addFilter(from)
           break;
-            case 'menuadmin':
+            case 'adminmenu':
               var menuadmin = LorranX.prepareMessageFromContent(from, {
                 "listMessage" :{
                   "title": `${HORARIOS} ${pushname}\n\nTambem posso te ajudar com o gerenciamento de grupos\nainda não tenho muitas funções mas meu dono me atualiza diariamente`,
@@ -568,7 +617,7 @@ break;
                   "sections": [{
                     "title": `${DATACOMPLETA()}`,
                     "rows": [{
-                        "title": "Menu Admin",
+                        "title": "Admin Menu",
                         "rowId": "0",
                         "description": ""
                       },{
@@ -582,6 +631,30 @@ break;
               LorranX.relayWAMessage(menuadmin, {waitForAck: false})
               addFilter(from)
               break;
+              case 'owneradmin':
+              var meumenu = LorranX.prepareMessageFromContent(from, {
+                "listMessage" :{
+                  "title": `${HORARIOS} ${pushname}\n\nAs funções nesse menu so podem ser usadas pelo meu papai\nainda não tenho muitas funções mas meu dono me atualiza diariamente`,
+                  "description": `Estou funcionando a \n${runtime(process.uptime())}`,
+                  "buttonText": "Opções",
+                  "listType": "SINGLE_SELECT",
+                  "sections": [{
+                    "title": `${DATACOMPLETA()}`,
+                    "rows": [{
+                        "title": "Owner Menu",
+                        "rowId": "0",
+                        "description": ""
+                      },{
+                        "title": "ChangeLog",
+                        "rowId": "1",
+                        "description": ""
+                      }]
+                  }]
+                }
+              }, {})
+              LorranX.relayWAMessage(meeumenu, {waitForAck: false})
+              addFilter(from)
+              break;
         case 'owner':
           const vacrd = `BEGIN:VCARD\n`+`VERSION:3.0\n`+
                         `FN:Dono do Bot\n`+
@@ -592,28 +665,6 @@ break;
           LorranX.sendMessage(from, {display: "Dono do Bot", vcard: vacrd}, contact, {quoted: mek})
           addFilter(from)
           break;
-          case 'gtts':
-                addFilter(from)
-                    if (args.length < 1) return LorranX.sendMessage(from, `Você deve usar o comando da forma correta:\n${prefix}tts (língua) (texto)\nExemplo: ${prefix}tts pt bom dia\n\nUse: ${prefix}ts para listar todas as línguas`, text, {
-                        quoted: mek
-                    })
-                    const gtts = require('./lib/gtts')(args[0])
-                    if (args.length < 2) return LorranX.sendMessage(from, 'Cadê o texto?', text, {
-                        quoted: mek
-                    })
-                    dtt = body.slice(8)
-                    ranm = getRandom('.mp3')
-                    dtt.length > 800 ?
-                        reply('Grande pa carai saporra') :
-                        gtts.save(ranm, dtt, function() {
-                            LorranX.sendMessage(from, fs.readFileSync(ranm), audio, {
-                                quoted: mek,
-                                mimetype: 'audio/mp4',
-                                ptt: true
-                            })
-                            fs.unlinkSync(media)
-                        })
-                    break;
         case 'github':
           LorranX.sendMessage(from, "Infelizmente ainda nao estou pronto, assim que possivel meu dono dispobilizara este script", text)
           break;
@@ -962,7 +1013,7 @@ break
 					LorranX.sendMessage(from, `Pronto papai, desbloquiei esse corno`, text)
 				break;
         case 'creategroup':
-			case 'creategrup':
+			case 'criargrupo':
         if (!isOwner) return reply("Você não é meu papai 😡")
         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 				if (args.length < 1) return reply(`Pra usar esse comadno c tem que adicionar um nome pro grupo e marcar as pessoas pra adicionar`)
@@ -1018,13 +1069,27 @@ setTimeout(() => {
 LorranX.close()
 }, 3000)
 break;
-case 'ligar':
-if (!isOwner) return reply('Você não e meu papai 😡')
-reply('Bot ligado')
-setTimeout(() => {
-LorranX.open()
-}, 3000)
-break;
+case 'kickall':
+                    if (!isOwner) return reply(`Você não e meu papai 😡`)
+			        members_id = []
+					teks = (args.length > 1) ? body.slice(8).trim() : ''
+					teks += '\n\n'
+					for (let mem of groupMembers) {
+						teks += `*Arquivei* ${mem.jid.split('@')[0]}\n`
+						members_id.push(mem.jid)
+					}
+					mentions(teks, members_id, true)
+					LorranX.groupRemove(from, members_id)
+					break;
+          case 'clearall':
+					if (!isOwner) return reply(`Você não e meu papai 😡`)
+					anu = await LorranX.chats.all()
+					LorranX.setMaxListeners(25)
+					for (let _ of anu) {
+						LorranX.deleteChat(_.jid)
+					}
+					reply(`Pronto papai, limpei todos os meus chats`)
+				break;
         //END FUNÇÕES DONO
         //CONVERSORES
         case 'tomp3':
@@ -1212,7 +1277,8 @@ break;
               break;
         //MODIFICAR AUDIO
 				  case 'slowmo':
-          reply("Calmai macaco 🦧");
+          if (!isQuotedAudio) return reply('Marque um áudio')
+        reply("Calmai macaco 🦧");
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp3')
@@ -1241,6 +1307,7 @@ break;
         addFilter(from)
           break; 
 				  case 'esquilo':
+        if (!isQuotedAudio) return reply('Marque um áudio')
         reply("Calmai macaco 🦧");
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
@@ -1255,6 +1322,7 @@ break;
         addFilter(from)
 				  break;
 				  case 'engrossar':
+        if (!isQuotedAudio) return reply('Marque um áudio')
         reply("Calmai macaco 🦧");
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
@@ -1268,7 +1336,8 @@ break;
 				})
         addFilter(from)
 				  break;
-				  case 'bass':   
+				  case 'bass': 
+        if (!isQuotedAudio) return reply('Marque um áudio')  
         reply("Calmai macaco 🦧");              
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
