@@ -18,6 +18,7 @@ const {
 } = require("@adiwajshing/baileys");
 const { getBuffer, color, getGroupAdmins, createExif, getRandom, modStick, fetchJson } = require("./lib/function.js");
 const { spawn, exec, execSync } = require("child_process");
+const crypto = require('crypto')
 const speed = require('performance-now');
 const ig = require('insta-fetcher');
 const hx = require("hxz-api");
@@ -92,6 +93,19 @@ function DATACOMPLETA(){
 	var year = (yy < 1000) ? yy + 1900 : yy;
 	return `${thisDay}, ${day} - ${myMonths[bulan]} - ${year}`;
 }
+function HORAEXATA(seconds){
+  function pad(s){
+    return (s < 10 ? '0' : '') + s;
+  }
+  var hours = Math.floor(seconds / (60*60));
+  var minutes = Math.floor(seconds % (60*60) / 60);
+  var seconds = Math.floor(seconds % 60);
+
+  //return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds)
+  return `${pad(hours)} horas ${pad(minutes)} minutos ${pad(seconds)} segundos`
+}
+
+
 function RODAPE(){
   MyTrademark = ["By LorranX ©"];
   ThisTrademark = MyTrademark;
@@ -110,19 +124,6 @@ const runtime = function (seconds) {
   var sDisplay = s > 0 ? s + (s == 1 ? " segundo(s)" : " segundo(s)") : "";
   return dDisplay + hDisplay + mDisplay + sDisplay;
 };
-
-//HORAS EXATAS
-function horaexata(seconds){
-  function pad(s){
-    return (s < 10 ? '0' : '') + s;
-  }
-  var hours = Math.floor(seconds / (60*60));
-  var minutes = Math.floor(seconds % (60*60) / 60);
-  var seconds = Math.floor(seconds % 60);
-
-  //return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds)
-  return `${pad(hours)} horas ${pad(minutes)} minutos ${pad(seconds)} segundos`
-}
 
 
 const time2 = moment().tz("America/Sao_Paulo").format("HH:mm:ss");
