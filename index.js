@@ -208,6 +208,7 @@ module.exports = (LorranX) => {
       const is = budy.slice(0).trim().split(/ +/).shift().toLowerCase()
       const args = body.trim().split(/ +/).slice(1)
       const isCmd = body.startsWith(prefix)
+      const arg = budy.slice(command.length + 2, budy.length)
       const q = args.join(' ')
       const botNumber = LorranX.user.jid
       const isGroup = from.endsWith("@g.us")
@@ -963,7 +964,7 @@ break;
           addFilter(from)
 					break;
           case 'notif':		
-if (!isGroup) return reply(mess.only.group)
+          if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 mensagem = `Mensagem importante enviada por @${sender.split("@")[0]}\n*Mensagem : ${body.slice(7)}*`
 group = await LorranX.groupMetadata(from);
 member = group['participants']
@@ -1129,7 +1130,7 @@ break
 			case 'criargrupo':
         if (!isOwner) return reply("Você não é meu papai 😡")
         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
-				if (args.length < 1) return reply(`Pra usar esse comadno c tem que adicionar um nome pro grupo e marcar as pessoas pra adicionar`)
+				if (args.length < 1) return reply(`Pra usar esse comando c tem que adicionar um nome pro grupo e marcar as pessoas pra adicionar`)
 				argz = arg.split('|')
 				if (mek.message.extendedTextMessage != undefined){
                     mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
@@ -1366,6 +1367,40 @@ case 'kickall':
             }
             });
 	    break;
+      case "tiktok":
+        if (!isUrl(args[0]) && !args[0].includes("tiktok.com"))
+          return reply(`Link invalido`);
+        var bv = await fetchJson(
+          `https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${args[0]}apikey=beta`
+        );
+        var b = bv.result.author_metadata;
+        var tamnel = await getBuffer(
+          bv.result.media_resources.image.contentUrl
+        );
+        var a = bv.result.media_metadata;
+        sendButImage(
+          from,
+          `⚜️ *Nickname*: ${b.username}\n❤️ *Like*: ${a.stats.diggCount}\n💬 *Komentar*: ${a.stats.commentCount}\n🔁 *Share*: ${a.stats.shareCount}\n🎞️ *Views*: ${a.stats.playCount}`,
+          `Silahkan pilih salah satu format yg mau didownload`,
+          tamnel,
+          [
+            {
+              buttonId: `${prefix}macaquito ${args[0]}|video`,
+              buttonText: {
+                displayText: `VIDEO`,
+              },
+              type: 1,
+            },
+            {
+              buttonId: `${prefix}macaquito ${args[0]}|audio`,
+              buttonText: {
+                displayText: `AUDIO`,
+              },
+              type: 1,
+            },
+          ]
+        );
+        break;
         //END DOWNLOADERS
           case 'probabilidade':
               rate = body.slice(1)
@@ -1668,6 +1703,20 @@ case 'kickall':
           }
             break;
         //PARA BOTÕES
+        case "macaquito":
+        var gh = args.join("");
+        var link = gh.split("|")[0];
+        var tipe = gh.split("|")[1];
+        var bv = await fetchJson(
+          `https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${link}apikey=beta`
+        );
+        if (tipe == "audio") {
+          sendMediaURL(from, bv.result.media_resources.music.playUrl, "");
+        }
+        if (tipe == "video") {
+          sendMediaURL(from, bv.result.media_resources.video.videoUrl, "");
+        }
+        break;
 
         //GARBAGE
 
