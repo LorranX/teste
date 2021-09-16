@@ -271,7 +271,7 @@ module.exports = (LorranX) => {
       const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : ''
       const isOwner = owner.includes(sender);
       const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
-      const produtoverify = { key: { fromMe: false, participant: `553195703379@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/verificado.png') }, "title": `Novo usuario verificado com sucesso`, "productImageCount": 9999 }, "businessOwnerJid": `5531957033796@s.whatsapp.net`}}}
+      const produtoverify = { key: { fromMe: false, participant: `553195703379@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/verificado.png') }, "title": `VERIFICANDO...`, "productImageCount": 9999 }, "businessOwnerJid": `5531957033796@s.whatsapp.net`}}}
       const isGroupAdmins = groupAdmins.includes(sender) || false
       const isRegister = checkRegisteredUser(sender)
       const conts = mek.key.fromMe ? LorranX.user.jid : LorranX.contacts[sender] || { notify: jid.replace(/@.+/, '') }
