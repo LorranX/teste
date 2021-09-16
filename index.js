@@ -1367,39 +1367,25 @@ case 'kickall':
             }
             });
 	    break;
-      case "tiktok":
-        reply(`Use sempre links validos do tiktok, caso este seja o caso basta aguardar`)
-        var bv = await fetchJson(
-          `https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${args[0]}apikey=beta`
-        );
-        var b = bv.result.author_metadata;
-        var tamnel = await getBuffer(
-          bv.result.media_resources.image.contentUrl
-        );
-        var a = bv.result.media_metadata;
-        sendButImage(
-          from,
-          `⚜️ *Nickname*: ${b.username}\n❤️ *Like*: ${a.stats.diggCount}\n💬 *Komentar*: ${a.stats.commentCount}\n🔁 *Share*: ${a.stats.shareCount}\n🎞️ *Views*: ${a.stats.playCount}`,
-          `Silahkan pilih salah satu format yg mau didownload`,
-          tamnel,
-          [
-            {
-              buttonId: `${prefix}macaquito ${args[0]}|video`,
-              buttonText: {
-                displayText: `VIDEO`,
-              },
-              type: 1,
-            },
-            {
-              buttonId: `${prefix}macaquito ${args[0]}|audio`,
-              buttonText: {
-                displayText: `AUDIO`,
-              },
-              type: 1,
-            },
-          ]
-        );
-        break;
+     case 'tiktok':
+          if (!isUrl(args[0]) && !args[0].includes('tiktok.com') && !q) return reply("Link invalido")
+          sek = reply("Calmai macaco")
+          hx.ttdownloader(args[0])
+          .then(res => {
+            const {
+              nowm
+            } = res;
+            axios.get(`https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${args[0]}apikey=beta`)
+            .then(async (a) => {
+              me = `link: ${a.data}`
+              salsa.sendMessage(from,{url:`${nowm}`},video,{mimetype:'video/mp4',quoted:mek,caption:me})
+              setTimeout(() => {
+                LorranX.deleteMessage(from, sek.key)
+              }, 10000);
+            })
+          })
+          .catch( e => console.log(e))
+          break;
         //END DOWNLOADERS
           case 'probabilidade':
               rate = body.slice(1)
@@ -1702,20 +1688,6 @@ case 'kickall':
           }
             break;
         //PARA BOTÕES
-        case "macaquito":
-        var gh = args.join("");
-        var link = gh.split("|")[0];
-        var tipe = gh.split("|")[1];
-        var bv = await fetchJson(
-          `https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${link}apikey=beta`
-        );
-        if (tipe == "audio") {
-          sendMediaURL(from, bv.result.media_resources.music.playUrl, "");
-        }
-        if (tipe == "video") {
-          sendMediaURL(from, bv.result.media_resources.video.videoUrl, "");
-        }
-        break;
 
         //GARBAGE
 
@@ -1727,7 +1699,7 @@ case 'kickall':
             const {
               nowm
             } = res;
-            axios.get(`https://tinyurl.com/api-create.php?url=${nowm}`)
+            axios.get(`https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${args[0]}apikey=beta`)
             .then(async (a) => {
               me = `link: ${a.data}`
               salsa.sendMessage(from,{url:`${nowm}`},video,{mimetype:'video/mp4',quoted:mek,caption:me})
