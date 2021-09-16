@@ -271,7 +271,7 @@ module.exports = (LorranX) => {
       const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : ''
       const isOwner = owner.includes(sender);
       const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
-      const ftoko = { key: { fromMe: false, participant: `553195703379@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/changelog.jpg') }, "title": `teste : teste`, "productImageCount": 9999 }, "businessOwnerJid": `5531957033796@s.whatsapp.net`}}}
+      const produtoverify = { key: { fromMe: false, participant: `553195703379@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/verificado.png') }, "title": `Novo usuario verificado com sucesso`, "productImageCount": 9999 }, "businessOwnerJid": `5531957033796@s.whatsapp.net`}}}
       const isGroupAdmins = groupAdmins.includes(sender) || false
       const isRegister = checkRegisteredUser(sender)
       const conts = mek.key.fromMe ? LorranX.user.jid : LorranX.contacts[sender] || { notify: jid.replace(/@.+/, '') }
@@ -820,38 +820,38 @@ break;
         case 'verify':
 case 'daftar':
 case 'register':
-if (isRegister) return reply('```Akun Kamu Sudah Terverfikasi```')
+if (isRegister) return reply('```Pronto, seu numero foi verificado```')
 veri = sender
 if (isGroup) {
 const namaUser = `${pushname}`
 const serialUser = createSerial(10)
 addRegisteredUser(sender, namaUser, time, serialUser)
-hasil = ` 〘 *VERIFIKASI SUKSES* 〙
+hasil = ` 〘 *NOVO USUARIO VERIFICADO COM SUCESSO* 〙
 
 
-• *NAMA :* ${namaUser}
-• *NOMOR :* ${sender.split("@")[0]}
-• *SERIAL :* ${serialUser}
-• *WAKTU VERIFIKASI :* ${time}
+• *Nome :* ${namaUser}
+• *Número :* ${sender.split("@")[0]}
+• *Serial :* ${serialUser}
+• *Data e hora da verificação :* ${time}
 
-      「 *TERIMAKASIH* 」`
-LorranX.sendMessage(from, hasil, text, {quoted: ftoko})
-console.log(color('❲ VERIFIKASI ❳'), '\nTIME : ', color(time, 'yellow'), '\nNAME : ', color(namaUser, 'cyan'), '\nSERIAL : ', color(serialUser, 'cyan'), '\nDI GRUP : ', color(sender || groupName))
+`
+LorranX.sendMessage(from, hasil, text, {quoted: produtoverify})
+console.log(color('❲ USUARIO VERIFICADO ❳'), '\nHora : ', color(time, 'yellow'), '\nNome : ', color(namaUser, 'cyan'), '\nSerial : ', color(serialUser, 'cyan'), '\nDI GRUP : ', color(sender || groupName))
 } else {
 const namaUser = `${pushname}`
 const serialUser = createSerial(10)
 addRegisteredUser(sender, namaUser, time, serialUser)
-hasil = ` 〘 *VERIFIKASI SUKSES* 〙
+hasil = ` 〘 *NOVO USUARIO VERIFICADO COM SUCESSO* 〙
 
 
-• *NAMA :* ${namaUser}
-• *NOMOR :* ${sender.split("@")[0]}
-• *SERIAL :* ${serialUser}
-• *WAKTU VERIFIKASI :* ${time}
+• *Nome :* ${namaUser}
+• *Número :* ${sender.split("@")[0]}
+• *Serial :* ${serialUser}
+• *Data e hora da verificação :* ${time}
 
-      「 *TERIMAKASIH* 」`
-LorranX.sendMessage(from, hasil, text, {quoted: ftoko})
-console.log(color('❲ VERIFIKASI ❳'), '\nTIME : ', color(time, 'yellow'), '\nNAME : ', color(namaUser, 'cyan'), '\nSERIAL : ', color(serialUser, 'cyan'))
+`
+LorranX.sendMessage(from, hasil, text, {quoted: produtoverify})
+console.log(color('❲ USUARIO VERIFICADO ❳'), '\nHora : ', color(time, 'yellow'), '\nNome : ', color(namaUser, 'cyan'), '\nSerial : ', color(serialUser, 'cyan'))
 }
 break
         case 'owner':
@@ -872,7 +872,7 @@ break
         case 'sticker':
           case 'f':
           var a = "BOT DO LORRAN";
-          var b = "TESTE";
+          var b = "ALPHA VERSION";
           if (isMedia && !mek.message.videoMessage || isQuotedImage ) {
           const encmedia = isQuotedImage   ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
            media = await LorranX.downloadAndSaveMediaMessage(encmedia)
@@ -1493,13 +1493,13 @@ case 'kickall':
 				  break;
           case 'acelerar':  
         reply("Calmai macaco 🦧");
-        if (!isQuotedAudio) return enviar('Marque um áudio')
+        if (!isQuotedAudio) return reply('Marque um áudio')
         encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
         media = await LorranX.downloadAndSaveMediaMessage(encmedia)
         ran = getRandom('.mp3')
         exec(`ffmpeg -i ${media} -filter:a atempo=1.06,asetrate=44100*1.25 ${ran}`, (err, stderr, stdout) => {
         fs.unlinkSync(media)
-        if (err) return enviar('Error!')
+        if (err) return reply('Error!')
         hah = fs.readFileSync(ran)
         LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
         fs.unlinkSync(ran)
@@ -1559,7 +1559,7 @@ case 'kickall':
         ran = getRandom('.mp3')
         exec(`ffmpeg -i ${media} -af equalizer=f=90:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
         fs.unlinkSync(media)
-        if (err) return enviar('Error!')
+        if (err) return reply('Error!')
         hah = fs.readFileSync(ran)
         LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
         fs.unlinkSync(ran)
