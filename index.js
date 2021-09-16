@@ -46,9 +46,38 @@ antideleted = true;
 self = false;
 
         //LOAD FILES
-
-
+        const registrarusuarios = JSON.parse(fs.readFileSync('./database/user/registros.json'))
         //END LOAD FILES
+
+        const getRegisteredRandomId = () => {
+          return registrarusuarios[Math.floor(Math.random() * registrarusuarios.length)].id
+          }
+          
+          const addRegisteredUser = (userid, sender, age, time, serials) => {
+          const obj = {
+          id: userid,
+          nome: sender,
+          idade: age,
+          time: time,
+          serial: serials
+          }
+          registrarusuarios.push(obj)
+          fs.writeFileSync('./database/user/registros.json', JSON.stringify(registrarusuarios))
+          }
+          
+          const createSerial = (size) => {
+          return crypto.randomBytes(size).toString('hex').slice(0, size)
+          }
+          
+          const checkRegisteredUser = (sender) => {
+          let status = false
+          Object.keys(registrarusuarios).forEach((i) => {
+          if (registrarusuarios[i].id === sender) {
+          status = true
+          }
+          })
+          return status
+          }
 
         //DATA...HORA
 function DATACOMPLETA(){
@@ -81,6 +110,19 @@ const runtime = function (seconds) {
   var sDisplay = s > 0 ? s + (s == 1 ? " segundo(s)" : " segundo(s)") : "";
   return dDisplay + hDisplay + mDisplay + sDisplay;
 };
+
+//HORAS EXATAS
+function horaexata(seconds){
+  function pad(s){
+    return (s < 10 ? '0' : '') + s;
+  }
+  var hours = Math.floor(seconds / (60*60));
+  var minutes = Math.floor(seconds % (60*60) / 60);
+  var seconds = Math.floor(seconds % 60);
+
+  //return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds)
+  return `${pad(hours)} horas ${pad(minutes)} minutos ${pad(seconds)} segundos`
+}
 
 
 const time2 = moment().tz("America/Sao_Paulo").format("HH:mm:ss");
@@ -207,6 +249,7 @@ module.exports = (LorranX) => {
       const command = body.slice(1).trim().split(/ +/).shift().toLowerCase()
       const is = budy.slice(0).trim().split(/ +/).shift().toLowerCase()
       const args = body.trim().split(/ +/).slice(1)
+      const time = moment.tz('America/Sao_Paulo').format('DD/MM HH:mm:ss')
       const isCmd = body.startsWith(prefix)
       const arg = budy.slice(command.length + 2, budy.length)
       const q = args.join(' ')
@@ -228,6 +271,7 @@ module.exports = (LorranX) => {
       const isOwner = owner.includes(sender);
       const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
       const isGroupAdmins = groupAdmins.includes(sender) || false
+      const isRegister = checkRegisteredUser(sender)
       const conts = mek.key.fromMe ? LorranX.user.jid : LorranX.contacts[sender] || { notify: jid.replace(/@.+/, '') }
       const pushname = mek.key.fromMe ? LorranX.user.name : conts.notify || conts.vname || conts.name || '-'
       const more = String.fromCharCode(8206)
@@ -771,6 +815,43 @@ break;
               addFilter(from)
               break;
         //END MENUS      
+        case 'verify':
+case 'daftar':
+case 'register':
+if (isRegister) return reply('```Akun Kamu Sudah Terverfikasi```')
+veri = sender
+if (isGroup) {
+const namaUser = `${pushname}`
+const serialUser = createSerial(10)
+addRegisteredUser(sender, namaUser, time, serialUser)
+hasil = ` 〘 *VERIFIKASI SUKSES* 〙
+
+
+• *NAMA :* ${namaUser}
+• *NOMOR :* ${sender.split("@")[0]}
+• *SERIAL :* ${serialUser}
+• *WAKTU VERIFIKASI :* ${time}
+
+      「 *TERIMAKASIH* 」`
+farid.sendMessage(from, hasil, text, {quoted: ftoko})
+console.log(color('❲ VERIFIKASI ❳'), '\nTIME : ', color(time, 'yellow'), '\nNAME : ', color(namaUser, 'cyan'), '\nSERIAL : ', color(serialUser, 'cyan'), '\nDI GRUP : ', color(sender || groupName))
+} else {
+const namaUser = `${pushname}`
+const serialUser = createSerial(10)
+addRegisteredUser(sender, namaUser, time, serialUser)
+hasil = ` 〘 *VERIFIKASI SUKSES* 〙
+
+
+• *NAMA :* ${namaUser}
+• *NOMOR :* ${sender.split("@")[0]}
+• *SERIAL :* ${serialUser}
+• *WAKTU VERIFIKASI :* ${time}
+
+      「 *TERIMAKASIH* 」`
+farid.sendMessage(from, hasil, text, {quoted: ftoko})
+console.log(color('❲ VERIFIKASI ❳'), '\nTIME : ', color(time, 'yellow'), '\nNAME : ', color(namaUser, 'cyan'), '\nSERIAL : ', color(serialUser, 'cyan'))
+}
+break
         case 'owner':
           const vacrd = `BEGIN:VCARD\n`+`VERSION:3.0\n`+
                         `FN:Dono do Bot\n`+
@@ -849,6 +930,7 @@ break;
           addFilter(from)
           break;
           case 'attp':
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
                 if (args.length < 1) return reply(`C tem que mandar um texto pra eu criar figurinha`)
                 dulim = body.slice(5)
 				apiglow = await getBuffer(`https://api.xteam.xyz/attp?file&text=${dulim}`)
