@@ -478,6 +478,12 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
 ║https://wa.me/+553195703379
 ╰───────────`;
   sendButtonMsg(Menuaudio, `By LorranX ©`,[{
+    buttonId: `${prefix}verify`,
+  buttonText: {
+    displayText: "Verify"
+  },
+  type: 1
+  },{
     buttonId: `${prefix}owner`,
     buttonText: {
       displayText: "Dono"
@@ -520,6 +526,12 @@ if (listbut == 'Modificadores de Video' || command == `${prefix}start`) {
 ║https://wa.me/+553195703379
 ╰───────────`;
 sendButtonMsg(Menuvideo, `By LorranX ©`,[{
+  buttonId: `${prefix}verify`,
+  buttonText: {
+    displayText: "Verify"
+  },
+  type: 1
+  },{
 buttonId: `${prefix}owner`,
 buttonText: {
 displayText: "Dono"
@@ -567,6 +579,12 @@ type: 1
 ║https://wa.me/+553195703379
 ╰───────────`;
   sendButtonMsg(Menueu, `By LorranX ©`,[{
+    buttonId: `${prefix}verify`,
+  buttonText: {
+    displayText: "Verify"
+  },
+  type: 1
+  },{
     buttonId: `${prefix}owner`,
     buttonText: {
       displayText: "Dono"
@@ -626,15 +644,21 @@ type: 1
 ╰───────────
 `;
 sendButtonMsg(Menu, `By LorranX ©`,[{
-  buttonId: `${prefix}owner`,
+  buttonId: `${prefix}verify`,
   buttonText: {
-    displayText: "Dono"
+    displayText: "Verify"
   },
   type: 1
   },{
     buttonId: `${prefix}github`,
     buttonText: {
-      displayText: "script do bot"
+      displayText: "Script do bot"
+    },
+    type: 1
+  },{
+    buttonId: `${prefix}owner`,
+    buttonText: {
+      displayText: "Dono"
     },
     type: 1
 }])
@@ -690,6 +714,12 @@ Versão atual: 1.0.5
 ║https://wa.me/+553195703379
 ╰───────────`;
 sendButtonMsg(MenuAdmin, `By LorranX ©`,[{
+  buttonId: `${prefix}verify`,
+  buttonText: {
+    displayText: "Verify"
+  },
+  type: 1
+  },{
   buttonId: `${prefix}owner`,
   buttonText: {
     displayText: "Dono"
@@ -818,7 +848,7 @@ break;
               break;
         //END MENUS      
         case 'verify':
-case 'daftar':
+case 'registrar':
 case 'register':
 if (isRegister) return reply('```Pronto, seu numero foi verificado```')
 veri = sender
@@ -941,6 +971,7 @@ break
          case 'resetlink':
          case 'resetarlik':
          case 'revokelink':
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
 					if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
@@ -949,6 +980,7 @@ break
           reply('Link do grupo resetado')
          break;
          case 'demoteall':
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
 					if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
@@ -959,6 +991,7 @@ break
                       LorranX.groupDemoteAdmin(from, members_id)
                       break;
                       case 'promoteall':
+                        if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
                         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
                         if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
                         if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
@@ -977,6 +1010,7 @@ break
           })
           break;
         case 'setdesc':
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
 					if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
@@ -991,6 +1025,7 @@ break
           break;
           case 'promote':
             case 'promover':
+              if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
 					if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
 					if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
@@ -1011,6 +1046,7 @@ break
 					break;
           case 'demote':
             case 'rebaixar':
+              if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
             if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
@@ -1030,6 +1066,7 @@ break
 					}
 					break;
           case 'hidetag':
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
 					var value = body.slice(9)
@@ -1067,6 +1104,7 @@ await LorranX.sendMessage(from, options, text)
 break
           case 'tagsticker':
             case 'tagfig': 
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
                     if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
@@ -1092,6 +1130,7 @@ break
                     addFilter(from)
                     break;
                     case 'tagimg':
+                      if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
                       if (!isGroup) return reply("Este comando so pode ser usado em grupos")
                       if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
@@ -1117,6 +1156,7 @@ break
                     addFilter(from)
                     break;
           case 'setname':
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
             if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
@@ -1124,6 +1164,7 @@ break
                 LorranX.sendMessage(from, 'Pronto macaco, alterei o nome do grupo', text, {quoted: mek})
 					break;
 			     	case 'kick':
+              if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
               if (!isGroup) return reply("Este comando so pode ser usado em grupos")
               if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
               if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
@@ -1144,6 +1185,7 @@ break
           addFilter(from)
 					break;
           case 'add':
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
             if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
@@ -1159,6 +1201,7 @@ break
           addFilter(from)
 				break;
         case 'linkgp':
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
           if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
           try {
@@ -1170,6 +1213,7 @@ break
           break;
           case 'delete':
 			    	case 'del':
+              if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
               if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
 						LorranX.deleteMessage(from, { id: mek.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
             addFilter(from)
@@ -1291,6 +1335,7 @@ case 'kickall':
         //END FUNÇÕES DONO
         //CONVERSORES
         case 'tomp3':
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
 				LorranX.updatePresence(from, Presence.composing)
 				if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
 				reply("Calmai macaco 🦧")
@@ -1307,6 +1352,7 @@ case 'kickall':
         addFilter(from)
 				break;
 				case 'togif':
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
                     if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
                         const encmediaaa = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         const mediaaa = await LorranX.downloadAndSaveMediaMessage(encmediaaa)
@@ -1323,6 +1369,7 @@ case 'kickall':
                     addFilter(from)
                     break;
                     case 'toimg':
+                      if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
 				if (!isQuotedSticker) return reply('Pra usar esse comando c tem que marcar uma figurinha')
 					reply("Calmai macaco 🦧")
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -1341,6 +1388,7 @@ case 'kickall':
         //DOWNLOADERS
         case 'play':
           case 'p':
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (args.length === 0) return reply(`Pra eu baixar a musica c tem que mandar um nome valido\nExemplo: *${prefix}play sertanejo*`)
           var srch = args.join('')
           find = await yts(srch)
@@ -1363,6 +1411,7 @@ case 'kickall':
           addFilter(from)
           break;
         case 'pvideo':
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (args.length === 0) return reply(`Pra eu baixar esse video c tem que mandar um nome valido\nExemplo: *${prefix}pvideo macaco*`)
           var srch = args.join('')
           find = await yts(srch);
@@ -1386,6 +1435,7 @@ case 'kickall':
           addFilter(from)                  
           break;
         case 'ytmp3':
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (args.length < 1) return reply('Pra eu baixar o audio c tem que usar um link valido do youtube')
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
           if (!link) return reply("Link invalido")
@@ -1408,6 +1458,7 @@ case 'kickall':
           addFilter(from)
           break;
         case 'ytmp4':
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (args.length < 1) return reply('Pra eu baixar o video c tem que usar um link valido do youtube')
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
           if (!link) return reply("link invalido")
@@ -1430,6 +1481,7 @@ case 'kickall':
           addFilter(from)
           break;
           case 'twitter':
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (!isUrl(args[0]) && !args[0].includes('twitter.com') && !q) return reply("Link invalido")
             var res = await hx.twitter(args[0])
             sendMediaURL(res.HD, "Tai seu video")
@@ -1453,12 +1505,14 @@ case 'kickall':
 	    break;
         //END DOWNLOADERS
           case 'probabilidade':
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
               rate = body.slice(1)
               const ra =['99','7','1000','-10','31','0','4','9','17','28','34','48','59','62','100','29','94','75','41','39']
               const te = ra[Math.floor(Math.random() * ra.length)]
               LorranX.sendMessage(from, 'Comando : *'+rate+'*\n\nResultado : '+ te+'%', text, { quoted: mek })
               break;
                     case '%gay':
+                      if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Porra, burrão, c tem que marcar alguem pra eu dizer a %')
               rate = body.slice(1)
               const gay =['99','7','1000','-10','31','0','4','9','17','28','34','48','59','62','100','29','94','75','41','39']
@@ -1467,6 +1521,7 @@ case 'kickall':
               break;
               case 'dado':
           case 'dadin':
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
               const dadinhos = ["⚀","⚁","⚂","⚃","⚄","⚅"]
               dadoaleatorio = dadinhos[Math.floor(Math.random() * dadinhos.length)]
               dadin = fs.readFileSync('./database/dadin/'+dadoaleatorio+'.webp')
@@ -1475,6 +1530,7 @@ case 'kickall':
               break;
         //MODIFICAR AUDIO
 				  case 'slowmo':
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isQuotedAudio) return reply('Marque um áudio')
         reply("Calmai macaco 🦧");
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -1489,7 +1545,8 @@ case 'kickall':
 				})
         addFilter(from)
 				  break;
-          case 'acelerar':  
+          case 'acelerar':
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)  
         reply("Calmai macaco 🦧");
         if (!isQuotedAudio) return reply('Marque um áudio')
         encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -1505,6 +1562,7 @@ case 'kickall':
         addFilter(from)
           break; 
 				  case 'esquilo':
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply('Marque um áudio')
         reply("Calmai macaco 🦧");
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -1520,6 +1578,7 @@ case 'kickall':
         addFilter(from)
 				  break;
 				  case 'engrossar':
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply('Marque um áudio')
         reply("Calmai macaco 🦧");
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -1535,6 +1594,7 @@ case 'kickall':
         addFilter(from)
 				  break;
 				  case 'bass': 
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply('Marque um áudio')  
         reply("Calmai macaco 🦧");              
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -1549,7 +1609,8 @@ case 'kickall':
 				})
         addFilter(from)
 				  break;
-          case 'estourar':       
+          case 'estourar':  
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)     
         if (!isQuotedAudio) return reply('Marque um áudio')
         reply("Calmai macaco 🦧");
         encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -1565,6 +1626,7 @@ case 'kickall':
         addFilter(from)
           break;
           case "reverse":
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply("Pra usar esse comando c tem que marcar um audio");
         reply("Calmai macaco 🦧");
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
@@ -1583,6 +1645,7 @@ case 'kickall':
         //END MODIFICAR AUDIO
         //MODIFICAR VIDEO
           case "reversev":
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
         reply("Calmai macaco 🦧");
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
@@ -1602,6 +1665,7 @@ case 'kickall':
         addFilter(from)
           break;
           case "acelerarv":
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
         reply("Calmai macaco 🦧");
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
@@ -1624,6 +1688,7 @@ case 'kickall':
         addFilter(from)
             break;
             case "slowv":
+              if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
           reply("Calmai macaco 🦧");
           encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
