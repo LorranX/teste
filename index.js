@@ -1368,8 +1368,7 @@ case 'kickall':
             });
 	    break;
       case "tiktok":
-        if (!isUrl(args[0]) && !args[0].includes("tiktok.com"))
-          return reply(`Link invalido`);
+        if (!isUrl(args[0]) && !args[0].includes('tiktok.com') && !q) return reply("Link invalido");
         var bv = await fetchJson(
           `https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${args[0]}apikey=beta`
         );
