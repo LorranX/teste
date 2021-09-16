@@ -828,13 +828,12 @@ const serialUser = createSerial(10)
 addRegisteredUser(sender, namaUser, time, serialUser)
 hasil = ` 〘 *NOVO USUARIO VERIFICADO COM SUCESSO* 〙
 
-
 • *Nome :* ${namaUser}
 • *Número :* ${sender.split("@")[0]}
 • *Serial :* ${serialUser}
 • *Data e hora da verificação :* ${time}
-
-`
+ 
+       ✘ *OBRIGADO POR SE REGISTRAR ✘`
 LorranX.sendMessage(from, hasil, text, {quoted: produtoverify})
 console.log(color('❲ USUARIO VERIFICADO ❳'), '\nHora : ', color(time, 'yellow'), '\nNome : ', color(namaUser, 'cyan'), '\nSerial : ', color(serialUser, 'cyan'), '\nUSER : ', color(sender || groupName))
 } else {
@@ -843,13 +842,12 @@ const serialUser = createSerial(10)
 addRegisteredUser(sender, namaUser, time, serialUser)
 hasil = ` 〘 *NOVO USUARIO VERIFICADO COM SUCESSO* 〙
 
-
 • *Nome :* ${namaUser}
 • *Número :* ${sender.split("@")[0]}
 • *Serial :* ${serialUser}
 • *Data e hora da verificação :* ${time}
 
-`
+       ✘ *OBRIGADO POR SE REGISTRAR ✘`
 LorranX.sendMessage(from, hasil, text, {quoted: produtoverify})
 console.log(color('❲ USUARIO VERIFICADO ❳'), '\nHora : ', color(time, 'yellow'), '\nNome : ', color(namaUser, 'cyan'), '\nSerial : ', color(serialUser, 'cyan'))
 }
