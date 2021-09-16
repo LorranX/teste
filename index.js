@@ -594,10 +594,10 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-Ultima atualização: 14/09/2021 as 20:21
-Ultimas alteraçoes: Script mais organizado, adicionado notif como alternativa ao hide tag
+Ultima atualização: 15/09/2021 as 21:03
+Ultimas alteraçoes: adicionadas novas funções para administradores, adicionados menus de modificações e owner, reorganização dos menus
 Versão atual: 1.0.5
-% de conclusão: 35%
+% de conclusão: 37%
 `
         LorranX.sendMessage(from, fs.readFileSync("./lib/image/changelog.jpg"), image, {quoted: mek, caption: medsos})
       }
@@ -623,8 +623,11 @@ Versão atual: 1.0.5
 ║│↭_*   [ *${prefix}leave* ] 
 ║│↭_*   [ *${prefix}setdesc* ]
 ║│↭_*   [ *${prefix}setname* ] 
+║│↭_*   [ *${prefix}promoteall* ] 
 ║│↭_*   [ *${prefix}promote* ] 
 ║│↭_*   [ *${prefix}demote* ]
+║│↭_*   [ *${prefix}demoteall* ]
+║│↭_*   [ *${prefix}revokelink* ]
 ║│↭_*   [ *${prefix}hidetag* ]
 ║│↭_*   [ *${prefix}notif* ]
 ║│↭_*   [ *${prefix}tagimg* ]
