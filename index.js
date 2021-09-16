@@ -668,6 +668,7 @@ break;
     }
         //CASE
       switch (command) {
+        //MENUS
         case 'help':
         case 'menu':
           var menulist = LorranX.prepareMessageFromContent(from, {
@@ -769,6 +770,7 @@ break;
               LorranX.relayWAMessage(modficadoresmenu, {waitForAck: false})
               addFilter(from)
               break;
+        //END MENUS      
         case 'owner':
           const vacrd = `BEGIN:VCARD\n`+`VERSION:3.0\n`+
                         `FN:Dono do Bot\n`+
@@ -1367,25 +1369,6 @@ case 'kickall':
             }
             });
 	    break;
-     case 'tiktok':
-          if (!isUrl(args[0]) && !args[0].includes('tiktok.com') && !q) return reply("Link invalido")
-          sek = reply("Calmai macaco")
-          hx.ttdownloader(args[0])
-          .then(res => {
-            const {
-              nowm
-            } = res;
-            axios.get(`https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${args[0]}apikey=beta`)
-            .then(async (a) => {
-              me = `link: ${a.data}`
-              salsa.sendMessage(from,{url:`${nowm}`},video,{mimetype:'video/mp4',quoted:mek,caption:me})
-              setTimeout(() => {
-                LorranX.deleteMessage(from, sek.key)
-              }, 10000);
-            })
-          })
-          .catch( e => console.log(e))
-          break;
         //END DOWNLOADERS
           case 'probabilidade':
               rate = body.slice(1)
