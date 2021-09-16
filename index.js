@@ -849,7 +849,7 @@ hasil = ` 〘 *VERIFIKASI SUKSES* 〙
 • *WAKTU VERIFIKASI :* ${time}
 
       「 *TERIMAKASIH* 」`
-LorranX.sendMessage(from, hasil, text, {quoted: ftoko})
+LorranX.sendMessage(from, hasil, text, {quoted: `done`})
 console.log(color('❲ VERIFIKASI ❳'), '\nTIME : ', color(time, 'yellow'), '\nNAME : ', color(namaUser, 'cyan'), '\nSERIAL : ', color(serialUser, 'cyan'))
 }
 break
