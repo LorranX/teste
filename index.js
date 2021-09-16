@@ -747,7 +747,7 @@ break;
                   "sections": [{
                     "title": `${DATACOMPLETA()}`,
                     "rows": [{
-                        "title": "Modificadores de Audio ",
+                        "title": "Modificadores de Audio",
                         "rowId": "0",
                         "description": ""
                       },{
