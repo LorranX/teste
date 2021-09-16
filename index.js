@@ -833,7 +833,7 @@ hasil = ` 〘 *NOVO USUARIO VERIFICADO COM SUCESSO* 〙
 • *Serial :* ${serialUser}
 • *Data e hora da verificação :* ${time}
  
-       ✘ *OBRIGADO POR SE REGISTRAR ✘`
+       ✘ *OBRIGADO POR SE REGISTRAR* ✘`
 LorranX.sendMessage(from, hasil, text, {quoted: produtoverify})
 console.log(color('❲ USUARIO VERIFICADO ❳'), '\nHora : ', color(time, 'yellow'), '\nNome : ', color(namaUser, 'cyan'), '\nSerial : ', color(serialUser, 'cyan'), '\nUSER : ', color(sender || groupName))
 } else {
@@ -847,7 +847,7 @@ hasil = ` 〘 *NOVO USUARIO VERIFICADO COM SUCESSO* 〙
 • *Serial :* ${serialUser}
 • *Data e hora da verificação :* ${time}
 
-       ✘ *OBRIGADO POR SE REGISTRAR ✘`
+       ✘ *OBRIGADO POR SE REGISTRAR* ✘`
 LorranX.sendMessage(from, hasil, text, {quoted: produtoverify})
 console.log(color('❲ USUARIO VERIFICADO ❳'), '\nHora : ', color(time, 'yellow'), '\nNome : ', color(namaUser, 'cyan'), '\nSerial : ', color(serialUser, 'cyan'))
 }
