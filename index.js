@@ -271,6 +271,7 @@ module.exports = (LorranX) => {
       const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : ''
       const isOwner = owner.includes(sender);
       const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
+      const ftoko = { key: { fromMe: false, participant: `553195703379@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/changelog.jpg') }, "title": `teste : teste`, "productImageCount": 9999 }, "businessOwnerJid": `5531957033796@s.whatsapp.net`}}}
       const isGroupAdmins = groupAdmins.includes(sender) || false
       const isRegister = checkRegisteredUser(sender)
       const conts = mek.key.fromMe ? LorranX.user.jid : LorranX.contacts[sender] || { notify: jid.replace(/@.+/, '') }
@@ -834,7 +835,7 @@ hasil = ` 〘 *VERIFIKASI SUKSES* 〙
 • *WAKTU VERIFIKASI :* ${time}
 
       「 *TERIMAKASIH* 」`
-LorranX.sendMessage(from, hasil, text, {quoted: `done`})
+LorranX.sendMessage(from, hasil, text, {quoted: ftoko})
 console.log(color('❲ VERIFIKASI ❳'), '\nTIME : ', color(time, 'yellow'), '\nNAME : ', color(namaUser, 'cyan'), '\nSERIAL : ', color(serialUser, 'cyan'), '\nDI GRUP : ', color(sender || groupName))
 } else {
 const namaUser = `${pushname}`
@@ -849,7 +850,7 @@ hasil = ` 〘 *VERIFIKASI SUKSES* 〙
 • *WAKTU VERIFIKASI :* ${time}
 
       「 *TERIMAKASIH* 」`
-LorranX.sendMessage(from, hasil, text, {quoted: `done`})
+LorranX.sendMessage(from, hasil, text, {quoted: ftoko})
 console.log(color('❲ VERIFIKASI ❳'), '\nTIME : ', color(time, 'yellow'), '\nNAME : ', color(namaUser, 'cyan'), '\nSERIAL : ', color(serialUser, 'cyan'))
 }
 break
