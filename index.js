@@ -665,10 +665,11 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-Ultima atualização: 15/09/2021 as 21:03
-Ultimas alteraçoes: adicionadas novas funções para administradores, adicionados menus de modificações e owner, reorganização dos menus
+Ultima atualização: 16/09/2021 as 21:22
+Ultimas alterações: Adicionada função verify para registrar novos usuarios do bot, para usar qualquer outra função se faz necessario se verificar, adicionado botão verify nos menus
+Possiveis proximas Atualizações: adicionar novas funções owner e admin, adicionar funções de meme e shit post
 Versão atual: 1.0.5
-% de conclusão: 37%
+% de conclusão: 38%
 `
         LorranX.sendMessage(from, fs.readFileSync("./lib/image/changelog.jpg"), image, {quoted: mek, caption: medsos})
       }
