@@ -979,8 +979,8 @@ break;
         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
         if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
         if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
-                       media = await client.downloadAndSaveMediaMessage(mek)
-                         await client.updateProfilePicture (from, media)
+                       media = await LorranX.downloadAndSaveMediaMessage(mek)
+                         await LorranX.updateProfilePicture (from, media)
                         reply('Pronto macaco alterei o icone do grupo')
 					break;
         case 'grp':
@@ -992,7 +992,7 @@ break;
 					    reply(`*Grupo aberto com sucesso*`)
 						LorranX.groupSettingChange(from, GroupSettingChange.messageSend, false)
 					} else if (args[0] === 'close') {
-						reply(`*Grupo fechado com sucesso`)
+						reply(`*Grupo fechado com sucesso*`)
 						LorranX.groupSettingChange(from, GroupSettingChange.messageSend, true)
 					}
 				break;
