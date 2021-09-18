@@ -568,6 +568,7 @@ type: 1
 ║│↭_*   [ *${prefix}unblock* ]
 ║│↭_*   [ *${prefix}creatgroup* ] 
 ║│↭_*   [ *${prefix}join* ] 
+║│↭_*   [ *${prefix}setpp* ] 
 ║│↭_*   [ *${prefix}selfmode* ]
 ║│↭_*   [ *${prefix}desligar* ]
 ║│↭_*   [ *${prefix}kickall* ]
@@ -632,6 +633,7 @@ type: 1
 ║│↭_*   [ *${prefix}toimg* ] 
 ║│↭_*   [ *${prefix}togif* ] 
 ║│↭_*   [ *${prefix}tomp3* ] 
+║│↭_*   [ *${prefix}listadmin* ] 
 ║│↭_*   [ *${prefix}adminmenu* ] 
 ║│↭_*   [ *${prefix}ownermenu* ]
 ║│↭_*   [ *${prefix}modmenu* ]
@@ -665,9 +667,9 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-Ultima atualização: 16/09/2021 as 21:22
-Ultimas alterações: Adicionada função verify para registrar novos usuarios do bot, para usar qualquer outra função se faz necessario se verificar, adicionado botão verify nos menus
-Possiveis proximas Atualizações: adicionar novas funções owner e admin, adicionar funções de meme e shit post
+Ultima atualização: 18/09/2021 as 00:22
+Ultimas alterações: Alterado prefix padrão "#" para "." , adicionado list admin, corrigido setdesc, adicionados novos comandos para owner e admin
+Possiveis proximas Atualizações: Correções, criação de novos comandos sem prefix (Talvez ja venham alguns xingamentos), adcionar o ban user (função que proibe determinado usuario de acessar as funções do bot)
 Versão atual: 1.0.5
 % de conclusão: 38%
 `
@@ -695,11 +697,13 @@ Versão atual: 1.0.5
 ║│↭_*   [ *${prefix}leave* ] 
 ║│↭_*   [ *${prefix}setdesc* ]
 ║│↭_*   [ *${prefix}setname* ] 
+║│↭_*   [ *${prefix}setig* ] 
 ║│↭_*   [ *${prefix}promoteall* ] 
 ║│↭_*   [ *${prefix}promote* ] 
 ║│↭_*   [ *${prefix}demote* ]
 ║│↭_*   [ *${prefix}demoteall* ]
 ║│↭_*   [ *${prefix}revokelink* ]
+║│↭_*   [ *${prefix}grp* ] 
 ║│↭_*   [ *${prefix}hidetag* ]
 ║│↭_*   [ *${prefix}notif* ]
 ║│↭_*   [ *${prefix}tagimg* ]
