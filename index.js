@@ -225,7 +225,7 @@ module.exports = (LorranX) => {
           : type == "buttonsResponseMessage" && mek.message[type].selectedButtonId
           ? mek.message[type].selectedButtonId
           : "";
-      const prefix = /^[°•π÷×¶∆£¢€¥®™=|~!#$%^&.?/\\©^z+*@,;]/.test(cmd) ? cmd.match(/^[°•π÷×¶∆£¢€¥®™=|~!#$%^&.?/\\©^z+*,;]/gi) : '#'
+      const prefix = /^[°•π÷×¶∆£¢€¥®™=|~!#$%^&.?/\\©^z+*@,;]/.test(cmd) ? cmd.match(/^[°•π÷×¶∆£¢€¥®™=|~!#$%^&.?/\\©^z+*,;]/gi) : '.'
       body = 
         type === 'listResponseMessage' && mek.message.listResponseMessage.title 
           ? mek.message.listResponseMessage.title 
@@ -851,13 +851,13 @@ break;
         case 'verify':
 case 'registrar':
 case 'register':
-if (isRegister) return reply('```Pronto, seu numero foi verificado```')
+if (isRegister) return reply('```Seus dados ja estam registrados na minha database```')
 veri = sender
 if (isGroup) {
 const namaUser = `${pushname}`
 const serialUser = createSerial(10)
 addRegisteredUser(sender, namaUser, time, serialUser)
-hasil = ` 〘 *NOVO USUARIO VERIFICADO COM SUCESSO* 〙
+hasil = `   〘 *NOVO USUARIO VERIFICADO COM SUCESSO* 〙
 
 • *Nome :* ${namaUser}
 • *Número :* ${sender.split("@")[0]}
@@ -871,7 +871,7 @@ console.log(color('❲ USUARIO VERIFICADO ❳'), '\nHora : ', color(time, 'yello
 const namaUser = `${pushname}`
 const serialUser = createSerial(10)
 addRegisteredUser(sender, namaUser, time, serialUser)
-hasil = ` 〘 *NOVO USUARIO VERIFICADO COM SUCESSO* 〙
+hasil = `   〘 *NOVO USUARIO VERIFICADO COM SUCESSO* 〙
 
 • *Nome :* ${namaUser}
 • *Número :* ${sender.split("@")[0]}
@@ -882,7 +882,7 @@ hasil = ` 〘 *NOVO USUARIO VERIFICADO COM SUCESSO* 〙
 LorranX.sendMessage(from, hasil, text, {quoted: produtoverify})
 console.log(color('❲ USUARIO VERIFICADO ❳'), '\nHora : ', color(time, 'yellow'), '\nNome : ', color(namaUser, 'cyan'), '\nSerial : ', color(serialUser, 'cyan'))
 }
-break
+break;
         case 'owner':
           const vacrd = `BEGIN:VCARD\n`+`VERSION:3.0\n`+
                         `FN:Dono do Bot\n`+
@@ -969,6 +969,29 @@ break
         addFilter(from)
 				break;
         //FUNÇÕES DE GRUPO
+        case 'setig': 
+        case 'setppgp': 
+        if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+        if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+        if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
+        if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
+                       media = await client.downloadAndSaveMediaMessage(mek)
+                         await client.updateProfilePicture (from, media)
+                        reply('Pronto macaco alterei o icone do grupo')
+					break;
+        case 'grp':
+					if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+          if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
+					if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
+					if (args[0] === 'open') {
+					    reply(`*Grupo aberto com sucesso*`)
+						LorranX.groupSettingChange(from, GroupSettingChange.messageSend, false)
+					} else if (args[0] === 'close') {
+						reply(`*Grupo fechado com sucesso`)
+						LorranX.groupSettingChange(from, GroupSettingChange.messageSend, true)
+					}
+				break;
          case 'resetlink':
          case 'resetarlik':
          case 'revokelink':
@@ -1010,20 +1033,25 @@ break
             LorranX.sendMessage(sender, "tchau", text)
           })
           break;
-        case 'setdesc':
-          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+          case 'setdesc':
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
-					if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
 					if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
-          const newdesc = body.slice(11)
-          const olddesc = groupDesc
-          try {
-          LorranX.groupUpdateDescription(from, newdesc)
-          reply(`Pronto, alterei a descricao do grupo\nde: ${olddesc}\n\npara: ${newdesc}`)
-          } catch (e) {
-            reply(e)
-          }
-          break;
+            LorranX.groupUpdateDescription(from, `${body.slice(9)}`)
+            LorranX.sendMessage(from, 'Pronto macaco, alterei a descrição do grupo', text, {quoted: mek})
+      break;
+      case 'listadmin':
+        if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+        if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+					teks = `Lista de adms do grupo *${groupMetadata.subject}*\n𝗧𝗼𝘁𝗮𝗹 : ${groupAdmins.length}\n\n`
+					no = 0
+					for (let admon of groupAdmins) {
+						no += 1
+						teks += `[${no.toString()}] @${admon.split('@')[0]}\n`
+					}
+					mentions(teks, groupAdmins, true)
+					break
           case 'promote':
             case 'promover':
               if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
@@ -1255,6 +1283,15 @@ break
 					LorranX.blockUser (`${body.slice(10)}@c.us`, "remove")
 					LorranX.sendMessage(from, `Pronto papai, desbloquiei esse corno`, text)
 				break;
+        case 'setpp':
+					if (!isOwner) return reply("Você não é meu papai 😡")
+				    LorranX.updatePresence(from, Presence.composing) 
+					if (!isQuotedImage) return reply(`Pra usar esse comando c tem que marcar uma imagem ou enviar uma com a legenda .setpp`)
+					enmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+					media = await LorranX.downloadAndSaveMediaMessage(enmedia)
+					await LorranX.updateProfilePicture(botNumber, media)
+					reply('Pronto papai, alterei minha foto de perfil')
+					break;
         case 'creategroup':
 			case 'criargrupo':
         if (!isOwner) return reply("Você não é meu papai 😡")
