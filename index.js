@@ -1767,7 +1767,7 @@ break;
           addFilter(from)
             break;
         //END MODIFICADORES VIDEO
-        case 'selfmode':
+        case 'shit':
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             sendButtonMsg(`"Ola usuario, essa funcao ainda esta em teste, basta ecolher entre video e imagem"}`,`${RODAPE()}`,[{
               buttonId:`${prefix}shitv`,
