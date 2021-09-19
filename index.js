@@ -707,7 +707,6 @@ Versão atual: 1.0.5
 ║│↭_*   [ *${prefix}hidetag* ]
 ║│↭_*   [ *${prefix}notif* ]
 ║│↭_*   [ *${prefix}tagimg* ]
-║│↭_*   [ *${prefix}tagimg* ]
 ║│↭_*   [ *${prefix}tagsticker* ]
 ║│↭_*   [ *${prefix}kick* ] 
 ║│↭_*   [ *${prefix}add* ] 
@@ -1684,6 +1683,21 @@ case 'kickall':
         });
         addFilter(from)
           break;
+          case 'robot':
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+        if (!isQuotedAudio) return reply("Pra usar esse comando c tem que marcar um audio");
+	encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+	media = await LorranX.downloadAndSaveMediaMessage(encmedia)
+	ran = getRandom('.mp3')
+	exec(`ffmpeg -i ${media} -filter_complex "afftfilt=real='hypot(re,im)*sin(0)':imag='hypot(re,im)*cos(0)':win_size=512:overlap=0.75" ${ran}`, (err, stderr, stdout) => {
+fs.unlinkSync(media)
+if (err) return reply('Error!')
+hah = fs.readFileSync(ran)
+LorranX.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt: true, quoted: mek})
+fs.unlinkSync(ran)
+	})
+  addFilter(from)
+break;
         //END MODIFICAR AUDIO
         //MODIFICAR VIDEO
           case "reversev":
@@ -1753,6 +1767,22 @@ case 'kickall':
           addFilter(from)
             break;
         //END MODIFICADORES VIDEO
+        case 'selfmode':
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+            sendButtonMsg(`"Ola usuario, essa funcao ainda esta em teste, basta ecolher entre video e imagem"}`,`${RODAPE()}`,[{
+              buttonId:`${prefix}shitv`,
+              buttonText: {
+                displayText: `video`
+              },
+              type: 1
+            },{
+              buttonId: `${prefix}shiti`,
+              buttonText: {
+                displayText: 'imagem'
+              },
+              type: 1
+            }])
+            break;
             case 'lirik':
           if(!q) return reply('lagu apa?')
           let song = await hx.lirik(q);
@@ -1860,6 +1890,23 @@ case 'kickall':
           }
             break;
         //PARA BOTÕES
+        case 'shitv':
+          data = fs.readFileSync('./database/api offline/shitv.js');
+                  jsonData = JSON.parse(data);
+                  randIndex = Math.floor(Math.random() * jsonData.length);
+                  randKey = jsonData[randIndex];
+                 hasil = await getBuffer(randKey.result)
+                 LorranX.sendMessage(from,hasil,video,{quoted: mek,caption: `Tai seu video`})
+         break
+         case 'shiti':
+          data = fs.readFileSync('./database/api offline/shiti.js');
+                  jsonData = JSON.parse(data);
+                  randIndex = Math.floor(Math.random() * jsonData.length);
+                  randKey = jsonData[randIndex];
+                 hasil = await getBuffer(randKey.result)
+                 LorranX.sendMessage(from,hasil,image,{quoted: mek,caption: `Tai seu video`})
+         break
+ 
 
         //GARBAGE
 
