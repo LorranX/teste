@@ -48,6 +48,7 @@ self = false;
 
         //LOAD FILES
         const registrarusuarios = JSON.parse(fs.readFileSync('./database/user/registros.json'))
+        const ban = JSON.parse(fs.readFileSync('./database/user/banned.json'))
         //END LOAD FILES
 
         const getRegisteredRandomId = () => {
@@ -269,6 +270,7 @@ module.exports = (LorranX) => {
       const groupDesc = isGroup ? groupMetadata.desc : ''
       const groupOwner = isGroup ? groupMetadata.owner : ''
       const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : ''
+      const isBanned = ban.includes(sender)
       const isOwner = owner.includes(sender);
       const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
       const produtoverify = { key: { fromMe: false, participant: `553195703379@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/verificado.png') }, "title": `VERIFICANDO...`, "productImageCount": 9999 }, "businessOwnerJid": `5531957033796@s.whatsapp.net`}}}
@@ -1274,6 +1276,20 @@ break
                 break;
         //END FUNÇÕES GRUPO
         //FUNÇÕES DONO
+        case 'ban':
+          if (!isOwner) return reply("Você não é meu papai 😡")
+				bnnd = body.slice(5)
+				ban.push(`${bnnd}@s.whatsapp.net`)
+				fs.writeFileSync('./database/banned.json', JSON.stringify(ban))
+				reply(`Berhasil membanned nomor : wa.me/${bnnd} `)
+				break
+        case 'unban':
+          if (!isOwner) return reply("Você não é meu papai 😡")
+				bnnd = body.slice(7)
+				ban.splice(`${bnnd}@s.whatsapp.net`, 1)
+				fs.writeFileSync('./database/banned.json', JSON.stringify(ban))
+				reply(`Nomor wa.me/${bnnd} telah di unban!`)
+				break
             case 'block':
 					LorranX.updatePresence(from, Presence.composing) 
 					if (!isOwner) return reply("Você não é meu papai 😡")
@@ -1767,22 +1783,6 @@ break;
           addFilter(from)
             break;
         //END MODIFICADORES VIDEO
-        case 'shit':
-          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
-            sendButtonMsg(`"Ola usuario, essa funcao ainda esta em teste, basta ecolher entre video e imagem"}`,`${RODAPE()}`,[{
-              buttonId:`${prefix}shitv`,
-              buttonText: {
-                displayText: `video`
-              },
-              type: 1
-            },{
-              buttonId: `${prefix}shiti`,
-              buttonText: {
-                displayText: 'imagem'
-              },
-              type: 1
-            }])
-            break;
             case 'lirik':
           if(!q) return reply('lagu apa?')
           let song = await hx.lirik(q);
@@ -1890,22 +1890,6 @@ break;
           }
             break;
         //PARA BOTÕES
-        case 'shitv':
-          data = fs.readFileSync('./database/api offline/shitv.js');
-                  jsonData = JSON.parse(data);
-                  randIndex = Math.floor(Math.random() * jsonData.length);
-                  randKey = jsonData[randIndex];
-                 hasil = await getBuffer(randKey.result)
-                 LorranX.sendMessage(from,hasil,video,{quoted: mek,caption: `Tai seu video`})
-         break
-         case 'shiti':
-          data = fs.readFileSync('./database/api offline/shiti.js');
-                  jsonData = JSON.parse(data);
-                  randIndex = Math.floor(Math.random() * jsonData.length);
-                  randKey = jsonData[randIndex];
-                 hasil = await getBuffer(randKey.result)
-                 LorranX.sendMessage(from,hasil,image,{quoted: mek,caption: `Tai seu video`})
-         break
  
 
         //GARBAGE
