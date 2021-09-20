@@ -252,7 +252,6 @@ module.exports = (LorranX) => {
       const is = budy.slice(0).trim().split(/ +/).shift().toLowerCase()
       const args = body.trim().split(/ +/).slice(1)
       const time = moment.tz('America/Sao_Paulo').format('DD/MM HH:mm:ss')
-      const usuario = `${pushname}`
       const isCmd = body.startsWith(prefix)
       const arg = budy.slice(command.length + 2, budy.length)
       const q = args.join(' ')
@@ -1311,6 +1310,7 @@ break
         case 'ban':
           if (!isOwner) return reply("Você não é meu papai 😡")
 				bnnd = body.slice(5)
+        const usuario = `${pushname}`
 				ban.push(`${bnnd}@s.whatsapp.net`)
 				fs.writeFileSync('./database/user/banned.json', JSON.stringify(ban))
 				reply(`Pronto papai, ja bani essa pessoa, agora ela não podera mais usar meus comandos`)
@@ -1319,6 +1319,7 @@ break
         case 'unban':
           if (!isOwner) return reply("Você não é meu papai 😡")
 				bnnd = body.slice(7)
+        const usuario = `${pushname}`
 				ban.splice(`${bnnd}@s.whatsapp.net`, 1)
 				fs.writeFileSync('./database/user/banned.json', JSON.stringify(ban))
 				reply(`Pronto papai, agora essa pessoa pode voltar a usar os meus comados`)
