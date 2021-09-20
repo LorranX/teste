@@ -1280,14 +1280,14 @@ break
           if (!isOwner) return reply("Você não é meu papai 😡")
 				bnnd = body.slice(5)
 				ban.push(`${bnnd}@s.whatsapp.net`)
-				fs.writeFileSync('./database/banned.json', JSON.stringify(ban))
+				fs.writeFileSync('./database/user/banned.json', JSON.stringify(ban))
 				reply(`Berhasil membanned nomor : wa.me/${bnnd} `)
 				break
         case 'unban':
           if (!isOwner) return reply("Você não é meu papai 😡")
 				bnnd = body.slice(7)
 				ban.splice(`${bnnd}@s.whatsapp.net`, 1)
-				fs.writeFileSync('./database/banned.json', JSON.stringify(ban))
+				fs.writeFileSync('./database/user/banned.json', JSON.stringify(ban))
 				reply(`Nomor wa.me/${bnnd} telah di unban!`)
 				break
             case 'block':
