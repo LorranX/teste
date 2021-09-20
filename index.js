@@ -671,11 +671,11 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-Ultima atualização: 18/09/2021 as 00:22
-Ultimas alterações: Alterado prefix padrão "#" para "." , adicionado list admin, corrigido setdesc, adicionados novos comandos para owner e admin
-Possiveis proximas Atualizações: Correções, criação de novos comandos sem prefix (Talvez ja venham alguns xingamentos), adcionar o ban user (função que proibe determinado usuario de acessar as funções do bot)
+Ultima atualização: 20/09/2021 as 00:22
+Ultimas alterações: Adicionado novo modificador de audio (robot),adicionada função ban, corrigidos alguns erros
+Possiveis proximas Atualizações: Correções, criação de novos comandos sem prefix (Talvez ja venham alguns xingamentos),)
 Versão atual: 1.0.5
-% de conclusão: 38%
+% de conclusão: 39%
 `
         LorranX.sendMessage(from, fs.readFileSync("./lib/image/changelog.jpg"), image, {quoted: mek, caption: medsos})
       }
@@ -1314,15 +1314,15 @@ break
 				ban.push(`${bnnd}@s.whatsapp.net`)
 				fs.writeFileSync('./database/user/banned.json', JSON.stringify(ban))
 				reply(`Pronto papai, ja bani essa pessoa, agora ela não podera mais usar meus comandos`)
-        console.log(color('NOVO USUARIO BANIDO'), '\nHora : ', color(time, 'yellow'), '\nNome : ', color(usuario, 'cyan'))
+        console.log(color('NOVO USUARIO BANIDO'), '\nHora : ', color(time, 'yellow'))
 				break
         case 'unban':
           if (!isOwner) return reply("Você não é meu papai 😡")
 				bnnd = body.slice(7)
 				ban.splice(`${bnnd}@s.whatsapp.net`, 1)
 				fs.writeFileSync('./database/user/banned.json', JSON.stringify(ban))
-				reply(`Pronto papai, agora essa pessoa pode voltar a usar os meus comados`)
-        console.log(color('NOVO USUARIO DESBANIDO'), '\nHora : ', color(time, 'yellow'), '\nNome : ', color(usuario, 'cyan'))
+				reply(`Pronto papai, agora essa pessoa pode voltar a usar os meus comandos`)
+        console.log(color('NOVO USUARIO DESBANIDO'), '\nHora : ', color(time, 'yellow'))
 				break
             case 'block':
 					LorranX.updatePresence(from, Presence.composing) 
