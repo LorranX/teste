@@ -473,6 +473,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
 ║│↭_*   [ *${prefix}bass* ]
 ║│↭_*   [ *${prefix}estourar* ]
 ║│↭_*   [ *${prefix}reverse* ]
+║│↭_*   [ *${prefix}robot* ]
 
 ║│
 
@@ -673,7 +674,7 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
 Ultima atualização: 20/09/2021 as 00:22
 Ultimas alterações: Adicionado novo modificador de audio (robot),adicionada função ban, corrigidos alguns erros
-Possiveis proximas Atualizações: Correções, criação de novos comandos sem prefix (Talvez ja venham alguns xingamentos),)
+Possiveis proximas Atualizações: Correções, criação de novos comandos sem prefix (Talvez ja venham alguns xingamentos)
 Versão atual: 1.0.5
 % de conclusão: 39%
 `
@@ -1756,6 +1757,7 @@ case 'kickall':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply("Pra usar esse comando c tem que marcar um audio");
+        reply("Calmai macaco 🦧");
 	encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 	media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 	ran = getRandom('.mp3')
