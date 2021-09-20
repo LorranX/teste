@@ -1319,7 +1319,6 @@ break
         case 'unban':
           if (!isOwner) return reply("Você não é meu papai 😡")
 				bnnd = body.slice(7)
-        const usuario = `${pushname}`
 				ban.splice(`${bnnd}@s.whatsapp.net`, 1)
 				fs.writeFileSync('./database/user/banned.json', JSON.stringify(ban))
 				reply(`Pronto papai, agora essa pessoa pode voltar a usar os meus comados`)
