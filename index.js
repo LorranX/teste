@@ -252,6 +252,7 @@ module.exports = (LorranX) => {
       const is = budy.slice(0).trim().split(/ +/).shift().toLowerCase()
       const args = body.trim().split(/ +/).slice(1)
       const time = moment.tz('America/Sao_Paulo').format('DD/MM HH:mm:ss')
+      const usuario = `${pushname}`
       const isCmd = body.startsWith(prefix)
       const arg = budy.slice(command.length + 2, budy.length)
       const q = args.join(' ')
@@ -568,6 +569,8 @@ type: 1
 
 ║│↭_*   [ *${prefix}block* ] 
 ║│↭_*   [ *${prefix}unblock* ]
+║│↭_*   [ *${prefix}ban* ] 
+║│↭_*   [ *${prefix}unban* ]
 ║│↭_*   [ *${prefix}creatgroup* ] 
 ║│↭_*   [ *${prefix}join* ] 
 ║│↭_*   [ *${prefix}setpp* ] 
@@ -1310,14 +1313,16 @@ break
 				bnnd = body.slice(5)
 				ban.push(`${bnnd}@s.whatsapp.net`)
 				fs.writeFileSync('./database/user/banned.json', JSON.stringify(ban))
-				reply(`Berhasil membanned nomor : wa.me/${bnnd} `)
+				reply(`Pronto papai, ja bani essa pessoa, agora ela não podera mais usar meus comandos`)
+        console.log(color('NOVO USUARIO BANIDO'), '\nHora : ', color(time, 'yellow'), '\nNome : ', color(usuario, 'cyan'))
 				break
         case 'unban':
           if (!isOwner) return reply("Você não é meu papai 😡")
 				bnnd = body.slice(7)
 				ban.splice(`${bnnd}@s.whatsapp.net`, 1)
 				fs.writeFileSync('./database/user/banned.json', JSON.stringify(ban))
-				reply(`Nomor wa.me/${bnnd} telah di unban!`)
+				reply(`Pronto papai, agora essa pessoa pode voltar a usar os meus comados`)
+        console.log(color('NOVO USUARIO DESBANIDO'), '\nHora : ', color(time, 'yellow'), '\nNome : ', color(usuario, 'cyan'))
 				break
             case 'block':
 					LorranX.updatePresence(from, Presence.composing) 
