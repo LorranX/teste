@@ -742,6 +742,7 @@ sendButtonMsg(MenuAdmin, `By LorranX ©`,[{
         //SEM PREFIX
     switch(is) {
       case 'bot':
+        if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 buf = fs.readFileSync(`./database/mp3/oi.mp3`)
 LorranX.sendMessage(from, buf, audio, {
 mimetype: 'audio/mp4', quoted: mek, ptt: true
@@ -753,6 +754,7 @@ break;
         //MENUS
         case 'help':
         case 'menu':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           var menulist = LorranX.prepareMessageFromContent(from, {
             "listMessage" :{
               "title": `${HORARIOS} ${pushname}\n\nEu sou o BOT DO LORRAN\nainda não estou pronto, mas asssim que estiver meu papai vai disponibilizar esse script no github\n\n\nEsse script foi desenvolvido com a ajuda direta e indireta de algumas pessoas\nSPECIAL THANKS TO:\nAffis Junianto\nManik\nmhankbarbar`,
@@ -777,6 +779,7 @@ break;
           addFilter(from)
           break;
             case 'adminmenu':
+              if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
               var menuadmin = LorranX.prepareMessageFromContent(from, {
                 "listMessage" :{
                   "title": `${HORARIOS} ${pushname}\n\nTambem posso te ajudar com o gerenciamento de grupos\nainda não tenho muitas funções mas meu dono me atualiza diariamente`,
@@ -801,6 +804,7 @@ break;
               addFilter(from)
               break;
               case 'ownermenu':
+                if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
               var meumenu = LorranX.prepareMessageFromContent(from, {
                 "listMessage" :{
                   "title": `${HORARIOS} ${pushname}\n\nAs funções nesse menu so podem ser usadas pelo meu papai\nainda não tenho muitas funções mas meu dono me atualiza diariamente`,
@@ -825,6 +829,7 @@ break;
               addFilter(from)
               break;
               case 'modmenu':
+                if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
               var modficadoresmenu = LorranX.prepareMessageFromContent(from, {
                 "listMessage" :{
                   "title": `${HORARIOS} ${pushname}\n\nEsse é o menu de modificadores, aqui você pode modificar seus videos e audios,`,
@@ -856,6 +861,7 @@ break;
         case 'verify':
 case 'registrar':
 case 'register':
+  if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 if (isRegister) return reply('```Seus dados ja estam registrados na minha database```')
 veri = sender
 if (isGroup) {
@@ -889,6 +895,7 @@ console.log(color('❲ USUARIO VERIFICADO ❳'), '\nHora : ', color(time, 'yello
 }
 break;
         case 'owner':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           const vacrd = `BEGIN:VCARD\n`+`VERSION:3.0\n`+
                         `FN:Dono do Bot\n`+
                         `ORG:Desenvolvedor do BOT DO LORRAN\n`+
@@ -899,12 +906,14 @@ break;
           addFilter(from)
           break;
         case 'github':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           LorranX.sendMessage(from, "Infelizmente ainda nao estou pronto, assim que possivel meu dono dispobilizara este script", text)
           break;
         case 'figu':
         case 'figurinha':
         case 'sticker':
           case 'f':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           var a = "BOT DO LORRAN";
           var b = "ALPHA VERSION";
           if (isMedia && !mek.message.videoMessage || isQuotedImage ) {
@@ -966,6 +975,7 @@ break;
           addFilter(from)
           break;
           case 'attp':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
                 if (args.length < 1) return reply(`C tem que mandar um texto pra eu criar figurinha`)
                 dulim = body.slice(5)
@@ -976,6 +986,7 @@ break;
         //FUNÇÕES DE GRUPO
         case 'setig': 
         case 'setppgp': 
+        if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
         if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
         if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
@@ -985,6 +996,7 @@ break;
                         reply('Pronto macaco alterei o icone do grupo')
 					break;
         case 'grp':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 					if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
@@ -1000,6 +1012,7 @@ break;
          case 'resetlink':
          case 'resetarlik':
          case 'revokelink':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
@@ -1009,6 +1022,7 @@ break;
           reply('Link do grupo resetado')
          break;
          case 'demoteall':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
@@ -1020,6 +1034,7 @@ break;
                       LorranX.groupDemoteAdmin(from, members_id)
                       break;
                       case 'promoteall':
+                        if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
                         if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
                         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
                         if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
@@ -1031,6 +1046,7 @@ break;
                 LorranX.groupMakeAdmin(from, members_id)
                 break;
         case 'leave':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
           LorranX.groupLeave(from)
@@ -1039,6 +1055,7 @@ break;
           })
           break;
           case 'setdesc':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
@@ -1047,6 +1064,7 @@ break;
             LorranX.sendMessage(from, 'Pronto macaco, alterei a descrição do grupo', text, {quoted: mek})
       break;
       case 'listadmin':
+        if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
         if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					teks = `Lista de adms do grupo *${groupMetadata.subject}*\n𝗧𝗼𝘁𝗮𝗹 : ${groupAdmins.length}\n\n`
@@ -1059,6 +1077,7 @@ break;
 					break
           case 'promote':
             case 'promover':
+              if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
               if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
 					if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
@@ -1080,6 +1099,7 @@ break;
 					break;
           case 'demote':
             case 'rebaixar':
+              if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
               if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
@@ -1100,6 +1120,7 @@ break;
 					}
 					break;
           case 'hidetag':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
@@ -1138,6 +1159,7 @@ await LorranX.sendMessage(from, options, text)
 break
           case 'tagsticker':
             case 'tagfig': 
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
@@ -1164,6 +1186,7 @@ break
                     addFilter(from)
                     break;
                     case 'tagimg':
+                      if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
                       if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
                       if (!isGroup) return reply("Este comando so pode ser usado em grupos")
                       if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
@@ -1190,6 +1213,7 @@ break
                     addFilter(from)
                     break;
           case 'setname':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
@@ -1198,6 +1222,7 @@ break
                 LorranX.sendMessage(from, 'Pronto macaco, alterei o nome do grupo', text, {quoted: mek})
 					break;
 			     	case 'kick':
+              if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
               if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
               if (!isGroup) return reply("Este comando so pode ser usado em grupos")
               if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
@@ -1219,6 +1244,7 @@ break
           addFilter(from)
 					break;
           case 'add':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
             if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
@@ -1235,6 +1261,7 @@ break
           addFilter(from)
 				break;
         case 'linkgp':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
           if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
@@ -1247,6 +1274,7 @@ break
           break;
           case 'delete':
 			    	case 'del':
+              if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
               if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
               if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
 						LorranX.deleteMessage(from, { id: mek.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
@@ -1254,6 +1282,7 @@ break
 						break;
             case 'ttt':
               case 'tictactoe':
+                if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
                 if (!isGroup) return reply("mainkan di group")
                 if (args.length < 1) return reply ("tag orang yang mau kamu aja main")
                 if (isTTT) return reply("permainan sedang berlangsung di group ini")
@@ -1392,6 +1421,7 @@ case 'kickall':
         //END FUNÇÕES DONO
         //CONVERSORES
         case 'tomp3':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
 				LorranX.updatePresence(from, Presence.composing)
 				if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
@@ -1409,6 +1439,7 @@ case 'kickall':
         addFilter(from)
 				break;
 				case 'togif':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
                     if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
                         const encmediaaa = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
@@ -1426,6 +1457,7 @@ case 'kickall':
                     addFilter(from)
                     break;
                     case 'toimg':
+                      if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
                       if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
 				if (!isQuotedSticker) return reply('Pra usar esse comando c tem que marcar uma figurinha')
 					reply("Calmai macaco 🦧")
@@ -1445,6 +1477,7 @@ case 'kickall':
         //DOWNLOADERS
         case 'play':
           case 'p':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (args.length === 0) return reply(`Pra eu baixar a musica c tem que mandar um nome valido\nExemplo: *${prefix}play sertanejo*`)
           var srch = args.join('')
@@ -1468,6 +1501,7 @@ case 'kickall':
           addFilter(from)
           break;
         case 'pvideo':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (args.length === 0) return reply(`Pra eu baixar esse video c tem que mandar um nome valido\nExemplo: *${prefix}pvideo macaco*`)
           var srch = args.join('')
@@ -1492,6 +1526,7 @@ case 'kickall':
           addFilter(from)                  
           break;
         case 'ytmp3':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (args.length < 1) return reply('Pra eu baixar o audio c tem que usar um link valido do youtube')
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
@@ -1515,6 +1550,7 @@ case 'kickall':
           addFilter(from)
           break;
         case 'ytmp4':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (args.length < 1) return reply('Pra eu baixar o video c tem que usar um link valido do youtube')
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
@@ -1538,6 +1574,7 @@ case 'kickall':
           addFilter(from)
           break;
           case 'twitter':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (!isUrl(args[0]) && !args[0].includes('twitter.com') && !q) return reply("Link invalido")
             var res = await hx.twitter(args[0])
@@ -1545,6 +1582,7 @@ case 'kickall':
             addFilter(from)
             break;
             case 'ig':
+              if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
         if (!isUrl(args[0]) && !args[0].includes('instagram.com')) return reply(`Link invalido`)
         reply(`Camai macaco`)
 	    hx.igdl(args[0])
@@ -1562,6 +1600,7 @@ case 'kickall':
 	    break;
         //END DOWNLOADERS
           case 'probabilidade':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
               rate = body.slice(1)
               const ra =['99','7','1000','-10','31','0','4','9','17','28','34','48','59','62','100','29','94','75','41','39']
@@ -1569,6 +1608,7 @@ case 'kickall':
               LorranX.sendMessage(from, 'Comando : *'+rate+'*\n\nResultado : '+ te+'%', text, { quoted: mek })
               break;
                     case '%gay':
+                      if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
                       if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Porra, burrão, c tem que marcar alguem pra eu dizer a %')
               rate = body.slice(1)
@@ -1578,6 +1618,7 @@ case 'kickall':
               break;
               case 'dado':
           case 'dadin':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
               const dadinhos = ["⚀","⚁","⚂","⚃","⚄","⚅"]
               dadoaleatorio = dadinhos[Math.floor(Math.random() * dadinhos.length)]
@@ -1587,6 +1628,7 @@ case 'kickall':
               break;
         //MODIFICAR AUDIO
 				  case 'slowmo':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isQuotedAudio) return reply('Marque um áudio')
         reply("Calmai macaco 🦧");
@@ -1603,6 +1645,7 @@ case 'kickall':
         addFilter(from)
 				  break;
           case 'acelerar':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)  
         reply("Calmai macaco 🦧");
         if (!isQuotedAudio) return reply('Marque um áudio')
@@ -1619,6 +1662,7 @@ case 'kickall':
         addFilter(from)
           break; 
 				  case 'esquilo':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply('Marque um áudio')
         reply("Calmai macaco 🦧");
@@ -1635,6 +1679,7 @@ case 'kickall':
         addFilter(from)
 				  break;
 				  case 'engrossar':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply('Marque um áudio')
         reply("Calmai macaco 🦧");
@@ -1651,6 +1696,7 @@ case 'kickall':
         addFilter(from)
 				  break;
 				  case 'bass': 
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply('Marque um áudio')  
         reply("Calmai macaco 🦧");              
@@ -1667,6 +1713,7 @@ case 'kickall':
         addFilter(from)
 				  break;
           case 'estourar':  
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)     
         if (!isQuotedAudio) return reply('Marque um áudio')
         reply("Calmai macaco 🦧");
@@ -1683,6 +1730,7 @@ case 'kickall':
         addFilter(from)
           break;
           case "reverse":
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply("Pra usar esse comando c tem que marcar um audio");
         reply("Calmai macaco 🦧");
@@ -1700,6 +1748,7 @@ case 'kickall':
         addFilter(from)
           break;
           case 'robot':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply("Pra usar esse comando c tem que marcar um audio");
 	encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -1717,6 +1766,7 @@ break;
         //END MODIFICAR AUDIO
         //MODIFICAR VIDEO
           case "reversev":
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
         reply("Calmai macaco 🦧");
@@ -1737,6 +1787,7 @@ break;
         addFilter(from)
           break;
           case "acelerarv":
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
         reply("Calmai macaco 🦧");
@@ -1760,6 +1811,7 @@ break;
         addFilter(from)
             break;
             case "slowv":
+              if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
               if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
           reply("Calmai macaco 🦧");
