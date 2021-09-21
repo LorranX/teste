@@ -672,11 +672,11 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-Ultima atualização: 20/09/2021 as 00:22
-Ultimas alterações: Adicionado novo modificador de audio (robot),adicionada função ban, corrigidos alguns erros
-Possiveis proximas Atualizações: Correções, criação de novos comandos sem prefix (Talvez ja venham alguns xingamentos)
-Versão atual: 1.0.5
-% de conclusão: 39%
+  • Ultima atualização: 20/09/2021 as 22:23
+  • Ultimas alterações: Corrigidos alguns erros
+  • Possiveis proximas Atualizações: Correções, criação de novos comandos sem prefix (Talvez ja venham alguns xingamentos)
+  • Versão atual: 1.0.5
+  • % de conclusão: 39%
 `
         LorranX.sendMessage(from, fs.readFileSync("./lib/image/changelog.jpg"), image, {quoted: mek, caption: medsos})
       }
@@ -1486,6 +1486,7 @@ case 'kickall':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (args.length === 0) return reply(`Pra eu baixar a musica c tem que mandar um nome valido\nExemplo: *${prefix}play sertanejo*`)
+          reply("Calmai macaco, pode ser que demore um pouco 🦧")
           var srch = args.join('')
           find = await yts(srch)
           res = find.all
@@ -1510,6 +1511,7 @@ case 'kickall':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (args.length === 0) return reply(`Pra eu baixar esse video c tem que mandar um nome valido\nExemplo: *${prefix}pvideo macaco*`)
+          reply("Calmai macaco, pode ser que demore um pouco 🦧")
           var srch = args.join('')
           find = await yts(srch);
           res = find.all 
@@ -1535,10 +1537,10 @@ case 'kickall':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (args.length < 1) return reply('Pra eu baixar o audio c tem que usar um link valido do youtube')
+          reply("Calmai macaco, pode ser que demore um pouco 🦧")
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
           if (!link) return reply("Link invalido")
           try {
-            reply("Calmai macaco 🦧")
             yta(args[0])
             .then((res) =>{
               const { dl_link, thumb, title, filesizeF, filesize } = res
@@ -1559,10 +1561,10 @@ case 'kickall':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (args.length < 1) return reply('Pra eu baixar o video c tem que usar um link valido do youtube')
+          reply("Calmai macaco, pode ser que demore um pouco 🦧")
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
           if (!link) return reply("link invalido")
           try {
-            reply("Calmai macaco 🦧")
             ytv(args[0])
             .then((res) =>{
               const { dl_link, thumb, title, filesizeF, filesize } = res
@@ -1583,6 +1585,7 @@ case 'kickall':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (!isUrl(args[0]) && !args[0].includes('twitter.com') && !q) return reply("Link invalido")
+            reply("Calmai macaco, pode ser que demore um pouco 🦧")
             var res = await hx.twitter(args[0])
             sendMediaURL(res.HD, "Tai seu video")
             addFilter(from)
@@ -1590,7 +1593,7 @@ case 'kickall':
             case 'ig':
               if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
         if (!isUrl(args[0]) && !args[0].includes('instagram.com')) return reply(`Link invalido`)
-        reply(`Camai macaco`)
+        reply("Calmai macaco, pode ser que demore um pouco 🦧") 
 	    hx.igdl(args[0])
 	    .then(async(result) => {
             for(let i of result.medias){
