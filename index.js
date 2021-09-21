@@ -1426,6 +1426,16 @@ case 'kickall':
 				break;
         //END FUNÇÕES DONO
         //CONVERSORES
+        case 'tourl':
+          if ((isMedia && !mek.message.videoMessage || isQuotedImage || isQuotedVideo ) && args.length == 0) {
+                  macaquito = isQuotedImage || isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
+                  lafonci = await LorranX.downloadMediaMessage(macaquito)
+                  res = await upload(lafonci)
+                  reply(res)
+                  } else {
+                  reply('Pra usar esse comando c tem que marcar um video ou imagem')
+                  }
+                  break;
         case 'tomp3':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
