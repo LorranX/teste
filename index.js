@@ -987,17 +987,17 @@ break;
         addFilter(from)
 				break;
         //FUNÇÕES DE GRUPO
-        case 'setig': 
-        case 'setppgp': 
-        if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
-        if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
-        if (!isGroup) return reply("Este comando so pode ser usado em grupos")
-        if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
-        if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
-                       media = await LorranX.downloadAndSaveMediaMessage(mek)
-                         await LorranX.updateProfilePicture (from, media)
-                        reply('Pronto macaco alterei o icone do grupo')
-					break;
+        case 'setgi': 
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
+					if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+          if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
+					if (!isBotGroupAdmins) return reply("Para usar este comando o bot deve ser um dos administradores")
+          const gpig = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo: mek
+          const medipp = await LorranX.downloadAndSaveMediaMessage(gpig)
+          await LorranX.updateProfilePicture (from, medipp)
+          reply(`Pronto macaco, alterei a foto do grupo`)
+          break;
         case 'grp':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 					if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
