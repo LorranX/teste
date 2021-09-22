@@ -634,7 +634,7 @@ type: 1
 
 ║╭──❉ * ⛤𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨⛤ * ❉──
 
-║│↭_*   [ *${prefix}listonline* ] 
+║│↭_*   [ *${prefix}ping* ] 
 ║│↭_*   [ *${prefix}probabilidade* ]
 ║│↭_*   [ *${prefix}%gay* ] 
 ║│↭_*   [ *${prefix}twitter* ]
@@ -989,6 +989,12 @@ break;
           }
           addFilter(from)
           break;
+          case 'speed':
+			case 'ping':
+					const timestampi = speed();
+					const latensyi = speed() - timestampi
+					reply(`Speed: ${latensyi.toFixed(4)} Segundos`)
+					break;
           case 'attp':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
