@@ -107,6 +107,10 @@ function HORAEXATA(seconds){
   return `${pad(hours)} horas ${pad(minutes)} minutos ${pad(seconds)} segundos`
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 
 function RODAPE(){
   MyTrademark = ["By LorranX ©"];
