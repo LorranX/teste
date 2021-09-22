@@ -451,9 +451,14 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
         //MUTAR BOT EM GRUPOS
         
         if (isMuted){
+          if (!isGroupAdmins && !isOwner) return
+          if (messagesC.includes(prefix+'unmute')){
               let anu = mute.indexOf(from)
               mute.splice(anu, 1)
+              fs.writeFileSync('./database/mute.json', JSON.stringify(mute))
+              reply(`Pronto, agora ja respondo a todos os comandos enviados nesse grupo`)
           }
+      }
 
         //COMANDOS DE LISTA
         if (listbut == 'Modificadores de Audio' || command == `${prefix}start`) {
@@ -1005,17 +1010,7 @@ break;
                 mute.push(from)
                 fs.writeFileSync('./database//bot/mute.json', JSON.stringify(mute))
                 reply(`Pronto, a partir de agora não respondo mais a nenhum comando nesse grupo`)
-                break
-                case 'unmute' :
-                  if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
-                  if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
-                  if (!isGroup) return reply("Este comando so pode ser usado em grupos")
-                  if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
-                      let anu = mute.indexOf(from)
-                      mute.splice(anu, 1)
-                      fs.writeFileSync('./database/bot/mute.json', JSON.stringify(mute))
-                      reply(`Pronto, agora ja respondo a todos os comandos enviados nesse grupo`)
-break;
+                break;
         case 'setgi': 
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 					if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
