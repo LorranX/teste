@@ -1003,7 +1003,7 @@ break;
               },
               type: 1
             },{
-              buttonId: `${prefix}mutador off`,
+              buttonId: `${prefix}mutador 0`,
               buttonText: {
                 displayText: 'não'
               },
