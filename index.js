@@ -423,9 +423,9 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
         type === "extendedTextMessage" && content.includes("stickerMessage");
       
       
-      if (isCmd && !isGroup) console.log("[",color("command","lime"),"]",time2,color(command,"lime"),"from",color(sender.split("@")[0],"cyan"))
-      if (isCmd && isGroup) console.log("[",color("command","lime"),"]",time2,color(command,"lime"),"from",color(sender.split("@")[0],"cyan"),"in",color(groupName,"yellow"))
-      if (listbut) console.log("[",color("command","lime"),"]",time2,color(listbut,"lime"),"from",color(sender.split("@")[0],"cyan"))
+      if (isCmd && !isGroup) console.log("↭",color("COMANDO","lime"),"↭",time2,color(command,"lime"),"ENVIADO POR",color(sender.split("@")[0],"cyan"))
+      if (isCmd && isGroup) console.log("↭",color("COMANDO","lime"),"↭",time2,color(command,"lime"),"ENVIADO POR",color(sender.split("@")[0],"cyan"),"NO GRUPO",color(groupName,"yellow"))
+      if (listbut) console.log("↭",color("COMANDO","lime"),"↭",time2,color(listbut,"lime"),"ENVIADO POR",color(sender.split("@")[0],"cyan"))
       
         //ANTI-SPAM
       if (isCmd && isFiltered(from) && !isGroup) {
@@ -1470,7 +1470,7 @@ case 'kickall':
 				break;
         case 'delchat':
           if (!isOwner) return reply(`Você não e meu papai 😡`)
-          reply('Sukses menghapus chat ' + from)
+          reply('Pronto papai, deletei esse chat ' + from)
                 LorranX.modifyChat(from, ChatModification.delete)
                 break
         //END FUNÇÕES DONO
