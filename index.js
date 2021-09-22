@@ -1418,6 +1418,13 @@ break
               type: 1
             }])
             break;
+            case 'restart':
+              if (!isOwner) return reply('Você não e meu papai 😡')
+reply(`Calmai carai, ja to reiniciando`)
+exec(`cd &&  npm start`)
+sleep(4000)
+reply('Pronto, ja reiniciei')
+break
             case 'desligar':
 if (!isOwner) return reply('Você não e meu papai 😡')
 reply('Bot desligado')
