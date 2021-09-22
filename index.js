@@ -107,10 +107,6 @@ function HORAEXATA(seconds){
   return `${pad(hours)} horas ${pad(minutes)} minutos ${pad(seconds)} segundos`
 }
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 
 function RODAPE(){
   MyTrademark = ["By LorranX ©"];
@@ -1372,6 +1368,18 @@ break
 					await LorranX.updateProfilePicture(botNumber, media)
 					reply('Pronto papai, alterei minha foto de perfil')
 					break;
+          case 'setbio':
+            if (!isOwner) return reply("Você não é meu papai 😡")
+					iyek = body.slice(8)
+					LorranX.setStatus(`${iyek}`)
+					reply(`Pronto papai, alterei meu recado para: ${body.slice(8)}`)
+					break
+          case 'setname':
+            if (!isOwner) return reply("Você não é meu papai 😡")
+                anu = body.slice(9)
+                LorranX.updateProfileName(anu)
+                reply(`Pronto papai, alterei meu nome para: ${body.slice(9)}`)
+                break
         case 'creategroup':
 			case 'criargrupo':
         if (!isOwner) return reply("Você não é meu papai 😡")
@@ -1422,13 +1430,6 @@ break
               type: 1
             }])
             break;
-            case 'restart':
-              if (!isOwner) return reply('Você não e meu papai 😡')
-reply(`Calmai carai, ja to reiniciando`)
-exec(`cd &&  npm start`)
-sleep(4000)
-reply('Pronto, ja reiniciei')
-break
             case 'desligar':
 if (!isOwner) return reply('Você não e meu papai 😡')
 reply('Bot desligado')
@@ -1457,6 +1458,11 @@ case 'kickall':
 					}
 					reply(`Pronto papai, limpei todos os meus chats`)
 				break;
+        case 'delchat':
+          if (!isOwner) return reply(`Você não e meu papai 😡`)
+                reply('Pronto papai, deletei esse chat' + from)
+                LorranX.modifyChat(from, ChatModification.delete)
+                break
         //END FUNÇÕES DONO
         //CONVERSORES
         case 'tomp3':
