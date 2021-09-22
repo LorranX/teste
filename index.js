@@ -423,9 +423,9 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
         type === "extendedTextMessage" && content.includes("stickerMessage");
       
       
-      if (isCmd && !isGroup) console.log("↭",color("COMANDO","lime"),"↭",time2,color(command,"lime"),"ENVIADO POR",color(sender.split("@")[0],"cyan"))
-      if (isCmd && isGroup) console.log("↭",color("COMANDO","lime"),"↭",time2,color(command,"lime"),"ENVIADO POR",color(sender.split("@")[0],"cyan"),"NO GRUPO",color(groupName,"yellow"))
-      if (listbut) console.log("↭",color("COMANDO","lime"),"↭",time2,color(listbut,"lime"),"ENVIADO POR",color(sender.split("@")[0],"cyan"))
+      if (isCmd && !isGroup) console.log("《",color("COMANDO ENVIADO AS","lime"),time2,color(command,"lime"),"ENVIADO POR",color(sender.split("@")[0],"cyan"))
+      if (isCmd && isGroup) console.log("《",color("COMANDO ENVIADO AS","lime"),time2,color(command,"lime"),"ENVIADO POR",color(sender.split("@")[0],"cyan"),"NO GRUPO",color(groupName,"yellow"))
+      if (listbut) console.log("《",color("COMANDO ENVIADO AS","lime"),time2,color(listbut,"lime"),"ENVIADO POR",color(sender.split("@")[0],"cyan"))
       
         //ANTI-SPAM
       if (isCmd && isFiltered(from) && !isGroup) {
