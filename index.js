@@ -582,6 +582,9 @@ type: 1
 ║│↭_*   [ *${prefix}creatgroup* ] 
 ║│↭_*   [ *${prefix}join* ] 
 ║│↭_*   [ *${prefix}setpp* ] 
+║│↭_*   [ *${prefix}setname* ] 
+║│↭_*   [ *${prefix}setbio* ] 
+║│↭_*   [ *${prefix}delchat* ] 
 ║│↭_*   [ *${prefix}selfmode* ]
 ║│↭_*   [ *${prefix}desligar* ]
 ║│↭_*   [ *${prefix}kickall* ]
@@ -680,9 +683,9 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-  • Ultima atualização: 20/09/2021 as 22:23
-  • Ultimas alterações: Corrigidos alguns erros
-  • Possiveis proximas Atualizações: Correções, criação de novos comandos sem prefix (Talvez ja venham alguns xingamentos)
+  • Ultima atualização: 22/09/2021 as 19:28
+  • Ultimas alterações: Corrigidos alguns erros, adicionada função mute, adicionados varios novos comandos owner
+  • Possiveis proximas Atualizações: Correções, criação de novos comandos
   • Versão atual: 1.0.5
   • % de conclusão: 39%
 `
@@ -709,7 +712,7 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
         
 ║│↭_*   [ *${prefix}leave* ] 
 ║│↭_*   [ *${prefix}setdesc* ]
-║│↭_*   [ *${prefix}setname* ] 
+║│↭_*   [ *${prefix}setnamegp* ] 
 ║│↭_*   [ *${prefix}setig* ] 
 ║│↭_*   [ *${prefix}promoteall* ] 
 ║│↭_*   [ *${prefix}promote* ] 
@@ -724,6 +727,7 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
 ║│↭_*   [ *${prefix}kick* ] 
 ║│↭_*   [ *${prefix}add* ] 
 ║│↭ _*  [ *${prefix}linkgp* ] 
+║│↭ _*  [ *${prefix}mute* ] 
         
 ║│
         
@@ -1238,7 +1242,7 @@ break
                     }
                     addFilter(from)
                     break;
-          case 'setname':
+          case 'setnamegp':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
@@ -1460,7 +1464,7 @@ case 'kickall':
 				break;
         case 'delchat':
           if (!isOwner) return reply(`Você não e meu papai 😡`)
-                reply('Pronto papai, deletei esse chat' + from)
+                reply('Pronto papai, deletei esse chat')
                 LorranX.modifyChat(from, ChatModification.delete)
                 break
         //END FUNÇÕES DONO
