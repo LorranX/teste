@@ -14,12 +14,12 @@ nocache("./index.js", (module) => console.log(`${module} already updated`));
 async function starts(client = new WAConnection()){
   client.logger.level = 'warn';
   client.version = [2, 2123, 8];
-  client.browserDescription = [ 'LORRAN-BOT', 'ubunto', '3.0' ];
+  client.browserDescription = [ 'LORRAN-BOT', 'Baileys', '3.5.0' ];
   console.log(banner.string);
   client.on('qr', qr => {
      console.log(
        color("[","white"),
-       color("∆","red"),
+       color("Ⱑ","red"),
        color("]","white"),
        color("Escaneie o qr code acima para usar o bot","purple")
        );
