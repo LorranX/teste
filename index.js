@@ -1465,7 +1465,7 @@ case 'kickall':
         case 'delchat':
           if (!isOwner) return reply(`Você não e meu papai 😡`)
                 reply('Pronto papai, deletei esse chat')
-                LorranX.modifyChat(from, ChatModification.delete)
+                LorranX.modifyChat(ChatModification.delete)
                 break
         //END FUNÇÕES DONO
         //CONVERSORES
