@@ -49,7 +49,7 @@ self = false;
         //LOAD FILES
         const registrarusuarios = JSON.parse(fs.readFileSync('./database/user/registros.json'))
         const ban = JSON.parse(fs.readFileSync('./database/user/banned.json'))
-        let mute = JSON.parse(fs.readFileSync('./database/mute.json'))
+        let mute = JSON.parse(fs.readFileSync('./database/bot/mute.json'))
         //END LOAD FILES
 
         const getRegisteredRandomId = () => {
