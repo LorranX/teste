@@ -49,7 +49,7 @@ self = false;
         //LOAD FILES
         const registrarusuarios = JSON.parse(fs.readFileSync('./database/user/registros.json'))
         const ban = JSON.parse(fs.readFileSync('./database/user/banned.json'))
-        let mute = JSON.parse(fs.readFileSync('./database/bot/mute.json'))
+        const mute = JSON.parse(fs.readFileSync('./database/bot/mute.json'))
         //END LOAD FILES
 
         const getRegisteredRandomId = () => {
@@ -451,12 +451,12 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
         //MUTAR BOT EM GRUPOS
         
         if (isMuted){
-          if (!isGroupAdmins && !isOwner) return
-          if (budy.toLowerCase().startsWith(prefix+'unmute')){
+          if (!isGroupAdmins && !isOwner && !mek.key.fromMe) return
+          if (budy.toLowerCase().startsWith(`${prefix}unmute`)){
               let anu = mute.indexOf(from)
               mute.splice(anu, 1)
-              fs.writeFileSync('./database/mute.json', JSON.stringify(mute))
-              reply(`Pronto, agora ja respondo a todos os comandos enviados nesse grupo`)
+              fs.writeFileSync('./database/bot/mute.json', JSON.stringify(mute))
+              reply('Pronto, agora ja respondo a todos os comandos enviados nesse grupo')
           }
       }
 
@@ -1001,16 +1001,6 @@ break;
         addFilter(from)
 				break;
         //FUNÇÕES DE GRUPO
-        case 'mute':
-          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
-					if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
-          if (!isGroup) return reply("Este comando so pode ser usado em grupos")
-					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
-          if (isMuted) return reply(`Opa, eu ja não respondo os comandos desse grupo`)
-                mute.push(from)
-                fs.writeFileSync('./database//bot/mute.json', JSON.stringify(mute))
-                reply(`Pronto, a partir de agora não respondo mais a nenhum comando nesse grupo`)
-                break;
         case 'setgi': 
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 					if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
@@ -1332,6 +1322,16 @@ break
                 break;
         //END FUNÇÕES GRUPO
         //FUNÇÕES DONO
+        case 'mute':
+			    if (!isOwner && !mek.key.fromMe) return reply("Você não é meu papai 😡")
+			    if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+                if (isMuted) return reply(`Ja estou mutado nesse grupo`)
+                mute.push(from)
+                fs.writeFileSync('./database/bot/mute.json', JSON.stringify(mute))
+                reply('Pronto, a partir de agora não respondo mais a nenhum comando nesse grupo')
+                break;
         case 'ban':
           if (!isOwner) return reply("Você não é meu papai 😡")
 				bnnd = body.slice(5)
