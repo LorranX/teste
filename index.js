@@ -452,7 +452,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
         
         if (isMuted){
           if (!isGroupAdmins && !isOwner) return
-          if (messagesC.includes(prefix+'unmute')){
+          if (conversation.toLowerCase().startsWith(prefix+'unmute')){
               let anu = mute.indexOf(from)
               mute.splice(anu, 1)
               fs.writeFileSync('./database/mute.json', JSON.stringify(mute))
