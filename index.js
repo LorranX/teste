@@ -49,6 +49,7 @@ self = false;
         //LOAD FILES
         const registrarusuarios = JSON.parse(fs.readFileSync('./database/user/registros.json'))
         const ban = JSON.parse(fs.readFileSync('./database/user/banned.json'))
+        const mute = JSON.parse(fs.readFileSync('./database/bot/mute.json'));
         //END LOAD FILES
 
         const getRegisteredRandomId = () => {
@@ -276,6 +277,7 @@ module.exports = (LorranX) => {
       const produtoverify = { key: { fromMe: false, participant: `553195703379@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/verificado.png') }, "title": `VERIFICANDO...`, "productImageCount": 9999 }, "businessOwnerJid": `5531957033796@s.whatsapp.net`}}}
       const isGroupAdmins = groupAdmins.includes(sender) || false
       const isRegister = checkRegisteredUser(sender)
+      const isMuted = isGroup ? mute.includes(from) : false
       const conts = mek.key.fromMe ? LorranX.user.jid : LorranX.contacts[sender] || { notify: jid.replace(/@.+/, '') }
       const pushname = mek.key.fromMe ? LorranX.user.name : conts.notify || conts.vname || conts.name || '-'
       const more = String.fromCharCode(8206)
@@ -445,6 +447,12 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
                     }
                  }
         return reply(ff1)}  
+
+        //SILENCIAR BOT EM GRUPOS
+
+        if (isMuted){
+          if (!isGroupAdmins) return
+}
 
         //COMANDOS DE LISTA
         if (listbut == 'Modificadores de Audio' || command == `${prefix}start`) {
@@ -987,6 +995,21 @@ break;
         addFilter(from)
 				break;
         //FUNÇÕES DE GRUPO
+        case 'mute':
+            sendButtonMsg(`Coe ${pushname}, ${HORARIOS}\n\nCaso eu esteja te encomodando você pode me silenciar aqui nesse grupo, devo me silenciar? `,[{
+              buttonId:`${prefix}mutador 1`,
+              buttonText: {
+                displayText: `sim`
+              },
+              type: 1
+            },{
+              buttonId: `${prefix}mutador off`,
+              buttonText: {
+                displayText: 'não'
+              },
+              type: 1
+            }])
+            break;
         case 'setgi': 
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 					if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
@@ -1961,6 +1984,25 @@ break;
           }
             break;
         //PARA BOTÕES
+        case 'mutador':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
+					if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+          if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
+               if (args[0].toLowerCase() === '1'){
+               if (isMuted) return reply(`Ja estou silenciado nesse grupo`)
+               mute.push(from)
+               fs.writeFileSync('./database/bot/mute.json', JSON.stringify(mute))
+               reply(`Pronto, o bot foi silenciado e agora somente os adms podem usar os comandos`)
+               } else if (args[0].toLowerCase() === '0'){
+               anu = mute.indexOf(from)
+               mute.splice(anu, 1)
+               fs.writeFileSync('./database/bot/mute.json', JSON.stringify(mute))
+               reply(`Pronto, agora todos podem usar meus comandos novamente`)
+               } else {
+               reply(`Selecione 1 ou 0`)
+}
+               break
  
 
         //GARBAGE
