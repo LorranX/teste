@@ -996,7 +996,7 @@ break;
 				break;
         //FUNÇÕES DE GRUPO
         case 'mute':
-            sendButtonMsg(`Coe ${pushname}, ${HORARIOS}\n\nCaso eu esteja te encomodando você pode me silenciar aqui nesse grupo, devo me silenciar? `,[{
+            sendButtonMsg(`${isGroupAdmins == true ? `Coe ${pushname}, ${HORARIOS}\n\nCaso eu esteja te encomodando você pode me silenciar aqui nesse grupo, devo me silenciar ?` : "Tu nem é adm porra"}`[{
               buttonId:`${prefix}mutador 1`,
               buttonText: {
                 displayText: `sim`
