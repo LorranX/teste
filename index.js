@@ -996,14 +996,14 @@ break;
 				break;
         //FUNÇÕES DE GRUPO
         case 'mute':
-            sendButtonMsg(`${isGroupAdmins == true ? `Coe ${pushname}, ${HORARIOS}\n\nCaso eu esteja te encomodando você pode me silenciar aqui nesse grupo, devo me silenciar ?` : "Tu nem é adm porra"}`[{
-              buttonId:`${prefix}mutador 1`,
+            sendButtonMsg(`Coe ${pushname}, ${HORARIOS}\n\nCaso eu esteja te incomodando você pode me silenciar aqui nesse grupo, devo me silenciar ?`[{
+              buttonId:`${prefix}mutador on`,
               buttonText: {
                 displayText: `sim`
               },
               type: 1
             },{
-              buttonId: `${prefix}mutador 0`,
+              buttonId: `${prefix}mutador off`,
               buttonText: {
                 displayText: 'não'
               },
@@ -1448,16 +1448,6 @@ case 'kickall':
 				break;
         //END FUNÇÕES DONO
         //CONVERSORES
-        case 'tourl':
-          if ((isMedia && !mek.message.videoMessage || isQuotedImage || isQuotedVideo ) && args.length == 0) {
-                  macaquito = isQuotedImage || isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-                  lafonci = await LorranX.downloadMediaMessage(macaquito)
-                  res = await upload(lafonci)
-                  reply(res)
-                  } else {
-                  reply('Pra usar esse comando c tem que marcar um video ou imagem')
-                  }
-                  break;
         case 'tomp3':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
@@ -1989,18 +1979,18 @@ break;
 					if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
-               if (args[0].toLowerCase() === '1'){
+               if (args[0].toLowerCase() === 'on'){
                if (isMuted) return reply(`Ja estou silenciado nesse grupo`)
                mute.push(from)
                fs.writeFileSync('./database/bot/mute.json', JSON.stringify(mute))
                reply(`Pronto, o bot foi silenciado e agora somente os adms podem usar os comandos`)
-               } else if (args[0].toLowerCase() === '0'){
+               } else if (args[0].toLowerCase() === 'off'){
                anu = mute.indexOf(from)
                mute.splice(anu, 1)
                fs.writeFileSync('./database/bot/mute.json', JSON.stringify(mute))
                reply(`Pronto, agora todos podem usar meus comandos novamente`)
                } else {
-               reply(`Selecione 1 ou 0`)
+               reply(`Selecione on ou off`)
 }
                break
  
