@@ -274,7 +274,7 @@ module.exports = (LorranX) => {
       const isBanned = ban.includes(sender)
       const isOwner = owner.includes(sender);
       const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
-      const produtoverify = { key: { fromMe: false, participant: `553195703379@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/verificado.png') }, "title": `VERIFICANDO...`, "productImageCount": 9999 }, "businessOwnerJid": `5531957033796@s.whatsapp.net`}}}
+      const produtoverify = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/verificado.png') }, "title": `VERIFICANDO...`, "productImageCount": 9999 }, "businessOwnerJid": `0@s.whatsapp.net`}}}
       const isGroupAdmins = groupAdmins.includes(sender) || false
       const isRegister = checkRegisteredUser(sender)
       const isMuted = isGroup ? mute.includes(from) : false
@@ -1175,21 +1175,25 @@ break;
 					LorranX.sendMessage(from, options, text)
           addFilter(from)
 					break;
-          case 'notif':		
+          case 'notif': 
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
-mensagem = `Mensagem importante enviada por @${sender.split("@")[0]}\n*Mensagem : ${body.slice(7)}*`
+          if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+          LorranX.updatePresence(from, Presence.composing)
+aviso  = `Notifição enviada por: @${sender.split("@")[0]}\n\nMensagem: ${body.slice(7)}`
 group = await LorranX.groupMetadata(from);
 member = group['participants']
 jids = [];
 member.map(async adm => {
-  jids.push(adm.id.replace('c.us', 's.whatsapp.net'));
+jids.push(adm.id.replace('c.us', 's.whatsapp.net'));
 })
 options = {
-  text: mensagem,
-  contextInfo: {
-mentionedJid: mem
-  },
-  quoted: mek
+text: aviso,
+contextInfo: {
+mentionedJid: jids
+},
+quoted: tob
 }
 await LorranX.sendMessage(from, options, text)
 break
