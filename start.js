@@ -19,7 +19,7 @@ async function starts(client = new WAConnection()){
   client.on('qr', qr => {
      console.log(
        color("[","white"),
-       color("Ⱑ","red"),
+       color("∆","red"),
        color("]","white"),
        color("Escaneie o qr code acima para usar o bot","purple")
        );
