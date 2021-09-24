@@ -991,7 +991,6 @@ break;
           addFilter(from)
           break;
           case 'rename':
-//「 ❗ 」By Tobi シ︎
 var namaPackss = q.substring(0, q.indexOf('|') - 0)
 var authorPackss = q.substring(q.lastIndexOf('|') + 1)
 stiker_wm = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
@@ -1037,6 +1036,7 @@ if (err) return console.log(err);
 exec(`webpmux -set exif ${exif321} undefined.webp -o ${exifst}`, (err) => {
 if (err) return console.log(err);
 LorranX.sendMessage(from, fs.readFileSync(exifst), sticker )
+reply(`Pronto macaco, alterei os dados da figurinha`)
 fs.unlinkSync(exifst)
 fs.unlinkSync(exif321)
 fs.unlinkSync('undefined.webp')
@@ -1247,9 +1247,8 @@ text: aviso,
 contextInfo: {
 mentionedJid: jids
 },
-quoted: verificadonormal
 }
-await LorranX.sendMessage(from, options, text)
+await LorranX.sendMessage(from, options, text, {quoted: verificadonormal})
 break
           case 'tagsticker':
             case 'tagfig': 
