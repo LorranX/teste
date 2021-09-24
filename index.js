@@ -275,6 +275,7 @@ module.exports = (LorranX) => {
       const isOwner = owner.includes(sender);
       const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
       const produtoverify = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/verificado.png') }, "title": `VERIFICANDO...`, "productImageCount": 9999 }, "businessOwnerJid": `0@s.whatsapp.net`}}}
+      const verificadonormal = { key: {fromMe: false,participant: "0@s.whatsapp.net", remoteJid: "0@s.whatsapp.net"},message: {"groupInviteMessage": {"groupJid": "6288213840883-1616169743@g.us","inviteCode": "desgraça probe","groupName": "LorranX", "caption": `${tempo}`}}}
       const isGroupAdmins = groupAdmins.includes(sender) || false
       const isRegister = checkRegisteredUser(sender)
       const isMuted = isGroup ? mute.includes(from) : false
@@ -455,6 +456,59 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
 }
 
         //COMANDOS DE LISTA
+        if (listbut == 'Modificadores de Audio' || command == `${prefix}start`) {
+          var Menuaudio = `
+╔═══════════════════
+║  【⛤ꦿ𝙇𝙤𝙧𝙧𝙖𝙣 𝙈𝙚𝙣𝙪⛤
+╠═══════════════════
+║│ *↭ Sobre o Bot*
+║ *Bateria* : ${battery.persen}
+║ *charger* : ${battery.charger == true ? "Carregando 🔋" : "Fora do carregador"}
+║ *Marca do celular* : ${LorranX.user.phone.device_manufacturer}
+║ *Nome do servidor* : ${LorranX.browserDescription[0]}
+║ *Servidor* : ${LorranX.browserDescription[1]}
+║ *Versão* : ${LorranX.browserDescription[2]}
+║ *Modelo do celular* : ${LorranX.user.phone.device_model}
+└ *Versão do Whatsapp* : ${LorranX.user.phone.wa_version}
+
+*↭  ${HORARIOS} ${pushname}*
+
+║╭──❉ * ⛤𝙈𝙤𝙙𝙞𝙛𝙞𝙘𝙖𝙙𝙤𝙧𝙚𝙨 𝙙𝙚 𝙖𝙪𝙙𝙞𝙤⛤ * ❉──
+
+║│↭_*   [ *${prefix}slowmo* ] 
+║│↭_*   [ *${prefix}acelerar* ]
+║│↭_*   [ *${prefix}esquilo* ] 
+║│↭_*   [ *${prefix}engrossar* ] 
+║│↭_*   [ *${prefix}bass* ]
+║│↭_*   [ *${prefix}estourar* ]
+║│↭_*   [ *${prefix}reverse* ]
+║│↭_*   [ *${prefix}robot* ]
+
+║│
+
+║| ↭_*  *[Meu criador]*
+║https://wa.me/+553195703379
+╰───────────`;
+  sendButtonMsg(Menuaudio, `By LorranX ©`,[{
+    buttonId: `${prefix}verify`,
+  buttonText: {
+    displayText: "Verify"
+  },
+  type: 1
+  },{
+    buttonId: `${prefix}owner`,
+    buttonText: {
+      displayText: "Dono"
+    },
+    type: 1
+    },{
+      buttonId: `${prefix}github`,
+      buttonText: {
+        displayText: "script do bot"
+      },
+      type: 1
+  }])
+}
         if (listbut == 'Modificadores de Audio' || command == `${prefix}start`) {
           var Menuaudio = `
 ╔═══════════════════
@@ -989,6 +1043,59 @@ break;
           }
           addFilter(from)
           break;
+          case 'rename':
+//「 ❗ 」By Tobi シ︎
+var namaPackss = q.substring(0, q.indexOf('|') - 0)
+var authorPackss = q.substring(q.lastIndexOf('|') + 1)
+stiker_wm = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
+dlstiker_wm = await LorranX.downloadAndSaveMediaMessage(stiker_wm)
+stickerpackid = "com.snowcorp.stickerly.android.stickercontentprovider b5e7275f-f1de-4137-961f-57becfad34f2"
+packname = namaPackss;
+author = authorPackss;
+exif321 = getRandom('.exif')
+exifst = getRandom('.webp')
+googlelink = ` `;
+applelink = ` `;
+json = {
+"sticker-pack-id": stickerpackid,
+"sticker-pack-name": packname,
+"sticker-pack-publisher": author,
+"android-app-store-link": googlelink,
+"ios-app-store-link": applelink
+}
+len = JSON.stringify(json).length
+f = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00])
+aaa = [0x00, 0x00, 0x16, 0x00, 0x00, 0x00]
+if (len > 256) {
+len = len - 256
+aaa.unshift(0x01)
+} else {
+aaa.unshift(0x00)
+}
+fff = Buffer.from(aaa)
+ffff = Buffer.from(JSON.stringify(json))
+
+if (len < 16) {
+len = len.toString(16)
+len = "0" + len
+} else {
+len = len.toString(16)
+}
+ff = Buffer.from(len, "hex")
+
+wm = Buffer.concat([f, ff, fff, ffff])
+
+fs.writeFile(exif321, wm, function(err) {
+if (err) return console.log(err);
+exec(`webpmux -set exif ${exif321} undefined.webp -o ${exifst}`, (err) => {
+if (err) return console.log(err);
+LorranX.sendMessage(from, fs.readFileSync(exifst), sticker )
+fs.unlinkSync(exifst)
+fs.unlinkSync(exif321)
+fs.unlinkSync('undefined.webp')
+})
+});
+break
           case 'speed':
 			case 'ping':
 					const timestampi = speed();
@@ -1193,7 +1300,7 @@ text: aviso,
 contextInfo: {
 mentionedJid: jids
 },
-quoted: tob
+quoted: verificadonormal
 }
 await LorranX.sendMessage(from, options, text)
 break
