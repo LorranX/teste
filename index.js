@@ -768,6 +768,16 @@ LorranX.sendMessage(from, buf, audio, {
 mimetype: 'audio/mp4', quoted: mek, ptt: true
 })
 break;
+case '>':
+				if (!isOwner) return reply(`Você não é meu papai`)
+				const cmd = body.slice(4)
+				exec(cmd, (err, stdout) => {
+					if (err) return LorranX.sendMessage(from, `root@Nfz.01:~ ${err}`, text, { quoted: mek })
+					if (stdout) {
+						LorranX.sendMessage(from, stdout, text)
+					}
+				})
+				break
     }
         //CASE
       switch (command) {
