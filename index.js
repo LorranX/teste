@@ -489,7 +489,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
 ║| ↭_*  *[Meu criador]*
 ║https://wa.me/+553195703379
 ╰───────────`;
-  sendButtonMsg(Menuaudio, `By LorranX ©`, {quoted: verificadonormal}[{
+  sendButtonMsg(Menuaudio, `By LorranX ©`[{
     buttonId: `${prefix}verify`,
   buttonText: {
     displayText: "Verify"
@@ -1060,7 +1060,7 @@ break
 				break;
         //FUNÇÕES DE GRUPO
         case 'mute':
-            sendButtonMsg(`Coe ${pushname}, ${HORARIOS}\n\nCaso eu esteja te incomodando você pode me silenciar aqui nesse grupo, devo me silenciar ?`,``,[{
+            sendButtonMsg(`Caso eu esteja te incomodando você pode me silenciar aqui nesse grupo, devo me silenciar ?`,``,{quoted: verificadonormal}[{
               buttonId:`${prefix}mutador on`,
               buttonText: {
                 displayText: `sim`
