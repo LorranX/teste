@@ -275,7 +275,7 @@ module.exports = (LorranX) => {
       const isOwner = owner.includes(sender);
       const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
       const produtoverify = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/verificado.png') }, "title": `VERIFICANDO...`, "productImageCount": 9999 }, "businessOwnerJid": `0@s.whatsapp.net`}}}
-      const verificadonormal = { key: {fromMe: false,participant: "0@s.whatsapp.net", remoteJid: "0@s.whatsapp.net"},message: {"groupInviteMessage": {"groupJid": "6288213840883-1616169743@g.us","inviteCode": "mememteeeekkeke","groupName": "LorranX", "caption": `${HORARIOS}`}}}
+      const verificadonormal = { key: {fromMe: false,participant: "0@s.whatsapp.net", remoteJid: "0@s.whatsapp.net"},message: {"groupInviteMessage": {"groupJid": "6288213840883-1616169743@g.us","inviteCode": "desgraça probe","groupName": "LorranX", "caption": `${HORARIOS}`}}}
       const isGroupAdmins = groupAdmins.includes(sender) || false
       const isRegister = checkRegisteredUser(sender)
       const isMuted = isGroup ? mute.includes(from) : false
@@ -646,7 +646,6 @@ type: 1
 ║│↭_*   [ *${prefix}pvideo* ] 
 ║│↭ _*  [ *${prefix}sticker* ] 
 ║│↭_*   [ *${prefix}attp* ] 
-║│↭_*   [ *${prefix}rename* ] 
 ║│↭_*   [ *${prefix}dado* ] 
 ║│↭_*   [ *${prefix}toimg* ] 
 ║│↭_*   [ *${prefix}togif* ] 
@@ -685,8 +684,8 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-  • Ultima atualização: 22/09/2021 as 22:46
-  • Ultimas alterações: Corrigidos alguns erros, removido notif, adicionado rename
+  • Ultima atualização: 22/09/2021 as 19:28
+  • Ultimas alterações: Corrigidos alguns erros, adicionada função mute, adicionados varios novos comandos owner
   • Possiveis proximas Atualizações: Correções, criação de novos comandos
   • Versão atual: 1.0.5
   • % de conclusão: 39%
@@ -723,6 +722,7 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
 ║│↭_*   [ *${prefix}revokelink* ]
 ║│↭_*   [ *${prefix}grp* ] 
 ║│↭_*   [ *${prefix}hidetag* ]
+║│↭_*   [ *${prefix}notif* ]
 ║│↭_*   [ *${prefix}tagimg* ]
 ║│↭_*   [ *${prefix}tagsticker* ]
 ║│↭_*   [ *${prefix}kick* ] 
@@ -991,6 +991,8 @@ break;
           addFilter(from)
           break;
           case 'rename':
+            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
+            if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
 var namaPackss = q.substring(0, q.indexOf('|') - 0)
 var authorPackss = q.substring(q.lastIndexOf('|') + 1)
 stiker_wm = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
@@ -1229,6 +1231,27 @@ break
 					LorranX.sendMessage(from, options, text)
           addFilter(from)
 					break;
+          case 'notif': 
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+          if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+          if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+          LorranX.updatePresence(from, Presence.composing)
+aviso  = `Notifição enviada por: @${sender.split("@")[0]}\n\nMensagem: ${body.slice(7)}`
+group = await LorranX.groupMetadata(from);
+member = group['participants']
+jids = [];
+member.map(async adm => {
+jids.push(adm.id.replace('c.us', 's.whatsapp.net'));
+})
+options = {
+text: aviso,
+contextInfo: {
+mentionedJid: jids
+},
+}
+await LorranX.sendMessage(from, options, text, {quoted: verificadonormal})
+break
           case 'tagsticker':
             case 'tagfig': 
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
