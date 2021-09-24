@@ -1064,7 +1064,7 @@ break
 				break;
         //FUNÇÕES DE GRUPO
         case 'mute':
-            sendButtonMsg(`Caso eu esteja te incomodando você pode me silenciar aqui nesse grupo, devo me silenciar ?`,``,{quoted: verificadonormal}[{
+            sendButtonMsg(`Caso eu esteja te incomodando você pode me silenciar aqui nesse grupo, devo me silenciar ?`,``,[{
               buttonId:`${prefix}mutador on`,
               buttonText: {
                 displayText: `sim`
@@ -1230,7 +1230,7 @@ break
 					contextInfo: { mentionedJid: mem },
 					quoted: mek
 					}
-					LorranX.sendMessage(from, options, text)
+					LorranX.sendMessage(from, options, text, {quoted: verificadonormal})
           addFilter(from)
 					break;
           case 'tagsticker':
