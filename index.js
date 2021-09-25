@@ -121,7 +121,7 @@ const obj = {id: sender, uang : 0}
   fs.writeFileSync('./database/user/dinheiro.json', JSON.stringify(uang))
 }
 
-const addKoinUser = (sender, amount) => {
+const addCoinUser = (sender, amount) => {
   let position = false
   Object.keys(uang).forEach((i) => {
       if (uang[i].id === sender) {
@@ -686,7 +686,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
                   try {
                       if (checkATM === undefined) addATM(sender)
                       const uangsaku = Math.floor(Math.random() * 10) + 90
-                      addKoinUser(sender, uangsaku)
+                      addCoinUser(sender, uangsaku)
                   } catch (err) {
                       console.error(err)
                   }
@@ -1304,7 +1304,7 @@ break
         case 'carteira':
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
 				const kantong = checkATMuser(sender)
-				LorranX.sendMessage(from, RESPOSTAS.uangkau(pushname, sender, kantong)), text, { quoted : verificadostts}
+				LorranX.sendMessage(from, `*┏⊱ 「 𝘾𝘼𝙍𝙏𝙀𝙄𝙍𝘼 𝘿𝙀 𝙋𝙊𝙉𝙏𝙊𝙎 💵 」⊰━┓*\n┣⊱ *Nome* : ${pushname}\n┣⊱ *Número* : ${sender.split("@")[0]}\n┣⊱ *Pontos* : ${kantong}\n┗━━━━━━━━━━`), text, { quoted : verificadostts}
 				break;
         case 'transfer':
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
@@ -1317,9 +1317,9 @@ break
                 const tujuantf = `${tujuan.replace("@", '')}@s.whatsapp.net`
                 fee = 0.20 *  jumblah
                 hasiltf = jumblah - fee
-                addKoinUser(tujuantf, hasiltf)
+                addCoinUser(tujuantf, hasiltf)
                 confirmATM(sender, jumblah)
-                addKoinUser('553192271279@s.whatsapp.net', fee)
+                addCoinUser('553192271279@s.whatsapp.net', fee)
                 reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\nTransação de pontos bem sucedida\nTransferencia realizada por : +${sender.split("@")[0]}\npara : +${tujuan}\nquantidade de pontos transferidos : ${jumblah}\nimposto sobre transferência : ${fee}`)
                 break
         //FUNÇÕES DE GRUPO
