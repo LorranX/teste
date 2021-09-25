@@ -32,6 +32,7 @@ const { webp2gifFile } = require("./lib/gif.js")
 const { isFiltered, addFilter } = require('./lib/antispam')
 const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
+const { RESPOSTAS } = require ('./respostas')
 
         //INFO
 owner = ["553195703379@s.whatsapp.net","553192941210@s.whatsapp.net"];
@@ -1303,7 +1304,7 @@ break
         case 'carteira':
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
 				const kantong = checkATMuser(sender)
-				LorranX.sendMessage(from, kantong, `*┏⊱ 「 𝘾𝘼𝙍𝙏𝙀𝙄𝙍𝘼 𝘿𝙀 𝙋𝙊𝙉𝙏𝙊𝙎 💵 」⊰━┓*\n┣⊱ *Nome* : ${pushname}\n┣⊱ *Número* : ${sender.split("@")[0]}\n┣⊱ *Pontos* : ${uangkau}\n┗━━━━━━━━━━`, text, {quoted: verificadostts})
+				LorranX.sendMessage(from, ind.uangkau(pushname, sender, kantong), text, { quoted : verificadostts})
 				break;
         case 'transfer':
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
@@ -1779,7 +1780,7 @@ case 'kickall':
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
 				LorranX.updatePresence(from, Presence.composing)
 				if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
-				reply("Calmai macaco 🦧")
+				reply(RESPOSTAS.wait())
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp4')
