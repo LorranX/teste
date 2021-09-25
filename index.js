@@ -32,6 +32,8 @@ const { webp2gifFile } = require("./lib/gif.js")
 const { isFiltered, addFilter } = require('./lib/antispam')
 const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
+const { getLevelingXp, getLevelingLevel, getLevelingId, addLevelingXp, addLevelingId } = require('./lib/level');
+const { addATM, addCoinUser, checkATMuser, confirmATM } = require ('./lib/dinheiritos')
 
         //INFO
 owner = ["553195703379@s.whatsapp.net","553192941210@s.whatsapp.net"];
@@ -47,9 +49,12 @@ antideleted = true;
 self = false;
 
         //LOAD FILES
-        const registrarusuarios = JSON.parse(fs.readFileSync('./database/user/registros.json'))
-        const ban = JSON.parse(fs.readFileSync('./database/user/banned.json'))
+        const registrarusuarios = JSON.parse(fs.readFileSync('./database/user/registros.json'));
+        const ban = JSON.parse(fs.readFileSync('./database/user/banned.json'));
         const mute = JSON.parse(fs.readFileSync('./database/bot/mute.json'));
+        const _leveling = JSON.parse(fs.readFileSync('./database/grupo/leveling.json'));
+        const _level = JSON.parse(fs.readFileSync('./database/user/levelusuarios.json'));
+        const uang = JSON.parse(fs.readFileSync('./database/user/dineheiro.json'))
         //END LOAD FILES
 
         const getRegisteredRandomId = () => {
@@ -275,6 +280,7 @@ module.exports = (LorranX) => {
       const isOwner = owner.includes(sender);
       const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
       const isGroupAdmins = groupAdmins.includes(sender) || false
+      const isLevelingOn = isGroup ? _leveling.includes(from) : false
       const isRegister = checkRegisteredUser(sender)
       const isMuted = isGroup ? mute.includes(from) : false
       const conts = mek.key.fromMe ? LorranX.user.jid : LorranX.contacts[sender] || { notify: jid.replace(/@.+/, '') }
@@ -315,7 +321,8 @@ module.exports = (LorranX) => {
         //VERIFICADOS
 
         const produtoverify = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/verificado.png') }, "title": `VERIFICANDO...`, "productImageCount": 9999 }, "businessOwnerJid": `0@s.whatsapp.net`}}}
-        const verificadonormal ={"key": {   "fromMe": false,"participant":"0@s.whatsapp.net",   "remoteJid": "556181496039-1625944593@g.us"  }, "message": {orderMessage: {itemCount: 999999,status: 200, thumbnail: fs.readFileSync(`./lib/image/verificado.png`), surface: 200, message: `⊳ Comando : ${prefix}${command}\n⊳${HORARIOS} ${pushname}`, orderTitle: '©Bot', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
+        const verificadocarrinho ={"key": {   "fromMe": false,"participant":"0@s.whatsapp.net",   "remoteJid": "556181496039-1625944593@g.us"  }, "message": {orderMessage: {itemCount: 999999,status: 200, thumbnail: fs.readFileSync(`./lib/image/verificado.png`), surface: 200, message: `⊳ Comando : ${prefix}${command}\n⊳${HORARIOS} ${pushname}`, orderTitle: '©Bot', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
+        const verificadostts = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "caption": `⊳ Comando : ${prefix}${command}\n⊳${HORARIOS} ${pushname}`} } }
 
         //BOTÃO NORMAL
       const sendButtonMsg = (text, footer, but = [], options = {}) => {
@@ -452,6 +459,128 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
                     }
                  }
         return reply(ff1)}  
+
+        //RANKING
+
+        const levelRole = getLevelingLevel(sender)
+   	     var role = 'Gadinho'
+        if (levelRole <= 3) {
+            role = 'Gado'
+        } else if (levelRole <= 5) {
+            role = 'Super gado'
+        } else if (levelRole <= 7) {
+            role = 'Gadão II'
+        } else if (levelRole <= 9) {
+            role = 'Gadão I'
+        } else if (levelRole <= 10) {
+            role = 'Hyper mega gado'
+        } else if (levelRole <= 11) {
+            role = 'Miquinho fofo'
+        } else if (levelRole <= 12) {
+            role = 'Miquinho'
+        } else if (levelRole <= 13) {
+            role = 'Macaco'
+        } else if (levelRole <= 14) {
+            role = 'Macaco desgraçado'
+        } else if (levelRole <= 16) {
+            role = 'Kong'
+        } else if (levelRole <= 17) {
+            role = 'Macaco 𝑇𝐻𝐴𝑁𝐴𝑇𝑂𝑆'
+        } else if (levelRole <= 19) {
+            role = 'Membro a of painel'
+        } else if (levelRole <= 20) {
+            role = 'Membro da MCBR'
+        } else if (levelRole <= 21) {
+            role = 'Membro da gst 😡'
+        } else if (levelRole <= 22) {
+            role = 'Membro da pain'
+        } else if (levelRole <= 24) {
+            role = 'Membro da TBF 😍😍'
+        } else if (levelRole <= 25) {
+            role = 'Comedor de casada'
+        } else if (levelRole <= 26) {
+            role = 'Preto'
+        } else if (levelRole <= 27) {
+            role = 'Mega pretão'
+        } else if (levelRole <= 30) {
+            role = 'Asfalto 😍'
+        } else if (levelRole <= 33) {
+            role = 'Putinha da TRD'
+        } else if (levelRole <= 37) {
+            role = 'Puta da TRD'
+        } else if (levelRole <= 41) {
+            role = 'Puta gostosa da TRD'
+        } else if (levelRole <= 46) {
+            role = 'Gasosa'
+        } else if (levelRole <= 52) {
+            role = 'Gostosa'
+        } else if (levelRole <= 59) {
+            role = 'Gostosa do caralho'
+        } else if (levelRole <= 67) {
+            role = 'Super corno'
+        } else if (levelRole <= 76) {
+            role = 'Mega corno'
+        } else if (levelRole <= 86) {
+            role = 'Hyper corno'
+        } else if (levelRole <= 97) {
+            role = 'Jogador de ff'
+        } else if (levelRole <= 109) {
+            role = 'The doctor'
+        } else if (levelRole <= 122) {
+            role = 'The plague'
+        } else if (levelRole <= 132) {
+            role = 'The best'
+        } else if (levelRole <= 137) {
+            role = 'Brabo dos brabos'
+        } else if (levelRole <= 142) {
+            role = 'Hyper mega PRETO'
+        } else if (levelRole <= 147) {
+            role = 'Mini Xmod 🐶'
+        } else if (levelRole <= 148) {
+            role = 'Mini Beibe 🦈'
+        } else if (levelRole <= 149) {
+            role = 'Mini Mcp 🥖'
+        } else if (levelRole <= 150) {
+            role = 'Mini 𝑇𝐻𝐴𝑁𝐴𝑇𝑂𝑆 🦧'
+        }
+
+        //FUNÇÃO DE LEVEL
+                  if (isGroup && isRegistered && isLevelingOn) {
+                    const currentLevel = getLevelingLevel(sender)
+                    const checkId = getLevelingId(sender)
+                    try {
+                        if (currentLevel === undefined && checkId === undefined) addLevelingId(sender)
+                        const amountXp = Math.floor(Math.random() * 10) + 500
+                        const requiredXp = 5000 * (Math.pow(2, currentLevel) - 1)
+                        const getLevel = getLevelingLevel(sender)
+                        addLevelingXp(sender, amountXp)
+                        if (requiredXp <= getLevelingXp(sender)) {
+                            addLevelingLevel(sender, 1)
+                            bayarLimit(sender, 3)
+                            await LorranX.sendMessage(from, `
+*「 𝙋𝘼𝙍𝘼𝘽𝙀𝙉𝙎 🥳 」*
+┏⊱ *Nome* : ${pushname}
+┣⊱ *Número* : wa.me/${sender.split("@")[0]}
+┣⊱ *Xp* : ${getLevelingXp(sender)}
+┣⊱ *Patente*: ${role}
+┗⊱ *Level* : ${getLevel} ⊱ ${getLevelingLevel(sender)}` , text, {quoted: verificadostts})
+                        }
+                    } catch (err) {
+                        console.error(err)
+                    }
+                }
+
+          //FUNÇÃO DINHERIN      
+                if (!isRegister) {
+                  const checkATM = checkATMuser(sender)
+                  try {
+                      if (checkATM === undefined) addATM(sender)
+                      const uangsaku = Math.floor(Math.random() * 10) + 90
+                      addKoinUser(sender, uangsaku)
+                  } catch (err) {
+                      console.error(err)
+                  }
+              }
 
         //SILENCIAR BOT EM GRUPOS
 
@@ -768,16 +897,6 @@ LorranX.sendMessage(from, buf, audio, {
 mimetype: 'audio/mp4', quoted: mek, ptt: true
 })
 break;
-case '>':
-				if (!isOwner) return reply(`Você não é meu papai`)
-				const cmd = body.slice(4)
-				exec(cmd, (err, stdout) => {
-					if (err) return LorranX.sendMessage(from, `root@Nfz.01:~ ${err}`, text, { quoted: mek })
-					if (stdout) {
-						LorranX.sendMessage(from, stdout, text)
-					}
-				})
-				break
     }
         //CASE
       switch (command) {
@@ -1072,6 +1191,27 @@ break
 				LorranX.sendMessage(from, apiglow, sticker, {quoted: mek})
         addFilter(from)
 				break;
+        case 'carteira':
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+				const kantong = checkATMuser(sender)
+				LorranX.sendMessage(from, `*┏⊱ 「 𝘾𝘼𝙍𝙏𝙀𝙄𝙍𝘼 𝘿𝙀 𝙋𝙊𝙉𝙏𝙊𝙎 💵 」⊰━┓*\n┣⊱ *Nome* : ${pushname}\n┣⊱ *Número* : ${sender.split("@")[0]}\n┣⊱ *Pontos* : ${uangkau}\n┗━━━━━━━━━━`, text, {quoted: verificadostts})
+				break;
+        case 'transfer':
+          if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+				if (!q.includes('|')) return  reply(`*Formato incorreto/texto inválido*`)
+                const tujuan = q.substring(0, q.indexOf('|') - 1)
+                const jumblah = q.substring(q.lastIndexOf('|') + 1)
+                if(isNaN(jumblah)) return await reply('Como assim o número de pontos não é um numero wtf')
+                if (jumblah < 100 ) return reply(`Vsfd seu preto falido, c tem que transferir no minimo 100 pontos`)
+                if (checkATMuser(sender) < jumblah) return reply(`Você não tem dinheiro suficiente para fazer essa transferência`)
+                const tujuantf = `${tujuan.replace("@", '')}@s.whatsapp.net`
+                fee = 0.20 *  jumblah
+                hasiltf = jumblah - fee
+                addKoinUser(tujuantf, hasiltf)
+                confirmATM(sender, jumblah)
+                addKoinUser('553192271279@s.whatsapp.net', fee)
+                reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\nTransação de pontos bem sucedida\nTransferencia realizada por : +${sender.split("@")[0]}\npara : +${tujuan}\nquantidade de pontos transferidos : ${jumblah}\nimposto sobre transferência : ${fee}`)
+                break
         //FUNÇÕES DE GRUPO
         case 'mute':
             sendButtonMsg(`Caso eu esteja te incomodando você pode me silenciar aqui nesse grupo, devo me silenciar ?`,``,[{
@@ -1240,7 +1380,7 @@ break
 					contextInfo: { mentionedJid: mem },
 					quoted: mek
 					}
-					LorranX.sendMessage(from, options, text, {quoted: verificadonormal})
+					LorranX.sendMessage(from, options, text, {quoted: verificadostts})
           addFilter(from)
 					break;
           case 'tagsticker':
@@ -1571,7 +1711,7 @@ case 'kickall':
 					ran = getRandom('.png')
 					exec(`ffmpeg -i ${media} ${ran}`, (err) => {
 						fs.unlinkSync(media)
-						if (err) return reply(ind.stikga())
+						if (err) return reply(`*Deu errado macaco, tente novamente mais tarde*`)
 						buffer = fs.readFileSync(ran)
 						LorranX.sendMessage(from, buffer, image, {quoted: mek})
 						fs.unlinkSync(ran)
@@ -2069,7 +2209,24 @@ break;
                } else {
                reply(`Selecione on ou off`)
 }
-               break
+               break;
+               case 'leveling':
+                if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+                if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
+                if (args.length < 1) return reply('Man, c tem que escolher entre on (ativar) e off (desativar)')
+                if (args[0] === 'on') {
+                if (isLevelingOn) return reply('*Ja ta ativado*')
+                 	   _leveling.push(from)
+                 	   fs.writeFileSync('./database/grupo/leveling.json', JSON.stringify(_leveling))
+                  	   reply(ind.lvlon())
+              	  } else if (args[0] === 'off') {
+                  	  _leveling.splice(from, 1)
+                 	   fs.writeFileSync('./database/grupo/leveling.json', JSON.stringify(_leveling))
+                 	    reply(ind.lvloff())
+             	   } else {
+                 	   reply(ind.satukos())
+                	}
+				break;
  
 
         //GARBAGE
