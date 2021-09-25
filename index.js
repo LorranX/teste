@@ -2327,13 +2327,13 @@ break;
                 if (isLevelingOn) return reply('*Ja ta ativado*')
                  	   _leveling.push(from)
                  	   fs.writeFileSync('./database/grupo/leveling.json', JSON.stringify(_leveling))
-                  	   reply(ind.lvlon())
+                  	   reply(`*Pronto macaco, ativei o recurso de level*`)
               	  } else if (args[0] === 'off') {
                   	  _leveling.splice(from, 1)
                  	   fs.writeFileSync('./database/grupo/leveling.json', JSON.stringify(_leveling))
-                 	    reply(ind.lvloff())
+                 	    reply(`*Pronto macaco, desativei o recurso de level*`)
              	   } else {
-                 	   reply(ind.satukos())
+                 	   reply(`*Faz saporra direito macaco*`)
                 	}
 				break;
  
