@@ -1304,7 +1304,7 @@ break
         case 'carteira':
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
 				const kantong = checkATMuser(sender)
-				LorranX.sendMessage(from, RESPOSTAS.uangkau(pushname, sender, kantong), text, { quoted : verificadostts})
+				LorranX.sendMessage(from, RESPOSTAS.uangkau(pushname, sender, kantong)), text, { quoted : verificadostts}
 				break;
         case 'transfer':
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
