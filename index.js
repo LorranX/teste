@@ -91,7 +91,7 @@ const addLevelingXp = (sender, amount) => {
   })
   if (position !== false) {
       _level[position].xp += amount
-      fs.writeFileSync('./database/user/level.json', JSON.stringify(_level))
+      fs.writeFileSync('./database/user/levelusuarios.json', JSON.stringify(_level))
   }
 }
 
@@ -104,44 +104,20 @@ const addLevelingLevel = (sender, amount) => {
   })
   if (position !== false) {
       _level[position].level += amount
-      fs.writeFileSync('./database/user/level.json', JSON.stringify(_level))
+      fs.writeFileSync('./database/user/levelusuarios.json', JSON.stringify(_level))
   }
 }
 
 const addLevelingId = (sender) => {
   const obj = {id: sender, xp: 1, level: 1}
   _level.push(obj)
-  fs.writeFileSync('./database/user/level.json', JSON.stringify(_level))
-}
-   
-const getRegisteredRandomId = () => {
-  return _registered[Math.floor(Math.random() * _registered.length)].id
-}
-
-const addRegisteredUser = (userid, sender, age, time, serials) => {
-  const obj = { id: userid, name: sender, age: age, time: time, serial: serials }
-  _registered.push(obj)
-  fs.writeFileSync('./database/bot/registered.json', JSON.stringify(_registered))
-}
-
-const createSerial = (size) => {
-  return crypto.randomBytes(size).toString('hex').slice(0, size)
-}
-
-const checkRegisteredUser = (sender) => {
-  let status = false
-  Object.keys(_registered).forEach((i) => {
-      if (_registered[i].id === sender) {
-          status = true
-      }
-  })
-  return status
+  fs.writeFileSync('./database/user/levelusuarios.json', JSON.stringify(_level))
 }
 
 const addATM = (sender) => {
 const obj = {id: sender, uang : 0}
   uang.push(obj)
-  fs.writeFileSync('./database/user/uang.json', JSON.stringify(uang))
+  fs.writeFileSync('./database/user/dinheiro.json', JSON.stringify(uang))
 }
 
 const addCoinUser = (sender, amount) => {
@@ -153,7 +129,7 @@ const addCoinUser = (sender, amount) => {
   })
   if (position !== false) {
       uang[position].uang += amount
-      fs.writeFileSync('./database/user/uang.json', JSON.stringify(uang))
+      fs.writeFileSync('./database/user/dinheiro.json', JSON.stringify(uang))
   }
 }
 
@@ -169,19 +145,6 @@ let position = false
   }
 }
 
-const bayarLimit = (sender, amount) => {
-let position = false
-  Object.keys(_limit).forEach((i) => {
-      if (_limit[i].id === sender) {
-          position = i
-      }
-  })
-  if (position !== false) {
-      _limit[position].limit -= amount
-      fs.writeFileSync('./database/user/limit.json', JSON.stringify(_limit))
-  }
-}
-
 const confirmATM = (sender, amount) => {
 let position = false
   Object.keys(uang).forEach((i) => {
@@ -191,57 +154,8 @@ let position = false
   })
   if (position !== false) {
       uang[position].uang -= amount
-      fs.writeFileSync('./database/user/uang.json', JSON.stringify(uang))
+      fs.writeFileSync('./database/user/dinheiro.json', JSON.stringify(uang))
   }
-}
-
-const limitAdd = (sender) => {
-   let position = false
-  Object.keys(_limit).forEach((i) => {
-      if (_limit[i].id == sender) {
-          position = i
-      }
-  })
-  if (position !== false) {
-      _limit[position].limit += 1
-      fs.writeFileSync('./database/user/limit.json', JSON.stringify(_limit))
-  }
-} 
-
-const getPremiumExpired = (sender) => {
-let position = null
-Object.keys(prem).forEach((i) => {
-  if (prem[i].id === sender) {
-      position = i
-  }
-})
-if (position !== null) {
-  return prem[position].expired
-}
-} 
-
-const expiredCheck = () => {
-setInterval(() => {
-  let position = null
-  Object.keys(prem).forEach((i) => {
-      if (Date.now() >= prem[i].expired) {
-          position = i
-      }
-  })
-  if (position !== null) {
-      console.log(`Premium expired: ${prem[position].id}`)
-      prem.splice(position, 1)
-      fs.writeFileSync('./database/bot/prem.json', JSON.stringify(prem))
-  }
-}, 1000)
-} 
-
-const getAllPremiumUser = () => {
-const array = []
-Object.keys(prem).forEach((i) => {
-  array.push(prem[i].id)
-})
-return array
 }
 
         //LOAD FILES
@@ -752,7 +666,6 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
                         addLevelingXp(sender, amountXp)
                         if (requiredXp <= getLevelingXp(sender)) {
                             addLevelingLevel(sender, 1)
-                            bayarLimit(sender, 3)
                             await LorranX.sendMessage(from, `
 *「 𝙋𝘼𝙍𝘼𝘽𝙀𝙉𝙎 🥳 」*
 ┏⊱ *Nome* : ${pushname}
@@ -772,7 +685,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
                   try {
                       if (checkATM === undefined) addATM(sender)
                       const uangsaku = Math.floor(Math.random() * 10) + 90
-                      addKoinUser(sender, uangsaku)
+                      addCoinUser(sender, uangsaku)
                   } catch (err) {
                       console.error(err)
                   }
@@ -1403,9 +1316,9 @@ break
                 const tujuantf = `${tujuan.replace("@", '')}@s.whatsapp.net`
                 fee = 0.20 *  jumblah
                 hasiltf = jumblah - fee
-                addKoinUser(tujuantf, hasiltf)
+                addCoinUser(tujuantf, hasiltf)
                 confirmATM(sender, jumblah)
-                addKoinUser('553192271279@s.whatsapp.net', fee)
+                addCoinUser('553192271279@s.whatsapp.net', fee)
                 reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\nTransação de pontos bem sucedida\nTransferencia realizada por : +${sender.split("@")[0]}\npara : +${tujuan}\nquantidade de pontos transferidos : ${jumblah}\nimposto sobre transferência : ${fee}`)
                 break
         //FUNÇÕES DE GRUPO
