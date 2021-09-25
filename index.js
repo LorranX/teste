@@ -655,7 +655,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
         }
 
         //FUNÇÃO DE LEVEL
-                  if (isGroup && isRegistered && isLevelingOn) {
+                  if (isGroup && isRegister && isLevelingOn) {
                     const currentLevel = getLevelingLevel(sender)
                     const checkId = getLevelingId(sender)
                     try {
