@@ -54,7 +54,7 @@ self = false;
         const mute = JSON.parse(fs.readFileSync('./database/bot/mute.json'));
         const _leveling = JSON.parse(fs.readFileSync('./database/grupo/leveling.json'));
         const _level = JSON.parse(fs.readFileSync('./database/user/levelusuarios.json'));
-        const uang = JSON.parse(fs.readFileSync('./database/user/dineheiro.json'))
+        const uang = JSON.parse(fs.readFileSync('./database/user/dinheiro.json'))
         //END LOAD FILES
 
         const getRegisteredRandomId = () => {
