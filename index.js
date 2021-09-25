@@ -121,7 +121,7 @@ const obj = {id: sender, uang : 0}
   fs.writeFileSync('./database/user/dinheiro.json', JSON.stringify(uang))
 }
 
-const addCoinUser = (sender, amount) => {
+const addKoinUser = (sender, amount) => {
   let position = false
   Object.keys(uang).forEach((i) => {
       if (uang[i].id === sender) {
@@ -686,7 +686,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
                   try {
                       if (checkATM === undefined) addATM(sender)
                       const uangsaku = Math.floor(Math.random() * 10) + 90
-                      addCoinUser(sender, uangsaku)
+                      addKoinUser(sender, uangsaku)
                   } catch (err) {
                       console.error(err)
                   }
@@ -1317,9 +1317,9 @@ break
                 const tujuantf = `${tujuan.replace("@", '')}@s.whatsapp.net`
                 fee = 0.20 *  jumblah
                 hasiltf = jumblah - fee
-                addCoinUser(tujuantf, hasiltf)
+                addKoinUser(tujuantf, hasiltf)
                 confirmATM(sender, jumblah)
-                addCoinUser('553192271279@s.whatsapp.net', fee)
+                addKoinUser('553192271279@s.whatsapp.net', fee)
                 reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\nTransação de pontos bem sucedida\nTransferencia realizada por : +${sender.split("@")[0]}\npara : +${tujuan}\nquantidade de pontos transferidos : ${jumblah}\nimposto sobre transferência : ${fee}`)
                 break
         //FUNÇÕES DE GRUPO
