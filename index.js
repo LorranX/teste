@@ -148,6 +148,19 @@ const checkATMuser = (sender) => {
     }
 }
 
+const confirmATM = (sender, amount) => {
+  let position = false
+    Object.keys(uang).forEach((i) => {
+        if (uang[i].id === sender) {
+            position = i
+        }
+    })
+    if (position !== false) {
+        uang[position].uang -= amount
+        fs.writeFileSync('./database/user/dinheiro.json', JSON.stringify(uang))
+    }
+}
+
         //END DINHEIRO E LEVEL
 
         //LOAD FILES
