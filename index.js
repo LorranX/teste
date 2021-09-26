@@ -892,6 +892,9 @@ type: 1
 ║│↭_*   [ *${prefix}ytmp3* ]
 ║│↭_*   [ *${prefix}play* ] 
 ║│↭_*   [ *${prefix}pvideo* ] 
+║│↭_*   [ *${prefix}carteira* ] 
+║│↭_*   [ *${prefix}pix* ] 
+║│↭_*   [ *${prefix}ted* ] 
 ║│↭ _*  [ *${prefix}sticker* ] 
 ║│↭_*   [ *${prefix}attp* ] 
 ║│↭_*   [ *${prefix}rename* ] 
@@ -934,10 +937,10 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
   • Ultima atualização: 22/09/2021 as 22:46
-  • Ultimas alterações: Corrigidos alguns erros, adicionado recurso de leveling, adicionado recurso de pontos,
-  • Possiveis proximas Atualizações: Correções, criação de novos comandos
+  • Ultimas alterações: Corrigidos alguns erros, adicionado recurso de leveling, adicionado recurso de pontos
+  • Possiveis proximas Atualizações: Correções, adicionar novos recusos relacionados a leveling e dinheiro, adicionar welcome, anti-link, anti-fake
   • Versão atual: 1.0.5
-  • % de conclusão: 39%
+  • % de conclusão: 40%
 `
         LorranX.sendMessage(from, fs.readFileSync("./lib/image/changelog.jpg"), image, {quoted: mek, caption: medsos})
       }
@@ -1313,6 +1316,7 @@ break
 				LorranX.sendMessage(from, RESPOSTAS.uangkau(pushname, sender, kantong), text, { quoted : verificadostts})
 				break;
         case 'transfer':
+          case 'ted':
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
 				if (!q.includes('|')) return  reply(`*Formato incorreto/texto inválido*`)
                 const tujuan = q.substring(0, q.indexOf('|') - 1)
@@ -1326,7 +1330,7 @@ break
                 addKoinUser(tujuantf, hasiltf)
                 confirmATM(sender, jumblah)
                 addKoinUser('553192271279@s.whatsapp.net', fee)
-                reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\n_Transação de pontos bem sucedida_\n• Transferencia realizada por : ${sender.split("@")[0]}\n• Para : +${tujuan}\nquantidade de pontos transferidos : ${jumblah}\n• Imposto sobre transferência : ${fee}`)
+                LorranX.sendMessage(from, `*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\n_Transação de pontos bem sucedida_\n\n• Transferencia realizada por : ${sender.split("@")[0]}\n• Para : +${tujuan}\n• Quantidade de pontos transferidos : ${jumblah}\n• Imposto sobre transferência : ${fee}`, text, {quoted: verificadostts})
                 break
                 case 'pix':
                   if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
@@ -1339,11 +1343,11 @@ break
                         const cacotf = `${caco.replace("@", '')}@s.whatsapp.net`
                         addKoinUser(cacotf, maco)
                         confirmATM(sender, maco)
-                        reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 💠 」*\n\n_Transação de pontos via pix bem sucedida 💠_\n• Transferencia realizada por : +${sender.split("@")[0]}\n• Para : ${caco}\n• Quantidade de pontos transferidos : ${maco}\n*Não sao cobrados impostos sobre transações via pix*`)
+                        LorranX.sendMessage(from, `*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅💠 」*\n\n_Transação de pontos via pix bem sucedida 💠_\n\n• pix enviado por : +${sender.split("@")[0]}\n• Para : ${caco}\n• Quantidade de pontos transferidos : ${maco}\n\n*Não sao cobrados impostos sobre transações via pix*`, text, {quoted: verificadostts})
                         break
         //FUNÇÕES DE GRUPO
         case 'mute':
-            sendButtonMsg(`Caso eu esteja te incomodando você pode me silenciar aqui nesse grupo, devo me silenciar ?`,``,[{
+            sendButtonMsg(`Coe ${pushname}, ${HORARIOS}\n\nCaso eu esteja te incomodando você pode me silenciar aqui nesse grupo, devo me silenciar ?`,``,[{
               buttonId:`${prefix}mutador on`,
               buttonText: {
                 displayText: `sim`
@@ -1358,7 +1362,7 @@ break
             }])
             break;
             case 'leveling':
-            sendButtonMsg(`Coe ${pushname}\nAgora tambem tenho funções de leveling, elas geralmente ajudam na interação dos membros do grupo, devo ativar o leveling?`,``,[{
+            sendButtonMsg(`Coe ${pushname}, ${HORARIOS}\n\nAgora tambem tenho funções de leveling, elas geralmente ajudam na interação dos membros do grupo, devo ativar o leveling?`,``,[{
               buttonId:`${prefix}nivel on`,
               buttonText: {
                 displayText: `sim`
