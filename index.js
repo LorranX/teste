@@ -116,47 +116,34 @@ const addLevelingId = (sender) => {
 }
 
 const addATM = (sender) => {
-const obj = {id: sender, uang : 0}
-  uang.push(obj)
-  fs.writeFileSync('./database/user/dinheiro.json', JSON.stringify(uang))
+  const obj = {id: sender, uang : 0}
+    uang.push(obj)
+    fs.writeFileSync('./database/user/dinheiro.json', JSON.stringify(uang))
 }
 
-const addCoinUser = (sender, amount) => {
-  let position = false
-  Object.keys(uang).forEach((i) => {
-      if (uang[i].id === sender) {
-          position = i
-      }
-  })
-  if (position !== false) {
-      uang[position].uang += amount
-      fs.writeFileSync('./database/user/dinheiro.json', JSON.stringify(uang))
-  }
+const addKoinUser = (sender, amount) => {
+    let position = false
+    Object.keys(uang).forEach((i) => {
+        if (uang[i].id === sender) {
+            position = i
+        }
+    })
+    if (position !== false) {
+        uang[position].uang += amount
+        fs.writeFileSync('./database/user/dinheiro.json', JSON.stringify(uang))
+    }
 }
 
 const checkATMuser = (sender) => {
-let position = false
-  Object.keys(uang).forEach((i) => {
-      if (uang[i].id === sender) {
-          position = i
-      }
-  })
-  if (position !== false) {
-      return uang[position].uang
-  }
-}
-
-const confirmATM = (sender, amount) => {
-let position = false
-  Object.keys(uang).forEach((i) => {
-      if (uang[i].id === sender) {
-          position = i
-      }
-  })
-  if (position !== false) {
-      uang[position].uang -= amount
-      fs.writeFileSync('./database/user/dinheiro.json', JSON.stringify(uang))
-  }
+  let position = false
+    Object.keys(uang).forEach((i) => {
+        if (uang[i].id === sender) {
+            position = i
+        }
+    })
+    if (position !== false) {
+        return uang[position].uang
+    }
 }
 
         //LOAD FILES
@@ -681,16 +668,16 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
                 }
 
           //FUNÇÃO DINHERIN      
-                if (!isRegister) {
-                  const checkATM = checkATMuser(sender)
-                  try {
-                      if (checkATM === undefined) addATM(sender)
-                      const uangsaku = Math.floor(Math.random() * 10) + 90
-                      addCoinUser(sender, uangsaku)
-                  } catch (err) {
-                      console.error(err)
-                  }
-              }
+if (isGroup) {
+  const checkATM = checkATMuser(sender)
+  try {
+  if (checkATM === undefined) addATM(sender)
+  const uangsaku = Math.floor(Math.random() * 10) + 90
+  addKoinUser(sender, uangsaku)
+  } catch (err) {
+  console.error(err)
+  }
+  }
 
         //SILENCIAR BOT EM GRUPOS
 
