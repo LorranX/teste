@@ -1290,7 +1290,8 @@ break
 				break;
         case 'carteira':
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
-				LorranX.sendMessage(from, `*┏⊱ 「 𝘾𝘼𝙍𝙏𝙀𝙄𝙍𝘼 𝘿𝙀 𝙋𝙊𝙉𝙏𝙊𝙎 💵 」⊰━┓*\n┣⊱ *Nome* : ${pushname}\n┣⊱ *Número* : ${sender.split("@")[0]}\n┣⊱ *Pontos* : ${checkATMuser}\n┗━━━━━━━━━━`), text, { quoted : verificadostts}
+				const kantong = checkATMuser(sender)
+				LorranX.sendMessage(from, ind.uangkau(pushname, sender, kantong), text, { quoted : verificadostts})
 				break;
         case 'transfer':
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
