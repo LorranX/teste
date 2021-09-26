@@ -1310,9 +1310,9 @@ break
                 const tujuantf = `${tujuan.replace("@", '')}@s.whatsapp.net`
                 fee = 0.20 *  jumblah
                 hasiltf = jumblah - fee
-                addCoinUser(tujuantf, hasiltf)
+                addKoinUser(tujuantf, hasiltf)
                 confirmATM(sender, jumblah)
-                addCoinUser('553192271279@s.whatsapp.net', fee)
+                addKoinUser('553192271279@s.whatsapp.net', fee)
                 reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\nTransação de pontos bem sucedida\nTransferencia realizada por : +${sender.split("@")[0]}\npara : +${tujuan}\nquantidade de pontos transferidos : ${jumblah}\nimposto sobre transferência : ${fee}`)
                 break
                 case 'pix':
@@ -1324,7 +1324,7 @@ break
                         if (maco < 100 ) return reply(`C tem que transferir no minimo 100 pontos`)
                         if (checkATMuser(sender) < maco) return reply(`Você não tem dinheiro suficiente para fazer essa transferência`)
                         const cacotf = `${caco.replace("@", '')}@s.whatsapp.net`
-                        addCoinUser(cacotf, maco)
+                        addkoinUser(cacotf, maco)
                         confirmATM(sender, maco)
                         reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\nTransação de pontos via pix bem sucedida\nTransferencia realizada por : +${sender.split("@")[0]}\npara : +${tujuan}\nquantidade de pontos transferidos : ${jumblah}\nimposto sobre transferência : nenhum imposto é cobrado em transcoes via pix`)
                         break
