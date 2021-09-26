@@ -1318,14 +1318,14 @@ break
                 case 'pix':
                   if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
                 if (!q.includes('|')) return  reply(`*Formato incorreto/texto inválido*`)
-                        const tujuan = q.substring(0, q.indexOf('|') - 1)
-                        const jumblah = q.substring(q.lastIndexOf('|') + 1)
-                        if(isNaN(jumblah)) return await reply('Como assim o número de pontos não é um numero wtf')
-                        if (jumblah < 100 ) return reply(`C tem que transferir no minimo 100 pontos`)
-                        if (checkATMuser(sender) < jumblah) return reply(`Você não tem dinheiro suficiente para fazer essa transferência`)
-                        const tujuantf = `${tujuan.replace("@", '')}@s.whatsapp.net`
-                        addCoinUser(tujuantf, jumblah)
-                        confirmATM(sender, jumblah)
+                        const caco = q.substring(0, q.indexOf('|') - 1)
+                        const maco = q.substring(q.lastIndexOf('|') + 1)
+                        if(isNaN(maco)) return await reply('Como assim o número de pontos não é um numero wtf')
+                        if (maco < 100 ) return reply(`C tem que transferir no minimo 100 pontos`)
+                        if (checkATMuser(sender) < maco) return reply(`Você não tem dinheiro suficiente para fazer essa transferência`)
+                        const cacotf = `${caco.replace("@", '')}@s.whatsapp.net`
+                        addCoinUser(cacotf, maco)
+                        confirmATM(sender, maco)
                         reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\nTransação de pontos via pix bem sucedida\nTransferencia realizada por : +${sender.split("@")[0]}\npara : +${tujuan}\nquantidade de pontos transferidos : ${jumblah}\nimposto sobre transferência : nenhum imposto é cobrado em transcoes via pix`)
                         break
         //FUNÇÕES DE GRUPO
