@@ -47,6 +47,8 @@ defttt = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣",
 antideleted = true;
 self = false;
 
+        //DINHEIRO E LEVEL
+
 const getLevelingXp = (sender) => {
   let position = false
   Object.keys(_level).forEach((i) => {
@@ -145,6 +147,8 @@ const checkATMuser = (sender) => {
         return uang[position].uang
     }
 }
+
+        //END DINHEIRO E LEVEL
 
         //LOAD FILES
         const registrarusuarios = JSON.parse(fs.readFileSync('./database/user/registros.json'));
@@ -245,7 +249,7 @@ if (time2 < "15:00:00") {
   var HORARIOS = "Boa tarde";
 }
 if (time2 < "11:00:00") {
-  var HORARIOS = "coe viado bom dia";
+  var HORARIOS = "Bom dia";
 }
 if (time2 < "05:00:00") {
   var HORARIOS = "Boa madrugada";
@@ -660,6 +664,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
 ┣⊱ *Número* : wa.me/${sender.split("@")[0]}
 ┣⊱ *Xp* : ${getLevelingXp(sender)}
 ┣⊱ *Patente*: ${role}
+┣⊱ *Pontos*: +100
 ┗⊱ *Level* : ${getLevel} ⊱ ${getLevelingLevel(sender)}` , text, {quoted: verificadostts})
                         }
                     } catch (err) {
@@ -916,7 +921,7 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
   • Ultima atualização: 22/09/2021 as 22:46
-  • Ultimas alterações: Corrigidos alguns erros, removido notif, adicionado rename
+  • Ultimas alterações: Corrigidos alguns erros, adicionado recurso de leveling, adicionado recurso de pontos,
   • Possiveis proximas Atualizações: Correções, criação de novos comandos
   • Versão atual: 1.0.5
   • % de conclusão: 39%
@@ -952,6 +957,7 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
 ║│↭_*   [ *${prefix}demoteall* ]
 ║│↭_*   [ *${prefix}revokelink* ]
 ║│↭_*   [ *${prefix}grp* ] 
+║│↭_*   [ *${prefix}leveling* ] 
 ║│↭_*   [ *${prefix}hidetag* ]
 ║│↭_*   [ *${prefix}tagimg* ]
 ║│↭_*   [ *${prefix}tagsticker* ]
@@ -1299,7 +1305,7 @@ break
                 const tujuan = q.substring(0, q.indexOf('|') - 1)
                 const jumblah = q.substring(q.lastIndexOf('|') + 1)
                 if(isNaN(jumblah)) return await reply('Como assim o número de pontos não é um numero wtf')
-                if (jumblah < 100 ) return reply(`Vsfd seu preto falido, c tem que transferir no minimo 100 pontos`)
+                if (jumblah < 100 ) return reply(`C tem que transferir no minimo 100 pontos`)
                 if (checkATMuser(sender) < jumblah) return reply(`Você não tem dinheiro suficiente para fazer essa transferência`)
                 const tujuantf = `${tujuan.replace("@", '')}@s.whatsapp.net`
                 fee = 0.20 *  jumblah
@@ -1309,6 +1315,19 @@ break
                 addCoinUser('553192271279@s.whatsapp.net', fee)
                 reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\nTransação de pontos bem sucedida\nTransferencia realizada por : +${sender.split("@")[0]}\npara : +${tujuan}\nquantidade de pontos transferidos : ${jumblah}\nimposto sobre transferência : ${fee}`)
                 break
+                case 'pix':
+                  if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+                if (!q.includes('|')) return  reply(`*Formato incorreto/texto inválido*`)
+                        const tujuan = q.substring(0, q.indexOf('|') - 1)
+                        const jumblah = q.substring(q.lastIndexOf('|') + 1)
+                        if(isNaN(jumblah)) return await reply('Como assim o número de pontos não é um numero wtf')
+                        if (jumblah < 100 ) return reply(`C tem que transferir no minimo 100 pontos`)
+                        if (checkATMuser(sender) < jumblah) return reply(`Você não tem dinheiro suficiente para fazer essa transferência`)
+                        const tujuantf = `${tujuan.replace("@", '')}@s.whatsapp.net`
+                        addCoinUser(tujuantf, jumblah)
+                        confirmATM(sender, jumblah)
+                        reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\nTransação de pontos via pix bem sucedida\nTransferencia realizada por : +${sender.split("@")[0]}\npara : +${tujuan}\nquantidade de pontos transferidos : ${jumblah}\nimposto sobre transferência : nenhum imposto é cobrado em transcoes via pix`)
+                        break
         //FUNÇÕES DE GRUPO
         case 'mute':
             sendButtonMsg(`Caso eu esteja te incomodando você pode me silenciar aqui nesse grupo, devo me silenciar ?`,``,[{
@@ -1319,6 +1338,21 @@ break
               type: 1
             },{
               buttonId: `${prefix}mutador off`,
+              buttonText: {
+                displayText: 'não'
+              },
+              type: 1
+            }])
+            break;
+            case 'leveling':
+            sendButtonMsg(`Coe ${pushname}\nAgora tambem tenho funções de leveling, elas geralmente ajudam na interação dos membros do grupo, devo ativar o leveling?`,``,[{
+              buttonId:`${prefix}nivel on`,
+              buttonText: {
+                displayText: `sim`
+              },
+              type: 1
+            },{
+              buttonId: `${prefix}nivel off`,
               buttonText: {
                 displayText: 'não'
               },
@@ -1786,7 +1820,7 @@ case 'kickall':
                     if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
                         const encmediaaa = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         const mediaaa = await LorranX.downloadAndSaveMediaMessage(encmediaaa)
-                        reply("calmai macaco 🦧")
+                        (RESPOSTAS.wait())
                         a = await webp2gifFile(mediaaa)
                         mp4 = await getBuffer(a.result)
                         LorranX.sendMessage(from, mp4, MessageType.video, {
@@ -1802,7 +1836,7 @@ case 'kickall':
                       if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
                       if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
 				if (!isQuotedSticker) return reply('Pra usar esse comando c tem que marcar uma figurinha')
-					reply("Calmai macaco 🦧")
+					reply(RESPOSTAS.wait())
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 					ran = getRandom('.png')
@@ -1976,7 +2010,7 @@ case 'kickall':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isQuotedAudio) return reply('Marque um áudio')
-        reply("Calmai macaco 🦧");
+        reply(RESPOSTAS.wait());
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp3')
@@ -1992,7 +2026,7 @@ case 'kickall':
           case 'acelerar':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)  
-        reply("Calmai macaco 🦧");
+        reply(RESPOSTAS.wait());
         if (!isQuotedAudio) return reply('Marque um áudio')
         encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
         media = await LorranX.downloadAndSaveMediaMessage(encmedia)
@@ -2010,7 +2044,7 @@ case 'kickall':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply('Marque um áudio')
-        reply("Calmai macaco 🦧");
+        reply(RESPOSTAS.wait());
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp3')
@@ -2027,7 +2061,7 @@ case 'kickall':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply('Marque um áudio')
-        reply("Calmai macaco 🦧");
+        reply(RESPOSTAS.wait())
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp3')
@@ -2044,7 +2078,7 @@ case 'kickall':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply('Marque um áudio')  
-        reply("Calmai macaco 🦧");              
+        reply(RESPOSTAS.wait());              
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp3')
@@ -2061,7 +2095,7 @@ case 'kickall':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)     
         if (!isQuotedAudio) return reply('Marque um áudio')
-        reply("Calmai macaco 🦧");
+        reply(RESPOSTAS.wait())
         encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
         media = await LorranX.downloadAndSaveMediaMessage(encmedia)
         ran = getRandom('.mp3')
@@ -2078,7 +2112,7 @@ case 'kickall':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply("Pra usar esse comando c tem que marcar um audio");
-        reply("Calmai macaco 🦧");
+        reply(RESPOSTAS.wait());
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
         .message.extendedTextMessage.contextInfo;
         media = await LorranX.downloadAndSaveMediaMessage(encmedia);
@@ -2096,7 +2130,7 @@ case 'kickall':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedAudio) return reply("Pra usar esse comando c tem que marcar um audio");
-        reply("Calmai macaco 🦧");
+        reply(RESPOSTAS.wait());
 	encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 	media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 	ran = getRandom('.mp3')
@@ -2115,7 +2149,7 @@ break;
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
-        reply("Calmai macaco 🦧");
+        reply(RESPOSTAS.wait());
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
         .message.extendedTextMessage.contextInfo;
         media = await LorranX.downloadAndSaveMediaMessage(encmedia);
@@ -2136,7 +2170,7 @@ break;
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
         if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
-        reply("Calmai macaco 🦧");
+        reply(RESPOSTAS.wait());
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
         .message.extendedTextMessage.contextInfo;
         media = await LorranX.downloadAndSaveMediaMessage(encmedia);
@@ -2160,7 +2194,7 @@ break;
               if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
               if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
-          reply("Calmai macaco 🦧");
+          reply(RESPOSTAS.wait());
           encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
           .message.extendedTextMessage.contextInfo;
           media = await LorranX.downloadAndSaveMediaMessage(encmedia);
@@ -2307,7 +2341,7 @@ break;
                reply(`Selecione on ou off`)
 }
                break;
-               case 'leveling':
+               case 'nivel':
                 if (!isGroup) return reply("Este comando so pode ser usado em grupos")
                 if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
                 if (args.length < 1) return reply('Man, c tem que escolher entre on (ativar) e off (desativar)')
