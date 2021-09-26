@@ -1326,7 +1326,7 @@ break
                 addKoinUser(tujuantf, hasiltf)
                 confirmATM(sender, jumblah)
                 addKoinUser('553192271279@s.whatsapp.net', fee)
-                reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\nTransação de pontos bem sucedida\nTransferencia realizada por : +${sender.split("@")[0]}\npara : +${tujuan}\nquantidade de pontos transferidos : ${jumblah}\nimposto sobre transferência : ${fee}`)
+                reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\n• Transação de pontos bem sucedida\n• Transferencia realizada por : +${sender.split("@")[0]}\n•Para : ${tujuan}\n• Quantidade de pontos transferidos : ${jumblah}\n• Imposto sobre transferência : ${fee}`)
                 break
                 case 'pix':
                   if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
@@ -1337,10 +1337,12 @@ break
                         if (maco < 100 ) return reply(`C tem que transferir no minimo 100 pontos`)
                         if (checkATMuser(sender) < maco) return reply(`Você não tem dinheiro suficiente para fazer essa transferência`)
                         const cacotf = `${caco.replace("@", '')}@s.whatsapp.net`
-                        addKoinUser(cacotf, maco)
+                        fee = 0 *  maco
+                        imposto = maco - fee
+                        addKoinUser(cacotf, imposto)
                         confirmATM(sender, maco)
-                        reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\nTransação de pontos via pix bem sucedida\nTransferencia realizada por : +${sender.split("@")[0]}\npara : +${tujuan}\nquantidade de pontos transferidos : ${jumblah}\nimposto sobre transferência : nenhum imposto é cobrado em transcoes via pix`)
-                        break
+                        reply(`*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 💠 」*\n\n• Transação de pontos via pix bem sucedida 💠\n• Transferencia realizada por : +${sender.split("@")[0]}\nPara : ${tujuan}\n• Quantidade de pontos transferidos : ${jumblah}\n*Não sao cobrados impostos sobre transações via pix*`)
+                        break;
         //FUNÇÕES DE GRUPO
         case 'mute':
             sendButtonMsg(`Caso eu esteja te incomodando você pode me silenciar aqui nesse grupo, devo me silenciar ?`,``,[{
