@@ -1330,7 +1330,7 @@ break
                 addKoinUser(tujuantf, hasiltf)
                 confirmATM(sender, jumblah)
                 addKoinUser('553192271279@s.whatsapp.net', fee)
-                LorranX.sendMessage(from, `*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\n_Transação de pontos bem sucedida_\n\n• Transferencia realizada por : ${sender.split("@")[0]}\n• Para : +${tujuan}\n• Quantidade de pontos transferidos : ${jumblah}\n• Imposto sobre transferência : ${fee}`, text, {quoted: verificadostts})
+                LorranX.sendMessage(from, `*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅ 」*\n\n_Transação de pontos bem sucedida_\n\n• Transferencia realizada por : ${sender.split("@")[0]}\n• Para : @${pushname}\n• Quantidade de pontos transferidos : ${jumblah}\n• Imposto sobre transferência : ${fee}`, text, {quoted: verificadostts})
                 break
                 case 'pix':
                   if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
@@ -1345,7 +1345,7 @@ break
                         imposto = maco - fee
                         addKoinUser(cacotf, imposto)
                         confirmATM(sender, maco)
-                        LorranX.sendMessage(from, `*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅💠 」*\n\n_Transação de pontos via pix bem sucedida 💠_\n\n• pix enviado por : +${sender.split("@")[0]}\n• Para : ${caco}\n• Quantidade de pontos transferidos : ${maco}\n\n*Não sao cobrados impostos sobre transações via pix*`, text, {quoted: verificadostts})
+                        LorranX.sendMessage(from, `*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅💠 」*\n\n_Transação de pontos via pix bem sucedida 💠_\n\n• pix enviado por : +${sender.split("@")[0]}\n• Para : @${pushname}\n• Quantidade de pontos transferidos : ${maco}\n\n*Não sao cobrados impostos sobre transações via pix*`, text, {quoted: verificadostts})
                         break
         //FUNÇÕES DE GRUPO
         case 'mute':
