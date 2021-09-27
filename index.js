@@ -1341,7 +1341,9 @@ break
                         if (maco < 100 ) return reply(`C tem que transferir no minimo 100 pontos`)
                         if (checkATMuser(sender) < maco) return reply(`Você não tem dinheiro suficiente para fazer essa transferência`)
                         const cacotf = `${caco.replace("@", '')}@s.whatsapp.net`
-                        addKoinUser(cacotf, maco)
+                        fee = 0 *  maco
+                        imposto = maco - fee
+                        addKoinUser(cacotf, imposto)
                         confirmATM(sender, maco)
                         LorranX.sendMessage(from, `*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅💠 」*\n\n_Transação de pontos via pix bem sucedida 💠_\n\n• pix enviado por : +${sender.split("@")[0]}\n• Para : ${caco}\n• Quantidade de pontos transferidos : ${maco}\n\n*Não sao cobrados impostos sobre transações via pix*`, text, {quoted: verificadostts})
                         break
