@@ -1696,7 +1696,6 @@ break
 				break;
         case 'sider': 
         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
-if (!isQuoted) return reply(`Coe macaco, c tem que marcar alguma mensagem minha`)
 LorranX.messageInfo(from, LorranX.message.extendedTextMessage.contextInfo.stanzaId)
 .then((res) => {
 let anu = []
