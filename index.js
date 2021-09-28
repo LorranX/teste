@@ -1130,7 +1130,7 @@ break;
 case 'registrar':
 case 'register':
   if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
-if (isRegister) return reply('```Seus dados ja estam registrados na minha database```')
+if (isRegister) return reply('```Seus dados estão registrados na minha database```')
 veri = sender
 if (isGroup) {
 const namaUser = `${pushname}`
