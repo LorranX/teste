@@ -548,6 +548,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
         type === "extendedTextMessage" && content.includes("audioMessage");
       const isQuotedSticker =
         type === "extendedTextMessage" && content.includes("stickerMessage");
+      const isQuoted = type == 'extendedTextMessage'
       
       
       if (isCmd && !isGroup) console.log("《",color("COMANDO ENVIADO AS","lime"),time2,color(command,"lime"),"ENVIADO POR",color(sender.split("@")[0],"cyan"))
@@ -1297,6 +1298,7 @@ fs.unlinkSync('undefined.webp')
 break
           case 'speed':
 			case 'ping':
+        if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 					const timestampi = speed();
 					const latensyi = speed() - timestampi
 					reply(`Speed: ${latensyi.toFixed(4)} Segundos`)
@@ -1317,6 +1319,7 @@ break
         case 'transfer':
           case 'ted':
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 				if (!q.includes('|')) return  reply(`*Formato incorreto/texto inválido*`)
                 const tujuan = q.substring(0, q.indexOf('|') - 1)
                 const jumblah = q.substring(q.lastIndexOf('|') + 1)
@@ -1333,6 +1336,7 @@ break
                 break
                 case 'pix':
                   if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
+                  if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
                 if (!q.includes('|')) return  reply(`*Formato incorreto/texto inválido*`)
                         const caco = q.substring(0, q.indexOf('|') - 1)
                         const maco = q.substring(q.lastIndexOf('|') + 1)
@@ -1691,6 +1695,22 @@ break
 					LorranX.blockUser (`${body.slice(10)}@c.us`, "remove")
 					LorranX.sendMessage(from, `Pronto papai, desbloquiei esse corno`, text)
 				break;
+        case 'sider': 
+if (!isGroup) return reply(mess.only.group)
+if (!isQuoted) return reply(`Coe macaco, c tem que marcar alguma mensagem minha`)
+LorranX.messageInfo(from, LorranX.message.extendedTextMessage.contextInfo.stanzaId)
+.then((res) => {
+let anu = []
+let txt = `• *Lido por*\n\n`
+for (let i = 0; i < res.reads.length; i++){
+anu.push(res.reads[i].jid)
+txt += `• @${res.reads[i].jid.split("@")[0]}\n`
+txt += `• Horario em que vizualizou : ${moment(`${res.reads[i].t}` * 1000).tz('America/Sao_Paulo').format('HH:mm:ss')}\n\n`
+}         
+mentions(txt, anu, true)
+})
+.catch((err) => reply('So consigo ver quem vizualizou as *minhas* mensagens'))
+break
         case 'setpp':
 					if (!isOwner) return reply("Você não é meu papai 😡")
 				    LorranX.updatePresence(from, Presence.composing) 
