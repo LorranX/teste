@@ -538,7 +538,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
       };
 
             
-      
+      const isQuoted = type == "extendedTextMessage"
       const isMedia = type === "imageMessage" || type === "videoMessage";
       const isQuotedImage =
         type === "extendedTextMessage" && content.includes("imageMessage");
@@ -548,7 +548,6 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
         type === "extendedTextMessage" && content.includes("audioMessage");
       const isQuotedSticker =
         type === "extendedTextMessage" && content.includes("stickerMessage");
-      const isQuoted = type == 'extendedTextMessage'
       
       
       if (isCmd && !isGroup) console.log("《",color("COMANDO ENVIADO AS","lime"),time2,color(command,"lime"),"ENVIADO POR",color(sender.split("@")[0],"cyan"))
