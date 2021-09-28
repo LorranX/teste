@@ -1837,8 +1837,8 @@ case 'kickall':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
                     if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
-                        const encmediaaa = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        const mediaaa = await LorranX.downloadAndSaveMediaMessage(encmediaaa)
+                        encmediaaa = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
+                        mediaaa = await LorranX.downloadAndSaveMediaMessage(encmediaaa)
                         (RESPOSTAS.wait())
                         a = await webp2gifFile(mediaaa)
                         mp4 = await getBuffer(a.result)
