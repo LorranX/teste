@@ -1900,8 +1900,8 @@ case 'kickall':
 if (args.length < 1) return reply('Cade o link????')
 if(!isUrl(args[0]) && !args[0].includes('mediafire')) return reply(`Link invalido`)
 reply(`Calmai macaco, pode ser que demore um pouco 🦧`)
-teks = args.join(' ')
-res = await mediafireDl(teks)
+zuzu = args.join(' ')
+res = await mediafireDl(zuzu)
 result = `Media Fire Downloader
 
 *Nome do arquivo :* ${res[0].nama}
@@ -2268,6 +2268,13 @@ break;
             case 'stopjadibot':
           if (mek.key.fromMe) return reply("```khusus Owner```")
           stopjadibot(reply)
+            break;
+            case 'listjadibot':
+          let teks = "*[ LIST BOT ]*"
+          for(let i of listjadibot) {
+          teks += `*Nomor* : ${i.jid.split('@')[0]}*Nama* : ${i.name}\n*Device* : ${i.phone.device_manufacturer}\n*Model* : ${i.phone.device_model}\n\n`
+          }
+          reply(teks)
             break;
             case 'suit':
           sendButtonMsg(`pilih salah satu`,``,[{
