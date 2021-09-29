@@ -29,6 +29,7 @@ const request = require('request');
 const axios = require("axios");
 const moment = require("moment-timezone");
 const { webp2gifFile } = require("./lib/gif.js")
+const { mediafireDl } = require('./lib/mediafire')
 const { isFiltered, addFilter } = require('./lib/antispam')
 const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
@@ -162,6 +163,19 @@ const confirmATM = (sender, amount) => {
 }
 
         //END DINHEIRO E LEVEL
+
+        //DOWNLOAD
+        const sendFileFromUrl = async(link, type, options) => {
+          hasil = await getBuffer(link).catch(e => {
+          fetch(link).then((hasil) => {
+          return LorranX.sendMessage(from, hasil, type, options)
+          }).catch(e => {
+          LorranX.sendMessage(from, { url : link }, type, options).catch(e => {
+            reply('_Opora, aconteceu algo de errado_')
+            console.log(e)
+          }) 
+          }) 
+          })
 
         //LOAD FILES
         const registrarusuarios = JSON.parse(fs.readFileSync('./database/user/registros.json'));
@@ -438,6 +452,7 @@ module.exports = (LorranX) => {
         const produtoverify = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/verificado.png') }, "title": `VERIFICANDO...`, "productImageCount": 9999 }, "businessOwnerJid": `0@s.whatsapp.net`}}}
         const verificadocarrinho ={"key": {   "fromMe": false,"participant":"0@s.whatsapp.net",   "remoteJid": "556181496039-1625944593@g.us"  }, "message": {orderMessage: {itemCount: 999999,status: 200, thumbnail: fs.readFileSync(`./lib/image/verificado.png`), surface: 200, message: `⊳ Comando : ${prefix}${command}\n⊳${HORARIOS} ${pushname}`, orderTitle: '©Bot', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
         const verificadostts = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "caption": `${HORARIOS} ${pushname}`} } }
+        const zepi = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "caption": `⊳ Comando : ${prefix}${command}\n⊳${HORARIOS} ${pushname}`} } }
 
         //BOTÃO NORMAL
       const sendButtonMsg = (text, footer, but = [], options = {}) => {
@@ -1869,6 +1884,22 @@ case 'kickall':
 				break;
         //END CONVERSORES
         //DOWNLOADERS
+        case 'mediafire':
+          if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)  		    
+if (args.length < 1) return reply('Cade o link????')
+if(!isUrl(args[0]) && !args[0].includes('mediafire')) return reply(`Link invalido`)
+reply(`Calmai macaco, pode ser que demore um pouco 🦧`)
+teks = args.join(' ')
+res = await mediafireDl(teks)
+result = `Media Fire Downloader
+
+*Nome do arquivo :* ${res[0].nama}
+*Tamanho do arquivo :* ${res[0].size}
+*Link :* ${res[0].link}
+`
+reply(result)
+sendFileFromUrl(res[0].link, document, {mimetype: res[0].mime, filename: res[0].nama, quoted: zepi})
+break;
         case 'play':
           case 'p':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
