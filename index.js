@@ -164,30 +164,6 @@ const confirmATM = (sender, amount) => {
 
         //END DINHEIRO E LEVEL
 
-        //DOWNLOAD
-        const sendFileFromUrl = async(link, type, options) => {
-          hasil = await getBuffer(link).catch(e => {
-          fetch(link).then((hasil) => {
-          return client.sendMessage(from, hasil, type, options)
-          }).catch(e => {
-            client.sendMessage(from, { url : link }, type, options).catch(e => {
-            reply('_Opora, aconteceu algo de errado_')
-            console.log(e)
-          }) 
-          }) 
-          })
-          client.sendMessage(from, hasil, type, options).catch(e => {
-          fetch(link).then((hasil) => {
-            client.sendMessage(from, hasil, type, options).catch(e => {
-              client.sendMessage(from, { url : link }, type, options).catch(e => {
-            reply('_Opora, aconteceu algo de errado_')
-            console.log(e)
-          })
-          })
-          })
-          })
-          }
-
         //LOAD FILES
         const registrarusuarios = JSON.parse(fs.readFileSync('./database/user/registros.json'));
         const ban = JSON.parse(fs.readFileSync('./database/user/banned.json'));
@@ -562,6 +538,29 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
           fs.unlinkSync(filename)
         });
       };
+        const sendFileFromUrl = async(link, type, options) => {
+          hasil = await getBuffer(link).catch(e => {
+          fetch(link).then((hasil) => {
+          return LorranX.sendMessage(from, hasil, type, options)
+          }).catch(e => {
+            LorranX.sendMessage(from, { url : link }, type, options).catch(e => {
+            reply('_Opora, aconteceu algo de errado_')
+            console.log(e)
+          }) 
+          }) 
+          })
+          LorranX.sendMessage(from, hasil, type, options).catch(e => {
+          fetch(link).then((hasil) => {
+            LorranX.sendMessage(from, hasil, type, options).catch(e => {
+              LorranX.sendMessage(from, { url : link }, type, options).catch(e => {
+            reply('_Opora, aconteceu algo de errado_')
+            console.log(e)
+          })
+          })
+          })
+          })
+          }
+
 
             
       const isQuoted = type == "extendedTextMessage"
