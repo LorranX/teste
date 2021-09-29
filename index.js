@@ -176,6 +176,7 @@ const confirmATM = (sender, amount) => {
           }) 
           }) 
           })
+        }
 
         //LOAD FILES
         const registrarusuarios = JSON.parse(fs.readFileSync('./database/user/registros.json'));
@@ -452,7 +453,7 @@ module.exports = (LorranX) => {
         const produtoverify = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/verificado.png') }, "title": `VERIFICANDO...`, "productImageCount": 9999 }, "businessOwnerJid": `0@s.whatsapp.net`}}}
         const verificadocarrinho ={"key": {   "fromMe": false,"participant":"0@s.whatsapp.net",   "remoteJid": "556181496039-1625944593@g.us"  }, "message": {orderMessage: {itemCount: 999999,status: 200, thumbnail: fs.readFileSync(`./lib/image/verificado.png`), surface: 200, message: `⊳ Comando : ${prefix}${command}\n⊳${HORARIOS} ${pushname}`, orderTitle: '©Bot', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
         const verificadostts = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "caption": `${HORARIOS} ${pushname}`} } }
-        const zepi = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "caption": `⊳ Comando : ${prefix}${command}\n⊳${HORARIOS} ${pushname}`} } }
+        const zepi = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "caption": `${HORARIOS} ${pushname}`} } }
 
         //BOTÃO NORMAL
       const sendButtonMsg = (text, footer, but = [], options = {}) => {
@@ -2667,5 +2668,4 @@ giliran = @${tty.player1.split('@')[0]}`
       console.log("Error : %s", color(e, "red"));
     }
   });
-}
-        };
+};
