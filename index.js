@@ -1506,6 +1506,22 @@ break
 						LorranX.groupDemoteAdmin(from, mentioned)
 					}
 					break;
+          case 'sider': 
+        if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+        if (!isQuoted) return reply(`Reply pesan dari bot`)
+LorranX.messageInfo(from, mek.message.extendedTextMessage.contextInfo.stanzaId)
+.then((res) => {
+let anu = []
+let txt = `• *Lido por*\n\n`
+for (let i = 0; i < res.reads.length; i++){
+anu.push(res.reads[i].jid)
+txt += `• ${res.reads[i].jid.split("@")[0]}\n`
+txt += `• Horario em que vizualizou : ${moment(`${res.reads[i].t}` * 1000).tz('America/Sao_Paulo').format('HH:mm:ss')}\n\n`
+}         
+mentions(txt, anu, true)
+})
+.catch((err) => reply('So consigo ver quem vizualizou as *minhas* mensagens'))
+break;
           case 'hidetag':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isGroup) return reply("Este comando so pode ser usado em grupos")
@@ -1694,21 +1710,6 @@ break
 					LorranX.blockUser (`${body.slice(10)}@c.us`, "remove")
 					LorranX.sendMessage(from, `Pronto papai, desbloquiei esse corno`, text)
 				break;
-        case 'sider': 
-        if (!isGroup) return reply("Este comando so pode ser usado em grupos")
-LorranX.messageInfo(from, mek.message.extendedTextMessage.contextInfo.stanzaId)
-.then((res) => {
-let anu = []
-let txt = `• *Lido por*\n\n`
-for (let i = 0; i < res.reads.length; i++){
-anu.push(res.reads[i].jid)
-txt += `• @${res.reads[i].jid.split("@")[0]}\n`
-txt += `• Horario em que vizualizou : ${moment(`${res.reads[i].t}` * 1000).tz('America/Sao_Paulo').format('HH:mm:ss')}\n\n`
-}         
-mentions(txt, anu, true)
-})
-.catch((err) => reply('So consigo ver quem vizualizou as *minhas* mensagens'))
-break
         case 'setpp':
 					if (!isOwner) return reply("Você não é meu papai 😡")
 				    LorranX.updatePresence(from, Presence.composing) 
