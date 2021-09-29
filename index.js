@@ -1696,7 +1696,7 @@ break
 				break;
         case 'sider': 
         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
-LorranX.messageInfo(from, message.extendedTextMessage.contextInfo.stanzaId)
+LorranX.messageInfo(from, mek.message.extendedTextMessage.contextInfo.stanzaId)
 .then((res) => {
 let anu = []
 let txt = `• *Lido por*\n\n`
