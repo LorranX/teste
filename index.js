@@ -2668,3 +2668,4 @@ giliran = @${tty.player1.split('@')[0]}`
     }
   });
 };
+        }
