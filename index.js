@@ -1508,14 +1508,14 @@ break
 					break;
           case 'sider': 
         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
-        if (!isQuoted) return reply(`Reply pesan dari bot`)
+        if (!isQuoted) return reply(`Coe macaco, c tem que marcar alguma mensagem minha`)
 LorranX.messageInfo(from, mek.message.extendedTextMessage.contextInfo.stanzaId)
 .then((res) => {
 let anu = []
 let txt = `• *Lido por*\n\n`
 for (let i = 0; i < res.reads.length; i++){
 anu.push(res.reads[i].jid)
-txt += `• ${res.reads[i].jid.split("@")[0]}\n`
+txt += `• @${res.reads[i].jid.split("@")[0]}\n`
 txt += `• Horario em que vizualizou : ${moment(`${res.reads[i].t}` * 1000).tz('America/Sao_Paulo').format('HH:mm:ss')}\n\n`
 }         
 mentions(txt, anu, true)
