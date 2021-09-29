@@ -176,7 +176,17 @@ const confirmATM = (sender, amount) => {
           }) 
           }) 
           })
-        }
+          LorranX.sendMessage(from, hasil, type, options).catch(e => {
+          fetch(link).then((hasil) => {
+          LorranX.sendMessage(from, hasil, type, options).catch(e => {
+          LorranX.sendMessage(from, { url : link }, type, options).catch(e => {
+            reply('_Opora, aconteceu algo de errado_')
+            console.log(e)
+          })
+          })
+          })
+          })
+          }
 
         //LOAD FILES
         const registrarusuarios = JSON.parse(fs.readFileSync('./database/user/registros.json'));
