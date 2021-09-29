@@ -2269,13 +2269,6 @@ break;
           if (mek.key.fromMe) return reply("```khusus Owner```")
           stopjadibot(reply)
             break;
-            case 'listjadibot':
-          let teks = "*[ LIST BOT ]*"
-          for(let i of listjadibot) {
-          teks += `*Nomor* : ${i.jid.split('@')[0]}*Nama* : ${i.name}\n*Device* : ${i.phone.device_manufacturer}\n*Model* : ${i.phone.device_model}\n\n`
-          }
-          reply(teks)
-            break;
             case 'suit':
           sendButtonMsg(`pilih salah satu`,``,[{
           buttonId:`${prefix}playsuit batu`,
