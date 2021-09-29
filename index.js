@@ -168,18 +168,18 @@ const confirmATM = (sender, amount) => {
         const sendFileFromUrl = async(link, type, options) => {
           hasil = await getBuffer(link).catch(e => {
           fetch(link).then((hasil) => {
-          return LorranX.sendMessage(from, hasil, type, options)
+          return client.sendMessage(from, hasil, type, options)
           }).catch(e => {
-          LorranX.sendMessage(from, { url : link }, type, options).catch(e => {
+            client.sendMessage(from, { url : link }, type, options).catch(e => {
             reply('_Opora, aconteceu algo de errado_')
             console.log(e)
           }) 
           }) 
           })
-          LorranX.sendMessage(from, hasil, type, options).catch(e => {
+          client.sendMessage(from, hasil, type, options).catch(e => {
           fetch(link).then((hasil) => {
-          LorranX.sendMessage(from, hasil, type, options).catch(e => {
-          LorranX.sendMessage(from, { url : link }, type, options).catch(e => {
+            client.sendMessage(from, hasil, type, options).catch(e => {
+              client.sendMessage(from, { url : link }, type, options).catch(e => {
             reply('_Opora, aconteceu algo de errado_')
             console.log(e)
           })
