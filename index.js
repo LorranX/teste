@@ -1288,10 +1288,10 @@ if (err) return console.log(err);
 exec(`webpmux -set exif ${exif321} undefined.webp -o ${exifst}`, (err) => {
 if (err) return console.log(err);
 LorranX.sendMessage(from, fs.readFileSync(exifst), sticker)
-reply(`Pronto macaco, alterei os dados da figurinha`)
 fs.unlinkSync(exifst)
 fs.unlinkSync(exif321)
 fs.unlinkSync('undefined.webp')
+reply(`Pronto macaco, alterei os dados da figurinha`)
 })
 });
 break
