@@ -895,6 +895,7 @@ type: 1
 ║│↭_*   [ *${prefix}carteira* ] 
 ║│↭_*   [ *${prefix}pix* ] 
 ║│↭_*   [ *${prefix}ted* ] 
+║│↭_*   [ *${prefix}sider* ] 
 ║│↭ _*  [ *${prefix}sticker* ] 
 ║│↭_*   [ *${prefix}attp* ] 
 ║│↭_*   [ *${prefix}rename* ] 
@@ -936,8 +937,8 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-  • Ultima atualização: 22/09/2021 as 22:46
-  • Ultimas alterações: Corrigidos alguns erros, adicionado recurso de leveling, adicionado recurso de pontos
+  • Ultima atualização: 28/09/2021 as 21:54
+  • Ultimas alterações: Adicionado sider (ver quem vizualizou mensagens do bot), corrigidos erros e problemas cronicos
   • Possiveis proximas Atualizações: Correções, adicionar novos recusos relacionados a leveling e dinheiro, adicionar welcome, anti-link, anti-fake
   • Versão atual: 1.0.5
   • % de conclusão: 40%
