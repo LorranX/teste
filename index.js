@@ -454,8 +454,7 @@ module.exports = (LorranX) => {
           from,
           buttonMessage,
           buttonsMessage,
-          options,
-          {quoted: verificadocarrinho}
+          options
         )
       }
         ///BOTÃO DE IMAGEM
@@ -790,7 +789,7 @@ if (listbut == 'Modificadores de Video' || command == `${prefix}start`) {
 ║| ↭_*  *[Meu criador]*
 ║https://wa.me/+553195703379
 ╰───────────`;
-sendButtonMsg(Menuvideo, `By LorranX ©`,[{
+sendButtonMsg(Menuvideo, {quoted: verificadocarrinho}, `By LorranX ©`,[{
   buttonId: `${prefix}verify`,
   buttonText: {
     displayText: "Verify"
