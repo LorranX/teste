@@ -1,7 +1,11 @@
 const a = '```'
 
 exports.wait = () => {
-	return`*Calmai macaco 🦧*`
+	return`*Calmai macaco*`
+}
+
+exports.wait2 = () => {
+	return`*Calmai macaco, pode ser que demore um pouco*`
 }
 
 exports.uangkau = (pushname, sender, uangkau) => {
