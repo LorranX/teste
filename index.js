@@ -1824,7 +1824,7 @@ case 'kickall':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 				LorranX.updatePresence(from, Presence.composing)
 				if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
-				LorranX.sendMessage(from, RESPOSTAS.wait, { quoted : magago})
+				reply(RESPOSTAS.wait, { quoted: magago })
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp4')
