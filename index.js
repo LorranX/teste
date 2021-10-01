@@ -1824,7 +1824,7 @@ case 'kickall':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 				LorranX.updatePresence(from, Presence.composing)
 				if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
-				LorranX.sendMessage(RESPOSTAS.wait, text, { quoted : magago})
+				LorranX.sendMessage(from, RESPOSTAS.wait, { quoted : magago})
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp4')
@@ -1979,7 +1979,7 @@ case 'kickall':
             case 'ig':
               if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
         if (!isUrl(args[0]) && !args[0].includes('instagram.com')) return reply(`Link invalido`)
-        LorranX.sendMessage(from, RESPOSTAS.wait2, text, { quoted : magago}) 
+        reply("Calmai macaco, pode ser que demore um pouco 🦧") 
 	    hx.igdl(args[0])
 	    .then(async(result) => {
             for(let i of result.medias){
