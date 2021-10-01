@@ -789,7 +789,7 @@ if (listbut == 'Modificadores de Video' || command == `${prefix}start`) {
 ║| ↭_*  *[Meu criador]*
 ║https://wa.me/+553195703379
 ╰───────────`;
-sendButtonMsg(Menuvideo, `By LorranX ©`,[{
+sendButtonMsg(Menuvideo, `By LorranX ©`, { quoted: verificadocarrinho }[{
   buttonId: `${prefix}verify`,
   buttonText: {
     displayText: "Verify"
