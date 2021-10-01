@@ -440,6 +440,7 @@ module.exports = (LorranX) => {
         const verificadocarrinho ={"key": {   "fromMe": false,"participant":"0@s.whatsapp.net",   "remoteJid": "556181496039-1625944593@g.us"  }, "message": {orderMessage: {itemCount: 999999,status: 200, thumbnail: fs.readFileSync(`./lib/image/verificado.png`), surface: 200, message: `⊳ Comando : ${prefix}${command}\n⊳${HORARIOS} ${pushname}`, orderTitle: '©Bot', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
         const verificadostts = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "caption": `${HORARIOS} ${pushname}`} } }
         const zepi = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "caption": `⊳ Comando : ${prefix}${command}\n⊳${HORARIOS} ${pushname}`} } }
+        const magago = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "caption": `🦧`} } }
 
         //BOTÃO NORMAL
       const sendButtonMsg = (text, footer, but = [], options = {}) => {
@@ -1824,7 +1825,7 @@ case 'kickall':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 				LorranX.updatePresence(from, Presence.composing)
 				if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
-				reply(RESPOSTAS.wait())
+				LorranX.sendMessage(from, RESPOSTAS.wait, text, { quoted : magago})
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp4')
@@ -1842,7 +1843,7 @@ case 'kickall':
                     if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
                         encmediaaa = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         mediaaa = await LorranX.downloadAndSaveMediaMessage(encmediaaa)
-                        (RESPOSTAS.wait())
+                        LorranX.sendMessage(from, RESPOSTAS.wait, text, { quoted : magago})
                         a = await webp2gifFile(mediaaa)
                         mp4 = await getBuffer(a.result)
                         LorranX.sendMessage(from, mp4, MessageType.video, {
@@ -1857,7 +1858,7 @@ case 'kickall':
                     case 'toimg':
                       if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 				if (!isQuotedSticker) return reply('Pra usar esse comando c tem que marcar uma figurinha')
-					reply(RESPOSTAS.wait())
+        LorranX.sendMessage(from, RESPOSTAS.wait, text, { quoted : magago})
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 					ran = getRandom('.png')
@@ -1876,7 +1877,7 @@ case 'kickall':
           case 'p':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (args.length === 0) return reply(`Pra eu baixar a musica c tem que mandar um nome valido\nExemplo: *${prefix}play sertanejo*`)
-          reply("Calmai macaco, pode ser que demore um pouco 🦧")
+          LorranX.sendMessage(from, RESPOSTAS.wait2, text, { quoted : magago})
           var srch = args.join('')
           find = await yts(srch)
           res = find.all
@@ -1900,7 +1901,7 @@ case 'kickall':
         case 'pvideo':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (args.length === 0) return reply(`Pra eu baixar esse video c tem que mandar um nome valido\nExemplo: *${prefix}pvideo macaco*`)
-          reply("Calmai macaco, pode ser que demore um pouco 🦧")
+          LorranX.sendMessage(from, RESPOSTAS.wait2, text, { quoted : magago})
           var srch = args.join('')
           find = await yts(srch);
           res = find.all 
@@ -1925,7 +1926,7 @@ case 'kickall':
         case 'ytmp3':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (args.length < 1) return reply('Pra eu baixar o audio c tem que usar um link valido do youtube')
-          reply("Calmai macaco, pode ser que demore um pouco 🦧")
+          LorranX.sendMessage(from, RESPOSTAS.wait2, text, { quoted : magago})
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
           if (!link) return reply("Link invalido")
           try {
@@ -1948,7 +1949,7 @@ case 'kickall':
         case 'ytmp4':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (args.length < 1) return reply('Pra eu baixar o video c tem que usar um link valido do youtube')
-          reply("Calmai macaco, pode ser que demore um pouco 🦧")
+          LorranX.sendMessage(from, RESPOSTAS.wait2, text, { quoted : magago})
           var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
           if (!link) return reply("link invalido")
           try {
@@ -1971,7 +1972,7 @@ case 'kickall':
           case 'twitter':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
             if (!isUrl(args[0]) && !args[0].includes('twitter.com') && !q) return reply("Link invalido")
-            reply("Calmai macaco, pode ser que demore um pouco 🦧")
+            LorranX.sendMessage(from, RESPOSTAS.wait2, text, { quoted : magago})
             var res = await hx.twitter(args[0])
             sendMediaURL(res.HD, "Tai seu video")
             addFilter(from)
@@ -1979,7 +1980,7 @@ case 'kickall':
             case 'ig':
               if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
         if (!isUrl(args[0]) && !args[0].includes('instagram.com')) return reply(`Link invalido`)
-        reply("Calmai macaco, pode ser que demore um pouco 🦧") 
+        LorranX.sendMessage(from, RESPOSTAS.wait2, text, { quoted : magago}) 
 	    hx.igdl(args[0])
 	    .then(async(result) => {
             for(let i of result.medias){
@@ -2022,7 +2023,7 @@ case 'kickall':
 				  case 'slowmo':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isQuotedAudio) return reply('Marque um áudio')
-        reply(RESPOSTAS.wait());
+          LorranX.sendMessage(from, RESPOSTAS.wait, text, { quoted : magago});
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp3')
@@ -2037,7 +2038,7 @@ case 'kickall':
 				  break;
           case 'acelerar':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
-        reply(RESPOSTAS.wait());
+            LorranX.sendMessage(from, RESPOSTAS.wait, text, { quoted : magago});
         if (!isQuotedAudio) return reply('Marque um áudio')
         encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
         media = await LorranX.downloadAndSaveMediaMessage(encmedia)
@@ -2054,7 +2055,7 @@ case 'kickall':
 				  case 'esquilo':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
         if (!isQuotedAudio) return reply('Marque um áudio')
-        reply(RESPOSTAS.wait());
+        LorranX.sendMessage(from, RESPOSTAS.wait, text, { quoted : magago});
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp3')
@@ -2070,7 +2071,7 @@ case 'kickall':
 				  case 'engrossar':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
         if (!isQuotedAudio) return reply('Marque um áudio')
-        reply(RESPOSTAS.wait())
+        LorranX.sendMessage(from, RESPOSTAS.wait, text, { quoted : magago})
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp3')
@@ -2086,7 +2087,7 @@ case 'kickall':
 				  case 'bass': 
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
         if (!isQuotedAudio) return reply('Marque um áudio')  
-        reply(RESPOSTAS.wait());              
+        LorranX.sendMessage(from, RESPOSTAS.wait, text, { quoted : magago});              
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp3')
@@ -2102,7 +2103,7 @@ case 'kickall':
           case 'estourar':  
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
         if (!isQuotedAudio) return reply('Marque um áudio')
-        reply(RESPOSTAS.wait())
+        LorranX.sendMessage(from, RESPOSTAS.wait, text, { quoted : magago})
         encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
         media = await LorranX.downloadAndSaveMediaMessage(encmedia)
         ran = getRandom('.mp3')
@@ -2118,7 +2119,7 @@ case 'kickall':
           case "reverse":
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
         if (!isQuotedAudio) return reply("Pra usar esse comando c tem que marcar um audio");
-        reply(RESPOSTAS.wait());
+        LorranX.sendMessage(from, RESPOSTAS.wait, text, { quoted : magago});
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
         .message.extendedTextMessage.contextInfo;
         media = await LorranX.downloadAndSaveMediaMessage(encmedia);
@@ -2135,7 +2136,7 @@ case 'kickall':
           case 'robot':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
         if (!isQuotedAudio) return reply("Pra usar esse comando c tem que marcar um audio");
-        reply(RESPOSTAS.wait());
+        LorranX.sendMessage(from, RESPOSTAS.wait, text, { quoted : magago});
 	encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 	media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 	ran = getRandom('.mp3')
@@ -2153,7 +2154,7 @@ break;
           case "reversev":
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
         if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
-        reply(RESPOSTAS.wait());
+        LorranX.sendMessage(from, RESPOSTAS.wait, text, { quoted : magago});
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
         .message.extendedTextMessage.contextInfo;
         media = await LorranX.downloadAndSaveMediaMessage(encmedia);
@@ -2173,7 +2174,7 @@ break;
           case "acelerarv":
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
         if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
-        reply(RESPOSTAS.wait());
+        LorranX.sendMessage(from, RESPOSTAS.wait, text, { quoted : magago});
         encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
         .message.extendedTextMessage.contextInfo;
         media = await LorranX.downloadAndSaveMediaMessage(encmedia);
@@ -2196,7 +2197,7 @@ break;
             case "slowv":
               if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           if (!isQuotedVideo) return reply("Pra usar esse comando c tem que marcar um video");
-          reply(RESPOSTAS.wait());
+          LorranX.sendMessage(from, RESPOSTAS.wait, text, { quoted : magago});
           encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
           .message.extendedTextMessage.contextInfo;
           media = await LorranX.downloadAndSaveMediaMessage(encmedia);
