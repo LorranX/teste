@@ -29,7 +29,6 @@ const request = require('request');
 const axios = require("axios");
 const moment = require("moment-timezone");
 const { webp2gifFile } = require("./lib/gif.js")
-const { mediafireDl } = require('./lib/mediafire')
 const { isFiltered, addFilter } = require('./lib/antispam')
 const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
