@@ -471,7 +471,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
   LorranX.sendMessage(
     from,
     buttonMessages,
-    MessageType.buttonsMessage,
+    buttonsMessage,
     options
     )
   }
