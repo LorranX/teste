@@ -471,7 +471,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
   LorranX.sendMessage(
     from,
     buttonMessages,
-    MessageType.buttonsMessage,
+    buttonsMessage,
     options
     )
   }
@@ -741,28 +741,26 @@ if (isGroup) {
 ║| ↭_*  *[Meu criador]*
 ║https://wa.me/+553195703379
 ╰───────────`;
-tamnel = fs.readFileSync("./lib/image/changelog.jpg")
-sendButImage(
-  from, Menuvideo, `test`, tamnel,[{
-        buttonId: `${prefix}verify`,
-        buttonText: {
-          displayText: "Verify"
-        },
-        type: 1
-        },{
-      buttonId: `${prefix}owner`,
-      buttonText: {
+  sendButtonMsg(Menuaudio, `By LorranX ©`[{
+    buttonId: `${prefix}verify`,
+  buttonText: {
+    displayText: "Verify"
+  },
+  type: 1
+  },{
+    buttonId: `${prefix}owner`,
+    buttonText: {
       displayText: "Dono"
-      },
-      type: 1
-      },{
+    },
+    type: 1
+    },{
       buttonId: `${prefix}github`,
       buttonText: {
-      displayText: "script do bot"
+        displayText: "script do bot"
       },
       type: 1
-      }])
-      }
+  }])
+}
 if (listbut == 'Modificadores de Video' || command == `${prefix}start`) {
   var Menuvideo = `
 ╔═══════════════════
@@ -791,26 +789,27 @@ if (listbut == 'Modificadores de Video' || command == `${prefix}start`) {
 ║| ↭_*  *[Meu criador]*
 ║https://wa.me/+553195703379
 ╰───────────`;
-sendButtonMsg(Menuvideo, `By LorranX ©`,[{
-  buttonId: `${prefix}verify`,
-  buttonText: {
-    displayText: "Verify"
-  },
-  type: 1
-  },{
-buttonId: `${prefix}owner`,
-buttonText: {
-displayText: "Dono"
-},
-type: 1
-},{
-buttonId: `${prefix}github`,
-buttonText: {
-displayText: "script do bot"
-},
-type: 1
-}])
-}
+tamnel = fs.readFileSync("./lib/image/changelog.jpg")
+sendButImage(from, Menuvideo, `test`, tamnel,[{
+        buttonId: `${prefix}verify`,
+        buttonText: {
+          displayText: "Verify"
+        },
+        type: 1
+        },{
+      buttonId: `${prefix}owner`,
+      buttonText: {
+      displayText: "Dono"
+      },
+      type: 1
+      },{
+      buttonId: `${prefix}github`,
+      buttonText: {
+      displayText: "script do bot"
+      },
+      type: 1
+      }])
+      }
         if (listbut == 'Owner Menu' || command == `${prefix}start`) {
           var Menueu = `
 ╔═══════════════════
