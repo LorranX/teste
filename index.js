@@ -471,7 +471,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
   LorranX.sendMessage(
     from,
     buttonMessages,
-    buttonsMessage,
+    MessageType.buttonsMessage,
     options
     )
   }
@@ -741,25 +741,25 @@ if (isGroup) {
 ║| ↭_*  *[Meu criador]*
 ║https://wa.me/+553195703379
 ╰───────────`;
-  sendButtonMsg(Menuaudio, `By LorranX ©`[{
-    buttonId: `${prefix}verify`,
+sendButtonMsg(Menuaudio, `By LorranX ©`,[{
+  buttonId: `${prefix}verify`,
+buttonText: {
+  displayText: "Verify"
+},
+type: 1
+},{
+  buttonId: `${prefix}owner`,
   buttonText: {
-    displayText: "Verify"
+    displayText: "Dono"
   },
   type: 1
   },{
-    buttonId: `${prefix}owner`,
+    buttonId: `${prefix}github`,
     buttonText: {
-      displayText: "Dono"
+      displayText: "script do bot"
     },
     type: 1
-    },{
-      buttonId: `${prefix}github`,
-      buttonText: {
-        displayText: "script do bot"
-      },
-      type: 1
-  }])
+}])
 }
 if (listbut == 'Modificadores de Video' || command == `${prefix}start`) {
   var Menuvideo = `
