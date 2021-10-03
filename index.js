@@ -741,26 +741,27 @@ if (isGroup) {
 ║| ↭_*  *[Meu criador]*
 ║https://wa.me/+553195703379
 ╰───────────`;
-sendButtonMsg(Menuaudio, `By LorranX ©`,[{
-  buttonId: `${prefix}verify`,
-buttonText: {
-  displayText: "Verify"
-},
-type: 1
-},{
-  buttonId: `${prefix}owner`,
-  buttonText: {
-    displayText: "Dono"
-  },
-  type: 1
-  },{
-    buttonId: `${prefix}github`,
-    buttonText: {
+menuimg = fs.readFileSync("./lib/image/modmenu.jpg")
+sendButImage(from, Menuaudio, `@LorranX`, menuimg,[{
+        buttonId: `${prefix}verify`,
+        buttonText: {
+          displayText: "Verify"
+        },
+        type: 1
+        },{
+      buttonId: `${prefix}owner`,
+      buttonText: {
+      displayText: "Dono"
+      },
+      type: 1
+      },{
+      buttonId: `${prefix}github`,
+      buttonText: {
       displayText: "script do bot"
-    },
-    type: 1
-}])
-}
+      },
+      type: 1
+      }])
+      }
 if (listbut == 'Modificadores de Video' || command == `${prefix}start`) {
   var Menuvideo = `
 ╔═══════════════════
@@ -789,8 +790,8 @@ if (listbut == 'Modificadores de Video' || command == `${prefix}start`) {
 ║| ↭_*  *[Meu criador]*
 ║https://wa.me/+553195703379
 ╰───────────`;
-tamnel = fs.readFileSync("./lib/image/changelog.jpg")
-sendButImage(from, Menuvideo, `test`, tamnel,[{
+menuimg = fs.readFileSync("./lib/image/modmenu.jpg")
+sendButImage(from, Menuvideo, `@LorranX`, menuimg,[{
         buttonId: `${prefix}verify`,
         buttonText: {
           displayText: "Verify"
@@ -849,26 +850,27 @@ sendButImage(from, Menuvideo, `test`, tamnel,[{
 ║| ↭_*  *[Meu criador]*
 ║https://wa.me/+553195703379
 ╰───────────`;
-  sendButtonMsg(Menueu, `By LorranX ©`,[{
-    buttonId: `${prefix}verify`,
-  buttonText: {
-    displayText: "Verify"
-  },
-  type: 1
-  },{
-    buttonId: `${prefix}owner`,
-    buttonText: {
-      displayText: "Dono"
-    },
-    type: 1
-    },{
-      buttonId: `${prefix}github`,
+menuimg = fs.readFileSync("./lib/image/ownermenu.jpg")
+sendButImage(from, Menueu, `@LorranX`, menuimg,[{
+        buttonId: `${prefix}verify`,
+        buttonText: {
+          displayText: "Verify"
+        },
+        type: 1
+        },{
+      buttonId: `${prefix}owner`,
       buttonText: {
-        displayText: "script do bot"
+      displayText: "Dono"
       },
       type: 1
-  }])
-}
+      },{
+      buttonId: `${prefix}github`,
+      buttonText: {
+      displayText: "script do bot"
+      },
+      type: 1
+      }])
+      }
       if (listbut == 'Menu' || command == `${prefix}start`) {
         var Menu = `
 ╔═══════════════════
@@ -920,25 +922,26 @@ sendButImage(from, Menuvideo, `test`, tamnel,[{
 ║https://wa.me/+553195703379
 ╰───────────
 `;
-sendButtonMsg(Menu, `By LorranX ©`,[{
-  buttonId: `${prefix}verify`,
-  buttonText: {
-    displayText: "Verify"
-  },
-  type: 1
-  },{
-    buttonId: `${prefix}github`,
-    buttonText: {
-      displayText: "Script do bot"
-    },
-    type: 1
-  },{
-    buttonId: `${prefix}owner`,
-    buttonText: {
+menuimg = fs.readFileSync("./lib/image/menu1.jpg")
+sendButImage(from, Menu, `@LorranX`, menuimg,[{
+        buttonId: `${prefix}verify`,
+        buttonText: {
+          displayText: "Verify"
+        },
+        type: 1
+        },{
+      buttonId: `${prefix}owner`,
+      buttonText: {
       displayText: "Dono"
-    },
-    type: 1
-}])
+      },
+      type: 1
+      },{
+      buttonId: `${prefix}github`,
+      buttonText: {
+      displayText: "script do bot"
+      },
+      type: 1
+      }])
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
@@ -993,25 +996,26 @@ sendButtonMsg(Menu, `By LorranX ©`,[{
 ║| ↭_*  *[Meu criador]*
 ║https://wa.me/+553195703379
 ╰───────────`;
-sendButtonMsg(MenuAdmin, `By LorranX ©`,[{
-  buttonId: `${prefix}verify`,
-  buttonText: {
-    displayText: "Verify"
-  },
-  type: 1
-  },{
-  buttonId: `${prefix}owner`,
-  buttonText: {
-    displayText: "Dono"
-  },
-  type: 1
-  },{
-    buttonId: `${prefix}github`,
-    buttonText: {
+menuimg = fs.readFileSync("./lib/image/adminmenu.jpg")
+sendButImage(from, MenuAdmin, `@LorranX`, menuimg,[{
+        buttonId: `${prefix}verify`,
+        buttonText: {
+          displayText: "Verify"
+        },
+        type: 1
+        },{
+      buttonId: `${prefix}owner`,
+      buttonText: {
+      displayText: "Dono"
+      },
+      type: 1
+      },{
+      buttonId: `${prefix}github`,
+      buttonText: {
       displayText: "script do bot"
-    },
-    type: 1
-}])
+      },
+      type: 1
+      }])
       }
         //SEM PREFIX
     switch(is) {
