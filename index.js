@@ -911,9 +911,6 @@ sendButImage(from, Menueu, `@LorranX`, menuimg,[{
 ║│↭_*   [ *${prefix}togif* ] 
 ║│↭_*   [ *${prefix}tomp3* ] 
 ║│↭_*   [ *${prefix}listadmin* ] 
-║│↭_*   [ *${prefix}adminmenu* ] 
-║│↭_*   [ *${prefix}ownermenu* ]
-║│↭_*   [ *${prefix}modmenu* ]
 ║│ 
 
 ║│
@@ -1040,7 +1037,7 @@ break;
               "buttonText": "Opções",
               "listType": "SINGLE_SELECT",
               "sections": [{
-                "title": `${HORARIOS} ${pushname} hoje é ${DATACOMPLETA()}, abaixo você encontrara os meus menus`,
+                "title": `${HORARIOS} ${pushname}, abaixo você encontrara os meus menus`,
                 "rows": [{
                     "title": "Menu",
                     "rowId": "0",
@@ -1072,85 +1069,6 @@ break;
           LorranX.relayWAMessage(menulist, {waitForAck: false})
           addFilter(from)
           break;
-            case 'adminmenu':
-              if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
-              var menuadmin = LorranX.prepareMessageFromContent(from, {
-                "listMessage" :{
-                  "title": `${HORARIOS} ${pushname}\n\nTambem posso te ajudar com o gerenciamento de grupos\nainda não tenho muitas funções mas meu dono me atualiza diariamente`,
-                  "description": `Estou funcionando a \n${runtime(process.uptime())}`,
-                  "buttonText": "Opções",
-                  "listType": "SINGLE_SELECT",
-                  "sections": [{
-                    "title": `${DATACOMPLETA()}`,
-                    "rows": [{
-                        "title": "Admin Menu",
-                        "rowId": "0",
-                        "description": ""
-                      },{
-                        "title": "ChangeLog",
-                        "rowId": "1",
-                        "description": ""
-                      }]
-                  }]
-                }
-              }, {})
-              LorranX.relayWAMessage(menuadmin, {waitForAck: false})
-              addFilter(from)
-              break;
-              case 'ownermenu':
-                if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
-              var meumenu = LorranX.prepareMessageFromContent(from, {
-                "listMessage" :{
-                  "title": `${HORARIOS} ${pushname}\n\nAs funções nesse menu so podem ser usadas pelo meu papai\nainda não tenho muitas funções mas meu dono me atualiza diariamente`,
-                  "description": `Estou funcionando a \n${runtime(process.uptime())}`,
-                  "buttonText": "Opções",
-                  "listType": "SINGLE_SELECT",
-                  "sections": [{
-                    "title": `${DATACOMPLETA()}`,
-                    "rows": [{
-                        "title": "Owner Menu",
-                        "rowId": "0",
-                        "description": ""
-                      },{
-                        "title": "ChangeLog",
-                        "rowId": "1",
-                        "description": ""
-                      }]
-                  }]
-                }
-              }, {})
-              LorranX.relayWAMessage(meumenu, {waitForAck: false})
-              addFilter(from)
-              break;
-              case 'modmenu':
-                if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
-              var modficadoresmenu = LorranX.prepareMessageFromContent(from, {
-                "listMessage" :{
-                  "title": `${HORARIOS} ${pushname}\n\nEsse é o menu de modificadores, aqui você pode modificar seus videos e audios,`,
-                  "description": `Estou funcionando a \n${runtime(process.uptime())}`,
-                  "buttonText": "Opções",
-                  "listType": "SINGLE_SELECT",
-                  "sections": [{
-                    "title": `${DATACOMPLETA()}`,
-                    "rows": [{
-                        "title": "Modificadores de Audio",
-                        "rowId": "0",
-                        "description": ""
-                      },{
-                        "title": "Modificadores de Video",
-                        "rowId": "1",
-                        "description": ""
-                      },{
-                        "title": "ChangeLog",
-                        "rowId": "1",
-                        "description": ""
-                      }]
-                  }]
-                }
-              }, {})
-              LorranX.relayWAMessage(modficadoresmenu, {waitForAck: false})
-              addFilter(from)
-              break;
         //END MENUS      
         case 'verify':
 case 'registrar':
