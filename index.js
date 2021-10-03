@@ -213,7 +213,7 @@ function DATACOMPLETA(){
 	thisDay = myDays[thissDay];
 	var yy = tgl.getYear();
 	var year = (yy < 1000) ? yy + 1900 : yy;
-	return `${thisDay}, ${day} - ${myMonths[bulan]} - ${year}`;
+	return `${thisDay}, dia ${day} de ${myMonths[bulan]} de ${year}`;
 }
 function HORAEXATA(seconds){
   function pad(s){
@@ -1040,12 +1040,28 @@ break;
               "buttonText": "Opções",
               "listType": "SINGLE_SELECT",
               "sections": [{
-                "title": `${DATACOMPLETA()}`,
+                "title": `${HORARIOS} ${pushname} hoje é ${DATACOMPLETA()}, abaixo você encontrara os meus menus`,
                 "rows": [{
                     "title": "Menu",
                     "rowId": "0",
                     "description": ""
                   },{
+                    "title": "Admin Menu",
+                    "rowId": "0",
+                    "description": ""
+                  },{
+                    "title": "Owner Menu",
+                        "rowId": "0",
+                        "description": ""
+                      },{
+                        "title": "Modificadores de Audio",
+                        "rowId": "0",
+                        "description": ""
+                      },{
+                        "title": "Modificadores de Video",
+                        "rowId": "1",
+                        "description": ""
+                      },{
                     "title": "ChangeLog",
                     "rowId": "1",
                     "description": ""
