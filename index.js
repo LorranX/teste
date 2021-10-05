@@ -480,7 +480,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
         ///BOTÃO DE VIDEO
   const sendButVideo = async(from, text1, desc1, vid1, but = [], options = {}) => {
   kma = vid1
-  mhan = await LorranX.prepareMessage(from, kma, video)
+  mhan = await LorranX.prepareMessage(from, kma, video,)
   const buttonMessages = {
   videoMessage: mhan.message.videoMessage,
   contentText: text1,
@@ -494,6 +494,24 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
     options
     )
   }
+  ///BOTÃO DE GIF
+  const sendButGif = async(from, text1, desc1, vid1, but = [], options = {}) => {
+    kma = vid1
+    mhan = await LorranX.prepareMessage(from, kma, video, {
+      mimetype: 'video/gif',})
+    const buttonMessages = {
+    videoMessage: mhan.message.videoMessage,
+    contentText: text1,
+    footerText: desc1,
+    buttons: but,
+    headerType: 5
+    }
+    LorranX.sendMessage(from,
+      buttonMessages,
+      buttonsMessage,
+      options
+      )
+    }
         ///BOTÃO DE LOC
   const sendButLocation = async (from, text1, desc1, gam1, but = [], options = {}) => {
   kma = gam1
@@ -1351,8 +1369,7 @@ break
             break;
             case 'leveling':
               levelvid = fs.readFileSync("./lib/image/level.mp4")
-            sendButVideo(from, `Coe ${pushname}, ${HORARIOS}\n\n devo ativar o leveling?`,``, levelvid, {
-              mimetype: 'video/gif',} [{
+            sendButGif(from, `Coe ${pushname}, ${HORARIOS}\n\n devo ativar o leveling?`,``, levelvid,[{
               buttonId:`${prefix}nivel on`,
               buttonText: {
                 displayText: `sim`
