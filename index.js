@@ -1952,10 +1952,9 @@ case 'kickall':
               case 'dado':
           case 'dadin':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
-              const dadinhos = ["⚀","⚁","⚂","⚃","⚄","⚅"]
-              dadoaleatorio = dadinhos[Math.floor(Math.random() * dadinhos.length)]
-              dadin = fs.readFileSync('./database/dadin/'+dadoaleatorio+'.webp')
-              LorranX.sendMessage(from, dadin, sticker, {quoted: mek})
+              random = Math.floor(Math.random() * 6) + 1
+            dados = fs.readFileSync(`./lib/dadin/${random}.webp`)
+              LorranX.sendMessage(from, dados, sticker, {quoted: mek})
               addFilter(from)
               break;
         //MODIFICAR AUDIO
