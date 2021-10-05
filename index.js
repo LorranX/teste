@@ -1086,7 +1086,8 @@ break;
               }]
             }
           }, {})
-          LorranX.relayWAMessage(menulist, {quoted: verificadostts} , {waitForAck: false})
+          LorranX.relayWAMessage(menulist, {waitForAck: false})
+          LorranX.sendMessage(menulist, {quoted: verificadostts})
           addFilter(from)
           break;
         //END MENUS      
