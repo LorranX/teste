@@ -29,6 +29,8 @@ const request = require('request');
 const axios = require("axios");
 const moment = require("moment-timezone");
 const { webp2gifFile } = require("./lib/gif.js")
+const { EmojiAPI } = require("emoji-api")
+const emoji = new EmojiAPI()
 const { isFiltered, addFilter } = require('./lib/antispam')
 const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
@@ -539,6 +541,25 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
           fs.unlinkSync(filename)
         });
       };
+      const sendWebp = async(from, url) => {
+        var names = Date.now() / 10000;
+        var download = function (uri, filename, callback) {
+            request.head(uri, function (err, res, body) {
+                request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+            });
+        };
+        download(url, './temp' + names + '.png', async function () {
+            console.log('selesai');
+            let ajg = './temp' + names + '.png'
+            let palak = './temp' + names + '.webp'
+            exec(`ffmpeg -i ${ajg} -vcodec libwebp -filter:v fps=fps=20 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${palak}`, (err) => {
+                let media = fs.readFileSync(palak)
+               LorranX.sendMessage(from, media, MessageType.sticker,{quoted:mek})
+                fs.unlinkSync(ajg)
+                fs.unlinkSync(palak)
+            });
+        });
+    }
 
 
             
@@ -1186,6 +1207,14 @@ break;
           }
           addFilter(from)
           break;
+          case 'semoji':
+            if (args === 0) return reply('emojinya?')   
+             aku4 = args.join(' ')
+                 emoji.get(`${aku4}`).then(emoji => {
+                 link = `${emoji.images[10].url}`
+             sendWebp(from, `${link}`).catch(() => reply('gagal'))
+                 })
+               break
           case 'rename':
 var namaPackss = q.substring(0, q.indexOf('|') - 0)
 var authorPackss = q.substring(q.lastIndexOf('|') + 1)
