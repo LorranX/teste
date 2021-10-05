@@ -1052,7 +1052,17 @@ break;
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           var menulist = LorranX.prepareMessageFromContent(from, {
             "listMessage" :{
-              "title": `${HORARIOS} ${pushname}\n\nEu sou o BOT DO LORRAN\nainda não estou pronto, mas asssim que estiver meu papai vai disponibilizar esse script no github\n\n\nEsse script foi desenvolvido com a ajuda direta e indireta de algumas pessoas\nSPECIAL THANKS TO:\nAffis Junianto\nManik\nmhankbarbar`,
+              "title": `${HORARIOS} ${pushname}
+              
+              Eu sou o BOT DO LORRAN
+              ainda não estou pronto, mas asssim que estiver meu papai vai disponibilizar esse script no github
+              
+              
+              Esse script foi desenvolvido com a ajuda direta e indireta de algumas pessoas
+              SPECIAL THANKS TO:
+              Affis Junianto
+              Manik
+              mhankbarbar`,
               "description": `Estou funcionando a \n${runtime(process.uptime())}`,
               "buttonText": "Opções",
               "listType": "SINGLE_SELECT",
@@ -1086,7 +1096,7 @@ break;
               }]
             }
           }, {})
-          LorranX.sendMessage(menulist, {quoted: verificadostts} , {waitForAck: false})
+          LorranX.relayWAMessage(menulist, {waitForAck: false})
           addFilter(from)
           break;
         //END MENUS      
@@ -1340,7 +1350,9 @@ break
             }])
             break;
             case 'leveling':
-            sendButtonMsg(`Coe ${pushname}, ${HORARIOS}\n\nAgora tambem tenho funções de leveling, elas geralmente ajudam na interação dos membros do grupo, devo ativar o leveling?`,``,[{
+              levelvid = fs.readFileSync("./lib/image/level.mp4")
+            sendButVideo(`Coe ${pushname}, ${HORARIOS}\n\n devo ativar o leveling?`,``, levelvid, video, {
+              mimetype: 'video/gif',} [{
               buttonId:`${prefix}nivel on`,
               buttonText: {
                 displayText: `sim`
