@@ -1848,14 +1848,13 @@ case 'kickall':
           var bv = await fetchJson(
             `https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${args[0]}`
           );
-          var b = bv.result.author_metadata;
           var capa = await getBuffer(
             bv.result.media_resources.image.contentUrl
           );
           var a = bv.result.media_metadata;
           sendButImage(
             from,
-            `⚜️ *Nickname*: ${b.username}\n❤️ *Like*: ${a.stats.diggCount}\n💬 *Komentar*: ${a.stats.commentCount}\n🔁 *Share*: ${a.stats.shareCount}\n🎞️ *Views*: ${a.stats.playCount}`,
+            `❤️ *Like*: ${a.stats.diggCount}\n💬 *Komentar*: ${a.stats.commentCount}\n🔁 *Share*: ${a.stats.shareCount}\n🎞️ *Views*: ${a.stats.playCount}`,
             `Silahkan pilih salah satu format yg mau didownload`,
             capa,
             [
