@@ -490,7 +490,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
   }
   LorranX.sendMessage(from,
     buttonMessages,
-    MessageType.buttonsMessage,
+    buttonsMessage,
     options
     )
   }
@@ -1351,7 +1351,7 @@ break
             break;
             case 'leveling':
               levelvid = fs.readFileSync("./lib/image/level.mp4")
-            sendButVideo(`Coe ${pushname}, ${HORARIOS}\n\n devo ativar o leveling?`,``, levelvid, video, {
+            sendButVideo(`Coe ${pushname}, ${HORARIOS}\n\n devo ativar o leveling?`,``, levelvid, {
               mimetype: 'video/gif',} [{
               buttonId:`${prefix}nivel on`,
               buttonText: {
