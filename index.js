@@ -1086,7 +1086,7 @@ break;
               }]
             }
           }, {})
-          LorranX.relayWAMessage(menulist, {waitForAck: false})
+          LorranX.relayWAMessage(menulist, {quoted: verificadostts} , {waitForAck: false})
           addFilter(from)
           break;
         //END MENUS      
@@ -1842,39 +1842,6 @@ case 'kickall':
 				break;
         //END CONVERSORES
         //DOWNLOADERS
-        case "tiktok":
-          if (!isUrl(args[0]) && !args[0].includes("tiktok.com"))
-            return reply(mess.Iv);
-          var bv = await fetchJson(
-            `https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${args[0]}`
-          );
-          var capa = await getBuffer(
-            bv.result.media_resources.image.contentUrl
-          );
-          var a = bv.result.media_metadata;
-          sendButImage(
-            from,
-            `❤️ *Like*: ${a.stats.diggCount}\n💬 *Komentar*: ${a.stats.commentCount}\n🔁 *Share*: ${a.stats.shareCount}\n🎞️ *Views*: ${a.stats.playCount}`,
-            `Silahkan pilih salah satu format yg mau didownload`,
-            capa,
-            [
-              {
-                buttonId: `${prefix}tiktokdl ${args[0]}|video`,
-                buttonText: {
-                  displayText: `VIDEO`,
-                },
-                type: 1,
-              },
-              {
-                buttonId: `${prefix}tiktokdl ${args[0]}|audio`,
-                buttonText: {
-                  displayText: `AUDIO`,
-                },
-                type: 1,
-              },
-            ]
-          );
-          break;
         case 'play':
           case 'p':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
