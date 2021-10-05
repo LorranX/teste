@@ -549,7 +549,6 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
             });
         };
         download(url, './temp' + names + '.png', async function () {
-            console.log('selesai');
             let ajg = './temp' + names + '.png'
             let palak = './temp' + names + '.webp'
             exec(`ffmpeg -i ${ajg} -vcodec libwebp -filter:v fps=fps=20 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${palak}`, (err) => {
@@ -1208,13 +1207,15 @@ break;
           addFilter(from)
           break;
           case 'semoji':
-            if (args === 0) return reply('emojinya?')   
+            if (args === 0) return reply('Cade o emoji Macaco')  
+            LorranX.sendMessage(from, RESPOSTAS.wait2(), text, { quoted : zepi}) 
              aku4 = args.join(' ')
                  emoji.get(`${aku4}`).then(emoji => {
                  link = `${emoji.images[10].url}`
-             sendWebp(from, `${link}`).catch(() => reply('gagal'))
+             sendWebp(from, `${link}`).catch(() => reply('Deu errado carai'))
                  })
-               break
+                 addFilter(from)
+               break;
           case 'rename':
 var namaPackss = q.substring(0, q.indexOf('|') - 0)
 var authorPackss = q.substring(q.lastIndexOf('|') + 1)
