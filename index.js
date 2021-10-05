@@ -1351,7 +1351,7 @@ break
             break;
             case 'leveling':
               levelvid = fs.readFileSync("./lib/image/level.mp4")
-            sendButVideo(`Coe ${pushname}, ${HORARIOS}\n\n devo ativar o leveling?`,``, levelvid, {
+            sendButVideo(from, `Coe ${pushname}, ${HORARIOS}\n\n devo ativar o leveling?`,``, levelvid, {
               mimetype: 'video/gif',} [{
               buttonId:`${prefix}nivel on`,
               buttonText: {
