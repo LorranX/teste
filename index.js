@@ -498,7 +498,7 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
   const sendButGif = async(from, text1, desc1, vid1, but = [], options = {}) => {
     kma = vid1
     mhan = await LorranX.prepareMessage(from, kma, video, {
-      mimetype: 'video/gif',})
+      mimetype: Mimetype.gif,})
     const buttonMessages = {
     videoMessage: mhan.message.videoMessage,
     contentText: text1,
@@ -1070,17 +1070,7 @@ break;
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
           var menulist = LorranX.prepareMessageFromContent(from, {
             "listMessage" :{
-              "title": `${HORARIOS} ${pushname}
-              
-              Eu sou o BOT DO LORRAN
-              ainda não estou pronto, mas asssim que estiver meu papai vai disponibilizar esse script no github
-              
-              
-              Esse script foi desenvolvido com a ajuda direta e indireta de algumas pessoas
-              SPECIAL THANKS TO:
-              Affis Junianto
-              Manik
-              mhankbarbar`,
+              "title": `${HORARIOS} ${pushname}\n\nEu sou o BOT DO LORRAN\nainda não estou pronto, mas asssim que estiver meu papai vai disponibilizar esse script no github\n\n\nEsse script foi desenvolvido com a ajuda direta e indireta de algumas pessoas\nSPECIAL THANKS TO:\nAffis Junianto\nManik\nmhankbarbar`,
               "description": `Estou funcionando a \n${runtime(process.uptime())}`,
               "buttonText": "Opções",
               "listType": "SINGLE_SELECT",
@@ -1369,7 +1359,7 @@ break
             break;
             case 'leveling':
               levelvid = fs.readFileSync("./lib/image/level.mp4")
-            sendButGif(from, `Coe ${pushname}, ${HORARIOS}\n\n devo ativar o leveling?`,``, levelvid,[{
+            sendButGif(from, `Coe ${pushname}, ${HORARIOS}\n\ndevo ativar o leveling?`,``, levelvid,[{
               buttonId:`${prefix}nivel on`,
               buttonText: {
                 displayText: `sim`
