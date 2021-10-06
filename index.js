@@ -335,7 +335,7 @@ module.exports = (LorranX) => {
       mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message;
       const content = JSON.stringify(mek.message);
       const from = mek.key.remoteJid;
-      const { text, extendedText, contact, location, liveLocation, image, video, gif, sticker, document, audio, product, buttonsMessage } = MessageType;
+      const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product, buttonsMessage } = MessageType;
       const type = Object.keys(mek.message)[0];
       const cmd =
         type === "conversation" && mek.message.conversation
@@ -493,13 +493,12 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
     buttonsMessage,
     options
     )
-  }
-  ///BOTÃO DE GIF
-  const sendButGif = async(from, text1, desc1, gif1, but = [], options = {}) => {
-    kma = gif1
-    mhan = await LorranX.prepareMessage(from, kma, gif,)
+  }///BOTÃO DE VIDEO
+  const sendButgif = async(from, text1, desc1, vid1, but = [], options = {}) => {
+    kma = vid1
+    mhan = await LorranX.prepareMessage(from, kma, video, {Mimetype: video/gif})
     const buttonMessages = {
-    gifMessage: mhan.message.gifMessage,
+    videoMessage: mhan.message.videoMessage,
     contentText: text1,
     footerText: desc1,
     buttons: but,
@@ -1359,7 +1358,7 @@ break
             break;
             case 'leveling':
               levelvid = fs.readFileSync("./lib/image/level.mp4")
-            sendButGif(from, `Coe ${pushname}, ${HORARIOS}\n\ndevo ativar o leveling?`,``, levelvid,[{
+            sendButVideo(from, `Coe ${pushname}, ${HORARIOS}\n\ndevo ativar o leveling?`,``, levelvid,[{
               buttonId:`${prefix}nivel on`,
               buttonText: {
                 displayText: `sim`
