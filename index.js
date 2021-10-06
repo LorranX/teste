@@ -335,7 +335,7 @@ module.exports = (LorranX) => {
       mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message;
       const content = JSON.stringify(mek.message);
       const from = mek.key.remoteJid;
-      const { text, extendedText, contact, location, liveLocation, image, video, gif, sticker, document, audio, product, buttonsMessage } = MessageType;
+      const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product, buttonsMessage } = MessageType;
       const type = Object.keys(mek.message)[0];
       const cmd =
         type === "conversation" && mek.message.conversation
@@ -1054,6 +1054,7 @@ break;
           var menulist = LorranX.prepareMessageFromContent(from, {
             "listMessage" :{
               "title": `${HORARIOS} ${pushname}\n\nEu sou o BOT DO LORRAN\nainda não estou pronto, mas asssim que estiver meu papai vai disponibilizar esse script no github\n\n\nEsse script foi desenvolvido com a ajuda direta e indireta de algumas pessoas\nSPECIAL THANKS TO:\nAffis Junianto\nManik\nmhankbarbar`,
+              "quoted": zepi,
               "description": `Estou funcionando a \n${runtime(process.uptime())}`,
               "buttonText": "Opções",
               "listType": "SINGLE_SELECT",
@@ -1342,7 +1343,7 @@ break
             break;
             case 'leveling':
               levelvid = fs.readFileSync("./lib/image/level.mp4")
-            sendButVideo(from, `Coe ${pushname}, ${HORARIOS}\n\ndevo ativar o leveling?`,``, levelvid, {Mimetype: gif/video},[{
+            sendButVideo(from, `Coe ${pushname}, ${HORARIOS}\n\ndevo ativar o leveling?`,``, levelvid,[{
               buttonId:`${prefix}nivel on`,
               buttonText: {
                 displayText: `sim`
