@@ -335,7 +335,7 @@ module.exports = (LorranX) => {
       mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message;
       const content = JSON.stringify(mek.message);
       const from = mek.key.remoteJid;
-      const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product, buttonsMessage } = MessageType;
+      const { text, extendedText, contact, location, liveLocation, image, video, gif, sticker, document, audio, product, buttonsMessage } = MessageType;
       const type = Object.keys(mek.message)[0];
       const cmd =
         type === "conversation" && mek.message.conversation
@@ -478,14 +478,13 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
     )
   }
         ///BOTÃO DE VIDEO
-  const sendButVideo = async(from, text1, desc1, vid1, mime, but = [], options = {}) => {
+  const sendButVideo = async(from, text1, desc1, vid1, but = [], options = {}) => {
   kma = vid1
   mhan = await LorranX.prepareMessage(from, kma, video,)
   const buttonMessages = {
   videoMessage: mhan.message.videoMessage,
   contentText: text1,
   footerText: desc1,
-  Mimetype: mime,
   buttons: but,
   headerType: 5
   }
@@ -495,6 +494,23 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
     options
     )
   }
+  ///BOTÃO DE GIF
+  const sendButGif = async(from, text1, desc1, gif1, but = [], options = {}) => {
+    kma = gif1
+    mhan = await LorranX.prepareMessage(from, kma, gif,)
+    const buttonMessages = {
+    gifMessage: mhan.message.gifMessage,
+    contentText: text1,
+    footerText: desc1,
+    buttons: but,
+    headerType: 5
+    }
+    LorranX.sendMessage(from,
+      buttonMessages,
+      buttonsMessage,
+      options
+      )
+    }
         ///BOTÃO DE LOC
   const sendButLocation = async (from, text1, desc1, gam1, but = [], options = {}) => {
   kma = gam1
@@ -1343,7 +1359,7 @@ break
             break;
             case 'leveling':
               levelvid = fs.readFileSync("./lib/image/level.mp4")
-            sendButVideo(from, `Coe ${pushname}, ${HORARIOS}\n\ndevo ativar o leveling?`,``, levelvid,[{
+            sendButGif(from, `Coe ${pushname}, ${HORARIOS}\n\ndevo ativar o leveling?`,``, levelvid,[{
               buttonId:`${prefix}nivel on`,
               buttonText: {
                 displayText: `sim`
