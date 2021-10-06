@@ -335,7 +335,7 @@ module.exports = (LorranX) => {
       mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message;
       const content = JSON.stringify(mek.message);
       const from = mek.key.remoteJid;
-      const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product, buttonsMessage } = MessageType;
+      const { text, extendedText, contact, location, liveLocation, image, video, gif, sticker, document, audio, product, buttonsMessage } = MessageType;
       const type = Object.keys(mek.message)[0];
       const cmd =
         type === "conversation" && mek.message.conversation
@@ -1342,7 +1342,7 @@ break
             break;
             case 'leveling':
               levelvid = fs.readFileSync("./lib/image/level.mp4")
-            sendButVideo(from, `Coe ${pushname}, ${HORARIOS}\n\ndevo ativar o leveling?`,``, levelvid, gif,[{
+            sendButVideo(from, `Coe ${pushname}, ${HORARIOS}\n\ndevo ativar o leveling?`,``, levelvid, {Mimetype: video/gif},[{
               buttonId:`${prefix}nivel on`,
               buttonText: {
                 displayText: `sim`
