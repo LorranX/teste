@@ -497,8 +497,9 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
   ///BOTÃO DE GIF
   const sendButGif = async(from, text1, desc1, vid1, but = [], options = {}) => {
     kma = vid1
+    mime = Mimetype.gif
     mhan = await LorranX.prepareMessage(from, kma, video, {
-      mimetype: Mimetype.gif,})
+      mimetype: mime,})
     const buttonMessages = {
     videoMessage: mhan.message.videoMessage,
     contentText: text1,
