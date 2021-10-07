@@ -704,8 +704,8 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
 ┣⊱ *Patente*: ${role}
 ┣⊱ *Pontos*: +100
 ┗⊱ *Level* : ${getLevel} ⊱ ${getLevelingLevel(sender)}` , text, {quoted: verificadostts})
-                        } else {
-                          LorranX.sendMessage(from, `oi`, text,)}
+await LorranX.sendMessage(from, `oi`, text,)
+                        } 
                     } catch (err) {
                         console.error(err)
                     }
@@ -1794,20 +1794,21 @@ case 'kickall':
         //END FUNÇÕES DONO
         //CONVERSORES
         case 'tourl':
+          LorranX.sendMessage(from, RESPOSTAS.wait2(), text, { quoted : zepi})
     if ((isMedia && !mek.message.videoMessage || isQuotedImage || isQuotedVideo ) && args.length == 0) {
             boij = isQuotedImage || isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
             owgi = await LorranX.downloadMediaMessage(boij)
             res = await upload(owgi)
             reply(res)
             } else {
-            reply('kirim/reply gambar/video')
+            reply('Tu fez algo de errado ai')
             }
             break
         case 'tomp3':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 				LorranX.updatePresence(from, Presence.composing)
 				if (!isQuotedVideo) return reply('Pra usar esse comando c tem que marcar um video')
-				LorranX.sendMessage(from, RESPOSTAS.wait(), text, { quoted : zepi})
+				LorranX.sendMessage(from, RESPOSTAS.wait2(), text, { quoted : zepi})
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
 				media = await LorranX.downloadAndSaveMediaMessage(encmedia)
 				ran = getRandom('.mp4')
@@ -1825,7 +1826,7 @@ case 'kickall':
                     if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
                         encmediaaa = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         mediaaa = await LorranX.downloadAndSaveMediaMessage(encmediaaa)
-                        LorranX.sendMessage(from, RESPOSTAS.wait(), text, { quoted : zepi})
+                        LorranX.sendMessage(from, RESPOSTAS.wait2(), text, { quoted : zepi})
                         a = await webp2gifFile(mediaaa)
                         mp4 = await getBuffer(a.result)
                         LorranX.sendMessage(from, mp4, MessageType.video, {
