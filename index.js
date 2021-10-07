@@ -706,7 +706,8 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
 ┗⊱ *Level* : ${getLevel} ⊱ ${getLevelingLevel(sender)}` , text, {quoted: verificadostts})
 random = Math.floor(Math.random() * 6) + 1
 sons = fs.readFileSync(`./lib/sons/levelup/${random}.mp3`)
-await LorranX.sendMessage(from, sons, audio,)
+await LorranX.sendMessage(from, sons, audio, {mimetype: 'audio/mp4', ptt: true
+},)
                         } 
                     } catch (err) {
                         console.error(err)
