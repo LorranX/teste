@@ -1091,7 +1091,7 @@ break;
               }]
             }
           }, {})
-          LorranX.relayWAMessage(menulist, {waitForAck: false})
+          LorranX.sendMessage(from, menulist, listMessage, {quoted: zepi}, {waitForAck: false})
           addFilter(from)
           break;
         //END MENUS      
