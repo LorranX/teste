@@ -336,7 +336,7 @@ module.exports = (LorranX) => {
       mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message;
       const content = JSON.stringify(mek.message);
       const from = mek.key.remoteJid;
-      const { text, extendedText, contact, location, liveLocation, image, video, gif, sticker, document, audio, product, buttonsMessage } = MessageType;
+      const { text, extendedText, contact, location, liveLocation, image, video, gif, sticker, document, audio, product, buttonsMessage, listMessage } = MessageType;
       const type = Object.keys(mek.message)[0];
       const cmd =
         type === "conversation" && mek.message.conversation
