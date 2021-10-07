@@ -34,6 +34,7 @@ const emoji = new EmojiAPI()
 const { isFiltered, addFilter } = require('./lib/antispam')
 const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
+const { uploadimg, uploadl } = require('./lib/upload')
 const { RESPOSTAS } = require ('./respostas')
 
         //INFO
@@ -703,7 +704,8 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
 ┣⊱ *Patente*: ${role}
 ┣⊱ *Pontos*: +100
 ┗⊱ *Level* : ${getLevel} ⊱ ${getLevelingLevel(sender)}` , text, {quoted: verificadostts})
-                        }
+                        } else {
+                          LorranX.sendMessage(from, `oi`, text,)}
                     } catch (err) {
                         console.error(err)
                     }
@@ -1053,7 +1055,6 @@ break;
           var menulist = LorranX.prepareMessageFromContent(from, {
             "listMessage" :{
               "title": `${HORARIOS} ${pushname}\n\nEu sou o BOT DO LORRAN\nainda não estou pronto, mas asssim que estiver meu papai vai disponibilizar esse script no github\n\n\nEsse script foi desenvolvido com a ajuda direta e indireta de algumas pessoas\nSPECIAL THANKS TO:\nAffis Junianto\nManik\nmhankbarbar`,
-              "quoted": zepi,
               "description": `Estou funcionando a \n${runtime(process.uptime())}`,
               "buttonText": "Opções",
               "listType": "SINGLE_SELECT",
@@ -1792,6 +1793,16 @@ case 'kickall':
                 break
         //END FUNÇÕES DONO
         //CONVERSORES
+        case 'tourl':
+    if ((isMedia && !mek.message.videoMessage || isQuotedImage || isQuotedVideo ) && args.length == 0) {
+            boij = isQuotedImage || isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
+            owgi = await LorranX.downloadMediaMessage(boij)
+            res = await upload(owgi)
+            reply(res)
+            } else {
+            reply('kirim/reply gambar/video')
+            }
+            break
         case 'tomp3':
           if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
 				LorranX.updatePresence(from, Presence.composing)
