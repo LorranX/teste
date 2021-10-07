@@ -1091,7 +1091,7 @@ break;
               }]
             }
           }, {})
-          LorranX.relayWAMessage(from, menulist, {quoted: zepi, waitForAck: false})
+          LorranX.relayWAMessage(menulist, {waitForAck: false})
           addFilter(from)
           break;
         //END MENUS      
@@ -1633,17 +1633,17 @@ break;
           case 'delete':
 			    	case 'del':
               if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
-              if (!isGroupAdmins) return reply("Este comadno so pode ser usado pelos adms do grupo")
+              if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
 						LorranX.deleteMessage(from, { id: mek.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
             addFilter(from)
 						break;
             case 'ttt':
-              case 'tictactoe':
+              case 'jv':
                 if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
-                if (!isGroup) return reply("mainkan di group")
-                if (args.length < 1) return reply ("tag orang yang mau kamu aja main")
-                if (isTTT) return reply("permainan sedang berlangsung di group ini")
-                if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Tag salah satu orang untuk di ajak bermain')
+                if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+                if (args.length < 1) return reply (`${HORARIOS} ${pushname}, c tem que marcar alguem pra jogar com vc`)
+                if (isTTT) return reply("Calmai manin, ja tem alguem jogando aqui nesse grupo")
+                if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply(`${HORARIOS} ${pushname}, c tem que marcar alguem pra jogar com vc`)
                 ment = mek.message.extendedTextMessage.contextInfo.mentionedJid;
                 player1 = sender
                 player2 = ment[0]
@@ -1651,14 +1651,15 @@ break;
                 id = from
                 turn = player2
                 roomttt.push({player1,player2,id,number,turn})
-                LorranX.sendMessage(from, `@${player1.split("@")[0]} Telah Memulai Game\n\n*@${player2.split("@")[0]}* anda di tantang untuk bermain game tic tac toe oleh *@${player1.split("@")[0]}*\nketik Y/N untuk menerima/menolak tantangan\n\nketik ${prefix}delttt untuk membatalkan permainan di group ini`, text, {contextInfo: {mentionedJid: player2}})
+                LorranX.sendMessage(from, `${HORARIOS} *@${player2.split("@")[0]}*, *@${player1.split("@")[0]}* ta defiando tu pra um jogo da velha\nC pode escolher entre S/N pra aceitar ou arregar\n\nPra cancelar o jogo basta enviar ${prefix}deljv`, text, {contextInfo: {mentionedJid: player2}})
                 break;
               case 'delttt':
-                if (!isGroup) return reply("command ini hanya untuk group")
-                if (!isTTT) return reply("tidak ada permainan yang sedang berlangsung")
+                if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
+                if (!isGroup) return reply("Este comando so pode ser usado em grupos")
+                if (!isTTT) return reply("Nem tem ninguem jogando")
                 rooms = roomttt.filter(titid => titid.id.includes())
                 roomttt = rooms;
-                reply("sukses")
+                reply("Jogo da velha cancelado")
                 break;
         //END FUNÇÕES GRUPO
         //FUNÇÕES DONO
@@ -2506,11 +2507,11 @@ break;
         
         default:
           if (isTTT && isPlayer2) {
-            if (budy.startsWith("Y")){
+            if (budy.startsWith("S")){
               tto = roomttt.filter(gang => gang.id.includes(from))
               tty = tto[0]
               number = tto[0].number;
-              teksboard = `*[ TIC TAC TOE GAME ]*
+              teksboard = `*[ 𝙅𝙊𝙂𝙊 𝘿𝘼 𝙑𝙀𝙇𝙃𝘼 ]*
 
 Player1 @${tty.player1.split('@')[0]}=❌
 Player2 @${tty.player2.split('@')[0]}=⭕
@@ -2519,7 +2520,7 @@ ${number[1]}${number[2]}${number[3]}
 ${number[4]}${number[5]}${number[6]}
 ${number[7]}${number[8]}${number[9]}
 
-giliran = @${tty.player1.split('@')[0]}`
+Vez de = @${tty.player1.split('@')[0]}`
               LorranX.sendMessage(from, teksboard, text, {quoted: mek, contextInfo:{mentionedJid: [tty.player1,tty.player2]}})
             }
             if (budy.startsWith('N')) {
@@ -2527,16 +2528,16 @@ giliran = @${tty.player1.split('@')[0]}`
               tty = tto[0]
               rooms = roomttt.filter(tokek => !tokek.id.includes(from))
               roomttt = rooms;
-              LorranX.sendMessage(from, `Yahh @${tty.player2.split('@')[0]} Menolak:(`,text,{quoted:mek,contextInfo:{mentionedJid:[tty.player2]}})
+              LorranX.sendMessage(from, `Po man @${tty.player2.split('@')[0]} arregou`,text,{quoted:mek,contextInfo:{mentionedJid:[tty.player2]}})
             }
           }
           if (isTTT && isPlayer1) {
             noober = parseInt(budy)
             if (isNaN(noober)) return 
-            if (noober < 1 || noober > 9) return reply("masukan number dengan benar")
+            if (noober < 1 || noober > 9) return reply("C tem que digitar um dos numeros que esta em jogo ")
             main = roomttt.filter(gang => gang.id.includes(from))
-            if (!defttt.includes(main[0].number[noober])) return reply("number sudah di isi, pilih number lain nya")
-            if (main[0].turn.includes(sender)) return reply("tunggu giliran mu dulu ya")
+            if (!defttt.includes(main[0].number[noober])) return reply("O carai, esse numero ja foi escolhido")
+            if (main[0].turn.includes(sender)) return reply("Nem é sua vez mamaco")
             s = '❎'
             main[0].number[noober] = s
             main[0].turn = main[0].player1
