@@ -1500,7 +1500,7 @@ Publicado: ${anu.resultado.publicado}
 
 Letra: ${anu.link.result}
 `
-LorranX.sendMessage(from, msc, text, { quoted: mek)
+LorranX.sendMessage(from, msc, text, { quoted: mek })
 break
           case 'sider': 
         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
