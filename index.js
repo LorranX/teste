@@ -1273,7 +1273,7 @@ LorranX.sendMessage(from, fs.readFileSync(exifst), sticker)
 fs.unlinkSync(exifst)
 fs.unlinkSync(exif321)
 fs.unlinkSync('undefined.webp')
-await reply(`Pronto macaco, alterei os dados da figurinha`)
+reply(`Pronto macaco, alterei os dados da figurinha`)
 })
 });
 break
