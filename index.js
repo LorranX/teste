@@ -968,11 +968,11 @@ sendButImage(from, Menu, `@LorranX`, menuimg,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-  • Ultima atualização: 28/09/2021 as 21:54
-  • Ultimas alterações: Adicionado sider (ver quem vizualizou mensagens do bot), corrigidos erros e problemas cronicos
-  • Possiveis proximas Atualizações: Correções, adicionar novos recusos relacionados a leveling e dinheiro, adicionar welcome, anti-link, anti-fake
+  • Ultima atualização: 07/10/2021 as 22:55
+  • Ultimas alterações: Adicionados menus com imagens, adicionadas funções com botão de video, adicionados dados animados, adicionado jogo da velha (PENDENTE DE ALGUMAS CORREÇÕES), corrigidos problemas e erros
+  • Possiveis proximas Atualizações: Correções, adicionar novos recusos relacionados a leveling e dinheiro, adicionar welcome, anti-link, anti-fake, adicionar funções de armazenamento
   • Versão atual: 1.0.5
-  • % de conclusão: 40%
+  • % de conclusão: 45%
 `
         LorranX.sendMessage(from, fs.readFileSync("./lib/image/changelog.jpg"), image, {quoted: mek, caption: medsos})
       }
@@ -1655,6 +1655,7 @@ break;
                 LorranX.sendMessage(from, `${HORARIOS} @${player2.split("@")[0]} , @${player1.split("@")[0]} ta defiando tu pra um jogo da velha\nC pode escolher entre S/N pra aceitar ou arregar\n\nPra cancelar o jogo basta enviar ${prefix}deljv`, text, {contextInfo: {mentionedJid: player2}})
                 break;
               case 'delttt':
+                case 'deljv':
                 if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
                 if (!isGroup) return reply("Este comando so pode ser usado em grupos")
                 if (!isTTT) return reply("Nem tem ninguem jogando")
@@ -2552,7 +2553,7 @@ Vez de = @${tty.player1.split('@')[0]}`
             ttt = `${number[1]}${number[2]}${number[3]}\n${number[4]}${number[5]}${number[6]}\n${number[7]}${number[8]}${number[9]}`
             
             winningspeech = () => {
-              ucapan1 = `*Jogo ganho por: *@${tty.player1.split('@')[0]}*\n`
+              ucapan1 = `Jogo ganho por: *@${tty.player1.split('@')[0]}*\n`
               ucapan2 = `*[ Resultado Final ]*\n\n${ttt}`
               LorranX.sendMessage(from, ucapan1, text, {quoted:winner, contextInfo:{mentionedJid: [tty.player2]}}) 
               rooms = roomttt.filter(hhg => !hhg.id.includes(from))
