@@ -1654,7 +1654,7 @@ break;
                 id = from
                 turn = player2
                 roomttt.push({player1,player2,id,number,turn})
-                LorranX.sendMessage(from, `${HORARIOS} @${player2.split("@")[0]} , @${player1.split("@")[0]} ta defiando tu pra um jogo da velha\nC pode escolher entre S/N pra aceitar ou arregar\n\nPra cancelar o jogo basta enviar ${prefix}deljv`, text, {contextInfo: {mentionedJid: player2}})
+                LorranX.sendMessage(from, `${HORARIOS} @${player2.split("@")[0]} , @${player1.split("@")[0]} ta defiando tu pra um jogo da velha\nC pode escolher entre S/N pra aceitar ou arregar\n\nPra cancelar o jogo basta enviar ${prefix}deljv`, text, {contextInfo: {mentionedJid: [player1,player2]}})
                 break;
               case 'delttt':
                 case 'deljv':
