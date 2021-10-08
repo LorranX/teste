@@ -1651,7 +1651,7 @@ break;
                 id = from
                 turn = player2
                 roomttt.push({player1,player2,id,number,turn})
-                LorranX.sendMessage(from, `${HORARIOS} @${player2.split("@")[0]}, @${player1.split("@")[0]} ta defiando tu pra um jogo da velha\nC pode escolher entre S/N pra aceitar ou arregar\n\nPra cancelar o jogo basta enviar ${prefix}deljv`, text, {contextInfo: {mentionedJid: player2}})
+                LorranX.sendMessage(from, `${HORARIOS} *@${player2.split("@")[0]}*, *@${player1.split("@")[0]}* ta defiando tu pra um jogo da velha\nC pode escolher entre S/N pra aceitar ou arregar\n\nPra cancelar o jogo basta enviar ${prefix}deljv`, text, {contextInfo: {mentionedJid: player2}})
                 break;
               case 'delttt':
                 if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
@@ -1860,6 +1860,11 @@ case 'kickall':
 				break;
         //END CONVERSORES
         //DOWNLOADERS
+        case 'pesquisamsc':
+anu = await fetchJson(`https://akamer.herokuapp.com/api/joox/?msc=alone&apikey=akame`)
+msc = `${música}`
+LorranX.sendMessage(from, buffer, image, { quoted: mek, thumbnail:null, caption: `${msc}`})
+break;
         case 'play':
           case 'p':
             if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
@@ -2513,8 +2518,8 @@ break;
               number = tto[0].number;
               teksboard = `*[ 𝙅𝙊𝙂𝙊 𝘿𝘼 𝙑𝙀𝙇𝙃𝘼 ]*
 
-Player 1 @${tty.player1.split('@')[0]}=❌
-Player 2 @${tty.player2.split('@')[0]}=⭕
+Player1 @${tty.player1.split('@')[0]}=❌
+Player2 @${tty.player2.split('@')[0]}=⭕
 
 ${number[1]}${number[2]}${number[3]}
 ${number[4]}${number[5]}${number[6]}
@@ -2551,7 +2556,7 @@ Vez de = @${tty.player1.split('@')[0]}`
             ttt = `${number[1]}${number[2]}${number[3]}\n${number[4]}${number[5]}${number[6]}\n${number[7]}${number[8]}${number[9]}`
             
             winningspeech = () => {
-              ucapan1 = `Carai, deu velha`
+              ucapan1 = `*[ Hasil pertandingan Tic Tac Toe ]*\n\nyeyyy permainan di menangkan oleh *@${tty.player1.split('@')[0]}*\n`
               ucapan2 = `*[ Resultado Final ]*\n\n${ttt}`
               LorranX.sendMessage(from, ucapan1, text, {quoted:mek, contextInfo:{mentionedJid: [tty.player2]}}) 
               rooms = roomttt.filter(hhg => !hhg.id.includes(from))
@@ -2575,12 +2580,12 @@ Vez de = @${tty.player1.split('@')[0]}`
             
             if (!ttt.includes('1️⃣') && !ttt.includes('2️⃣') && !ttt.includes('3️⃣') && ! ttt.includes('4️⃣') && !ttt.includes('5️⃣') && !ttt.includes('6️⃣') && !ttt.includes('7️⃣') && !ttt.includes('8️⃣') && !ttt.includes('9️⃣')){
               ucapan1 = `Carai, deu velha`
-              ucapan2 = `*[ Resultado Final ]*\n\n${ttt}`
+              ucapan2 = `*[ Papan Hasil akhir ]*\n\n${ttt}`
               reply(ucapan1)
               naa = roomttt.filter(hhg => !hhg.id.includes(from))
               return roomttt= naa
             }
-            ucapan = `*[ 𝙅𝙊𝙂𝙊 𝘿𝘼 𝙑𝙀𝙇𝙃𝘼 ]*\n\nPlayer 1 @${tty.player1.split('@')[0]}=❌\nPlayer 2 @${tty.player2.split('@')[0]}=⭕\n\n${ttt}\n\nVez de = @${tty.player2.split('@')[0]}`
+            ucapan = `*[ 𝙅𝙊𝙂𝙊 𝘿𝘼 𝙑𝙀𝙇𝙃𝘼 ]*\n\nPlayer1 @${tty.player1.split('@')[0]}=❌\nPlayer2 @${tty.player2.split('@')[0]}=⭕\n\n${ttt}\n\nVez de = @${tty.player2.split('@')[0]}`
             LorranX.sendMessage(from, ucapan, text, {quoted: mek, contextInfo:{mentionedJid: [tty.player1,tty.player2]}})
           }
           if (isTTT && isPlayer2) {
@@ -2603,7 +2608,7 @@ Vez de = @${tty.player1.split('@')[0]}`
             ttt = `${number[1]}${number[2]}${number[3]}\n${number[4]}${number[5]}${number[6]}\n${number[7]}${number[8]}${number[9]}`
             
             winningspeech = () => {
-              ucapan1 = `Carai, deu velha`
+              ucapan1 = `*[ Hasil pertandingan Tic Tac Toe ]*\n\nyeyyy permainan di menangkan oleh *@${tty.player2.split('@')[0]}*\n`
               ucapan2 = `*[ Resultado Final ]*\n\n${ttt}`
               LorranX.sendMessage(from, ucapan1, text, {quoted:mek, contextInfo:{mentionedJid: [tty.player1]}}) 
               rooms = roomttt.filter(hhg => !hhg.id.includes(from))
@@ -2626,13 +2631,13 @@ Vez de = @${tty.player1.split('@')[0]}`
             if (number[3] == s && number[6] == s && number[9] == s) return winningspeech()
             
             if (!ttt.includes('1️⃣') && !ttt.includes('2️⃣') && !ttt.includes('3️⃣') && ! ttt.includes('4️⃣') && !ttt.includes('5️⃣') && !ttt.includes('6️⃣') && !ttt.includes('7️⃣') && !ttt.includes('8️⃣') && !ttt.includes('9️⃣')){
-              ucapan1 = `Carai, deu velha`
-              ucapan2 = `*[ Resultado Final ]*\n\n${ttt}`
+              ucapan1 = `*[ Hasil pertandingan Tic Tac Toe ]*\n\npermainan seri Good Game\n`
+              ucapan2 = `*[ Papan Hasil akhir ]*\n\n${ttt}`
               reply(ucapan1)
               naa = roomttt.filter(hhg => !hhg.id.includes(from))
               return roomttt= naa
             }
-            ucapan = `*[ 𝙅𝙊𝙂𝙊 𝘿𝘼 𝙑𝙀𝙇𝙃𝘼 ]*\n\nPlayer 1 @${tty.player1.split('@')[0]}=❌\nPlayer 2 @${tty.player2.split('@')[0]}=⭕\n\n${ttt}\n\nVez de = @${tty.player1.split('@')[0]}`
+            ucapan = `*[ TIC TAC TOE GAME ]*\n\nPlayer1 @${tty.player1.split('@')[0]}=❌\nPlayer2 @${tty.player2.split('@')[0]}=⭕\n\n${ttt}\n\ngiliran = @${tty.player1.split('@')[0]}`
             LorranX.sendMessage(from, ucapan, text, {quoted: mek, contextInfo:{mentionedJid: [tty.player1,tty.player2]}})
           }
       }
