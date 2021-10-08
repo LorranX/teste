@@ -933,6 +933,8 @@ sendButImage(from, Menueu, `@LorranX`, menuimg,[{
 ║│↭_*   [ *${prefix}attp* ] 
 ║│↭_*   [ *${prefix}rename* ] 
 ║│↭_*   [ *${prefix}dado* ] 
+║│↭_*   [ *${prefix}jv* ] 
+║│↭_*   [ *${prefix}tourl* ] 
 ║│↭_*   [ *${prefix}toimg* ] 
 ║│↭_*   [ *${prefix}togif* ] 
 ║│↭_*   [ *${prefix}tomp3* ] 
@@ -968,8 +970,8 @@ sendButImage(from, Menu, `@LorranX`, menuimg,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-  • Ultima atualização: 07/10/2021 as 22:55
-  • Ultimas alterações: Adicionados menus com imagens, adicionadas funções com botão de video, adicionados dados animados, adicionado jogo da velha (PENDENTE DE ALGUMAS CORREÇÕES), corrigidos problemas e erros
+  • Ultima atualização: 07/10/2021 as 23:16
+  • Ultimas alterações: Adicionado tourl, adicionados menus com imagens, adicionadas funções com botão de video, adicionados dados animados, adicionado jogo da velha (PENDENTE DE ALGUMAS CORREÇÕES), corrigidos problemas e erros
   • Possiveis proximas Atualizações: Correções, adicionar novos recusos relacionados a leveling e dinheiro, adicionar welcome, anti-link, anti-fake, adicionar funções de armazenamento
   • Versão atual: 1.0.5
   • % de conclusão: 45%
