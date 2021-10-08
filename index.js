@@ -1489,19 +1489,6 @@ break
 						LorranX.groupDemoteAdmin(from, mentioned)
 					}
 					break;
-					case 'pesquisamsc':
-anu = await fetchJson(`https://akamer.herokuapp.com/api/joox/?msc=${teks}&apikey=akame`)
-teks = args.join(' ')           
-msc = `
-Nome da musica: ${anu.resultado.música}
-Album: ${anu.resultado.album}
-Cantor: ${anu.resultado.cantor}
-Publicado: ${anu.resultado.publicado}
-
-Letra: ${anu.link.result}
-`
-LorranX.sendMessage(from, msc, text, { quoted: mek })
-break
           case 'sider': 
         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
         if (!isQuoted) return reply(`Coe macaco, c tem que marcar alguma mensagem minha`)
