@@ -2224,7 +2224,7 @@ break;
             case 'bebot':
               case 'sejaobot':
                 case 'sbot':
-          if (mek.key.fromMe) return reply("Eita zapo, ccomo vc quer ser um bot sendo que vc ja é um bot")
+          if (mek.key.fromMe) return reply("Eita zapo, como vc quer ser um bot sendo que vc ja é um bot")
           sejaobot(reply, LorranX, from)
             break;
             case 'stopbot':
