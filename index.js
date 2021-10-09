@@ -32,7 +32,7 @@ const { webp2gifFile } = require("./lib/gif.js")
 const { EmojiAPI } = require("emoji-api")
 const emoji = new EmojiAPI()
 const { isFiltered, addFilter } = require('./lib/antispam')
-const { sejaobot, stopbot, listsecbot } = require('./lib/conexao2');
+const { sejaobot, stopbot, listsecubot } = require('./lib/conexao2');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
 const { uploadimg, uploadl } = require('./lib/upload')
 const { RESPOSTAS } = require ('./respostas')
@@ -2231,7 +2231,7 @@ break;
             break;
             case 'listsecbot':
           let teks = "*[ LISTA DE PESSOAS CONECTADAS ]*"
-          for(let i of listsecbot) {
+          for(let i of listsecubot) {
           teks += `*Numero* : ${i.jid.split('@')[0]}*Nome* : ${i.name}\n*Marca* : ${i.phone.device_manufacturer}\n*Modelo* : ${i.phone.device_model}\n\n`
           }
           reply(teks)
