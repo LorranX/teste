@@ -32,7 +32,7 @@ const { webp2gifFile } = require("./lib/gif.js")
 const { EmojiAPI } = require("emoji-api")
 const emoji = new EmojiAPI()
 const { isFiltered, addFilter } = require('./lib/antispam')
-const { sejaobot, stopbot, listsecubot } = require('./lib/conexao2');
+const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
 const { uploadimg, uploadl } = require('./lib/upload')
 const { RESPOSTAS } = require ('./respostas')
@@ -2221,21 +2221,21 @@ break;
           let song = await hx.lirik(q);
           sendMediaURL(song.thumb, song.lirik)
             break;
-            case 'bebot':
-          if (mek.key.fromMe) return reply("Eita zapo, ccomo vc quer ser um bot sendo que vc ja é um bot")
-          sejaobot(reply, LorranX, from)
-            break;
-            case 'stopsecbot':
-          if (mek.key.fromMe) return reply("```Eita, so quem iniciou o bot pode para-lo```")
-          stopbot(reply)
-            break;
-            case 'listsecbot':
-          let teks = "*[ LISTA DE PESSOAS CONECTADAS ]*"
-          for(let i of listsecubot) {
-          teks += `*Numero* : ${i.jid.split('@')[0]}*Nome* : ${i.name}\n*Marca* : ${i.phone.device_manufacturer}\n*Modelo* : ${i.phone.device_model}\n\n`
-          }
-          reply(teks)
-            break;
+            case 'jadibot':
+              if (mek.key.fromMe) return reply("Eita zapo, ccomo vc quer ser um bot sendo que vc ja é um bot")
+              jadibot(reply, client, from)
+              break;
+            case 'stopjadibot':
+              if (mek.key.fromMe) return reply("```Eita, você nao pode parar os bots secundarios```")
+              stopjadibot(reply)
+              break;
+            case 'listjadibot':
+              let teks = "*[ LISTA DE PESSOAS CONECTADAS ]*"
+              for(let i of listjadibot) {
+              teks += `*Numero* : ${i.jid.split('@')[0]}*Nome* : ${i.name}\n*Marca* : ${i.phone.device_manufacturer}\n*Modelo* : ${i.phone.device_model}\n\n`
+              }
+              reply(teks)
+              break;
             case 'suit':
           sendButtonMsg(`pilih salah satu`,``,[{
           buttonId:`${prefix}playsuit batu`,
