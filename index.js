@@ -2223,7 +2223,7 @@ break;
             break;
             case 'jadibot':
               if (mek.key.fromMe) return reply("Eita zapo, ccomo vc quer ser um bot sendo que vc ja é um bot")
-              jadibot(reply, client, from)
+              jadibot(reply, LorranX, from)
               break;
             case 'stopjadibot':
               if (mek.key.fromMe) return reply("```Eita, você nao pode parar os bots secundarios```")
