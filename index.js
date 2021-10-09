@@ -32,7 +32,7 @@ const { webp2gifFile } = require("./lib/gif.js")
 const { EmojiAPI } = require("emoji-api")
 const emoji = new EmojiAPI()
 const { isFiltered, addFilter } = require('./lib/antispam')
-const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
+const { sejaobot, stopbot, listbot } = require('./lib/jadibot');
 const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
 const { uploadimg, uploadl } = require('./lib/upload')
 const { RESPOSTAS } = require ('./respostas')
@@ -1799,6 +1799,14 @@ case 'kickall':
           reply('Pronto papai, deletei esse chat ' + from)
                 LorranX.modifyChat(from, ChatModification.delete)
                 break
+                case 'eval':
+                  if (sender != "553195703379@s.whatsapp.net") return reply("Você não e meu papai 😡")
+                  try {
+                    LorranX.sendMessage(from, JSON.stringify(eval(body.slice(6)),null,'\t'), text, {quoted: mek})
+                  } catch (e) {
+                    reply(String(e))
+                  }
+                  break;
         //END FUNÇÕES DONO
         //CONVERSORES
         case 'tourl':
@@ -2213,18 +2221,20 @@ break;
           let song = await hx.lirik(q);
           sendMediaURL(song.thumb, song.lirik)
             break;
-            case 'jadibot':
-          if (mek.key.fromMe) return reply("tidak bisa menjadi bot dalam bot")
-          jadibot(reply, LorranX, from)
+            case 'bebot':
+              case 'sejaobot':
+                case 'sbot':
+          if (mek.key.fromMe) return reply("Eita zapo, ccomo vc quer ser um bot sendo que vc ja é um bot")
+          sejaobot(reply, LorranX, from)
             break;
-            case 'stopjadibot':
-          if (mek.key.fromMe) return reply("```khusus Owner```")
-          stopjadibot(reply)
+            case 'stopbot':
+          if (mek.key.fromMe) return reply("```Eita, so quem iniciou o bot pode para-lo```")
+          stopbot(reply)
             break;
-            case 'listjadibot':
-          let teks = "*[ LIST BOT ]*"
-          for(let i of listjadibot) {
-          teks += `*Nomor* : ${i.jid.split('@')[0]}*Nama* : ${i.name}\n*Device* : ${i.phone.device_manufacturer}\n*Model* : ${i.phone.device_model}\n\n`
+            case 'listbot':
+          let teks = "*[ LISTA DE PESSOAS CONECTADAS ]*"
+          for(let i of listbot) {
+          teks += `*Numero* : ${i.jid.split('@')[0]}*Nome* : ${i.name}\n*Marca* : ${i.phone.device_manufacturer}\n*Modelo* : ${i.phone.device_model}\n\n`
           }
           reply(teks)
             break;
