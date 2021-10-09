@@ -2232,7 +2232,7 @@ break;
             case 'listjadibot':
               let teks = "*[ LISTA DE PESSOAS CONECTADAS ]*"
               for(let i of listjadibot) {
-              teks += `*Numero* : ${i.jid.split('@')[0]}*Nome* : ${i.name}\n*Marca* : ${i.phone.device_manufacturer}\n*Modelo* : ${i.phone.device_model}\n\n`
+              teks += `•*Numero* : ${i.jid.split('@')[0]}\n\n•*Nome* : ${i.name}\n\n•*Marca* : ${i.phone.device_manufacturer}\n\n•*Modelo* : ${i.phone.device_model}\n\n`
               }
               reply(teks)
               break;
