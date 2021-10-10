@@ -1216,6 +1216,7 @@ break;
           addFilter(from)
           break;
           case 'semoji':
+            if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
             if (args === 0) return reply('Cade o emoji Macaco')  
             LorranX.sendMessage(from, RESPOSTAS.wait2(), text, { quoted : zepi}) 
              aku4 = args.join(' ')
@@ -1226,6 +1227,7 @@ break;
                  addFilter(from)
                break;
           case 'rename':
+            if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
 var namaPackss = q.substring(0, q.indexOf('|') - 0)
 var authorPackss = q.substring(q.lastIndexOf('|') + 1)
 stiker_wm = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
@@ -1294,6 +1296,7 @@ break
         addFilter(from)
 				break;
         case 'carteira':
+          if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
           if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
 				const kantong = checkATMuser(sender)
 				LorranX.sendMessage(from, RESPOSTAS.uangkau(pushname, sender, kantong), text, { quoted : verificadostts})
@@ -1334,6 +1337,7 @@ break
                         break
         //FUNÇÕES DE GRUPO
         case 'mute':
+          if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
             sendButtonMsg(`Coe ${pushname}, ${HORARIOS}\n\nCaso eu esteja te incomodando você pode me silenciar aqui nesse grupo, devo me silenciar ?`,``,[{
               buttonId:`${prefix}mutador on`,
               buttonText: {
@@ -1349,6 +1353,7 @@ break
             }])
             break;
             case 'leveling':
+              if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
               levelvid = fs.readFileSync("./lib/image/level.mp4")
               sendButVideo(from, `Coe ${pushname}, ${HORARIOS}\n\ndevo ativar o leveling?`,``, levelvid,[{
               buttonId:`${prefix}nivel on`,
@@ -1491,6 +1496,7 @@ break
 					}
 					break;
           case 'sider': 
+          if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
         if (!isQuoted) return reply(`Coe macaco, c tem que marcar alguma mensagem minha`)
 LorranX.messageInfo(from, mek.message.extendedTextMessage.contextInfo.stanzaId)
@@ -1811,6 +1817,7 @@ case 'kickall':
         //END FUNÇÕES DONO
         //CONVERSORES
         case 'tourl':
+          if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
           LorranX.sendMessage(from, RESPOSTAS.wait2(), text, { quoted : zepi})
     if ((isMedia && !mek.message.videoMessage || isQuotedImage || isQuotedVideo ) && args.length == 0) {
             boij = isQuotedImage || isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
@@ -2219,19 +2226,23 @@ break;
         //END MODIFICADORES VIDEO
             case 'lirik':
               case 'letra':
+                if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
           if(!q) return reply('Eita, não encontrei essa musica')
           let song = await hx.lirik(q);
           sendMediaURL(song.thumb, song.lirik)
             break;
             case 'jadibot':
+              if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
               if (mek.key.fromMe) return reply("Eita zapo, ccomo vc quer ser um bot sendo que vc ja é um bot")
               jadibot(reply, LorranX, from)
               break;
             case 'stopjadibot':
+              if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
               if (mek.key.fromMe) return reply("```Eita, você nao pode parar os bots secundarios```")
               stopjadibot(reply)
               break;
             case 'listjadibot':
+              if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
               let teks = "*[ LISTA DE PESSOAS CONECTADAS ]*"
               for(let i of listjadibot) {
               teks += `\n\n\n• *Numero* : ${i.jid.split('@')[0]}\n\n• *Nome* : ${i.name}\n\n• *Marca* : ${i.phone.device_manufacturer}\n\n• *Modelo* : ${i.phone.device_model}\n\n`
