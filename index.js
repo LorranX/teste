@@ -1333,7 +1333,7 @@ break
                         imposto = maco - fee
                         addKoinUser(cacotf, imposto)
                         confirmATM(sender, maco)
-                        LorranX.sendMessage(from, `*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅💠 」*\n\n_Transação de pontos via pix bem sucedida 💠_\n\n• pix enviado por : +${sender.split("@")[0]}\n• Para : ${cacotf}\n• Quantidade de pontos transferidos : ${maco}\n\n*Não sao cobrados impostos sobre transações via pix*`, text, {quoted: verificadostts})
+                        LorranX.sendMessage(from, `*「 𝙎𝙐𝘾𝙀𝙎𝙎𝙊 ✅💠 」*\n\n_Transação de pontos via pix bem sucedida 💠_\n\n• pix enviado por : ${sender.split("@")[0]}\n• Para : ${cacotf}\n• Quantidade de pontos transferidos : ${maco}\n\n*Não sao cobrados impostos sobre transações via pix*`, text, {quoted: verificadostts})
                         break
         //FUNÇÕES DE GRUPO
         case 'mute':
@@ -1355,7 +1355,7 @@ break
             case 'leveling':
               if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
               levelvid = fs.readFileSync("./lib/image/level.mp4")
-              sendButVideo(from, `Coe ${pushname}, ${HORARIOS}\n\ndevo ativar o leveling?`,``, levelvid,[{
+              sendButVideo(from, `Coe ${pushname}, ${HORARIOS}\n\nDevo ativar o leveling?`,``, levelvid,[{
               buttonId:`${prefix}nivel on`,
               buttonText: {
                 displayText: `sim`
@@ -1655,13 +1655,14 @@ break;
                 if (isTTT) return reply("Calmai manin, ja tem alguem jogando aqui nesse grupo")
                 if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply(`${HORARIOS} ${pushname}, c tem que marcar alguem pra jogar com vc`)
                 ment = mek.message.extendedTextMessage.contextInfo.mentionedJid;
+                jvimg = fs.readFileSync('./lib/image/jv.png')
                 player1 = sender
                 player2 = ment[0]
                 number = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣"]
                 id = from
                 turn = player2
                 roomttt.push({player1,player2,id,number,turn})
-                LorranX.sendMessage(from, `${HORARIOS} @${player2.split("@")[0]} , @${player1.split("@")[0]} ta defiando tu pra um jogo da velha\nC pode escolher entre S/N pra aceitar ou arregar\n\nPra cancelar o jogo basta enviar ${prefix}deljv`, text, {contextInfo: {mentionedJid: [player1,player2]}})
+                LorranX.sendMessage(from, jvimg, image, {quoted: mek, caption: `${HORARIOS} @${player2.split("@")[0]} , @${player1.split("@")[0]} ta defiando tu pra um jogo da velha\nC pode escolher entre S/N pra aceitar ou arregar\n\nPra cancelar o jogo basta enviar ${prefix}deljv`, text, contextInfo: {mentionedJid: [player1,player2]}})
                 break;
               case 'delttt':
                 case 'deljv':
@@ -2233,7 +2234,7 @@ break;
             break;
             case 'jadibot':
               if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
-              if (mek.key.fromMe) return reply("Eita zapo, ccomo vc quer ser um bot sendo que vc ja é um bot")
+              if (mek.key.fromMe) return reply("Eita zapo, como c quer ser um bot sendo que vc ja é um bot")
               jadibot(reply, LorranX, from)
               break;
             case 'stopjadibot':
