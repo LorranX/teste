@@ -2579,7 +2579,7 @@ Vez de = @${tty.player1.split('@')[0]}`
             winningspeech = () => {
               ucapan1 = `Jogo ganho por: *@${tty.player1.split('@')[0]}*\n`
               ucapan2 = `*[ Resultado Final ]*\n\n${ttt}`
-              LorranX.sendMessage(from, ucapan1, text, {quoted:winner, contextInfo:{mentionedJid: [tty.player2]}}) 
+              LorranX.sendMessage(from, ucapan1, text, {quoted:winner, contextInfo:{mentionedJid: [tty.player1]}}) 
               rooms = roomttt.filter(hhg => !hhg.id.includes(from))
               return roomttt = rooms 
             }
@@ -2631,7 +2631,7 @@ Vez de = @${tty.player1.split('@')[0]}`
             winningspeech = () => {
               ucapan1 = `Jogo ganho por :*@${tty.player2.split('@')[0]}*\n`
               ucapan2 = `*[ Resultado Final ]*\n\n${ttt}`
-              LorranX.sendMessage(from, ucapan1, text, {quoted:winner, contextInfo:{mentionedJid: [tty.player1]}}) 
+              LorranX.sendMessage(from, ucapan1, text, {quoted:winner, contextInfo:{mentionedJid: [tty.player2]}}) 
               rooms = roomttt.filter(hhg => !hhg.id.includes(from))
               return roomttt = rooms 
             }
