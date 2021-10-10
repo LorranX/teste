@@ -445,7 +445,7 @@ module.exports = (LorranX) => {
 ᱅ ${HORARIOS} ${pushname}\n᱅ Comando : ${prefix}${command}`} } }
         const magago = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "caption": `🦧`} } }
         const winner = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "caption": `𝙋𝘼𝙍𝘼𝘽𝙀𝙉𝙎 🥳`} } }
-        const vbanido = { key : { participant : '0@s.whatsapp.net' }, message: { liveLocationMessage: { caption: `Usuario banido detectado 🚫`, jpegThumbnail: fs.readFileSync(' ') } } }
+        const vbanido = { key : { participant : '0@s.whatsapp.net' }, message: { liveLocationMessage: { caption: `Usuario banido detectado 🚫`, jpegThumbnail: fs.readFileSync('./lib/image/banido.png') } } }
 
         //BOTÃO NORMAL
       const sendButtonMsg = (text, footer, but = [], options = {}) => {
