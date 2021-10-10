@@ -2067,7 +2067,7 @@ case 'kickall':
         addFilter(from)
 				  break;
 				  case 'engrossar':
-            if (isBanned) return reply(`Coe viado, por algum motivo você esta proibido de usar meus comandos, converse com meu dono`)
+            if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : zepi})
         if (!isQuotedAudio) return reply('Marque um áudio')
         LorranX.sendMessage(from, RESPOSTAS.wait(), text, { quoted : zepi});
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
