@@ -2217,7 +2217,8 @@ break;
             break;
         //END MODIFICADORES VIDEO
             case 'lirik':
-          if(!q) return reply('lagu apa?')
+              case 'letra':
+          if(!q) return reply('Eita, não encontrei essa musica')
           let song = await hx.lirik(q);
           sendMediaURL(song.thumb, song.lirik)
             break;
@@ -2232,7 +2233,7 @@ break;
             case 'listjadibot':
               let teks = "*[ LISTA DE PESSOAS CONECTADAS ]*"
               for(let i of listjadibot) {
-              teks += `•*Numero* : ${i.jid.split('@')[0]}\n\n•*Nome* : ${i.name}\n\n•*Marca* : ${i.phone.device_manufacturer}\n\n•*Modelo* : ${i.phone.device_model}\n\n`
+              teks += `\n\n\n• *Numero* : ${i.jid.split('@')[0]}\n\n• *Nome* : ${i.name}\n\n• *Marca* : ${i.phone.device_manufacturer}\n\n• *Modelo* : ${i.phone.device_model}\n\n`
               }
               reply(teks)
               break;
