@@ -1662,7 +1662,7 @@ break;
                 id = from
                 turn = player2
                 roomttt.push({player1,player2,id,number,turn})
-                LorranX.sendMessage(from, jvimg, image, {quoted: mek, caption: `${HORARIOS} @${player2.split("@")[0]} , @${player1.split("@")[0]} ta defiando tu pra um jogo da velha\nC pode escolher entre S/N pra aceitar ou arregar\n\nPra cancelar o jogo basta enviar ${prefix}deljv`, text, contextInfo: {mentionedJid: [player1,player2]}})
+                LorranX.sendMessage(from, jvimg, image, {quoted: mek, caption: `*〘 🎮 𝘼𝙂𝙐𝘼𝙍𝘿𝘼𝙉𝘿𝙊 𝙍𝙀𝙎𝙋𝙊𝙎𝙏𝘼 ⚔️ 〙*\n\n@${player2.split("@")[0]}, @${player1.split("@")[0]} _Ta desafiando tu pra uma partida de jogo da velha_\n\n_Use *S* para aceitar ou *N* pra arregar_\n\n`, text, contextInfo: {mentionedJid: [player1,player2]}})
                 break;
               case 'delttt':
                 case 'deljv':
