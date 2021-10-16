@@ -33,8 +33,7 @@ const { EmojiAPI } = require("emoji-api")
 const emoji = new EmojiAPI()
 const { isFiltered, addFilter } = require('./lib/antispam')
 const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot');
-const { yta, ytv, igdl, upload, formatDate } = require('./lib/ytdl');
-const { uploadimg, uploadl } = require('./lib/upload')
+const { yta, ytv, igdl, upload,hdyt, formatDate } = require('./lib/ytdl');
 const { RESPOSTAS } = require ('./respostas')
 
         //INFO
@@ -735,6 +734,7 @@ if (isGroup) {
 }
 
         //COMANDOS DE LISTA
+
         if (listbut == 'Modificadores de Audio' || command == `${prefix}start`) {
           var Menuaudio = `
 ╔═══════════════════
@@ -1893,11 +1893,10 @@ case 'kickall':
           try {
             yta(reslink)
             .then((res) => {
-              const { dl_link, thumb, title, filesizeF, filesize } = res
+              const { dl_link, thumb, title } = res
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then(async (a) => {
-                if (Number(filesize) >= 100000) return sendMediaURL(thumb, `*PLAY MUSIC*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual nao suporta baixar e converter musicas muito grandes, caso seja muito grande vou mandar o seu audio em formato de link_`)
-                sendMediaURL(thumb, `*PLAY MUSIC*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Ja vou baixar o sua musica, pode ser que demore um pouco, fica calmo ai carai_`)
+                sendMediaURL(thumb, `*PLAY MUSIC*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Link* : ${a.data}\n\n_Ja vou baixar o sua musica, pode ser que demore um pouco, fica calmo ai carai_`)
                 await sendMediaURL(dl_link).catch(() => reply('error'))
               })
             })
@@ -1917,13 +1916,12 @@ case 'kickall':
           try {
             ytv(reslink)
             .then((res) => {
-              const { dl_link, thumb, title, filesizeF, filesize } = res
+              const { dl_link, thumb, title } = res
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then(async (a) => {
-                if (Number(filesize) >= 100000) return sendMediaURL(thumb, `*PLAY VIDEO*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual não suporta baixar videos muito grandes, caso seja muito grande vou mandar o seu audio em formato de link_`)
-                const captions = `*PLAY VIDEO*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP4\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
+                const captions = `*PLAY VIDEO*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP4\n*Link* : ${a.data}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
                 sendMediaURL(thumb, captions)
-                await URL(dl_link).catch(() => reply('error'))
+                await sendMediaURL(dl_link).catch(() => reply('error'))
               })                
             })
           } catch (e) {
@@ -1931,6 +1929,30 @@ case 'kickall':
           }       
           addFilter(from)                  
           break;
+          case 'pvideohd':
+            if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
+            if (args.length === 0) return reply(`Pra eu baixar esse video c tem que mandar um nome valido\nExemplo: *${prefix}pvideo macaco*`)
+            LorranX.sendMessage(from, RESPOSTAS.wait2(), text, { quoted : zepi})
+            var srch = args.join('')
+            find = await yts(srch);
+            res = find.all 
+            var reslink = res[0].url
+            try {
+              hdyt(reslink)
+              .then((res) => {
+                const { dl_link, thumb, title, } = res
+                axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+                .then(async (a) => {
+                  const captions = `*PLAY VIDEO*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP4\n*Link* : ${a.data}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
+                  sendMediaURL(thumb, captions)
+                  await sendMediaURL(dl_link).catch(() => reply('error'))
+                })                
+              })
+            } catch (e) {
+              reply('server error')
+            }       
+            addFilter(from)                  
+            break;
         case 'ytmp3':
           if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
           if (args.length < 1) return reply('Pra eu baixar o audio c tem que usar um link valido do youtube')
@@ -1940,11 +1962,10 @@ case 'kickall':
           try {
             yta(args[0])
             .then((res) =>{
-              const { dl_link, thumb, title, filesizeF, filesize } = res
+              const { dl_link, thumb, title } = res
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then((a) => {
-                if (Number(filesize) >= 30000) return sendMediaURL(thumb, `*Achei carai*\n\n*Titulo* : ${title}\n*Formato de arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual nao suporta baixar e converter videos muito grandes, caso seja muito grande vou mandar o seu audio em formato de link_`)
-                const caption = `*Achei carai*\n\n*Titulo* : ${title}\n*Formato* : MP3\n*Tamanho* : ${filesizeF}\n\n_Ja vou baixar o seu audio, pode ser que demore um pouco, fica calmo ai carai_`
+                const caption = `*Achei carai*\n\n*Titulo* : ${title}\n*Formato* : MP3\n\n_Ja vou baixar o seu audio, pode ser que demore um pouco, fica calmo ai carai_`
                 sendMediaURL(thumb, caption)
                 sendMediaURL(dl_link).catch(() => reply("file error"))
               })
@@ -1963,11 +1984,10 @@ case 'kickall':
           try {
             ytv(args[0])
             .then((res) =>{
-              const { dl_link, thumb, title, filesizeF, filesize } = res
+              const { dl_link, thumb, title } = res
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then((a) => {
-                if (Number(filesize) >= 30000) return sendMediaURL(thumb, `*Achei carai!*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Tamanho* : ${filesizeF}\n*Link* : ${a.data}\n\n_Infelizmente minha API atual nao suporta baixar videos muito grandes, caso seja muito grande vou mandar o seu video em formato de link_`)
-                const caption = `*Achei carai*\n\n*Titulo* : ${title}\n*Formato* : MP3\n*Tamanho do arquivo* : ${filesizeF}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
+                const caption = `*Achei carai*\n\n*Titulo* : ${title}\n*Formato* : MP3\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
                 sendMediaURL(thumb, caption)
                 sendMediaURL(dl_link).catch(() => reply("file error"))
               })
