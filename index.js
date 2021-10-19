@@ -272,6 +272,23 @@ if (time2 < "05:00:00") {
 
 
 module.exports = (LorranX) => {
+  const WelcomeButton = async(from, text1, desc1, gam1, but = [], options = {}) => {
+    kma = gam1
+    mhan = await LorranX.prepareMessage(from, kma, MessageType.image)
+    const buttonMessages = {
+    imageMessage: mhan.message.imageMessage,
+    contentText: text1,
+    footerText: desc1,
+    buttons: but,
+    headerType: 4
+    };
+    LorranX.sendMessage(
+      from,
+      buttonMessages,
+      MessageType.buttonsMessage, {contextInfo: { mentionedJid: [mem.split("@")[0] + "@s.whatsapp.net"]}},
+      options
+      )
+    }
   LorranX.on("group-update", async(mem) => {
     metadata = await LorranX.groupMetadata(mem.jid);
     if (mem.announce == "false") {
@@ -314,6 +331,58 @@ module.exports = (LorranX) => {
     const type = Object.keys(mek.message)[0];
     LorranX.sendMessage(mek.key.remoteJid, `*[ ANTI DELETE ]*\n\n*nama* : @${mek.participant.split("@")[0]}\n*jam* : ${moment.localweek.localday}\n*Type* : ${type}`, MessageType.text, {quoted:mek.message, contextInfo: { "mentionedJid": [mek.participant]}})
   });
+  LorranX.on("group-participants-update", async (anu) => {
+    try {
+      groupMet = await LorranX.groupMetadata(anu.jid)
+      groupMembers = groupMet.participants
+      mem = anu.participants[0]
+
+      try {
+        pp_user = await LorranX.getProfilePicture(mem)
+      } catch (e) {
+        pp_user = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60"
+      }
+
+      if (anu.action == "add") {
+        mdata = await LorranX.groupMetadata(anu.jid)
+        memeg = mdata.participants.length
+        num = anu.participants[0]
+        let w = LorranX.contacts[num] || { notify: num.replace(/@.+/, "") }
+        anu_user = w.vname || w.notify || mem.split("@")[0]
+        time_wel = moment.tz("America/Sao_Paulo").format("HH:mm")
+        text = `Olá @${mem.split("@")[0]} seja bem vindo ao grupo ${mdata.subject}`
+        buff = await getBuffer(pp_user);
+        WelcomeButton(mdata.id, text, `Para ter acesso aos meus comandos use .menu`, buff, [{
+        buttonId: `add`,
+        buttonText: {
+          displayText: "Welcome 👋🏻"
+        },
+        type: 1
+        }])
+      }
+     if (anu.action == "remove" ) {
+        mdata = await LorranX.groupMetadata(anu.jid)
+        num = anu.participants[0]
+        let w = LorranX.contacts[num] || { notify: num.replace(/@.+/, "") }
+        anu_user = w.vname || w.notify || mem.split("@")[0]
+        time_wel = moment.tz("America/Sao_Paulo").format("HH:mm")
+        memeg = mdata.participants.length
+        text = `O integrante do grupo @${mem.split("@")[0]} acabou de sair`
+        buff = await getBuffer(pp_user)
+      WelcomeButton(mdata.id, text, `Tchau mamaco`, buff,[{
+        buttonId: `ZAP`,
+        buttonText: {
+          displayText: "Adeus 👋🏻"
+        },
+        type: 1
+      }])
+    }
+    } catch (e) {
+      console.log("Error : %s", color(e, "red"))
+    }
+      
+  }),
+
   LorranX.on("CB:Call", (num) => {
     let nomer;
     calling = JSON.parse(JSON.stringify(num));
@@ -435,6 +504,8 @@ module.exports = (LorranX) => {
             LorranX.sendMessage(from, teks, image, {thumbnail:fs.readFileSync('./lib/image/fake.jpeg'),quoted:mek,caption:yes})
         }
 
+
+
         //VERIFICADOS
 
         const produtoverify = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "productMessage": { "product": { "productImage":{ "mimetype": "image/jpeg", "jpegThumbnail": fs.readFileSync('./lib/image/verificado.png') }, "title": `VERIFICANDO...`, "productImageCount": 9999 }, "businessOwnerJid": `0@s.whatsapp.net`}}}
@@ -445,75 +516,8 @@ module.exports = (LorranX) => {
         const magago = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "caption": `🦧`} } }
         const winner = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "caption": `𝙋𝘼𝙍𝘼𝘽𝙀𝙉𝙎 🥳`} } }
         const vbanido = { key : { participant : '0@s.whatsapp.net' }, message: { liveLocationMessage: { caption: `Usuario banido detectado 🚫`, jpegThumbnail: fs.readFileSync('./lib/image/banido.png') } } }
+        const qmenu = { key : { participant : '0@s.whatsapp.net' }, message: { liveLocationMessage: { caption: `Ola esse quoted é apenas temporario`, jpegThumbnail: fs.readFileSync('./lib/image/banido.png') } } }
 
-        //BOTÃO NORMAL
-      const sendButtonMsg = (text, footer, but = [], options = {}) => {
-        const buttonMessage = {
-          contentText: text,
-          footerText: footer,
-          buttons: but,
-          headerType: 1
-        };
-        LorranX.sendMessage(
-          from,
-          buttonMessage,
-          buttonsMessage,
-          options
-        )
-      }
-        ///BOTÃO DE IMAGEM
-const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => {
-  kma = gam1
-  mhan = await LorranX.prepareMessage(from, kma, image)
-  const buttonMessages = {
-  imageMessage: mhan.message.imageMessage,
-  contentText: text1,
-  footerText: desc1,
-  buttons: but,
-  headerType: 4
-  };
-  LorranX.sendMessage(
-    from,
-    buttonMessages,
-    buttonsMessage,
-    options
-    )
-  }
-        ///BOTÃO DE VIDEO
-  const sendButVideo = async(from, text1, desc1, vid1, but = [], options = {}) => {
-  kma = vid1
-  mhan = await LorranX.prepareMessage(from, kma, video,)
-  const buttonMessages = {
-  videoMessage: mhan.message.videoMessage,
-  contentText: text1,
-  footerText: desc1,
-  buttons: but,
-  headerType: 5
-  }
-  LorranX.sendMessage(from,
-    buttonMessages,
-    buttonsMessage,
-    options
-    )
-  }
-        ///BOTÃO DE LOC
-  const sendButLocation = async (from, text1, desc1, gam1, but = [], options = {}) => {
-  kma = gam1
-  mhan = await LorranX.prepareMessage(from, kma, location)
-  const buttonMessages = {
-  locationMessage: mhan.message.locationMessage,
-  contentText: text1,
-  footerText: desc1,
-  buttons: but,
-  headerType: 6
-  }
-  LorranX.sendMessage(from,
-    buttonMessages,
-    MessageType.buttonsMessage,
-    options
-    )
-  }
-      
       const sendMediaURL = async(url, text="", mids=[]) =>{
         if(mids.length > 0){
           text = normalizeMention(to, text, mids)
@@ -561,6 +565,75 @@ const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => 
             });
         });
     }
+
+
+            //BOTÃO NORMAL
+            const sendButtonMsg = (text, footer, but = [], options = {}) => {
+              const buttonMessage = {
+                contentText: text,
+                footerText: footer,
+                buttons: but,
+                headerType: 1
+              };
+              LorranX.sendMessage(
+                from,
+                buttonMessage,
+                buttonsMessage,
+                options
+              )
+            }
+              ///BOTÃO DE IMAGEM
+      const sendButImage = async(from, text1, desc1, gam1, but = [], options = {}) => {
+        kma = gam1
+        mhan = await LorranX.prepareMessage(from, kma, image)
+        const buttonMessages = {
+        imageMessage: mhan.message.imageMessage,
+        contentText: text1,
+        footerText: desc1,
+        buttons: but,
+        headerType: 4
+        };
+        LorranX.sendMessage(
+          from,
+          buttonMessages,
+          buttonsMessage,
+          options
+          )
+        }
+              ///BOTÃO DE VIDEO
+        const sendButVideo = async(from, text1, desc1, vid1, but = [], options = {}) => {
+        kma = vid1
+        mhan = await LorranX.prepareMessage(from, kma, video,)
+        const buttonMessages = {
+        videoMessage: mhan.message.videoMessage,
+        contentText: text1,
+        footerText: desc1,
+        buttons: but,
+        headerType: 5
+        }
+        LorranX.sendMessage(from,
+          buttonMessages,
+          buttonsMessage,
+          options
+          )
+        }
+              ///BOTÃO DE LOC
+        const sendButLocation = async (from, text1, desc1, gam1, but = [], options = {}) => {
+        kma = gam1
+        mhan = await LorranX.prepareMessage(from, kma, location)
+        const buttonMessages = {
+        locationMessage: mhan.message.locationMessage,
+        contentText: text1,
+        footerText: desc1,
+        buttons: but,
+        headerType: 6
+        }
+        LorranX.sendMessage(from,
+          buttonMessages,
+          MessageType.buttonsMessage,
+          options
+          )
+        }
 
 
             
@@ -926,6 +999,8 @@ sendButImage(from, Menueu, `@LorranX`, menuimg,[{
 ║│↭_*   [ *${prefix}ytmp3* ]
 ║│↭_*   [ *${prefix}play* ] 
 ║│↭_*   [ *${prefix}pvideo* ] 
+║│↭_*   [ *${prefix}pvideofhd* ] 
+║│↭_*   [ *${prefix}ytfhd* ]
 ║│↭_*   [ *${prefix}carteira* ] 
 ║│↭_*   [ *${prefix}pix* ] 
 ║│↭_*   [ *${prefix}ted* ] 
@@ -939,6 +1014,7 @@ sendButImage(from, Menueu, `@LorranX`, menuimg,[{
 ║│↭_*   [ *${prefix}toimg* ] 
 ║│↭_*   [ *${prefix}togif* ] 
 ║│↭_*   [ *${prefix}tomp3* ] 
+║│↭_*   [ *${prefix}jadibot* ] (experimental)
 ║│↭_*   [ *${prefix}listadmin* ] 
 ║│ 
 
@@ -971,9 +1047,9 @@ sendButImage(from, Menu, `@LorranX`, menuimg,[{
       } else if (listbut == "ChangeLog") {
         const medsos = `
   *ᨁ 𝑪𝑯𝑨𝑵𝑮𝑬𝑳𝑶𝑮*
-  • Ultima atualização: 07/10/2021 as 23:16
-  • Ultimas alterações: Adicionado tourl, adicionados menus com imagens, adicionadas funções com botão de video, adicionados dados animados, adicionado jogo da velha (PENDENTE DE ALGUMAS CORREÇÕES), corrigidos problemas e erros
-  • Possiveis proximas Atualizações: Correções, adicionar novos recusos relacionados a leveling e dinheiro, adicionar welcome, anti-link, anti-fake, adicionar funções de armazenamento
+  • Ultima atualização: 17/10/2021 as 16:55
+  • Ultimas alterações: Adicionados downloaders em fullhd, adicionado welcome com botões, corrigidos erros e problemas cronicos
+  • Possiveis proximas Atualizações: Correções, melhorar o welcome, adicionar premium, adicionar novos recusos relacionados a leveling e dinheiro, anti-link, anti-fake, adicionar funções de armazenamento
   • Versão atual: 1.0.5
   • % de conclusão: 45%
 `
@@ -1092,9 +1168,9 @@ break;
                     "rowId": "1",
                     "description": ""
                   }]
-              }]
+              }],
             }
-          }, {})
+          }, {quoted: qmenu}, {})
           LorranX.relayWAMessage(menulist, {waitForAck: false})
           addFilter(from)
           break;
@@ -1356,13 +1432,13 @@ break
               if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
               levelvid = fs.readFileSync("./lib/image/level.mp4")
               sendButVideo(from, `Coe ${pushname}, ${HORARIOS}\n\nDevo ativar o leveling?`,``, levelvid,[{
-              buttonId:`${prefix}nivel on`,
+              buttonId:`${prefix}nivell on`,
               buttonText: {
                 displayText: `sim`
               },
               type: 1
             },{
-              buttonId: `${prefix}nivel off`,
+              buttonId: `${prefix}nivell off`,
               buttonText: {
                 displayText: 'não'
               },
@@ -1726,6 +1802,7 @@ break;
                 break
         case 'creategroup':
 			case 'criargrupo':
+        case 'criargp':
         if (!isOwner) return reply("Você não é meu papai 😡")
         if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 				if (args.length < 1) return reply(`Pra usar esse comando c tem que adicionar um nome pro grupo e marcar as pessoas pra adicionar`)
@@ -1896,7 +1973,7 @@ case 'kickall':
               const { dl_link, thumb, title } = res
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then(async (a) => {
-                sendMediaURL(thumb, `*PLAY MUSIC*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP3\n*Link* : ${a.data}\n\n_Ja vou baixar o sua musica, pode ser que demore um pouco, fica calmo ai carai_`)
+                sendMediaURL(thumb, `*PLAY MUSIC*\n\n*Titulo* : ${title}\n*Qualidade* : 144p\n*Formato do arquivo* : MP3\n*Link* : ${a.data}\n\n_Ja vou baixar o sua musica, pode ser que demore um pouco, fica calmo ai carai_`)
                 await sendMediaURL(dl_link).catch(() => reply('error'))
               })
             })
@@ -1919,7 +1996,7 @@ case 'kickall':
               const { dl_link, thumb, title } = res
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then(async (a) => {
-                const captions = `*PLAY VIDEO*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP4\n*Link* : ${a.data}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
+                const captions = `*PLAY VIDEO*\n\n*Titulo* : ${title}\n\n*Qualidade* : 360p\n*Formato do arquivo* : MP4\n*Link* : ${a.data}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
                 sendMediaURL(thumb, captions)
                 await sendMediaURL(dl_link).catch(() => reply('error'))
               })                
@@ -1929,7 +2006,7 @@ case 'kickall':
           }       
           addFilter(from)                  
           break;
-          case 'pvideohd':
+          case 'pvideofhd':
             if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
             if (args.length === 0) return reply(`Pra eu baixar esse video c tem que mandar um nome valido\nExemplo: *${prefix}pvideo macaco*`)
             LorranX.sendMessage(from, RESPOSTAS.wait2(), text, { quoted : zepi})
@@ -1943,7 +2020,7 @@ case 'kickall':
                 const { dl_link, thumb, title, } = res
                 axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
                 .then(async (a) => {
-                  const captions = `*PLAY VIDEO*\n\n*Titulo* : ${title}\n*Formato do arquivo* : MP4\n*Link* : ${a.data}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
+                  const captions = `*PLAY VIDEO*\n\n*Titulo* : ${title}\n*Qualidade* : 1080p\n*Formato do arquivo* : MP4\n*Link* : ${a.data}\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
                   sendMediaURL(thumb, captions)
                   await sendMediaURL(dl_link).catch(() => reply('error'))
                 })                
@@ -1965,7 +2042,7 @@ case 'kickall':
               const { dl_link, thumb, title } = res
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then((a) => {
-                const caption = `*Achei carai*\n\n*Titulo* : ${title}\n*Formato* : MP3\n\n_Ja vou baixar o seu audio, pode ser que demore um pouco, fica calmo ai carai_`
+                const caption = `*Achei carai*\n\n*Titulo* : ${title}\n*Qualidade* : 144p\n*Formato* : MP3\n\n_Ja vou baixar o seu audio, pode ser que demore um pouco, fica calmo ai carai_`
                 sendMediaURL(thumb, caption)
                 sendMediaURL(dl_link).catch(() => reply("file error"))
               })
@@ -1987,7 +2064,29 @@ case 'kickall':
               const { dl_link, thumb, title } = res
               axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
               .then((a) => {
-                const caption = `*Achei carai*\n\n*Titulo* : ${title}\n*Formato* : MP3\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
+                const caption = `*Achei carai*\n\n*Titulo* : ${title}\n*Qualidade* : 360p\n*Formato* : MP4\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
+                sendMediaURL(thumb, caption)
+                sendMediaURL(dl_link).catch(() => reply("file error"))
+              })
+            })
+          } catch (e) {
+            reply("error server")
+          }
+          addFilter(from)
+          break;
+          case 'ytfhd':
+          if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
+          if (args.length < 1) return reply('Pra eu baixar o video c tem que usar um link valido do youtube')
+          LorranX.sendMessage(from, RESPOSTAS.wait2(), text, { quoted : zepi})
+          var link = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
+          if (!link) return reply("link invalido")
+          try {
+            hdyt(args[0])
+            .then((res) =>{
+              const { dl_link, thumb, title } = res
+              axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+              .then((a) => {
+                const caption = `*Achei carai*\n\n*Titulo* : ${title}\n*Qualidade* : 1080p\n*Formato* : MP4\n\n_Ja vou baixar o seu video, pode ser que demore um pouco, fica calmo ai carai_`
                 sendMediaURL(thumb, caption)
                 sendMediaURL(dl_link).catch(() => reply("file error"))
               })
@@ -2255,7 +2354,7 @@ break;
             case 'jadibot':
               if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
               if (mek.key.fromMe) return reply("Eita zapo, como c quer ser um bot sendo que vc ja é um bot")
-              jadibot(reply, LorranX, from)
+              jadibot(reply, LorranX, sender)
               break;
             case 'stopjadibot':
               if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
@@ -2359,7 +2458,6 @@ break;
         //PARA BOTÕES
         case 'mutador':
           if (isBanned) return LorranX.sendMessage(from, RESPOSTAS.banido(), text, { quoted : vbanido})
-					if (!isRegister) return reply(`Opa, antes de usar os comandos do bot você precisa se registrar, pra fazer isso, basta enviar ${prefix}verify`)
           if (!isGroup) return reply("Este comando so pode ser usado em grupos")
 					if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
                if (args[0].toLowerCase() === 'on'){
@@ -2376,7 +2474,7 @@ break;
                reply(`Selecione on ou off`)
 }
                break;
-               case 'nivel':
+               case 'nivell':
                 if (!isGroup) return reply("Este comando so pode ser usado em grupos")
                 if (!isGroupAdmins) return reply("Este comando so pode ser usado pelos adms do grupo")
                 if (args.length < 1) return reply('Man, c tem que escolher entre on (ativar) e off (desativar)')
